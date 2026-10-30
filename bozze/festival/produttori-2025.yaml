@@ -1,0 +1,104 @@
+# Produttori Indisciplinato 2025
+# Fonte: Google Sheet "Data Merge Indisciplinato" (foglio "Produttori e indirizzi")
+# Base di partenza per la pagina Produttori: aggiornare con la lista 2027.
+
+- nome: Casa Tallone
+  regione: Piemonte
+  comune: San Damiano d'Asti (AT)
+  vini: [Roero Bianco, Roero Bianco MGA Patarun, Cisterna d'Asti, Roero Rosso]
+- nome: Federico Maron
+  regione: Liguria
+  comune: Murialdo (SV)
+  vini: [Maccaia (rosso), Alberghetti (bianco)]
+- nome: F.lli Omedè
+  regione: Piemonte
+  comune: Callianetto (AT)
+  vini: ["Gino '24", "Sale, vino mosso"]
+- nome: Agricola Bertolino
+  regione: Piemonte
+  comune: Costigliole d'Asti (AT)
+  vini: [Trice Monferrato DOC Dolcetto 2022, Piva Piemonte DOC Cortese 2023, Cua Langhe DOC Nebbiolo 2023, Cornaretta Monferrato DOC Rosso 2022]
+- nome: Tommaso Cappa
+  regione: Piemonte
+  comune: Ceretto (CN)
+  vini: [Langhe Nebbiolo 2023, Vino Rosso (Neretta Cuneese), "Sa di Cool* (Dolcetto)"]
+- nome: Gabriele Mattalia Wine
+  regione: Piemonte
+  comune: Chieri (TO)
+  vini: [Reisa Rosato, Freisa in macerazione carbonica, Freisa affinata in anfora]
+- nome: Gheddo
+  regione: Piemonte
+  comune: La Morra (CN)
+  vini: [Tinaar bianco 2023, Dolcetto d'Alba 2023, Barbera d'Alba Superiore 2023, Langhe Nebbiolo 2022, Barolo 2020]
+- nome: Cantina Gili
+  regione: Piemonte
+  comune: Settimo Rottaro (TO)
+  vini: [Singolarità (bianco), Il Bianco, Nerastro 60.12 (rosso), L'Uvaggio (rosso)]
+- nome: Bossotti
+  regione: Piemonte
+  comune: Cisterna d'Asti (AT)
+  vini: [Terre Alfieri Arneis, Piemonte Rosato, Cisterna d'Asti Superiore, Barbera d'Asti Superiore, Terre Alfieri Nebbiolo]
+- nome: Monfrà
+  regione: Piemonte
+  comune: Vignale Monferrato (AL)
+  vini: [Panikos Grignolino DOC, Heremit Barbera DOC, La Ru Barbera del Monferrato Superiore DOCG, Estreja, Ekhos]
+- nome: Cantina Lascesa
+  regione: Toscana
+  comune: Sovana (GR)
+  vini: [Nocchianello, Fiorino, Le Sauvage]
+- nome: Cascina Elena
+  regione: Piemonte
+  comune: Rocchetta Belbo (CN)
+  vini: [Makede 2022, Kei, Romeo 2023, Colpodala 2023, Langhe Freisa 2021, Alta Langa 2021]
+- nome: La Vinicea (Caire e Angelino)
+  regione: Piemonte
+  comune: Ottiglio (AL)
+  vini: []
+- nome: Tenuta Belvedere
+  regione: Lombardia
+  comune: Montecalvo Versiggia (PV)
+  vini: [Ma non troppo Metodo Classico 2020, Gatto senza baffi Metodo Classico, Wai (Metodo Ancestrale), Una scoperta Pinot Grigio 2023, Lo amo macerato 2022, Eleganza Pinot Nero 2021]
+- nome: McCalin
+  regione: Abruzzo
+  comune: Martinsicuro (TE)
+  vini: [Biancobop, Kuvee Antica, Orangebop, Rossobop, Komandante, Rossodamare, Liberoarbitrio]
+- nome: Tenuta San Marcello
+  regione: Marche
+  comune: Ancona (AN)
+  vini: [Bastaro Lacrima DOC, Petaloso Rosato, Buca Verdicchio Classico, Indisciplinato Marche Bianco IGT, Stai fermo, Volatile, Cry Baby]
+- nome: La Cascinetta
+  regione: Piemonte
+  comune: Viarigi (AT)
+  vini: [Ruchè]
+- nome: Bricco Visconti
+  regione: Piemonte
+  comune: Ferrere (AT)
+  vini: [Sofi, Savinen, Miass, Pit., Rosè di Pit., Rosè di Sofi]
+- nome: La Disfida vini testardi
+  regione: Toscana
+  comune: Manciano (GR)
+  vini: [Desko, Matafua, Vigna Manent, Zin Zin, Inneres Auge, Rustiko]
+- nome: Barroero
+  regione: Piemonte
+  comune: Coazzolo (AT)
+  vini: [Lanfrus bianco, Langhe Chardonnay DOC, Barbera d'Alba Superiore DOC, Barbera d'Asti Superiore DOCG, Langhe Nebbiolo DOC]
+- nome: La Contea
+  regione: Piemonte
+  comune: Neive (CN)
+  vini: []
+- nome: Beppe Mo
+  regione: Piemonte
+  comune: Castiglione Tinella (CN)
+  vini: [Robur Barbera d'Asti 2022, Dolcetto d'Alba, Langhe Nebbiolo, Langhe Chardonnay, Rosavivo]
+- nome: Mattia Rivetti
+  regione: Piemonte
+  comune: Coazzolo (AT)
+  vini: [Barbera d'Asti Superiore, Dolcetto d'Alba, Langhe Pinot Nero, Elicriso (bianco), Moscato]
+- nome: Cesca Daniele
+  regione: Piemonte
+  comune: Moncalvo (AT)
+  vini: [Rosato Frizzante "CD" 2020, Rosato "Annata" 2023, Rosso "Nonna Rina" 2022, Rosso "Nonno Aldo" 2021]
+- nome: I Versanti
+  regione: Piemonte
+  comune: ""
+  vini: [Ribota (Barbera pet-nat), Bota (Barbera), Equinozio (Brachetto-Barbera), Bandiera Gialla (Moscato bianco)]
