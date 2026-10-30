@@ -69,7 +69,16 @@ p { margin: 0; }
 .vbtn svg { width: 18px; height: 18px; }
 @media (min-width: 900px) { .vbtn { position: fixed; } }
 .top { display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding: 1rem clamp(1rem, 4vw, 3rem); }
-.brand { display: block; width: clamp(170px, 42vw, 300px); height: auto; }
+.brand { display: block; width: clamp(170px, 42vw, 300px); height: auto; overflow: visible; }
+/* Logo "timbrato": ogni lettera arriva storta e si assesta. Solo se l'utente non ha chiesto meno movimento. */
+@media (prefers-reduced-motion: no-preference) {
+  .stamp { transform-box: fill-box; transform-origin: 50% 60%; animation: timbro 260ms cubic-bezier(.2,.9,.3,1.25) both; animation-delay: calc(var(--i) * 55ms + 120ms); }
+  @keyframes timbro {
+    0%   { opacity: 0; transform: translateY(-35%) scale(1.5) rotate(var(--r)); }
+    60%  { opacity: 1; transform: translateY(4%) scale(0.94) rotate(calc(var(--r) * -0.3)); }
+    100% { opacity: 1; transform: none; }
+  }
+}
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .brand { filter: invert(1); } }
 :root[data-theme="dark"] .brand { filter: invert(1); }
 .lang {
@@ -113,7 +122,7 @@ footer li a { display: inline-block; padding: 0.35rem 0; }
 
 <div class="page">
   <header class="top">
-      <img class="brand" src="logo.png" width="900" height="118" alt="Indisciplinato">
+      <svg class="brand" viewBox="0 0 900 118" role="img" aria-label="Indisciplinato" xmlns="http://www.w3.org/2000/svg"><title>Indisciplinato</title><defs><clipPath id="lg0"><rect x="0" y="0" width="32" height="118"/></clipPath><clipPath id="lg1"><rect x="32" y="0" width="77" height="118"/></clipPath><clipPath id="lg2"><rect x="109" y="0" width="73" height="118"/></clipPath><clipPath id="lg3"><rect x="182" y="0" width="41" height="118"/></clipPath><clipPath id="lg4"><rect x="223" y="0" width="57" height="118"/></clipPath><clipPath id="lg5"><rect x="280" y="0" width="62" height="118"/></clipPath><clipPath id="lg6"><rect x="342" y="0" width="34" height="118"/></clipPath><clipPath id="lg7"><rect x="376" y="0" width="78" height="118"/></clipPath><clipPath id="lg8"><rect x="454" y="0" width="68" height="118"/></clipPath><clipPath id="lg9"><rect x="522" y="0" width="36" height="118"/></clipPath><clipPath id="lg10"><rect x="558" y="0" width="92" height="118"/></clipPath><clipPath id="lg11"><rect x="650" y="0" width="153" height="118"/></clipPath><clipPath id="lg12"><rect x="803" y="0" width="97" height="118"/></clipPath></defs><g class="stamp" style="--i:0;--r:-9deg"><image href="logo.png" width="900" height="118" clip-path="url(#lg0)"/></g><g class="stamp" style="--i:1;--r:7deg"><image href="logo.png" width="900" height="118" clip-path="url(#lg1)"/></g><g class="stamp" style="--i:2;--r:-5deg"><image href="logo.png" width="900" height="118" clip-path="url(#lg2)"/></g><g class="stamp" style="--i:3;--r:10deg"><image href="logo.png" width="900" height="118" clip-path="url(#lg3)"/></g><g class="stamp" style="--i:4;--r:-7deg"><image href="logo.png" width="900" height="118" clip-path="url(#lg4)"/></g><g class="stamp" style="--i:5;--r:6deg"><image href="logo.png" width="900" height="118" clip-path="url(#lg5)"/></g><g class="stamp" style="--i:6;--r:-10deg"><image href="logo.png" width="900" height="118" clip-path="url(#lg6)"/></g><g class="stamp" style="--i:7;--r:8deg"><image href="logo.png" width="900" height="118" clip-path="url(#lg7)"/></g><g class="stamp" style="--i:8;--r:-6deg"><image href="logo.png" width="900" height="118" clip-path="url(#lg8)"/></g><g class="stamp" style="--i:9;--r:9deg"><image href="logo.png" width="900" height="118" clip-path="url(#lg9)"/></g><g class="stamp" style="--i:10;--r:-8deg"><image href="logo.png" width="900" height="118" clip-path="url(#lg10)"/></g><g class="stamp" style="--i:11;--r:5deg"><image href="logo.png" width="900" height="118" clip-path="url(#lg11)"/></g><g class="stamp" style="--i:12;--r:-7deg"><image href="logo.png" width="900" height="118" clip-path="url(#lg12)"/></g></svg>
       <button class="lang" type="button" id="lang" lang="en">English</button>
     </header>
   <figure class="photo">
@@ -132,7 +141,7 @@ footer li a { display: inline-block; padding: 0.35rem 0; }
       <h1 data-it="Stiamo tornando" data-en="We're coming back">Stiamo tornando</h1>
 
       <p class="countdown">
-        <span id="countdown"><span data-it="Mancano" data-en="">Mancano</span> <span class="n" id="days">197</span> <span id="days-word" data-it="giorni" data-en="days to go">giorni</span></span>
+        <span id="countdown" aria-hidden="true"><span data-it="Mancano" data-en="">Mancano</span> <span class="n" id="days">197</span> <span id="days-word" data-it="giorni" data-en="days to go">giorni</span></span><span class="sr-only" id="countdown-sr">Mancano 197 giorni</span>
       </p>
 
       <dl class="facts">
@@ -192,15 +201,34 @@ footer li a { display: inline-block; padding: 0.35rem 0; }
     var today = Date.UTC(+parts.slice(0, 4), +parts.slice(5, 7) - 1, +parts.slice(8, 10));
     return Math.round((Date.UTC(2027, 4, 15) - today) / 86400000);
   }
+  var counted = false;
+  var reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   function renderDays(lang) {
     var n = daysLeft(), box = document.getElementById("countdown");
     if (n <= 0) {
       box.textContent = n === 0 || n === -1
         ? (lang === "it" ? "È oggi!" : "It's today!")
         : (lang === "it" ? "Grazie! Ci vediamo alla prossima edizione." : "Thank you! See you next year.");
+      document.getElementById("countdown-sr").textContent = box.textContent;
       return;
     }
-    document.getElementById("days").textContent = n;
+    var sr = document.getElementById("countdown-sr");
+    sr.textContent = lang === "it" ? (n === 1 ? "Manca 1 giorno" : "Mancano " + n + " giorni") : (n === 1 ? "1 day to go" : n + " days to go");
+    var el = document.getElementById("days");
+    if (!counted && !reduceMotion && window.requestAnimationFrame) {
+      counted = true;
+      var start = null, dur = 1100;
+      el.textContent = "0";
+      requestAnimationFrame(function step(ts) {
+        if (start === null) start = ts;
+        var p = Math.min(1, (ts - start) / dur), e = 1 - Math.pow(1 - p, 3);
+        el.textContent = Math.round(n * e);
+        if (p < 1) requestAnimationFrame(step);
+      });
+    } else {
+      counted = true;
+      el.textContent = n;
+    }
     var w = document.getElementById("days-word");
     w.textContent = lang === "it" ? (n === 1 ? "giorno" : "giorni") : (n === 1 ? "day to go" : "days to go");
     if (lang === "it" && n === 1) box.firstElementChild.textContent = "Manca";
