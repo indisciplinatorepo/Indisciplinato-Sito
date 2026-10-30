@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Indisciplinato 2027</title>
+<meta name="description" content="Indisciplinato torna il 15 e 16 maggio 2027 a Palazzo del Michelerio, Asti. Fiera astigiana delle microproduzioni di prossimità.">
+<!-- Sul sito vero i font saranno ospitati sul nostro dominio (niente richieste a Google). -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&display=swap" rel="stylesheet">
+<style>
+/* Palette Indisciplinato: Dusk Blue #345995, Mint Leaf #03CEA4, Tomato #FB4D3D su carta chiara. Titoli in Bricolage Grotesque.
+   Layout: video e testo affiancati su schermi larghi, video sopra e testo sotto su telefono. Il testo non sta mai sopra il video. */
+:root {
+  --paper: #f6f5f1;
+  --ink: #1b2233;
+  --muted: #4a5266;
+  --blue: #345995;      /* Dusk Blue: link e pulsante principale (testo bianco 7:1) */
+  --on-blue: #ffffff;
+  --mint: #03cea4;      /* Mint Leaf: solo come fondo, con testo scuro (7,8:1) */
+  --tomato: #fb4d3d;    /* Tomato: bordi e dettagli grafici (3:1), mai per testo piccolo */
+  --focus: #1b2233;
+  --display: "Bricolage Grotesque", "Arial Black", system-ui, sans-serif;
+  --body: "Atkinson Hyperlegible", Verdana, system-ui, sans-serif;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #141a26; --ink: #eef1f6; --muted: #c3c9d6; --blue: #9fb8e6; --on-blue: #141a26; --focus: #eef1f6;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #141a26; --ink: #eef1f6; --muted: #c3c9d6; --blue: #9fb8e6; --on-blue: #141a26; --focus: #eef1f6;
+  color-scheme: dark;
+}
+@media (prefers-contrast: more) { :root { --muted: var(--ink); } }
+
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: var(--paper); color: var(--ink);
+  font-family: var(--body); font-size: 1.125rem; line-height: 1.6;
+}
+a { color: var(--blue); text-underline-offset: 0.2em; text-decoration-thickness: 0.08em; }
+a:hover { text-decoration-thickness: 0.18em; }
+:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; border-radius: 3px; }
+h1, h2 { font-family: var(--display); font-weight: 800; margin: 0; line-height: 1.05; text-wrap: balance; }
+.sr-only { position: absolute; width: 1px; height: 1px; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+p { margin: 0; }
+
+.skip { position: absolute; left: 1rem; top: -10rem; z-index: 5; background: var(--ink); color: var(--paper); padding: 0.7rem 1rem; font-weight: 700; }
+.skip:focus { top: 1rem; }
+
+.page { display: grid; min-height: 100svh; grid-template-columns: 1fr; grid-template-areas: "top" "photo" "main" "foot"; }
+@media (min-width: 900px) {
+  .page { grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); grid-template-rows: auto 1fr auto; grid-template-areas: "photo top" "photo main" "photo foot"; }
+}
+.top { grid-area: top; } main { grid-area: main; } footer { grid-area: foot; }
+.photo { grid-area: photo; margin: 0; background: var(--mint); position: relative; }
+.photo video { display: block; width: 100%; height: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
+@media (min-width: 900px) { .photo video { aspect-ratio: auto; position: sticky; top: 0; height: 100svh; } }
+.vbtn {
+  position: absolute; left: 1rem; bottom: 1rem; display: inline-flex; align-items: center; gap: 0.5rem;
+  min-height: 44px; padding: 0.45rem 1rem; font: inherit; font-size: 1rem; font-weight: 700; cursor: pointer;
+  background: #1b2233; color: #ffffff; border: 2px solid #ffffff; border-radius: 999px;
+}
+.vbtn svg { width: 18px; height: 18px; }
+@media (min-width: 900px) { .vbtn { position: fixed; } }
+.top { display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding: 1rem clamp(1rem, 4vw, 3rem); }
+.brand { display: block; width: clamp(170px, 42vw, 300px); height: auto; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .brand { filter: invert(1); } }
+:root[data-theme="dark"] .brand { filter: invert(1); }
+.lang {
+  font: inherit; font-size: 1rem; font-weight: 700; min-height: 44px; padding: 0.4rem 1rem; cursor: pointer;
+  background: transparent; color: var(--ink); border: 2px solid var(--ink); border-radius: 999px;
+}
+
+main { padding: clamp(1.5rem, 5vw, 4rem) clamp(1rem, 4vw, 3rem) 3rem; display: grid; gap: 1.75rem; align-content: center; max-width: 40rem; }
+h1 { font-size: clamp(3rem, 10vw, 6.2rem); letter-spacing: -0.02em; }
+.countdown {
+  justify-self: start; display: inline-flex; align-items: center; gap: 0.6rem;
+  background: var(--mint); color: #1b2233; border-radius: 999px;
+  padding: 0.35rem 1.2rem 0.35rem 0.35rem; font-weight: 700; font-size: clamp(1.25rem, 3.4vw, 1.6rem);
+}
+.countdown img { width: 48px; height: 48px; border-radius: 10px; flex: none;
+}
+.countdown .n { font-variant-numeric: tabular-nums; }
+.facts { display: grid; gap: 1rem; margin: 0; }
+.facts div { display: grid; gap: 0.1rem; border-left: 5px solid var(--tomato); padding-left: 0.9rem; }
+.facts dt { font-size: 0.95rem; color: var(--muted); font-weight: 700; }
+.facts dd { margin: 0; font-size: 1.3rem; font-weight: 700; }
+.facts dd small { display: block; font-size: 1rem; font-weight: 400; color: var(--muted); }
+.cal { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+.cal a {
+  display: inline-flex; align-items: center; gap: 0.5rem; min-height: 48px; padding: 0.65rem 1.2rem;
+  border-radius: 999px; font-weight: 700; text-decoration: none; border: 2px solid var(--ink); color: var(--ink);
+}
+.cal a.primary { background: var(--blue); color: var(--on-blue); border-color: var(--blue); }
+.cal svg { width: 20px; height: 20px; flex: none; }
+.help { color: var(--muted); max-width: 52ch; }
+
+footer { background: #1b2233; color: #f6f5f1; border-top: 6px solid var(--tomato); padding: 2rem clamp(1rem, 4vw, 3rem); font-size: 0.98rem; display: grid; gap: 1rem; }
+footer a { color: #f6f5f1; }
+footer ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0.25rem 1.25rem; }
+footer li a { display: inline-block; padding: 0.35rem 0; }
+.facts small a, footer p a { display: inline-block; padding-block: 0.3rem; }
+[hidden] { display: none !important; }
+</style>
+</head>
+<body>
+<a class="skip" href="#contenuto" data-it="Salta al contenuto" data-en="Skip to content">Salta al contenuto</a>
+
+<div class="page">
+  <header class="top">
+      <img class="brand" src="logo.png" width="900" height="118" alt="Indisciplinato">
+      <button class="lang" type="button" id="lang" lang="en">English</button>
+    </header>
+  <figure class="photo">
+    <video id="video" muted loop playsinline preload="metadata" poster="poster.jpg" aria-describedby="video-desc">
+      <source src="fiera.mp4" type="video/mp4">
+    </video>
+    <figcaption id="video-desc" class="sr-only" data-it="Video senza audio dell'edizione 2025: produttori che sistemano le bottiglie sui banchi, scatoloni di vino, una piantina tra i calici." data-en="Silent video from the 2025 edition: producers setting bottles on their stands, boxes of wine, a small plant among the glasses.">Video senza audio dell'edizione 2025: produttori che sistemano le bottiglie sui banchi, scatoloni di vino, una piantina tra i calici.</figcaption>
+    <button class="vbtn" type="button" id="vbtn" hidden>
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="5" width="4" height="14"/><rect x="14" y="5" width="4" height="14"/></svg>
+      <span id="vbtn-label">Metti in pausa il video</span>
+    </button>
+  </figure>
+
+
+    <main id="contenuto" tabindex="-1">
+      <h1 data-it="Stiamo tornando" data-en="We're coming back">Stiamo tornando</h1>
+
+      <p class="countdown">
+        <img src="icona-bottiglia.png" alt="" width="48" height="48">
+        <span id="countdown"><span data-it="Mancano" data-en="">Mancano</span> <span class="n" id="days">197</span> <span id="days-word" data-it="giorni" data-en="days to go">giorni</span></span>
+      </p>
+
+      <dl class="facts">
+        <div>
+          <dt data-it="Quando" data-en="When">Quando</dt>
+          <dd>
+            <span data-it="Sabato 15 e domenica 16 maggio 2027" data-en="Saturday 15 and Sunday 16 May 2027">Sabato 15 e domenica 16 maggio 2027</span>
+            <small data-it="Orari in arrivo" data-en="Opening hours coming soon">Orari in arrivo</small>
+          </dd>
+        </div>
+        <div>
+          <dt data-it="Dove" data-en="Where">Dove</dt>
+          <dd>
+            Palazzo del Michelerio
+            <small>Corso Vittorio Alfieri 381, Asti · <a href="https://www.google.com/maps/search/?api=1&amp;query=Palazzo%20del%20Michelerio%2C%20Corso%20Vittorio%20Alfieri%20381%2C%20Asti" data-it="Apri la mappa (sito esterno)" data-en="Open the map (external site)">Apri la mappa (sito esterno)</a></small>
+          </dd>
+        </div>
+      </dl>
+
+      <div class="cal">
+        <a class="primary" id="gcal"
+           href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=Indisciplinato%202027&amp;dates=20270515%2F20270517&amp;location=Palazzo%20del%20Michelerio%2C%20Corso%20Vittorio%20Alfieri%20381%2C%20Asti&amp;details=Fiera%20astigiana%20delle%20microproduzioni%20di%20prossimit%C3%A0.%20www.indisciplinato.it">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4M12 13v5M9.5 15.5h5"/></svg>
+          <span data-it="Aggiungi a Google Calendar" data-en="Add to Google Calendar">Aggiungi a Google Calendar</span>
+        </a>
+        <a href="indisciplinato-2027.ics" type="text/calendar">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>
+          <span data-it="Altri calendari (.ics)" data-en="Other calendars (.ics)">Altri calendari (.ics)</span>
+        </a>
+      </div>
+
+      <p class="help" data-it="Hai bisogno di assistenza per venire alla fiera? Scrivici a info@indisciplinato.it: ci organizziamo insieme." data-en="Need assistance to attend the fair? Write to info@indisciplinato.it and we'll arrange it together.">Hai bisogno di assistenza per venire alla fiera? Scrivici a info@indisciplinato.it: ci organizziamo insieme.</p>
+    </main>
+
+    <footer>
+      <p><strong>Associazione Vinaccia ETS</strong><br>
+        Via Crova 21, 14020 Soglio (AT)<br>
+        <span data-it="C.F. 90060890044 · P.IVA 01763830054" data-en="Tax code 90060890044 · VAT 01763830054">C.F. 90060890044 · P.IVA 01763830054</span><br>
+        <span data-it="Iscritta al RUNTS dal 05/12/2022" data-en="Registered in RUNTS (Italian Third Sector Register) since 05/12/2022">Iscritta al RUNTS dal 05/12/2022</span></p>
+      <p>info@indisciplinato.it · <a href="https://www.instagram.com/indisciplinato_fiera/" data-it="Instagram (sito esterno)" data-en="Instagram (external site)">Instagram (sito esterno)</a></p>
+      <nav aria-label="Note legali" data-aria-it="Note legali" data-aria-en="Legal">
+        <ul>
+          <li><a href="note-legali.html#privacy" data-it="Privacy" data-en="Privacy">Privacy</a></li>
+          <li><a href="note-legali.html#cookie" data-it="Cookie" data-en="Cookies">Cookie</a></li>
+          <li><a href="note-legali.html#accessibilita" data-it="Dichiarazione di accessibilità" data-en="Accessibility statement">Dichiarazione di accessibilità</a></li>
+        </ul>
+      </nav>
+    </footer>
+</div>
+
+<script>
+(function () {
+  var root = document.documentElement;
+  // Giorni mancanti al 15/05/2027, contati sul calendario di Roma
+  function daysLeft() {
+    var parts = new Intl.DateTimeFormat("en-CA", { timeZone: "Europe/Rome", year: "numeric", month: "2-digit", day: "2-digit" }).format(new Date());
+    var today = Date.UTC(+parts.slice(0, 4), +parts.slice(5, 7) - 1, +parts.slice(8, 10));
+    return Math.round((Date.UTC(2027, 4, 15) - today) / 86400000);
+  }
+  function renderDays(lang) {
+    var n = daysLeft(), box = document.getElementById("countdown");
+    if (n <= 0) {
+      box.textContent = n === 0 || n === -1
+        ? (lang === "it" ? "È oggi!" : "It's today!")
+        : (lang === "it" ? "Grazie! Ci vediamo alla prossima edizione." : "Thank you! See you next year.");
+      return;
+    }
+    document.getElementById("days").textContent = n;
+    var w = document.getElementById("days-word");
+    w.textContent = lang === "it" ? (n === 1 ? "giorno" : "giorni") : (n === 1 ? "day to go" : "days to go");
+    if (lang === "it" && n === 1) box.firstElementChild.textContent = "Manca";
+  }
+  function setLang(lang) {
+    root.lang = lang;
+    document.querySelectorAll("[data-it]").forEach(function (el) { el.textContent = el.getAttribute("data-" + lang); });
+    document.querySelectorAll("[data-aria-it]").forEach(function (el) { el.setAttribute("aria-label", el.getAttribute("data-aria-" + lang)); });
+    var b = document.getElementById("lang");
+    b.textContent = lang === "it" ? "English" : "Italiano"; b.lang = lang === "it" ? "en" : "it";
+    document.title = lang === "it" ? "Indisciplinato 2027" : "Indisciplinato 2027 · Asti";
+    renderDays(lang);
+    if (typeof vlabel === "function" && document.getElementById("video")) { try { vlabel(); } catch (e) {} }
+  }
+  var video = document.getElementById("video"), vbtn = document.getElementById("vbtn");
+  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  function vlabel() {
+    var it = root.lang === "it", playing = !video.paused;
+    document.getElementById("vbtn-label").textContent = playing
+      ? (it ? "Metti in pausa il video" : "Pause the video")
+      : (it ? "Riproduci il video" : "Play the video");
+    vbtn.querySelector("svg").innerHTML = playing
+      ? '<rect x="6" y="5" width="4" height="14"/><rect x="14" y="5" width="4" height="14"/>'
+      : '<path d="M7 5l12 7-12 7z"/>';
+  }
+  vbtn.hidden = false;
+  vbtn.addEventListener("click", function () { if (video.paused) { video.play().catch(function(){}); } else { video.pause(); } });
+  video.addEventListener("play", vlabel); video.addEventListener("pause", vlabel);
+  if (!reduce) { video.play().catch(function () { vlabel(); }); }
+  vlabel();
+
+  document.getElementById("lang").addEventListener("click", function () {
+    var next = root.lang === "it" ? "en" : "it";
+    setLang(next);
+    try { history.replaceState(null, "", next === "en" ? "#en" : location.pathname); } catch (e) {}
+  });
+  setLang(location.hash === "#en" ? "en" : "it");
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,16 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Associazione Vinaccia ETS//Indisciplinato//IT
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:indisciplinato-2027@indisciplinato.it
+DTSTAMP:20261030T120000Z
+DTSTART;VALUE=DATE:20270515
+DTEND;VALUE=DATE:20270517
+SUMMARY:Indisciplinato 2027
+DESCRIPTION:Fiera astigiana delle microproduzioni di prossimità. Info: https://www.indisciplinato.it
+LOCATION:Palazzo del Michelerio\, Corso Vittorio Alfieri 381\, 14100 Asti
+URL:https://www.indisciplinato.it
+END:VEVENT
+END:VCALENDAR
