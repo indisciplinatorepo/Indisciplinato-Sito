@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Note per la revisione di accessibilità · Indisciplinato 2027</title>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Bricolage+Grotesque:opsz,wght@12..96,800&display=swap" rel="stylesheet">
+<style>
+:root { --paper: #f6f5f1; --ink: #1b2233; --muted: #4a5266; --blue: #345995; --mint: #03cea4; --tomato: #fb4d3d; --focus: #1b2233; color-scheme: light; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --paper: #141a26; --ink: #eef1f6; --muted: #c3c9d6; --blue: #9fb8e6; --focus: #eef1f6; color-scheme: dark; } }
+:root[data-theme="dark"] { --paper: #141a26; --ink: #eef1f6; --muted: #c3c9d6; --blue: #9fb8e6; --focus: #eef1f6; color-scheme: dark; }
+body { margin: 0; background: var(--paper); color: var(--ink); font-family: "Atkinson Hyperlegible", Verdana, system-ui, sans-serif; font-size: 1.125rem; line-height: 1.6; }
+main { max-width: 46rem; margin: 0 auto; padding: 2rem 1rem 4rem; display: grid; gap: 2rem; }
+h1, h2 { font-family: "Bricolage Grotesque", "Arial Black", system-ui, sans-serif; font-weight: 800; line-height: 1.1; margin: 0; text-wrap: balance; }
+h1 { font-size: clamp(2rem, 6vw, 2.8rem); }
+h2 { font-size: 1.5rem; }
+section { display: grid; gap: 0.75rem; border-top: 4px solid var(--mint); padding-top: 1.25rem; }
+p, ul, ol { margin: 0; }
+li + li { margin-top: 0.35rem; }
+a { color: var(--blue); text-underline-offset: 0.2em; }
+p > a:only-child { display: inline-block; padding-block: 0.35rem; }
+:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; }
+table { border-collapse: collapse; width: 100%; font-size: 1rem; }
+th, td { text-align: left; vertical-align: top; padding: 0.55rem 0.6rem; border-bottom: 1px solid var(--muted); }
+th { font-weight: 700; }
+.wrap-table { overflow-x: auto; }
+.lead { font-size: 1.2rem; }
+</style>
+</head>
+<body>
+<main>
+  <p><a href="index.html">← Torna alla bozza della pagina del festival</a></p>
+  <h1>Note per la revisione di accessibilità</h1>
+  <p class="lead">Grazie per il tempo che dedica a questa revisione. Qui trova le scelte che abbiamo fatto, i controlli già eseguiti, i limiti che conosciamo e le domande su cui ci serve il suo parere.</p>
+  <p>Associazione Vinaccia ETS · Indisciplinato 2027 · versione del 30 ottobre 2026</p>
+
+  <section aria-labelledby="ctx">
+    <h2 id="ctx">Contesto</h2>
+    <p>Indisciplinato è una fiera di vino e cibo di piccoli produttori ad Asti (15–16 maggio 2027). È candidata al bando "Eventi for All" di Fondazione CRT, dove ci siamo impegnati a un sito accessibile e compatibile con le tecnologie assistive. Questa pagina sarà il sito principale durante il festival; oggi è online solo una pagina d'attesa più semplice.</p>
+    <p>Obiettivo: <strong>WCAG 2.2 livello AA</strong>, italiano e inglese, nessun cookie che richieda consenso.</p>
+  </section>
+
+  <section aria-labelledby="scelte">
+    <h2 id="scelte">Scelte principali</h2>
+    <ul>
+      <li><strong>Struttura:</strong> HTML statico e semantico. Un solo H1, titoli in ordine, aree header/main/footer, link "Salta al contenuto", navigazione con nomi distinti.</li>
+      <li><strong>Lingua:</strong> attributo <code>lang</code> aggiornato al cambio di lingua; il pulsante "English" è marcato in inglese.</li>
+      <li><strong>Video in apertura:</strong> senza audio, 11 secondi in loop, pulsante pausa sempre visibile, descrizione testuale. Non parte con "riduci movimento" attivo.</li>
+      <li><strong>Animazioni:</strong> solo il logo che si "timbra" e il conto dei giorni che sale, sotto il secondo e una volta sola. Disattivate con "riduci movimento" e dal pannello. Il lettore di schermo legge solo il numero finale.</li>
+      <li><strong>Pannello "Accessibilità":</strong> testo più grande, alto contrasto, più spaziatura, link evidenziati, stop di animazioni e video. Preferenze salvate solo sul dispositivo. Abbiamo scelto di non usare plugin "overlay" di terze parti.</li>
+      <li><strong>Preferenze di sistema:</strong> rispettati tema scuro, riduzione del movimento, contrasto elevato e zoom.</li>
+      <li><strong>Filtro produttori:</strong> pulsanti con stato premuto; il numero di risultati è annunciato in una regione di stato.</li>
+      <li><strong>Organizzazione dei contenuti:</strong> sul modello delle linee guida GOV.UK e NHS. Prima cosa serve sapere (cos'è, quando, dove, quanto costa), poi i dettagli. Titoli brevi e descrittivi, frasi sotto le 25 parole, un indice "In questa pagina" in alto.</li>
+      <li><strong>Lettura facile:</strong> riquadro con 5 frasi brevi accanto alla spiegazione completa.</li>
+      <li><strong>Pulsante Accessibilità:</strong> primo comando della pagina dopo "Salta al contenuto", a tutta larghezza, con nome esplicito.</li>
+      <li><strong>Colori:</strong> testo e link almeno 4,5:1; il verde menta e il rosso sono usati solo come sfondo con testo scuro o per bordi.</li>
+      <li><strong>Contenuti esterni:</strong> nessuna mappa, video o social incorporati; solo link segnalati come "sito esterno".</li>
+    </ul>
+  </section>
+
+  <section aria-labelledby="test">
+    <h2 id="test">Controlli già eseguiti (automatici)</h2>
+    <div class="wrap-table">
+      <table>
+        <thead><tr><th scope="col">Controllo</th><th scope="col">Esito</th></tr></thead>
+        <tbody>
+          <tr><td>Contrasto del testo, tema chiaro, scuro e alto contrasto</td><td>Nessun errore</td></tr>
+          <tr><td>Struttura dei titoli</td><td>H1 unico, nessun livello saltato</td></tr>
+          <tr><td>Larghezza 320 px (1.4.10)</td><td>Nessuno scorrimento orizzontale</td></tr>
+          <tr><td>Testo al 200% (1.4.4)</td><td>Nessuna perdita di contenuto; corretto un titolo che usciva dallo schermo</td></tr>
+          <tr><td>Spaziatura del testo (1.4.12: interlinea 1,5, lettere 0,12, parole 0,16, paragrafi 2)</td><td>Nessun testo tagliato o sovrapposto</td></tr>
+          <tr><td>ID duplicati e riferimenti ARIA (aria-controls, aria-labelledby)</td><td>Nessun errore</td></tr>
+          <tr><td>Dimensione dei comandi (minimo 24×24 px)</td><td>Nessun errore</td></tr>
+          <tr><td>Ordine di tabulazione e focus visibile</td><td>Ordine logico, focus sempre visibile</td></tr>
+          <tr><td>Albero di accessibilità (lettura simulata)</td><td>Nomi e ruoli presenti; nessuna doppia lettura</td></tr>
+          <tr><td>Cambio lingua</td><td>Tutti i testi tradotti, tranne i nomi propri</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>Non sono stati ancora fatti test con lettori di schermo reali (VoiceOver, NVDA, TalkBack), né test con utenti.</p>
+  </section>
+
+  <section aria-labelledby="limiti">
+    <h2 id="limiti">Limiti che conosciamo</h2>
+    <ul>
+      <li>I contenuti segnati "da confermare" sono segnaposto (orari, prezzi, percorsi).</li>
+      <li>In questa anteprima i font arrivano da Google Fonts; sul sito pubblicato saranno ospitati sul nostro dominio.</li>
+      <li>La vendita dei biglietti non è ancora progettata: avverrà sul nostro sito, con un canale alternativo via email.</li>
+      <li>Mancano ancora: versione video in LIS dei contenuti principali, trascrizione dell'audioguida, pittogrammi CAA sul sito.</li>
+    </ul>
+  </section>
+
+  <section aria-labelledby="domande">
+    <h2 id="domande">Domande su cui ci serve il suo parere</h2>
+    <ol>
+      <li>Il video in apertura, anche con il pulsante pausa, è accettabile o meglio un'immagine fissa?</li>
+      <li>Il pannello "Accessibilità" è utile o rischia di essere ridondante rispetto alle impostazioni del sistema?</li>
+      <li>La sezione "Lettura facile" è sufficiente o servirebbe una pagina dedicata, magari validata con le associazioni?</li>
+      <li>Come presentare al meglio i servizi in LIS sul sito (video segnati, icona, posizione)?</li>
+      <li>Per la vendita dei biglietti, quali requisiti dovremmo chiedere al fornitore del pagamento?</li>
+      <li>Quali test con utenti ci consiglia prima della pubblicazione, e con quali strumenti?</li>
+    </ol>
+    <p>Può rispondere a info@indisciplinato.it. Grazie!</p>
+  </section>
+</main>
+</body>
+</html>

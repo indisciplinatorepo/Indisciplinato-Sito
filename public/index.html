@@ -3,44 +3,26 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Indisciplinato 2027 · Fiera dei piccoli produttori di vino e cibo · Asti, 15–16 maggio</title>
+<title>Indisciplinato 2027 · Fiera di Asti</title>
 <script>try{["p-grande","p-contrasto","p-spazio","p-link","p-fermo"].forEach(function(c){if(localStorage.getItem(c)==="1")document.documentElement.classList.add(c)})}catch(e){}</script>
-<meta name="description" content="Indisciplinato torna il 15 e 16 maggio 2027 a Palazzo del Michelerio, Asti: fiera di vino e cibo di piccoli produttori indipendenti, accessibile a tutte e tutti.">
-<link rel="canonical" href="https://www.indisciplinato.it/">
-<meta name="robots" content="index, follow">
-<meta name="theme-color" content="#345995">
-<link rel="icon" href="/favicon.ico" sizes="any">
-<link rel="icon" href="/favicon-32.png" type="image/png" sizes="32x32">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<meta property="og:type" content="website">
-<meta property="og:site_name" content="Indisciplinato">
-<meta property="og:title" content="Indisciplinato 2027 · Stiamo tornando">
-<meta property="og:description" content="15–16 maggio 2027, Palazzo del Michelerio, Asti. Fiera di vino e cibo di piccoli produttori indipendenti.">
-<meta property="og:url" content="https://www.indisciplinato.it/">
-<meta property="og:image" content="https://www.indisciplinato.it/og-image.jpg">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Logo Indisciplinato, scritta Stiamo tornando, 15–16 maggio 2027, Palazzo del Michelerio, Asti">
-<meta property="og:locale" content="it_IT">
-<meta property="og:locale:alternate" content="en_GB">
-<meta name="twitter:card" content="summary_large_image">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Event", "name": "Indisciplinato 2027", "description": "Fiera astigiana delle microproduzioni di prossimità: vino e cibo di piccoli produttori indipendenti.", "startDate": "2027-05-15", "endDate": "2027-05-16", "eventStatus": "https://schema.org/EventScheduled", "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode", "location": {"@type": "Place", "name": "Palazzo del Michelerio", "address": {"@type": "PostalAddress", "streetAddress": "Corso Vittorio Alfieri 381", "addressLocality": "Asti", "postalCode": "14100", "addressRegion": "AT", "addressCountry": "IT"}}, "image": ["https://www.indisciplinato.it/og-image.jpg"], "url": "https://www.indisciplinato.it/", "inLanguage": ["it", "en"], "organizer": {"@type": "Organization", "name": "Associazione Vinaccia ETS", "url": "https://www.indisciplinato.it/", "email": "info@indisciplinato.it"}, "isAccessibleForFree": false}</script>
-
-<!-- Sul sito vero i font saranno ospitati sul nostro dominio (niente richieste a Google). -->
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="Indisciplinato, fiera astigiana delle microproduzioni di prossimità: 15 e 16 maggio 2027 a Palazzo del Michelerio, Asti. Programma, produttori, biglietti e servizi di accessibilità.">
+<!-- Sul sito vero i font saranno ospitati sul nostro dominio. -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&display=swap" rel="stylesheet">
 <style>
-/* Palette Indisciplinato: Dusk Blue #345995, Mint Leaf #03CEA4, Tomato #FB4D3D su carta chiara. Titoli in Bricolage Grotesque.
-   Layout: video e testo affiancati su schermi larghi, video sopra e testo sotto su telefono. Il testo non sta mai sopra il video. */
+/* Palette Indisciplinato: Dusk Blue #345995, Mint Leaf #03CEA4, Tomato #FB4D3D su carta chiara.
+   Layout: apertura con video e testo affiancati, poi sezioni a tutta larghezza con colonna di lettura stretta. */
 :root {
   --paper: #f6f5f1;
+  --paper-2: #ecebe5;
   --ink: #1b2233;
   --muted: #4a5266;
-  --blue: #345995;      /* Dusk Blue: link e pulsante principale (testo bianco 7:1) */
+  --blue: #345995;
   --on-blue: #ffffff;
-  --mint: #03cea4;      /* Mint Leaf: solo come fondo, con testo scuro (7,8:1) */
-  --tomato: #fb4d3d;    /* Tomato: bordi e dettagli grafici (3:1), mai per testo piccolo */
+  --mint: #03cea4;
+  --tomato: #fb4d3d;
   --focus: #1b2233;
   --display: "Bricolage Grotesque", "Arial Black", system-ui, sans-serif;
   --body: "Atkinson Hyperlegible", Verdana, system-ui, sans-serif;
@@ -48,95 +30,53 @@
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --paper: #141a26; --ink: #eef1f6; --muted: #c3c9d6; --blue: #9fb8e6; --on-blue: #141a26; --focus: #eef1f6;
+    --paper: #141a26; --paper-2: #1c2433; --ink: #eef1f6; --muted: #c3c9d6; --blue: #9fb8e6; --on-blue: #141a26; --focus: #eef1f6;
     color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
-  --paper: #141a26; --ink: #eef1f6; --muted: #c3c9d6; --blue: #9fb8e6; --on-blue: #141a26; --focus: #eef1f6;
+  --paper: #141a26; --paper-2: #1c2433; --ink: #eef1f6; --muted: #c3c9d6; --blue: #9fb8e6; --on-blue: #141a26; --focus: #eef1f6;
   color-scheme: dark;
 }
 @media (prefers-contrast: more) { :root { --muted: var(--ink); } }
 
 * { box-sizing: border-box; }
-html, body { margin: 0; }
-body {
-  background: var(--paper); color: var(--ink);
-  font-family: var(--body); font-size: 1.125rem; line-height: 1.6;
-}
+html { scroll-padding-top: 1rem; }
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--body); font-size: 1.125rem; line-height: 1.6; }
 a { color: var(--blue); text-underline-offset: 0.2em; text-decoration-thickness: 0.08em; }
 a:hover { text-decoration-thickness: 0.18em; }
 :focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; border-radius: 3px; }
-h1, h2 { font-family: var(--display); font-weight: 800; margin: 0; line-height: 1.05; text-wrap: balance; }
-.sr-only { position: absolute; width: 1px; height: 1px; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+h1, h2, h3 { font-family: var(--display); font-weight: 800; margin: 0; line-height: 1.08; text-wrap: balance; }
+h2 { font-size: clamp(2rem, 6vw, 3.2rem); }
+h3 { font-size: 1.35rem; }
 p { margin: 0; }
+ul, ol { margin: 0; }
+.sr-only { position: absolute; width: 1px; height: 1px; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.wrap { width: min(100% - 2rem, 68rem); margin-inline: auto; }
+.read { max-width: 62ch; }
+.stack { display: grid; gap: 1.25rem; }
+[hidden] { display: none !important; }
 
 .skip { position: absolute; left: 1rem; top: -10rem; z-index: 5; background: var(--ink); color: var(--paper); padding: 0.7rem 1rem; font-weight: 700; }
 .skip:focus { top: 1rem; }
+.draft-note { background: var(--tomato); color: #1b2233; font-size: 0.98rem; padding: 0.55rem 0; }
+.draft-note a { color: #1b2233; font-weight: 700; display: inline-block; padding-block: 0.3rem; }
+.tbd { display: inline-block; font-size: 0.85rem; font-weight: 700; border: 2px dashed var(--muted); color: var(--muted); border-radius: 6px; padding: 0 0.4rem; margin-left: 0.3rem; }
 
-.page { display: grid; min-height: 100svh; grid-template-columns: 1fr; grid-template-areas: "top" "photo" "main" "foot"; }
-@media (min-width: 900px) {
-  .page { grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); grid-template-rows: auto 1fr auto; grid-template-areas: "photo top" "photo main" "photo foot"; }
-}
-.top { grid-area: top; } main { grid-area: main; } footer { grid-area: foot; }
-.photo { grid-area: photo; margin: 0; background: var(--mint); position: relative; }
-.photo video { display: block; width: 100%; height: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
-@media (min-width: 900px) { .photo video { aspect-ratio: auto; position: sticky; top: 0; height: 100svh; } }
-.vbtn {
-  position: absolute; left: 1rem; bottom: 1rem; display: inline-flex; align-items: center; gap: 0.5rem;
-  min-height: 44px; padding: 0.45rem 1rem; font: inherit; font-size: 1rem; font-weight: 700; cursor: pointer;
-  background: #1b2233; color: #ffffff; border: 2px solid #ffffff; border-radius: 999px;
-}
-.vbtn svg { width: 18px; height: 18px; }
-@media (min-width: 900px) { .vbtn { position: fixed; } }
-.top { display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding: 1rem clamp(1rem, 4vw, 3rem); }
-.brand { display: block; width: clamp(170px, 42vw, 300px); height: auto; overflow: visible; }
-/* Logo "timbrato": ogni lettera arriva storta e si assesta. Solo se l'utente non ha chiesto meno movimento. */
+/* intestazione */
+.top { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 0.75rem 1rem; padding: 1rem 0; }
+.brand { display: block; width: clamp(170px, 40vw, 280px); height: auto; overflow: visible; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .brand { filter: invert(1); } }
+:root[data-theme="dark"] .brand { filter: invert(1); }
 @media (prefers-reduced-motion: no-preference) {
   .stamp { transform-box: fill-box; transform-origin: 50% 60%; animation: timbro 260ms cubic-bezier(.2,.9,.3,1.25) both; animation-delay: calc(var(--i) * 55ms + 120ms); }
   @keyframes timbro {
-    0%   { opacity: 0; transform: translateY(-35%) scale(1.5) rotate(var(--r)); }
-    60%  { opacity: 1; transform: translateY(4%) scale(0.94) rotate(calc(var(--r) * -0.3)); }
+    0% { opacity: 0; transform: translateY(-35%) scale(1.5) rotate(var(--r)); }
+    60% { opacity: 1; transform: translateY(4%) scale(0.94) rotate(calc(var(--r) * -0.3)); }
     100% { opacity: 1; transform: none; }
   }
 }
-@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .brand { filter: invert(1); } }
-:root[data-theme="dark"] .brand { filter: invert(1); }
-.lang {
-  font: inherit; font-size: 1rem; font-weight: 700; min-height: 44px; padding: 0.4rem 1rem; cursor: pointer;
-  background: transparent; color: var(--ink); border: 2px solid var(--ink); border-radius: 999px;
-}
-
-main { padding: clamp(1.5rem, 5vw, 4rem) clamp(1rem, 4vw, 3rem) 3rem; display: grid; gap: 1.75rem; align-content: center; max-width: 40rem; }
-h1 { font-size: clamp(3rem, 10vw, 6.2rem); letter-spacing: -0.02em; }
-.countdown {
-  justify-self: start;
-  background: var(--mint); color: #1b2233; border-radius: 999px;
-  padding: 0.5rem 1.2rem; font-weight: 700; font-size: clamp(1.25rem, 3.4vw, 1.6rem);
-}
-
-.countdown .n { font-variant-numeric: tabular-nums; }
-.facts { display: grid; gap: 1rem; margin: 0; }
-.facts div { display: grid; gap: 0.1rem; border-left: 5px solid var(--tomato); padding-left: 0.9rem; }
-.facts dt { font-size: 0.95rem; color: var(--muted); font-weight: 700; }
-.facts dd { margin: 0; font-size: 1.3rem; font-weight: 700; }
-.facts dd small { display: block; font-size: 1rem; font-weight: 400; color: var(--muted); }
-.cal { display: flex; flex-wrap: wrap; gap: 0.75rem; }
-.cal a {
-  display: inline-flex; align-items: center; gap: 0.5rem; min-height: 48px; padding: 0.65rem 1.2rem;
-  border-radius: 999px; font-weight: 700; text-decoration: none; border: 2px solid var(--ink); color: var(--ink);
-}
-.cal a.primary { background: var(--blue); color: var(--on-blue); border-color: var(--blue); }
-.cal svg { width: 20px; height: 20px; flex: none; }
-.help { color: var(--muted); max-width: 52ch; }
-
-footer { background: #1b2233; color: #f6f5f1; border-top: 6px solid var(--tomato); padding: 2rem clamp(1rem, 4vw, 3rem); font-size: 0.98rem; display: grid; gap: 1rem; }
-footer a { color: #f6f5f1; }
-footer ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0.25rem 1.25rem; }
-footer li a { display: inline-block; padding: 0.35rem 0; }
-.facts small a, footer p a { display: inline-block; padding-block: 0.3rem; }
-[hidden] { display: none !important; }
-.top { flex-wrap: wrap; }
 .tools { display: flex; gap: 0.5rem; flex-wrap: wrap; }
 .a11y-btn {
   flex-basis: 100%; order: -1; display: flex; align-items: center; justify-content: center; gap: 0.6rem; width: 100%;
@@ -145,197 +85,428 @@ footer li a { display: inline-block; padding: 0.35rem 0; }
 }
 .a11y-btn svg { width: 24px; height: 24px; flex: none; }
 .a11y-btn[aria-expanded="true"] { background: var(--paper); color: var(--ink); }
-.lang { display: inline-flex; align-items: center; gap: 0.4rem; }
-.lang svg { width: 20px; height: 20px; }
+.btn {
+  display: inline-flex; align-items: center; gap: 0.4rem; font: inherit; font-size: 1rem; font-weight: 700; min-height: 44px;
+  padding: 0.4rem 1rem; cursor: pointer; background: transparent; color: var(--ink); border: 2px solid var(--ink); border-radius: 999px;
+}
+.btn svg { width: 20px; height: 20px; }
 .prefs { flex-basis: 100%; margin: 0; padding: 1rem; border: 2px solid var(--ink); border-radius: 16px; display: flex; flex-wrap: wrap; gap: 0.5rem; background: var(--paper); }
 .prefs legend { font-weight: 700; padding: 0 0.4rem; }
-.pref, .reset {
-  font: inherit; font-size: 1rem; font-weight: 700; min-height: 44px; padding: 0.45rem 0.9rem; cursor: pointer;
-  border: 2px solid var(--ink); border-radius: 14px; background: var(--paper); color: var(--ink); text-align: left;
-}
+.pref, .reset { font: inherit; font-size: 1rem; font-weight: 700; min-height: 44px; padding: 0.45rem 0.9rem; cursor: pointer; border: 2px solid var(--ink); border-radius: 14px; background: var(--paper); color: var(--ink); text-align: left; }
 .pref[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
 .pref[aria-pressed="true"]::before { content: "✓ "; }
 .reset { border-style: dashed; }
+nav.main ul { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 0.25rem 1.25rem; }
+nav.main a { display: inline-block; padding: 0.5rem 0; font-weight: 700; color: var(--ink); }
 
-/* Preferenze di lettura scelte dall'utente */
+/* apertura */
+.hero { display: grid; grid-template-columns: minmax(0, 1fr); border-top: 2px solid var(--ink); }
+@media (min-width: 900px) { .hero { grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); } }
+.photo { margin: 0; background: var(--mint); position: relative; min-height: 14rem; }
+.photo video { display: block; width: 100%; height: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
+@media (min-width: 900px) { .photo video { aspect-ratio: auto; position: absolute; inset: 0; } }
+.vbtn { position: absolute; left: 1rem; bottom: 1rem; display: inline-flex; align-items: center; gap: 0.5rem; min-height: 44px; padding: 0.45rem 1rem; font: inherit; font-size: 1rem; font-weight: 700; cursor: pointer; background: #1b2233; color: #fff; border: 2px solid #fff; border-radius: 999px; }
+.vbtn svg { width: 18px; height: 18px; }
+.intro { padding: clamp(1.5rem, 5vw, 3.5rem) clamp(1rem, 4vw, 3rem); display: grid; gap: 1.5rem; align-content: center; }
+.intro h1 { font-size: clamp(2.6rem, 9vw, 5.6rem); letter-spacing: -0.02em; overflow-wrap: anywhere; hyphens: auto; }
+.intro > * { min-width: 0; }
+.claim { font-size: 1.25rem; max-width: 40ch; }
+.countdown { justify-self: start; background: var(--mint); color: #1b2233; border-radius: 999px; padding: 0.5rem 1.2rem; font-weight: 700; font-size: clamp(1.2rem, 3.4vw, 1.5rem); }
+.countdown .n { font-variant-numeric: tabular-nums; }
+.facts { display: grid; gap: 1rem; margin: 0; }
+.facts div { display: grid; gap: 0.1rem; border-left: 5px solid var(--tomato); padding-left: 0.9rem; }
+.facts dt { font-size: 0.95rem; color: var(--muted); font-weight: 700; }
+.facts dd { margin: 0; font-size: 1.25rem; font-weight: 700; }
+.facts dd small { display: block; font-size: 1rem; font-weight: 400; color: var(--muted); }
+.actions { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+.actions a { display: inline-flex; align-items: center; gap: 0.5rem; min-height: 48px; padding: 0.65rem 1.2rem; border-radius: 999px; font-weight: 700; text-decoration: none; border: 2px solid var(--ink); color: var(--ink); }
+.actions a.primary { background: var(--blue); color: var(--on-blue); border-color: var(--blue); }
+.actions svg { width: 20px; height: 20px; flex: none; }
+
+/* sezioni */
+section.block { padding: clamp(2.5rem, 6vw, 4.5rem) 0; border-top: 2px solid var(--ink); }
+section.alt { background: var(--paper-2); }
+.easy-box { border: 3px solid var(--ink); border-radius: 16px; padding: 1.25rem 1.4rem; background: var(--paper); align-self: start; }
+.easy-box ol { padding-left: 1.4em; display: grid; gap: 0.6rem; font-size: 1.2em; max-width: 34ch; }
+.badge { justify-self: start; font-size: 0.9rem; font-weight: 700; padding: 0.15rem 0.7rem; border-radius: 999px; background: var(--mint); color: #1b2233; }
+.cards { list-style: none; padding: 0; display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr)); }
+.cards > li { border: 2px solid var(--ink); border-radius: 14px; padding: 1.1rem 1.2rem; display: grid; gap: 0.5rem; align-content: start; background: var(--paper); }
+.cards svg { width: 34px; height: 34px; stroke: var(--blue); fill: none; stroke-width: 2; }
+.day { display: grid; gap: 0.75rem; }
+.slots { list-style: none; padding: 0; display: grid; gap: 0.6rem; }
+.slots li { display: grid; grid-template-columns: 6.5rem 1fr; gap: 0.25rem 1rem; padding: 0.8rem 0; border-bottom: 1px solid var(--muted); }
+.slots time { font-weight: 700; font-variant-numeric: tabular-nums; }
+.slots .tags { grid-column: 2; display: flex; flex-wrap: wrap; gap: 0.35rem; }
+.tag { font-size: 0.85rem; font-weight: 700; border: 2px solid var(--blue); color: var(--blue); border-radius: 999px; padding: 0 0.55rem; }
+@media (max-width: 30rem) { .slots li { grid-template-columns: 1fr; } .slots .tags { grid-column: 1; } }
+.two { display: grid; gap: 2rem; grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr)); }
+.filters { display: flex; flex-wrap: wrap; gap: 0.5rem; border: 0; padding: 0; margin: 0; }
+.filters legend { font-weight: 700; margin-bottom: 0.5rem; padding: 0; }
+.filters button { font: inherit; font-size: 1rem; font-weight: 700; min-height: 44px; padding: 0.4rem 1rem; cursor: pointer; border: 2px solid var(--ink); border-radius: 999px; background: var(--paper); color: var(--ink); }
+.filters button[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
+.producers { list-style: none; padding: 0; display: grid; gap: 0.75rem; grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr)); }
+.producers li { border-left: 6px solid var(--mint); padding: 0.35rem 0 0.35rem 0.9rem; }
+.producers .name { font-weight: 700; display: block; }
+.producers .where, .producers .wines { color: var(--muted); font-size: 0.95em; display: block; }
+dl.prices { display: grid; grid-template-columns: auto 1fr; gap: 0.6rem 1.25rem; margin: 0; }
+dl.prices dt { font-weight: 700; }
+dl.prices dd { margin: 0; }
+.faq details { border-bottom: 1px solid var(--muted); }
+.faq summary { cursor: pointer; font-weight: 700; padding: 0.9rem 0; min-height: 44px; }
+.faq details > div { padding: 0 0 1rem; max-width: 62ch; }
+.partners { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.partners li { border: 2px solid var(--ink); border-radius: 999px; padding: 0.3rem 0.9rem; font-weight: 700; }
+
+footer { background: #1b2233; color: #f6f5f1; border-top: 6px solid var(--tomato); padding: 2.5rem 0; font-size: 0.98rem; }
+footer a { color: #f6f5f1; }
+footer .cols { display: grid; gap: 1.5rem; grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr)); }
+footer ul { list-style: none; padding: 0; display: grid; gap: 0.25rem; }
+footer li a, footer p a { display: inline-block; padding: 0.3rem 0; }
+.facts small a, p > a:only-child { display: inline-block; padding-block: 0.35rem; }
+
+/* preferenze di lettura */
 html.p-grande { font-size: 125%; }
-html.p-grande .brand { width: clamp(200px, 50vw, 360px); }
 html.p-spazio body { line-height: 1.9; letter-spacing: 0.05em; word-spacing: 0.15em; }
-html.p-spazio h1 { letter-spacing: 0.02em; line-height: 1.2; }
-html.p-link main a:not(.cal a), html.p-link footer a { text-decoration-thickness: 0.18em; background: #ffe500; color: #000 !important; padding: 0 0.15em; }
-html.p-contrasto {
-  --paper: #ffffff; --ink: #000000; --muted: #000000; --blue: #000000; --on-blue: #ffffff; --mint: #ffffff; --tomato: #000000; --focus: #0040ff;
-  color-scheme: light;
-}
-html.p-contrasto .countdown { border: 3px solid #000; }
-html.p-contrasto .cal a { border-width: 3px; }
-html.p-contrasto footer { background: #000; border-top-color: #000; }
+html.p-spazio h1, html.p-spazio h2 { letter-spacing: 0.02em; line-height: 1.2; }
+html.p-link main a:not(.actions a), html.p-link footer a { text-decoration-thickness: 0.18em; background: #ffe500; color: #000 !important; padding: 0 0.15em; }
+html.p-contrasto { --paper: #fff; --paper-2: #fff; --ink: #000; --muted: #000; --blue: #000; --on-blue: #fff; --mint: #fff; --tomato: #000; --focus: #0040ff; color-scheme: light; }
+html.p-contrasto .countdown, html.p-contrasto .badge { border: 3px solid #000; }
+html.p-contrasto .producers li { border-left-color: #000; }
+html.p-contrasto footer { background: #000; }
 html.p-contrasto .brand { filter: none !important; }
+html.p-contrasto .draft-note { background: #fff; border-bottom: 3px solid #000; }
 html.p-fermo .stamp { animation: none !important; }
 </style>
 </head>
 <body>
 <a class="skip" href="#contenuto" data-it="Salta al contenuto" data-en="Skip to content">Salta al contenuto</a>
 
-<div class="page">
-  <header class="top">
-      <button class="a11y-btn" type="button" id="prefs-btn" aria-expanded="false" aria-controls="prefs">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="4.5" r="2"/><path d="M5 8.5l7 1.5 7-1.5M12 10v5m0 0l-3 6m3-6l3 6"/></svg>
-        <span data-it="Accessibilità: adatta la pagina" data-en="Accessibility: adjust the page">Accessibilità: adatta la pagina</span>
+<div class="draft-note" role="note">
+  <div class="wrap"><p><span data-it="Bozza per la revisione di accessibilità: i contenuti segnati come “da confermare” sono segnaposto." data-en="Draft for accessibility review: content marked “to be confirmed” is placeholder.">Bozza per la revisione di accessibilità: i contenuti segnati come “da confermare” sono segnaposto.</span> <a href="per-il-revisore.html" data-it="Note per il revisore" data-en="Notes for the reviewer (Italian)">Note per il revisore</a></p></div>
+</div>
+
+<header class="wrap top">
+  <button class="a11y-btn" type="button" id="prefs-btn" aria-expanded="false" aria-controls="prefs">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="4.5" r="2"/><path d="M5 8.5l7 1.5 7-1.5M12 10v5m0 0l-3 6m3-6l3 6"/></svg>
+    <span data-it="Accessibilità: adatta la pagina" data-en="Accessibility: adjust the page">Accessibilità: adatta la pagina</span>
+  </button>
+  <svg class="brand" viewBox="0 0 900 118" role="img" aria-label="Indisciplinato" xmlns="http://www.w3.org/2000/svg"><title>Indisciplinato</title><defs><clipPath id="lg0"><rect x="0" y="0" width="32" height="118"/></clipPath><clipPath id="lg1"><rect x="32" y="0" width="77" height="118"/></clipPath><clipPath id="lg2"><rect x="109" y="0" width="73" height="118"/></clipPath><clipPath id="lg3"><rect x="182" y="0" width="41" height="118"/></clipPath><clipPath id="lg4"><rect x="223" y="0" width="57" height="118"/></clipPath><clipPath id="lg5"><rect x="280" y="0" width="62" height="118"/></clipPath><clipPath id="lg6"><rect x="342" y="0" width="34" height="118"/></clipPath><clipPath id="lg7"><rect x="376" y="0" width="78" height="118"/></clipPath><clipPath id="lg8"><rect x="454" y="0" width="68" height="118"/></clipPath><clipPath id="lg9"><rect x="522" y="0" width="36" height="118"/></clipPath><clipPath id="lg10"><rect x="558" y="0" width="92" height="118"/></clipPath><clipPath id="lg11"><rect x="650" y="0" width="153" height="118"/></clipPath><clipPath id="lg12"><rect x="803" y="0" width="97" height="118"/></clipPath></defs><g class="stamp" style="--i:0;--r:-9deg"><image href="logo.png" width="900" height="118" clip-path="url(#lg0)"/></g><g class="stamp" style="--i:1;--r:7deg"><image href="logo.png" width="900" height="118" clip-path="url(#lg1)"/></g><g class="stamp" style="--i:2;--r:-5deg"><image href="logo.png" width="900" height="118" clip-path="url(#lg2)"/></g><g class="stamp" style="--i:3;--r:10deg"><image href="logo.png" width="900" height="118" clip-path="url(#lg3)"/></g><g class="stamp" style="--i:4;--r:-7deg"><image href="logo.png" width="900" height="118" clip-path="url(#lg4)"/></g><g class="stamp" style="--i:5;--r:6deg"><image href="logo.png" width="900" height="118" clip-path="url(#lg5)"/></g><g class="stamp" style="--i:6;--r:-10deg"><image href="logo.png" width="900" height="118" clip-path="url(#lg6)"/></g><g class="stamp" style="--i:7;--r:8deg"><image href="logo.png" width="900" height="118" clip-path="url(#lg7)"/></g><g class="stamp" style="--i:8;--r:-6deg"><image href="logo.png" width="900" height="118" clip-path="url(#lg8)"/></g><g class="stamp" style="--i:9;--r:9deg"><image href="logo.png" width="900" height="118" clip-path="url(#lg9)"/></g><g class="stamp" style="--i:10;--r:-8deg"><image href="logo.png" width="900" height="118" clip-path="url(#lg10)"/></g><g class="stamp" style="--i:11;--r:5deg"><image href="logo.png" width="900" height="118" clip-path="url(#lg11)"/></g><g class="stamp" style="--i:12;--r:-7deg"><image href="logo.png" width="900" height="118" clip-path="url(#lg12)"/></g></svg>
+  <div class="tools"><button class="btn" type="button" id="lang" lang="en">English</button></div>
+  <fieldset class="prefs" id="prefs" hidden style="order:-1">
+    <legend data-it="Adatta la pagina" data-en="Adjust the page">Adatta la pagina</legend>
+    <button type="button" class="pref" data-pref="p-grande" aria-pressed="false" data-it="Testo più grande" data-en="Larger text">Testo più grande</button>
+    <button type="button" class="pref" data-pref="p-contrasto" aria-pressed="false" data-it="Alto contrasto" data-en="High contrast">Alto contrasto</button>
+    <button type="button" class="pref" data-pref="p-spazio" aria-pressed="false" data-it="Più spazio tra righe e lettere" data-en="More line and letter spacing">Più spazio tra righe e lettere</button>
+    <button type="button" class="pref" data-pref="p-link" aria-pressed="false" data-it="Evidenzia i link" data-en="Highlight links">Evidenzia i link</button>
+    <button type="button" class="pref" data-pref="p-fermo" aria-pressed="false" data-it="Ferma animazioni e video" data-en="Stop animations and video">Ferma animazioni e video</button>
+    <button type="button" class="reset" id="prefs-reset" data-it="Ripristina" data-en="Reset">Ripristina</button>
+  </fieldset>
+  <nav class="main" aria-label="In questa pagina" data-aria-it="In questa pagina" data-aria-en="On this page" style="flex-basis:100%">
+    <ul>
+      <li><a href="#cose" data-it="Cos'è" data-en="What it is">Cos'è</a></li>
+      <li><a href="#biglietti" data-it="Biglietti" data-en="Tickets">Biglietti</a></li>
+      <li><a href="#programma" data-it="Programma" data-en="Programme">Programma</a></li>
+      <li><a href="#produttori" data-it="Produttori" data-en="Producers">Produttori</a></li>
+      <li><a href="#accessibilita" data-it="Servizi di accessibilità" data-en="Accessibility services">Servizi di accessibilità</a></li>
+      <li><a href="#info" data-it="Come arrivare" data-en="Getting there">Come arrivare</a></li>
+      <li><a href="#domande" data-it="Domande frequenti" data-en="FAQ">Domande frequenti</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main id="contenuto" tabindex="-1">
+  <div class="hero">
+    <div class="photo">
+      <video id="video" muted loop playsinline preload="metadata" poster="poster.jpg" aria-describedby="video-desc">
+        <source src="fiera.mp4" type="video/mp4">
+      </video>
+      <p id="video-desc" class="sr-only" data-it="Video senza audio dell'edizione 2025: produttori che sistemano le bottiglie sui banchi, scatoloni di vino, una piantina tra i calici." data-en="Silent video from the 2025 edition: producers setting bottles on their stands, boxes of wine, a small plant among the glasses.">Video senza audio dell'edizione 2025: produttori che sistemano le bottiglie sui banchi, scatoloni di vino, una piantina tra i calici.</p>
+      <button class="vbtn" type="button" id="vbtn" hidden>
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="5" width="4" height="14"/><rect x="14" y="5" width="4" height="14"/></svg>
+        <span id="vbtn-label">Metti in pausa il video</span>
       </button>
-      <svg class="brand" viewBox="0 0 900 118" role="img" aria-label="Indisciplinato" xmlns="http://www.w3.org/2000/svg"><title>Indisciplinato</title><defs><clipPath id="lg0"><rect x="0" y="0" width="32" height="118"/></clipPath><clipPath id="lg1"><rect x="32" y="0" width="77" height="118"/></clipPath><clipPath id="lg2"><rect x="109" y="0" width="73" height="118"/></clipPath><clipPath id="lg3"><rect x="182" y="0" width="41" height="118"/></clipPath><clipPath id="lg4"><rect x="223" y="0" width="57" height="118"/></clipPath><clipPath id="lg5"><rect x="280" y="0" width="62" height="118"/></clipPath><clipPath id="lg6"><rect x="342" y="0" width="34" height="118"/></clipPath><clipPath id="lg7"><rect x="376" y="0" width="78" height="118"/></clipPath><clipPath id="lg8"><rect x="454" y="0" width="68" height="118"/></clipPath><clipPath id="lg9"><rect x="522" y="0" width="36" height="118"/></clipPath><clipPath id="lg10"><rect x="558" y="0" width="92" height="118"/></clipPath><clipPath id="lg11"><rect x="650" y="0" width="153" height="118"/></clipPath><clipPath id="lg12"><rect x="803" y="0" width="97" height="118"/></clipPath></defs><g class="stamp" style="--i:0;--r:-9deg"><image href="logo.png" width="900" height="118" clip-path="url(#lg0)"/></g><g class="stamp" style="--i:1;--r:7deg"><image href="logo.png" width="900" height="118" clip-path="url(#lg1)"/></g><g class="stamp" style="--i:2;--r:-5deg"><image href="logo.png" width="900" height="118" clip-path="url(#lg2)"/></g><g class="stamp" style="--i:3;--r:10deg"><image href="logo.png" width="900" height="118" clip-path="url(#lg3)"/></g><g class="stamp" style="--i:4;--r:-7deg"><image href="logo.png" width="900" height="118" clip-path="url(#lg4)"/></g><g class="stamp" style="--i:5;--r:6deg"><image href="logo.png" width="900" height="118" clip-path="url(#lg5)"/></g><g class="stamp" style="--i:6;--r:-10deg"><image href="logo.png" width="900" height="118" clip-path="url(#lg6)"/></g><g class="stamp" style="--i:7;--r:8deg"><image href="logo.png" width="900" height="118" clip-path="url(#lg7)"/></g><g class="stamp" style="--i:8;--r:-6deg"><image href="logo.png" width="900" height="118" clip-path="url(#lg8)"/></g><g class="stamp" style="--i:9;--r:9deg"><image href="logo.png" width="900" height="118" clip-path="url(#lg9)"/></g><g class="stamp" style="--i:10;--r:-8deg"><image href="logo.png" width="900" height="118" clip-path="url(#lg10)"/></g><g class="stamp" style="--i:11;--r:5deg"><image href="logo.png" width="900" height="118" clip-path="url(#lg11)"/></g><g class="stamp" style="--i:12;--r:-7deg"><image href="logo.png" width="900" height="118" clip-path="url(#lg12)"/></g></svg>
-      <div class="tools"><button class="lang" type="button" id="lang" lang="en">English</button></div>
-      <fieldset class="prefs" id="prefs" hidden style="order:-1">
-        <legend data-it="Adatta la pagina" data-en="Adjust the page">Adatta la pagina</legend>
-        <button type="button" class="pref" data-pref="p-grande" aria-pressed="false" data-it="Testo più grande" data-en="Larger text">Testo più grande</button>
-        <button type="button" class="pref" data-pref="p-contrasto" aria-pressed="false" data-it="Alto contrasto" data-en="High contrast">Alto contrasto</button>
-        <button type="button" class="pref" data-pref="p-spazio" aria-pressed="false" data-it="Più spazio tra righe e lettere" data-en="More line and letter spacing">Più spazio tra righe e lettere</button>
-        <button type="button" class="pref" data-pref="p-link" aria-pressed="false" data-it="Evidenzia i link" data-en="Highlight links">Evidenzia i link</button>
-        <button type="button" class="pref" data-pref="p-fermo" aria-pressed="false" data-it="Ferma animazioni e video" data-en="Stop animations and video">Ferma animazioni e video</button>
-        <button type="button" class="reset" id="prefs-reset" data-it="Ripristina" data-en="Reset">Ripristina</button>
-      </fieldset>
-    </header>
-  <div class="photo" role="region" aria-label="Video dell'edizione 2025" data-aria-it="Video dell'edizione 2025" data-aria-en="Video from the 2025 edition">
-    <video id="video" muted loop playsinline preload="metadata" poster="poster.jpg" aria-describedby="video-desc">
-      <source src="fiera.mp4" type="video/mp4">
-    </video>
-    <p id="video-desc" class="sr-only" data-it="Video senza audio dell'edizione 2025: produttori che sistemano le bottiglie sui banchi, scatoloni di vino, una piantina tra i calici." data-en="Silent video from the 2025 edition: producers setting bottles on their stands, boxes of wine, a small plant among the glasses.">Video senza audio dell'edizione 2025: produttori che sistemano le bottiglie sui banchi, scatoloni di vino, una piantina tra i calici.</p>
-    <button class="vbtn" type="button" id="vbtn" hidden>
-      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="5" width="4" height="14"/><rect x="14" y="5" width="4" height="14"/></svg>
-      <span id="vbtn-label">Metti in pausa il video</span>
-    </button>
-  </div>
-
-
-    <main id="contenuto" tabindex="-1">
-      <h1 data-it="Stiamo tornando" data-en="We're coming back">Stiamo tornando</h1>
-
-      <p class="countdown">
-        <span id="countdown" aria-hidden="true"><span data-it="Mancano" data-en="">Mancano</span> <span class="n" id="days">197</span> <span id="days-word" data-it="giorni" data-en="days to go">giorni</span></span><span class="sr-only" id="countdown-sr">Mancano 197 giorni</span>
-      </p>
-
+    </div>
+    <div class="intro">
+      <h1>Indisciplinato 2027</h1>
+      <p class="claim" data-it="Fiera astigiana delle microproduzioni di prossimità: vino e cibo di piccoli produttori indipendenti, da assaggiare e comprare direttamente da chi li fa." data-en="Asti's fair of small local producers: wine and food from independent makers, to taste and buy directly from the people who make them.">Fiera astigiana delle microproduzioni di prossimità: vino e cibo di piccoli produttori indipendenti, da assaggiare e comprare direttamente da chi li fa.</p>
+      <p class="countdown"><span id="countdown" aria-hidden="true"><span data-it="Mancano" data-en="">Mancano</span> <span class="n" id="days">197</span> <span id="days-word" data-it="giorni" data-en="days to go">giorni</span></span><span class="sr-only" id="countdown-sr">Mancano 197 giorni</span></p>
       <dl class="facts">
         <div>
           <dt data-it="Quando" data-en="When">Quando</dt>
-          <dd>
-            <span data-it="Sabato 15 e domenica 16 maggio 2027" data-en="Saturday 15 and Sunday 16 May 2027">Sabato 15 e domenica 16 maggio 2027</span>
-            <small data-it="Orari in arrivo" data-en="Opening hours coming soon">Orari in arrivo</small>
-          </dd>
+          <dd><span data-it="Sabato 15 e domenica 16 maggio 2027" data-en="Saturday 15 and Sunday 16 May 2027">Sabato 15 e domenica 16 maggio 2027</span>
+            <small><span data-it="Orari" data-en="Opening hours">Orari</span> <span class="tbd" data-it="da confermare" data-en="to be confirmed">da confermare</span></small></dd>
         </div>
         <div>
           <dt data-it="Dove" data-en="Where">Dove</dt>
-          <dd>
-            Palazzo del Michelerio
+          <dd>Palazzo del Michelerio
             <small>Corso Vittorio Alfieri 381, Asti</small>
-            <small><a href="https://www.google.com/maps/search/?api=1&amp;query=Palazzo%20del%20Michelerio%2C%20Corso%20Vittorio%20Alfieri%20381%2C%20Asti" data-it="Apri la mappa (sito esterno)" data-en="Open the map (external site)">Apri la mappa (sito esterno)</a></small>
-          </dd>
+            <small><a href="#info" data-it="Come arrivare e accessi" data-en="Getting there and entrances">Come arrivare e accessi</a></small></dd>
+        </div>
+        <div>
+          <dt data-it="Ingresso" data-en="Entry">Ingresso</dt>
+          <dd><span data-it="A pagamento, gratis per minori e accompagnatori" data-en="Paid entry, free for under 18s and companions">A pagamento, gratis per minori e accompagnatori</span>
+            <small><a href="#biglietti" data-it="Prezzi e riduzioni" data-en="Prices and discounts">Prezzi e riduzioni</a></small></dd>
         </div>
       </dl>
-
-      <div class="cal">
-        <a class="primary" id="gcal"
-           href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=Indisciplinato%202027&amp;dates=20270515%2F20270517&amp;location=Palazzo%20del%20Michelerio%2C%20Corso%20Vittorio%20Alfieri%20381%2C%20Asti&amp;details=Fiera%20astigiana%20delle%20microproduzioni%20di%20prossimit%C3%A0.%20www.indisciplinato.it">
+      <div class="actions">
+        <a class="primary" href="#biglietti">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 8a2 2 0 0 0 0 4v4a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-4a2 2 0 0 0 0-4V6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2z"/><path d="M14 4v16" stroke-dasharray="2 2"/></svg>
+          <span data-it="Biglietti e prezzi" data-en="Tickets and prices">Biglietti e prezzi</span>
+        </a>
+        <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=Indisciplinato%202027&amp;dates=20270515%2F20270517&amp;location=Palazzo%20del%20Michelerio%2C%20Corso%20Vittorio%20Alfieri%20381%2C%20Asti&amp;details=Fiera%20astigiana%20delle%20microproduzioni%20di%20prossimit%C3%A0.%20www.indisciplinato.it">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4M12 13v5M9.5 15.5h5"/></svg>
           <span data-it="Aggiungi a Google Calendar" data-en="Add to Google Calendar">Aggiungi a Google Calendar</span>
         </a>
-        <a href="indisciplinato-2027.ics" type="text/calendar">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>
-          <span data-it="Altri calendari (.ics)" data-en="Other calendars (.ics)">Altri calendari (.ics)</span>
-        </a>
       </div>
+    </div>
+  </div>
 
-      <p class="help" data-it="Hai bisogno di assistenza per venire alla fiera? Scrivici a info@indisciplinato.it: ci organizziamo insieme." data-en="Need assistance to attend the fair? Write to info@indisciplinato.it and we'll arrange it together.">Hai bisogno di assistenza per venire alla fiera? Scrivici a info@indisciplinato.it: ci organizziamo insieme.</p>
-    </main>
-
-    <footer>
-      <p><strong>Associazione Vinaccia ETS</strong><br>
-        Via Crova 21, 14020 Soglio (AT)<br>
-        <span data-it="C.F. 90060890044 · P.IVA 01763830054" data-en="Tax code 90060890044 · VAT 01763830054">C.F. 90060890044 · P.IVA 01763830054</span><br>
-        <span data-it="Iscritta al RUNTS dal 05/12/2022" data-en="Registered in RUNTS (Italian Third Sector Register) since 05/12/2022">Iscritta al RUNTS dal 05/12/2022</span></p>
-      <p>info@indisciplinato.it · <a href="https://www.instagram.com/indisciplinato_fiera/" data-it="Instagram (sito esterno)" data-en="Instagram (external site)">Instagram (sito esterno)</a></p>
-      <nav aria-label="Note legali" data-aria-it="Note legali" data-aria-en="Legal">
+  <section class="block alt" id="cose" aria-labelledby="cose-t">
+    <div class="wrap two">
+      <div class="stack read">
+        <h2 id="cose-t" data-it="Cos'è Indisciplinato" data-en="What Indisciplinato is">Cos'è Indisciplinato</h2>
+        <p data-it="Indisciplinato è una fiera dove piccoli produttori di vino e cibo incontrano il pubblico. Nasce ad Asti nel 2023 da un gruppo di giovani dell'Associazione Vinaccia." data-en="Indisciplinato is a fair where small wine and food producers meet the public. It started in Asti in 2023, run by a group of young people from the Vinaccia association.">Indisciplinato è una fiera dove piccoli produttori di vino e cibo incontrano il pubblico. Nasce ad Asti nel 2023 da un gruppo di giovani dell'Associazione Vinaccia.</p>
+        <h3 data-it="Cosa puoi fare" data-en="What you can do">Cosa puoi fare</h3>
         <ul>
-          <li><a href="note-legali.html#privacy" data-it="Privacy" data-en="Privacy">Privacy</a></li>
-          <li><a href="note-legali.html#cookie" data-it="Cookie" data-en="Cookies">Cookie</a></li>
-          <li><a href="note-legali.html#accessibilita" data-it="Dichiarazione di accessibilità" data-en="Accessibility statement">Dichiarazione di accessibilità</a></li>
+          <li data-it="Assaggiare vini e prodotti di circa 30 produttori." data-en="Taste wines and food from about 30 producers.">Assaggiare vini e prodotti di circa 30 produttori.</li>
+          <li data-it="Parlare con chi li produce e comprare direttamente da loro." data-en="Talk to the people who make them and buy directly from them.">Parlare con chi li produce e comprare direttamente da loro.</li>
+          <li data-it="Partecipare a incontri e degustazioni guidate, molte gratuite." data-en="Join talks and guided tastings, many of them free.">Partecipare a incontri e degustazioni guidate, molte gratuite.</li>
         </ul>
-      </nav>
-    </footer>
-</div>
+        <p data-it="Vogliamo una fiera aperta a tutte e tutti: per questo l'abbiamo progettata con associazioni di persone con disabilità." data-en="We want a fair that is open to everyone, so we designed it with disability organisations.">Vogliamo una fiera aperta a tutte e tutti: per questo l'abbiamo progettata con associazioni di persone con disabilità.</p>
+      </div>
+      <aside class="easy-box stack" aria-labelledby="facile-t">
+        <span class="badge" data-it="Lettura facile" data-en="Easy read">Lettura facile</span>
+        <h3 id="facile-t" data-it="Indisciplinato in breve" data-en="Indisciplinato in short">Indisciplinato in breve</h3>
+        <ol>
+          <li data-it="È una fiera di vino e di cibo." data-en="It is a wine and food fair.">È una fiera di vino e di cibo.</li>
+          <li data-it="È ad Asti, nel cortile di Palazzo del Michelerio." data-en="It is in Asti, in the courtyard of Palazzo del Michelerio.">È ad Asti, nel cortile di Palazzo del Michelerio.</li>
+          <li data-it="È sabato 15 e domenica 16 maggio 2027." data-en="It is on Saturday 15 and Sunday 16 May 2027.">È sabato 15 e domenica 16 maggio 2027.</li>
+          <li data-it="Puoi assaggiare e comprare da piccoli produttori." data-en="You can taste and buy from small producers.">Puoi assaggiare e comprare da piccoli produttori.</li>
+          <li data-it="Se hai bisogno di aiuto, scrivici prima di venire." data-en="If you need help, write to us before you come.">Se hai bisogno di aiuto, scrivici prima di venire.</li>
+        </ol>
+      </aside>
+    </div>
+  </section>
+
+  <section class="block" id="biglietti" aria-labelledby="big-t">
+    <div class="wrap two">
+      <div class="stack">
+        <h2 id="big-t" data-it="Biglietti" data-en="Tickets">Biglietti</h2>
+        <dl class="prices">
+          <dt data-it="Ingresso con degustazione" data-en="Entry with tasting">Ingresso con degustazione</dt><dd><span class="tbd" data-it="da confermare" data-en="to be confirmed">da confermare</span></dd>
+          <dt data-it="Under 25" data-en="Under 25">Under 25</dt><dd data-it="ridotto" data-en="reduced">ridotto</dd>
+          <dt data-it="Minori" data-en="Under 18">Minori</dt><dd data-it="gratis" data-en="free">gratis</dd>
+          <dt data-it="Accompagnatori di persone con disabilità" data-en="Companions of disabled visitors">Accompagnatori di persone con disabilità</dt><dd data-it="gratis" data-en="free">gratis</dd>
+        </dl>
+      </div>
+      <div class="stack read">
+        <p data-it="La vendita online aprirà su questo sito in primavera. Alcune attività, come gli incontri e le degustazioni guidate, sono gratuite." data-en="Online sales will open on this site in spring. Some activities, such as talks and guided tastings, are free.">La vendita online aprirà su questo sito in primavera. Alcune attività, come gli incontri e le degustazioni guidate, sono gratuite.</p>
+        <p data-it="Se non riesci a comprare online, scrivici a info@indisciplinato.it: teniamo il biglietto per te e paghi all'ingresso." data-en="If you can't buy online, write to info@indisciplinato.it: we will hold a ticket for you and you pay at the entrance.">Se non riesci a comprare online, scrivici a info@indisciplinato.it: teniamo il biglietto per te e paghi all'ingresso.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="block alt" id="programma" aria-labelledby="prog-t">
+    <div class="wrap stack">
+      <h2 id="prog-t" data-it="Programma" data-en="Programme">Programma</h2>
+      <p class="read"><span data-it="Gli orari sono provvisori." data-en="Times are provisional.">Gli orari sono provvisori.</span> <span class="tbd" data-it="da confermare" data-en="to be confirmed">da confermare</span></p>
+      <div class="two">
+        <div class="day">
+          <h3><time datetime="2027-05-15" data-it="Sabato 15 maggio" data-en="Saturday 15 May">Sabato 15 maggio</time></h3>
+          <ul class="slots">
+            <li><time datetime="2027-05-15T15:00">15:00</time><span data-it="Apertura dei banchi e degustazioni" data-en="Stands open, tastings begin">Apertura dei banchi e degustazioni</span>
+              <span class="tags"><span class="tag" data-it="Accessibile in sedia a ruote" data-en="Wheelchair accessible">Accessibile in sedia a ruote</span></span></li>
+            <li><time datetime="2027-05-15T17:00">17:00</time><span data-it="Scienza sotto i campanili: clima e vigna nell'Astigiano" data-en="Scienza sotto i campanili: climate and vineyards around Asti">Scienza sotto i campanili: clima e vigna nell'Astigiano</span>
+              <span class="tags"><span class="tag">LIS</span><span class="tag" data-it="Gratuito" data-en="Free">Gratuito</span></span></li>
+            <li><time datetime="2027-05-15T19:00">19:00</time><span data-it="Aperitivo con musica" data-en="Aperitivo with music">Aperitivo con musica</span>
+              <span class="tags"><span class="tag" data-it="Sala tranquilla disponibile" data-en="Quiet room available">Sala tranquilla disponibile</span></span></li>
+          </ul>
+        </div>
+        <div class="day">
+          <h3><time datetime="2027-05-16" data-it="Domenica 16 maggio" data-en="Sunday 16 May">Domenica 16 maggio</time></h3>
+          <ul class="slots">
+            <li><time datetime="2027-05-16T11:00">11:00</time><span data-it="Fiera-mercato con i produttori" data-en="Market day with the producers">Fiera-mercato con i produttori</span>
+              <span class="tags"><span class="tag" data-it="Accessibile in sedia a ruote" data-en="Wheelchair accessible">Accessibile in sedia a ruote</span></span></li>
+            <li><time datetime="2027-05-16T12:30">12:30</time><span data-it="Degustazione guidata" data-en="Guided tasting">Degustazione guidata</span>
+              <span class="tags"><span class="tag">LIS</span><span class="tag" data-it="Gratuito" data-en="Free">Gratuito</span></span></li>
+            <li><time datetime="2027-05-16T15:00">15:00</time><span data-it="Laboratorio sensoriale" data-en="Sensory workshop">Laboratorio sensoriale</span>
+              <span class="tags"><span class="tag" data-it="Kit sensoriale" data-en="Sensory kit">Kit sensoriale</span></span></li>
+            <li><time datetime="2027-05-16T16:30">16:30</time><span data-it="Asti Slow Fashion: moda circolare e consumo critico" data-en="Asti Slow Fashion: circular fashion and conscious consumption">Asti Slow Fashion: moda circolare e consumo critico</span>
+              <span class="tags"><span class="tag" data-it="Gratuito" data-en="Free">Gratuito</span></span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="produttori" aria-labelledby="prod-t">
+    <div class="wrap stack">
+      <h2 id="prod-t" data-it="Produttori" data-en="Producers">Produttori</h2>
+      <p class="read"><span data-it="Esempio con i produttori dell'edizione 2025: la lista 2027 è in arrivo." data-en="Example using the 2025 producers: the 2027 list is coming soon.">Esempio con i produttori dell'edizione 2025: la lista 2027 è in arrivo.</span> <span class="tbd" data-it="da confermare" data-en="to be confirmed">da confermare</span></p>
+      <fieldset class="filters">
+        <legend data-it="Mostra produttori da" data-en="Show producers from">Mostra produttori da</legend>
+        <button type="button" data-filter="tutti" aria-pressed="true" data-it="Tutte le regioni" data-en="All regions">Tutte le regioni</button>
+        <button type="button" data-filter="Piemonte" aria-pressed="false">Piemonte</button>
+        <button type="button" data-filter="altre" aria-pressed="false" data-it="Altre regioni" data-en="Other regions">Altre regioni</button>
+      </fieldset>
+      <p id="prod-count" role="status" class="read"></p>
+      <ul class="producers"><li data-regione="Piemonte"><span class="name">Casa Tallone</span><span class="where">San Damiano d&#x27;Asti (AT), Piemonte</span><span class="wines">Roero Bianco, Roero Bianco MGA Patarun, Cisterna d&#x27;Asti, Roero Rosso</span></li><li data-regione="Liguria"><span class="name">Federico Maron</span><span class="where">Murialdo (SV), Liguria</span><span class="wines">Maccaia (rosso), Alberghetti (bianco)</span></li><li data-regione="Piemonte"><span class="name">F.lli Omedè</span><span class="where">Callianetto (AT), Piemonte</span><span class="wines">Gino &#x27;24, Sale, vino mosso</span></li><li data-regione="Piemonte"><span class="name">Agricola Bertolino</span><span class="where">Costigliole d&#x27;Asti (AT), Piemonte</span><span class="wines">Trice Monferrato DOC Dolcetto 2022, Piva Piemonte DOC Cortese 2023, Cua Langhe DOC Nebbiolo 2023, Cornaretta Monferrato DOC Rosso 2022</span></li><li data-regione="Piemonte"><span class="name">Tommaso Cappa</span><span class="where">Ceretto (CN), Piemonte</span><span class="wines">Langhe Nebbiolo 2023, Vino Rosso (Neretta Cuneese), Sa di Cool* (Dolcetto)</span></li><li data-regione="Piemonte"><span class="name">Gabriele Mattalia Wine</span><span class="where">Chieri (TO), Piemonte</span><span class="wines">Reisa Rosato, Freisa in macerazione carbonica, Freisa affinata in anfora</span></li><li data-regione="Piemonte"><span class="name">Gheddo</span><span class="where">La Morra (CN), Piemonte</span><span class="wines">Tinaar bianco 2023, Dolcetto d&#x27;Alba 2023, Barbera d&#x27;Alba Superiore 2023, Langhe Nebbiolo 2022</span></li><li data-regione="Piemonte"><span class="name">Cantina Gili</span><span class="where">Settimo Rottaro (TO), Piemonte</span><span class="wines">Singolarità (bianco), Il Bianco, Nerastro 60.12 (rosso), L&#x27;Uvaggio (rosso)</span></li><li data-regione="Piemonte"><span class="name">Bossotti</span><span class="where">Cisterna d&#x27;Asti (AT), Piemonte</span><span class="wines">Terre Alfieri Arneis, Piemonte Rosato, Cisterna d&#x27;Asti Superiore, Barbera d&#x27;Asti Superiore</span></li><li data-regione="Piemonte"><span class="name">Monfrà</span><span class="where">Vignale Monferrato (AL), Piemonte</span><span class="wines">Panikos Grignolino DOC, Heremit Barbera DOC, La Ru Barbera del Monferrato Superiore DOCG, Estreja</span></li><li data-regione="Toscana"><span class="name">Cantina Lascesa</span><span class="where">Sovana (GR), Toscana</span><span class="wines">Nocchianello, Fiorino, Le Sauvage</span></li><li data-regione="Piemonte"><span class="name">Cascina Elena</span><span class="where">Rocchetta Belbo (CN), Piemonte</span><span class="wines">Makede 2022, Kei, Romeo 2023, Colpodala 2023</span></li><li data-regione="Piemonte"><span class="name">La Vinicea (Caire e Angelino)</span><span class="where">Ottiglio (AL), Piemonte</span></li><li data-regione="Lombardia"><span class="name">Tenuta Belvedere</span><span class="where">Montecalvo Versiggia (PV), Lombardia</span><span class="wines">Ma non troppo Metodo Classico 2020, Gatto senza baffi Metodo Classico, Wai (Metodo Ancestrale), Una scoperta Pinot Grigio 2023</span></li><li data-regione="Abruzzo"><span class="name">McCalin</span><span class="where">Martinsicuro (TE), Abruzzo</span><span class="wines">Biancobop, Kuvee Antica, Orangebop, Rossobop</span></li><li data-regione="Marche"><span class="name">Tenuta San Marcello</span><span class="where">Ancona (AN), Marche</span><span class="wines">Bastaro Lacrima DOC, Petaloso Rosato, Buca Verdicchio Classico, Indisciplinato Marche Bianco IGT</span></li><li data-regione="Piemonte"><span class="name">La Cascinetta</span><span class="where">Viarigi (AT), Piemonte</span><span class="wines">Ruchè</span></li><li data-regione="Piemonte"><span class="name">Bricco Visconti</span><span class="where">Ferrere (AT), Piemonte</span><span class="wines">Sofi, Savinen, Miass, Pit.</span></li><li data-regione="Toscana"><span class="name">La Disfida vini testardi</span><span class="where">Manciano (GR), Toscana</span><span class="wines">Desko, Matafua, Vigna Manent, Zin Zin</span></li><li data-regione="Piemonte"><span class="name">Barroero</span><span class="where">Coazzolo (AT), Piemonte</span><span class="wines">Lanfrus bianco, Langhe Chardonnay DOC, Barbera d&#x27;Alba Superiore DOC, Barbera d&#x27;Asti Superiore DOCG</span></li><li data-regione="Piemonte"><span class="name">La Contea</span><span class="where">Neive (CN), Piemonte</span></li><li data-regione="Piemonte"><span class="name">Beppe Mo</span><span class="where">Castiglione Tinella (CN), Piemonte</span><span class="wines">Robur Barbera d&#x27;Asti 2022, Dolcetto d&#x27;Alba, Langhe Nebbiolo, Langhe Chardonnay</span></li><li data-regione="Piemonte"><span class="name">Mattia Rivetti</span><span class="where">Coazzolo (AT), Piemonte</span><span class="wines">Barbera d&#x27;Asti Superiore, Dolcetto d&#x27;Alba, Langhe Pinot Nero, Elicriso (bianco)</span></li><li data-regione="Piemonte"><span class="name">Cesca Daniele</span><span class="where">Moncalvo (AT), Piemonte</span><span class="wines">Rosato Frizzante &quot;CD&quot; 2020, Rosato &quot;Annata&quot; 2023, Rosso &quot;Nonna Rina&quot; 2022, Rosso &quot;Nonno Aldo&quot; 2021</span></li><li data-regione="Piemonte"><span class="name">I Versanti</span><span class="where">Piemonte</span><span class="wines">Ribota (Barbera pet-nat), Bota (Barbera), Equinozio (Brachetto-Barbera), Bandiera Gialla (Moscato bianco)</span></li></ul>
+    </div>
+  </section>
+
+  <section class="block alt" id="accessibilita" aria-labelledby="acc-t">
+    <div class="wrap stack">
+      <h2 id="acc-t" data-it="Accessibilità alla fiera" data-en="Accessibility at the fair">Accessibilità alla fiera</h2>
+      <p class="read" data-it="Abbiamo progettato la fiera insieme ad associazioni del territorio. Dicci in anticipo di cosa hai bisogno: ci organizziamo." data-en="We designed the fair together with local associations. Tell us in advance what you need and we will arrange it.">Abbiamo progettato la fiera insieme ad associazioni del territorio. Dicci in anticipo di cosa hai bisogno: ci organizziamo.</p>
+      <ul class="cards">
+        <li><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M10 26c0-6 4-7 4-12a6 6 0 1 1 12 0"/><path d="M16 14a2 2 0 1 1 4 0c0 3-3 4-3 7"/></svg>
+          <h3 data-it="Lingua dei segni (LIS)" data-en="Italian Sign Language (LIS)">Lingua dei segni (LIS)</h3>
+          <p data-it="Interpreti durante degustazioni e incontri, con l'Ente Nazionale Sordi." data-en="Interpreters at tastings and talks, with the Italian Deaf Association (ENS).">Interpreti durante degustazioni e incontri, con l'Ente Nazionale Sordi.</p></li>
+        <li><svg viewBox="0 0 32 32" aria-hidden="true"><rect x="6" y="5" width="20" height="22" rx="2"/><circle cx="12" cy="11" r="1.5"/><circle cx="12" cy="16" r="1.5"/><circle cx="20" cy="11" r="1.5"/><circle cx="20" cy="21" r="1.5"/></svg>
+          <h3 data-it="Mappe in Braille e modello tattile" data-en="Braille maps and tactile model">Mappe in Braille e modello tattile</h3>
+          <p data-it="Mappe con la Fondazione Giorgio Faletti e un modello 3D dello spazio realizzato dal Liceo Artistico." data-en="Maps made with the Giorgio Faletti Foundation and a 3D model of the venue built by the Art High School.">Mappe con la Fondazione Giorgio Faletti e un modello 3D dello spazio realizzato dal Liceo Artistico.</p></li>
+        <li><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M8 18v-2a8 8 0 0 1 16 0v2"/><rect x="5" y="18" width="5" height="8" rx="2"/><rect x="22" y="18" width="5" height="8" rx="2"/></svg>
+          <h3 data-it="Audioguida" data-en="Audio guide">Audioguida</h3>
+          <p data-it="Descrizione degli spazi letta da Lorenza Zambon (Casa degli Alfieri), anche in versione testo. Cuffie disponibili su richiesta." data-en="A description of the venue read by Lorenza Zambon (Casa degli Alfieri), also available as text. Headphones on request.">Descrizione degli spazi letta da Lorenza Zambon (Casa degli Alfieri), anche in versione testo. Cuffie disponibili su richiesta.</p></li>
+        <li><svg viewBox="0 0 32 32" aria-hidden="true"><rect x="4" y="9" width="24" height="12" rx="3"/><circle cx="10" cy="23" r="2.5"/><circle cx="22" cy="23" r="2.5"/></svg>
+          <h3 data-it="Navetta accessibile" data-en="Accessible shuttle">Navetta accessibile</h3>
+          <p data-it="Trasporto su prenotazione con AUSER e parcheggi riservati vicino all'ingresso." data-en="Bookable transport with AUSER and reserved parking near the entrance.">Trasporto su prenotazione con AUSER e parcheggi riservati vicino all'ingresso.</p></li>
+        <li><svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="10"/><path d="M12 19c2 2 6 2 8 0"/><path d="M12 13h.01M20 13h.01"/></svg>
+          <h3 data-it="Kit sensoriale e sala tranquilla" data-en="Sensory kit and quiet room">Kit sensoriale e sala tranquilla</h3>
+          <p data-it="Kit co-progettato con il Centro Diurno Valdocco e una sala di decompressione al Museo Paleontologico." data-en="A kit co-designed with the Valdocco Day Centre and a quiet room at the Palaeontology Museum.">Kit co-progettato con il Centro Diurno Valdocco e una sala di decompressione al Museo Paleontologico.</p></li>
+        <li><svg viewBox="0 0 32 32" aria-hidden="true"><rect x="5" y="5" width="10" height="10" rx="2"/><rect x="17" y="5" width="10" height="10" rx="2"/><rect x="5" y="17" width="10" height="10" rx="2"/><path d="M19 22h6M22 19v6"/></svg>
+          <h3 data-it="Segnaletica con pittogrammi" data-en="Signs with pictograms">Segnaletica con pittogrammi</h3>
+          <p data-it="Cartelli in Comunicazione Aumentativa Alternativa (CAA) e materiali ad alta leggibilità." data-en="Signs in Augmentative and Alternative Communication (AAC) and high-legibility materials.">Cartelli in Comunicazione Aumentativa Alternativa (CAA) e materiali ad alta leggibilità.</p></li>
+      </ul>
+      <div class="read stack">
+        <h3 data-it="Prenota un'assistenza" data-en="Book assistance">Prenota un'assistenza</h3>
+        <p data-it="Scrivici a info@indisciplinato.it indicando giorno, orario di arrivo e di cosa hai bisogno (navetta, interprete LIS, accompagnamento, kit sensoriale). Ti rispondiamo entro 3 giorni." data-en="Write to info@indisciplinato.it with the day, your arrival time and what you need (shuttle, LIS interpreter, a guide, sensory kit). We reply within 3 days.">Scrivici a info@indisciplinato.it indicando giorno, orario di arrivo e di cosa hai bisogno (navetta, interprete LIS, accompagnamento, kit sensoriale). Ti rispondiamo entro 3 giorni.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="info" aria-labelledby="info-t">
+    <div class="wrap stack">
+      <h2 id="info-t" data-it="Come arrivare" data-en="Getting there">Come arrivare</h2>
+      <div class="two">
+        <div class="stack read">
+          <address style="font-style:normal"><strong>Palazzo del Michelerio</strong><br>Corso Vittorio Alfieri 381, 14100 Asti</address>
+          <p><a href="https://www.google.com/maps/search/?api=1&amp;query=Palazzo%20del%20Michelerio%2C%20Corso%20Vittorio%20Alfieri%20381%2C%20Asti" data-it="Apri la mappa (sito esterno)" data-en="Open the map (external site)">Apri la mappa (sito esterno)</a></p>
+          <h3 data-it="A piedi dalla stazione" data-en="On foot from the station">A piedi dalla stazione</h3>
+          <p><span data-it="Indicazioni passo passo, con percorso senza gradini." data-en="Step-by-step directions, with a step-free route.">Indicazioni passo passo, con percorso senza gradini.</span> <span class="tbd" data-it="da confermare" data-en="to be confirmed">da confermare</span></p>
+        </div>
+        <div class="stack read">
+          <h3 data-it="Ingresso e spazi" data-en="Entrance and spaces">Ingresso e spazi</h3>
+          <ul>
+            <li data-it="Ingresso dal cortile, a livello strada." data-en="Entrance from the courtyard, at street level.">Ingresso dal cortile, a livello strada.</li>
+            <li data-it="Bagno accessibile per persone in sedia a ruote." data-en="Wheelchair-accessible toilet.">Bagno accessibile per persone in sedia a ruote.</li>
+            <li data-it="Sala tranquilla al Museo Paleontologico, a pochi passi." data-en="Quiet room at the Palaeontology Museum, a short walk away.">Sala tranquilla al Museo Paleontologico, a pochi passi.</li>
+          </ul>
+          <h3 data-it="Cibo" data-en="Food">Cibo</h3>
+          <p data-it="Cucina del Rione Cattedrale, con piatti vegetariani e opzioni vegane e senza glutine segnalate. Menù a caratteri grandi con gli allergeni." data-en="Food by the Rione Cattedrale volunteers, with vegetarian dishes and labelled vegan and gluten-free options. Large-print menu with allergens.">Cucina del Rione Cattedrale, con piatti vegetariani e opzioni vegane e senza glutine segnalate. Menù a caratteri grandi con gli allergeni.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+  <section class="block alt faq" id="domande" aria-labelledby="faq-t">
+    <div class="wrap stack read">
+      <h2 id="faq-t" data-it="Domande frequenti" data-en="Frequently asked questions">Domande frequenti</h2>
+      <div>
+        <details><summary data-it="Posso entrare con il cane guida?" data-en="Can I bring my guide dog?">Posso entrare con il cane guida?</summary>
+          <div><p data-it="Sì, i cani guida e di assistenza sono sempre benvenuti. Trovi una ciotola d'acqua all'ingresso." data-en="Yes, guide and assistance dogs are always welcome. There is a water bowl at the entrance.">Sì, i cani guida e di assistenza sono sempre benvenuti. Trovi una ciotola d'acqua all'ingresso.</p></div></details>
+        <details><summary data-it="La fiera è accessibile in sedia a ruote?" data-en="Is the fair wheelchair accessible?">La fiera è accessibile in sedia a ruote?</summary>
+          <div><p data-it="Sì: il cortile è a livello strada e c'è un bagno accessibile. Se ti serve aiuto per arrivare, prenota la navetta AUSER." data-en="Yes: the courtyard is at street level and there is an accessible toilet. If you need help getting here, book the AUSER shuttle.">Sì: il cortile è a livello strada e c'è un bagno accessibile. Se ti serve aiuto per arrivare, prenota la navetta AUSER.</p></div></details>
+        <details><summary data-it="Devo bere vino per partecipare?" data-en="Do I have to drink wine to take part?">Devo bere vino per partecipare?</summary>
+          <div><p data-it="No. Puoi visitare la fiera, partecipare agli incontri e comprare prodotti alimentari anche senza degustazione." data-en="No. You can visit the fair, join the talks and buy food products without a tasting.">No. Puoi visitare la fiera, partecipare agli incontri e comprare prodotti alimentari anche senza degustazione.</p></div></details>
+        <details><summary data-it="Se c'è troppa gente, dove posso riposare?" data-en="If it gets crowded, where can I rest?">Se c'è troppa gente, dove posso riposare?</summary>
+          <div><p data-it="Nella sala tranquilla del Museo Paleontologico: luci basse, poco rumore, sedute. Chiedi ai volontari con la maglietta verde." data-en="In the quiet room at the Palaeontology Museum: low light, little noise, seating. Ask the volunteers in green T-shirts.">Nella sala tranquilla del Museo Paleontologico: luci basse, poco rumore, sedute. Chiedi ai volontari con la maglietta verde.</p> <span class="tbd" data-it="da confermare" data-en="to be confirmed">da confermare</span></div></details>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" aria-labelledby="partner-t">
+    <div class="wrap stack">
+      <h2 id="partner-t" data-it="Chi organizza e con chi" data-en="Who organises it, and with whom">Chi organizza e con chi</h2>
+      <ul class="partners">
+        <li>Ente Nazionale Sordi</li><li>Fondazione Giorgio Faletti</li><li>Casa degli Alfieri</li><li>AUSER</li><li>APRI Asti</li><li>Spazio Kor</li><li>Asti Slow Fashion</li><li>Scienza sotto i campanili</li><li>PIAM</li><li>Liceo Artistico</li><li>Rione Cattedrale</li><li>Cooperativa Valdocco</li>
+      </ul>
+      <p class="read" data-it="Organizza l'Associazione Vinaccia ETS, insieme a queste realtà del territorio. Progetto candidato al bando Eventi for All di Fondazione CRT." data-en="Organised by the Vinaccia association, together with these local partners. Project submitted to Fondazione CRT's Eventi for All call.">Organizza l'Associazione Vinaccia ETS, insieme a queste realtà del territorio. Progetto candidato al bando Eventi for All di Fondazione CRT.</p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap cols">
+    <div class="stack">
+      <p><strong>Associazione Vinaccia ETS</strong></p>
+      <p>Via Crova 21, 14020 Soglio (AT)</p>
+      <p data-it="C.F. 90060890044 · P.IVA 01763830054" data-en="Tax code 90060890044 · VAT 01763830054">C.F. 90060890044 · P.IVA 01763830054</p>
+      <p data-it="Iscritta al RUNTS dal 05/12/2022" data-en="Registered in RUNTS (Italian Third Sector Register) since 05/12/2022">Iscritta al RUNTS dal 05/12/2022</p>
+    </div>
+    <div class="stack">
+      <p>info@indisciplinato.it</p>
+      <p><a href="https://www.instagram.com/indisciplinato_fiera/" data-it="Instagram (sito esterno)" data-en="Instagram (external site)">Instagram (sito esterno)</a></p>
+    </div>
+    <nav aria-label="Note legali" data-aria-it="Note legali" data-aria-en="Legal">
+      <ul>
+        <li><a href="note-legali.html#privacy" data-it="Privacy" data-en="Privacy">Privacy</a></li>
+        <li><a href="note-legali.html#cookie" data-it="Cookie" data-en="Cookies">Cookie</a></li>
+        <li><a href="note-legali.html#accessibilita" data-it="Dichiarazione di accessibilità" data-en="Accessibility statement">Dichiarazione di accessibilità</a></li>
+      </ul>
+    </nav>
+  </div>
+</footer>
 
 <script>
 (function () {
   var root = document.documentElement;
-  // Giorni mancanti al 15/05/2027, contati sul calendario di Roma
+  var store = { get: function (k) { try { return localStorage.getItem(k); } catch (e) { return null; } },
+                set: function (k, v) { try { localStorage.setItem(k, v); } catch (e) {} } };
+  var reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* conto dei giorni */
+  var counted = false;
   function daysLeft() {
     var parts = new Intl.DateTimeFormat("en-CA", { timeZone: "Europe/Rome", year: "numeric", month: "2-digit", day: "2-digit" }).format(new Date());
     var today = Date.UTC(+parts.slice(0, 4), +parts.slice(5, 7) - 1, +parts.slice(8, 10));
     return Math.round((Date.UTC(2027, 4, 15) - today) / 86400000);
   }
-  var counted = false;
-  var reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   function renderDays(lang) {
-    var n = daysLeft(), box = document.getElementById("countdown");
+    var n = daysLeft(), box = document.getElementById("countdown"), sr = document.getElementById("countdown-sr");
     if (n <= 0) {
-      box.textContent = n === 0 || n === -1
-        ? (lang === "it" ? "È oggi!" : "It's today!")
-        : (lang === "it" ? "Grazie! Ci vediamo alla prossima edizione." : "Thank you! See you next year.");
-      document.getElementById("countdown-sr").textContent = box.textContent;
-      return;
+      box.textContent = n >= -1 ? (lang === "it" ? "È oggi!" : "It's today!") : (lang === "it" ? "Grazie! Ci vediamo alla prossima edizione." : "Thank you! See you next year.");
+      sr.textContent = box.textContent; return;
     }
-    var sr = document.getElementById("countdown-sr");
     sr.textContent = lang === "it" ? (n === 1 ? "Manca 1 giorno" : "Mancano " + n + " giorni") : (n === 1 ? "1 day to go" : n + " days to go");
+    document.getElementById("days-word").textContent = lang === "it" ? (n === 1 ? "giorno" : "giorni") : (n === 1 ? "day to go" : "days to go");
     var el = document.getElementById("days");
     if (!counted && !reduceMotion && !root.classList.contains("p-fermo") && window.requestAnimationFrame) {
-      counted = true;
-      var start = null, dur = 1100;
-      el.textContent = "0";
+      counted = true; var start = null, dur = 1100; el.textContent = "0";
       requestAnimationFrame(function step(ts) {
         if (start === null) start = ts;
         var p = Math.min(1, (ts - start) / dur), e = 1 - Math.pow(1 - p, 3);
         el.textContent = Math.round(n * e);
         if (p < 1) requestAnimationFrame(step);
       });
-    } else {
-      counted = true;
-      el.textContent = n;
-    }
-    var w = document.getElementById("days-word");
-    w.textContent = lang === "it" ? (n === 1 ? "giorno" : "giorni") : (n === 1 ? "day to go" : "days to go");
-    if (lang === "it" && n === 1) box.firstElementChild.textContent = "Manca";
+    } else { counted = true; el.textContent = n; }
   }
-  function setLang(lang) {
-    root.lang = lang;
-    document.querySelectorAll("[data-it]").forEach(function (el) { el.textContent = el.getAttribute("data-" + lang); });
-    document.querySelectorAll("[data-aria-it]").forEach(function (el) { el.setAttribute("aria-label", el.getAttribute("data-aria-" + lang)); });
-    var b = document.getElementById("lang");
-    b.textContent = lang === "it" ? "English" : "Italiano"; b.lang = lang === "it" ? "en" : "it";
-    document.title = lang === "it" ? "Indisciplinato 2027 · Fiera dei piccoli produttori di vino e cibo · Asti, 15–16 maggio" : "Indisciplinato 2027 · Small-producer wine and food fair · Asti, 15–16 May";
-    renderDays(lang);
-    if (typeof vlabel === "function" && document.getElementById("video")) { try { vlabel(); } catch (e) {} }
-  }
+
+  /* video */
   var video = document.getElementById("video"), vbtn = document.getElementById("vbtn");
-  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   function vlabel() {
     var it = root.lang === "it", playing = !video.paused;
-    document.getElementById("vbtn-label").textContent = playing
-      ? (it ? "Metti in pausa il video" : "Pause the video")
-      : (it ? "Riproduci il video" : "Play the video");
-    vbtn.querySelector("svg").innerHTML = playing
-      ? '<rect x="6" y="5" width="4" height="14"/><rect x="14" y="5" width="4" height="14"/>'
-      : '<path d="M7 5l12 7-12 7z"/>';
+    document.getElementById("vbtn-label").textContent = playing ? (it ? "Metti in pausa il video" : "Pause the video") : (it ? "Riproduci il video" : "Play the video");
+    vbtn.querySelector("svg").innerHTML = playing ? '<rect x="6" y="5" width="4" height="14"/><rect x="14" y="5" width="4" height="14"/>' : '<path d="M7 5l12 7-12 7z"/>';
   }
   vbtn.hidden = false;
-  vbtn.addEventListener("click", function () { if (video.paused) { video.play().catch(function(){}); } else { video.pause(); } });
+  vbtn.addEventListener("click", function () { if (video.paused) { video.play().catch(function () {}); } else { video.pause(); } });
   video.addEventListener("play", vlabel); video.addEventListener("pause", vlabel);
-  var fermo = false; try { fermo = localStorage.getItem("p-fermo") === "1"; } catch (e) {}
-  if (fermo) root.classList.add("p-fermo");
-  if (!reduce && !fermo) { video.play().catch(function () { vlabel(); }); }
-  vlabel();
+  if (!reduceMotion && !root.classList.contains("p-fermo")) { video.play().catch(function () { vlabel(); }); }
 
-  // Pannello preferenze
-  var store = { get: function (k) { try { return localStorage.getItem(k); } catch (e) { return null; } },
-                set: function (k, v) { try { localStorage.setItem(k, v); } catch (e) {} } };
+  /* preferenze */
   var pbtn = document.getElementById("prefs-btn"), panel = document.getElementById("prefs");
   function openPanel(open) { panel.hidden = !open; pbtn.setAttribute("aria-expanded", open ? "true" : "false"); }
   pbtn.addEventListener("click", function () { var o = panel.hidden; openPanel(o); if (o) panel.querySelector("button").focus(); });
@@ -348,18 +519,40 @@ html.p-fermo .stamp { animation: none !important; }
   var prefBtns = panel.querySelectorAll(".pref");
   prefBtns.forEach(function (btn) {
     applyPref(btn, store.get(btn.getAttribute("data-pref")) === "1");
-    btn.addEventListener("click", function () {
-      var on = btn.getAttribute("aria-pressed") !== "true";
-      applyPref(btn, on); store.set(btn.getAttribute("data-pref"), on ? "1" : "0");
-    });
+    btn.addEventListener("click", function () { var on = btn.getAttribute("aria-pressed") !== "true"; applyPref(btn, on); store.set(btn.getAttribute("data-pref"), on ? "1" : "0"); });
   });
   document.getElementById("prefs-reset").addEventListener("click", function () {
     prefBtns.forEach(function (btn) { applyPref(btn, false); store.set(btn.getAttribute("data-pref"), "0"); });
   });
 
+  /* filtro produttori */
+  var fbtns = document.querySelectorAll("[data-filter]"), items = document.querySelectorAll(".producers li"), current = "tutti";
+  function applyFilter(f, announce) {
+    current = f; var shown = 0;
+    items.forEach(function (li) {
+      var r = li.getAttribute("data-regione");
+      var ok = f === "tutti" || (f === "Piemonte" ? r === "Piemonte" : r !== "Piemonte");
+      li.hidden = !ok; if (ok) shown++;
+    });
+    fbtns.forEach(function (b) { b.setAttribute("aria-pressed", b.getAttribute("data-filter") === f ? "true" : "false"); });
+    var it = root.lang === "it";
+    var msg = it ? (shown === 1 ? "1 produttore mostrato" : shown + " produttori mostrati") : (shown === 1 ? "1 producer shown" : shown + " producers shown");
+    var out = document.getElementById("prod-count");
+    if (announce) { out.textContent = msg; } else { out.textContent = ""; }
+  }
+  fbtns.forEach(function (b) { b.addEventListener("click", function () { applyFilter(b.getAttribute("data-filter"), true); }); });
+
+  /* lingua */
+  function setLang(lang) {
+    root.lang = lang;
+    document.querySelectorAll("[data-it]").forEach(function (el) { el.textContent = el.getAttribute("data-" + lang); });
+    document.querySelectorAll("[data-aria-it]").forEach(function (el) { el.setAttribute("aria-label", el.getAttribute("data-aria-" + lang)); });
+    var b = document.getElementById("lang"); b.textContent = lang === "it" ? "English" : "Italiano"; b.lang = lang === "it" ? "en" : "it";
+    document.title = lang === "it" ? "Indisciplinato 2027 · Fiera di Asti" : "Indisciplinato 2027 · Asti fair";
+    renderDays(lang); vlabel(); applyFilter(current, false);
+  }
   document.getElementById("lang").addEventListener("click", function () {
-    var next = root.lang === "it" ? "en" : "it";
-    setLang(next);
+    var next = root.lang === "it" ? "en" : "it"; setLang(next);
     try { history.replaceState(null, "", next === "en" ? "#en" : location.pathname); } catch (e) {}
   });
   setLang(location.hash === "#en" ? "en" : "it");
