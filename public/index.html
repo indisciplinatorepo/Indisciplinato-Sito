@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Indisciplinato 2027</title>
+<script>try{["p-grande","p-contrasto","p-spazio","p-link","p-fermo"].forEach(function(c){if(localStorage.getItem(c)==="1")document.documentElement.classList.add(c)})}catch(e){}</script>
 <meta name="description" content="Indisciplinato torna il 15 e 16 maggio 2027 a Palazzo del Michelerio, Asti. Fiera astigiana delle microproduzioni di prossimità.">
 <!-- Sul sito vero i font saranno ospitati sul nostro dominio (niente richieste a Google). -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -115,6 +116,35 @@ footer ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: w
 footer li a { display: inline-block; padding: 0.35rem 0; }
 .facts small a, footer p a { display: inline-block; padding-block: 0.3rem; }
 [hidden] { display: none !important; }
+.top { flex-wrap: wrap; }
+.tools { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+.lang { display: inline-flex; align-items: center; gap: 0.4rem; }
+.lang svg { width: 20px; height: 20px; }
+.prefs { flex-basis: 100%; margin: 0; padding: 1rem; border: 2px solid var(--ink); border-radius: 16px; display: flex; flex-wrap: wrap; gap: 0.5rem; background: var(--paper); }
+.prefs legend { font-weight: 700; padding: 0 0.4rem; }
+.pref, .reset {
+  font: inherit; font-size: 1rem; font-weight: 700; min-height: 44px; padding: 0.45rem 0.9rem; cursor: pointer;
+  border: 2px solid var(--ink); border-radius: 14px; background: var(--paper); color: var(--ink); text-align: left;
+}
+.pref[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
+.pref[aria-pressed="true"]::before { content: "✓ "; }
+.reset { border-style: dashed; }
+
+/* Preferenze di lettura scelte dall'utente */
+html.p-grande { font-size: 125%; }
+html.p-grande .brand { width: clamp(200px, 50vw, 360px); }
+html.p-spazio body { line-height: 1.9; letter-spacing: 0.05em; word-spacing: 0.15em; }
+html.p-spazio h1 { letter-spacing: 0.02em; line-height: 1.2; }
+html.p-link main a:not(.cal a), html.p-link footer a { text-decoration-thickness: 0.18em; background: #ffe500; color: #000 !important; padding: 0 0.15em; }
+html.p-contrasto {
+  --paper: #ffffff; --ink: #000000; --muted: #000000; --blue: #000000; --on-blue: #ffffff; --mint: #ffffff; --tomato: #000000; --focus: #0040ff;
+  color-scheme: light;
+}
+html.p-contrasto .countdown { border: 3px solid #000; }
+html.p-contrasto .cal a { border-width: 3px; }
+html.p-contrasto footer { background: #000; border-top-color: #000; }
+html.p-contrasto .brand { filter: none !important; }
+html.p-fermo .stamp { animation: none !important; }
 </style>
 </head>
 <body>
@@ -123,18 +153,33 @@ footer li a { display: inline-block; padding: 0.35rem 0; }
 <div class="page">
   <header class="top">
       <svg class="brand" viewBox="0 0 900 118" role="img" aria-label="Indisciplinato" xmlns="http://www.w3.org/2000/svg"><title>Indisciplinato</title><defs><clipPath id="lg0"><rect x="0" y="0" width="32" height="118"/></clipPath><clipPath id="lg1"><rect x="32" y="0" width="77" height="118"/></clipPath><clipPath id="lg2"><rect x="109" y="0" width="73" height="118"/></clipPath><clipPath id="lg3"><rect x="182" y="0" width="41" height="118"/></clipPath><clipPath id="lg4"><rect x="223" y="0" width="57" height="118"/></clipPath><clipPath id="lg5"><rect x="280" y="0" width="62" height="118"/></clipPath><clipPath id="lg6"><rect x="342" y="0" width="34" height="118"/></clipPath><clipPath id="lg7"><rect x="376" y="0" width="78" height="118"/></clipPath><clipPath id="lg8"><rect x="454" y="0" width="68" height="118"/></clipPath><clipPath id="lg9"><rect x="522" y="0" width="36" height="118"/></clipPath><clipPath id="lg10"><rect x="558" y="0" width="92" height="118"/></clipPath><clipPath id="lg11"><rect x="650" y="0" width="153" height="118"/></clipPath><clipPath id="lg12"><rect x="803" y="0" width="97" height="118"/></clipPath></defs><g class="stamp" style="--i:0;--r:-9deg"><image href="logo.png" width="900" height="118" clip-path="url(#lg0)"/></g><g class="stamp" style="--i:1;--r:7deg"><image href="logo.png" width="900" height="118" clip-path="url(#lg1)"/></g><g class="stamp" style="--i:2;--r:-5deg"><image href="logo.png" width="900" height="118" clip-path="url(#lg2)"/></g><g class="stamp" style="--i:3;--r:10deg"><image href="logo.png" width="900" height="118" clip-path="url(#lg3)"/></g><g class="stamp" style="--i:4;--r:-7deg"><image href="logo.png" width="900" height="118" clip-path="url(#lg4)"/></g><g class="stamp" style="--i:5;--r:6deg"><image href="logo.png" width="900" height="118" clip-path="url(#lg5)"/></g><g class="stamp" style="--i:6;--r:-10deg"><image href="logo.png" width="900" height="118" clip-path="url(#lg6)"/></g><g class="stamp" style="--i:7;--r:8deg"><image href="logo.png" width="900" height="118" clip-path="url(#lg7)"/></g><g class="stamp" style="--i:8;--r:-6deg"><image href="logo.png" width="900" height="118" clip-path="url(#lg8)"/></g><g class="stamp" style="--i:9;--r:9deg"><image href="logo.png" width="900" height="118" clip-path="url(#lg9)"/></g><g class="stamp" style="--i:10;--r:-8deg"><image href="logo.png" width="900" height="118" clip-path="url(#lg10)"/></g><g class="stamp" style="--i:11;--r:5deg"><image href="logo.png" width="900" height="118" clip-path="url(#lg11)"/></g><g class="stamp" style="--i:12;--r:-7deg"><image href="logo.png" width="900" height="118" clip-path="url(#lg12)"/></g></svg>
-      <button class="lang" type="button" id="lang" lang="en">English</button>
+      <div class="tools">
+        <button class="lang" type="button" id="prefs-btn" aria-expanded="false" aria-controls="prefs">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="4.5" r="2"/><path d="M5 8.5l7 1.5 7-1.5M12 10v5m0 0l-3 6m3-6l3 6"/></svg>
+          <span data-it="Accessibilità" data-en="Accessibility">Accessibilità</span>
+        </button>
+        <button class="lang" type="button" id="lang" lang="en">English</button>
+      </div>
+      <fieldset class="prefs" id="prefs" hidden>
+        <legend data-it="Adatta la pagina" data-en="Adjust the page">Adatta la pagina</legend>
+        <button type="button" class="pref" data-pref="p-grande" aria-pressed="false" data-it="Testo più grande" data-en="Larger text">Testo più grande</button>
+        <button type="button" class="pref" data-pref="p-contrasto" aria-pressed="false" data-it="Alto contrasto" data-en="High contrast">Alto contrasto</button>
+        <button type="button" class="pref" data-pref="p-spazio" aria-pressed="false" data-it="Più spazio tra righe e lettere" data-en="More line and letter spacing">Più spazio tra righe e lettere</button>
+        <button type="button" class="pref" data-pref="p-link" aria-pressed="false" data-it="Evidenzia i link" data-en="Highlight links">Evidenzia i link</button>
+        <button type="button" class="pref" data-pref="p-fermo" aria-pressed="false" data-it="Ferma animazioni e video" data-en="Stop animations and video">Ferma animazioni e video</button>
+        <button type="button" class="reset" id="prefs-reset" data-it="Ripristina" data-en="Reset">Ripristina</button>
+      </fieldset>
     </header>
-  <figure class="photo">
+  <div class="photo">
     <video id="video" muted loop playsinline preload="metadata" poster="poster.jpg" aria-describedby="video-desc">
       <source src="fiera.mp4" type="video/mp4">
     </video>
-    <figcaption id="video-desc" class="sr-only" data-it="Video senza audio dell'edizione 2025: produttori che sistemano le bottiglie sui banchi, scatoloni di vino, una piantina tra i calici." data-en="Silent video from the 2025 edition: producers setting bottles on their stands, boxes of wine, a small plant among the glasses.">Video senza audio dell'edizione 2025: produttori che sistemano le bottiglie sui banchi, scatoloni di vino, una piantina tra i calici.</figcaption>
+    <p id="video-desc" class="sr-only" data-it="Video senza audio dell'edizione 2025: produttori che sistemano le bottiglie sui banchi, scatoloni di vino, una piantina tra i calici." data-en="Silent video from the 2025 edition: producers setting bottles on their stands, boxes of wine, a small plant among the glasses.">Video senza audio dell'edizione 2025: produttori che sistemano le bottiglie sui banchi, scatoloni di vino, una piantina tra i calici.</p>
     <button class="vbtn" type="button" id="vbtn" hidden>
       <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="5" width="4" height="14"/><rect x="14" y="5" width="4" height="14"/></svg>
       <span id="vbtn-label">Metti in pausa il video</span>
     </button>
-  </figure>
+  </div>
 
 
     <main id="contenuto" tabindex="-1">
@@ -156,7 +201,8 @@ footer li a { display: inline-block; padding: 0.35rem 0; }
           <dt data-it="Dove" data-en="Where">Dove</dt>
           <dd>
             Palazzo del Michelerio
-            <small>Corso Vittorio Alfieri 381, Asti · <a href="https://www.google.com/maps/search/?api=1&amp;query=Palazzo%20del%20Michelerio%2C%20Corso%20Vittorio%20Alfieri%20381%2C%20Asti" data-it="Apri la mappa (sito esterno)" data-en="Open the map (external site)">Apri la mappa (sito esterno)</a></small>
+            <small>Corso Vittorio Alfieri 381, Asti</small>
+            <small><a href="https://www.google.com/maps/search/?api=1&amp;query=Palazzo%20del%20Michelerio%2C%20Corso%20Vittorio%20Alfieri%20381%2C%20Asti" data-it="Apri la mappa (sito esterno)" data-en="Open the map (external site)">Apri la mappa (sito esterno)</a></small>
           </dd>
         </div>
       </dl>
@@ -215,7 +261,7 @@ footer li a { display: inline-block; padding: 0.35rem 0; }
     var sr = document.getElementById("countdown-sr");
     sr.textContent = lang === "it" ? (n === 1 ? "Manca 1 giorno" : "Mancano " + n + " giorni") : (n === 1 ? "1 day to go" : n + " days to go");
     var el = document.getElementById("days");
-    if (!counted && !reduceMotion && window.requestAnimationFrame) {
+    if (!counted && !reduceMotion && !root.classList.contains("p-fermo") && window.requestAnimationFrame) {
       counted = true;
       var start = null, dur = 1100;
       el.textContent = "0";
@@ -257,8 +303,34 @@ footer li a { display: inline-block; padding: 0.35rem 0; }
   vbtn.hidden = false;
   vbtn.addEventListener("click", function () { if (video.paused) { video.play().catch(function(){}); } else { video.pause(); } });
   video.addEventListener("play", vlabel); video.addEventListener("pause", vlabel);
-  if (!reduce) { video.play().catch(function () { vlabel(); }); }
+  var fermo = false; try { fermo = localStorage.getItem("p-fermo") === "1"; } catch (e) {}
+  if (fermo) root.classList.add("p-fermo");
+  if (!reduce && !fermo) { video.play().catch(function () { vlabel(); }); }
   vlabel();
+
+  // Pannello preferenze
+  var store = { get: function (k) { try { return localStorage.getItem(k); } catch (e) { return null; } },
+                set: function (k, v) { try { localStorage.setItem(k, v); } catch (e) {} } };
+  var pbtn = document.getElementById("prefs-btn"), panel = document.getElementById("prefs");
+  function openPanel(open) { panel.hidden = !open; pbtn.setAttribute("aria-expanded", open ? "true" : "false"); }
+  pbtn.addEventListener("click", function () { var o = panel.hidden; openPanel(o); if (o) panel.querySelector("button").focus(); });
+  panel.addEventListener("keydown", function (e) { if (e.key === "Escape") { openPanel(false); pbtn.focus(); } });
+  function applyPref(btn, on) {
+    var cls = btn.getAttribute("data-pref");
+    root.classList.toggle(cls, on); btn.setAttribute("aria-pressed", on ? "true" : "false");
+    if (cls === "p-fermo" && on && !video.paused) video.pause();
+  }
+  var prefBtns = panel.querySelectorAll(".pref");
+  prefBtns.forEach(function (btn) {
+    applyPref(btn, store.get(btn.getAttribute("data-pref")) === "1");
+    btn.addEventListener("click", function () {
+      var on = btn.getAttribute("aria-pressed") !== "true";
+      applyPref(btn, on); store.set(btn.getAttribute("data-pref"), on ? "1" : "0");
+    });
+  });
+  document.getElementById("prefs-reset").addEventListener("click", function () {
+    prefBtns.forEach(function (btn) { applyPref(btn, false); store.set(btn.getAttribute("data-pref"), "0"); });
+  });
 
   document.getElementById("lang").addEventListener("click", function () {
     var next = root.lang === "it" ? "en" : "it";
