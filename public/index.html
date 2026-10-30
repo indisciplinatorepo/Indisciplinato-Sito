@@ -80,12 +80,11 @@ p { margin: 0; }
 main { padding: clamp(1.5rem, 5vw, 4rem) clamp(1rem, 4vw, 3rem) 3rem; display: grid; gap: 1.75rem; align-content: center; max-width: 40rem; }
 h1 { font-size: clamp(3rem, 10vw, 6.2rem); letter-spacing: -0.02em; }
 .countdown {
-  justify-self: start; display: inline-flex; align-items: center; gap: 0.6rem;
+  justify-self: start;
   background: var(--mint); color: #1b2233; border-radius: 999px;
-  padding: 0.35rem 1.2rem 0.35rem 0.35rem; font-weight: 700; font-size: clamp(1.25rem, 3.4vw, 1.6rem);
+  padding: 0.5rem 1.2rem; font-weight: 700; font-size: clamp(1.25rem, 3.4vw, 1.6rem);
 }
-.countdown img { width: 48px; height: 48px; border-radius: 10px; flex: none;
-}
+
 .countdown .n { font-variant-numeric: tabular-nums; }
 .facts { display: grid; gap: 1rem; margin: 0; }
 .facts div { display: grid; gap: 0.1rem; border-left: 5px solid var(--tomato); padding-left: 0.9rem; }
@@ -133,7 +132,6 @@ footer li a { display: inline-block; padding: 0.35rem 0; }
       <h1 data-it="Stiamo tornando" data-en="We're coming back">Stiamo tornando</h1>
 
       <p class="countdown">
-        <img src="icona-bottiglia.png" alt="" width="48" height="48">
         <span id="countdown"><span data-it="Mancano" data-en="">Mancano</span> <span class="n" id="days">197</span> <span id="days-word" data-it="giorni" data-en="days to go">giorni</span></span>
       </p>
 
