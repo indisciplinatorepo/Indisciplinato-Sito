@@ -50,7 +50,9 @@ th { font-weight: 700; }
       <li><strong>Pannello "Accessibilità":</strong> testo più grande, alto contrasto, più spaziatura, link evidenziati, stop di animazioni e video. Preferenze salvate solo sul dispositivo. Abbiamo scelto di non usare plugin "overlay" di terze parti.</li>
       <li><strong>Preferenze di sistema:</strong> rispettati tema scuro, riduzione del movimento, contrasto elevato e zoom.</li>
       <li><strong>Filtro produttori:</strong> pulsanti con stato premuto; il numero di risultati è annunciato in una regione di stato.</li>
-      <li><strong>Lettura facile:</strong> riassunto in 5 frasi brevi in apertura.</li>
+      <li><strong>Organizzazione dei contenuti:</strong> sul modello delle linee guida GOV.UK e NHS. Prima cosa serve sapere (cos'è, quando, dove, quanto costa), poi i dettagli. Titoli brevi e descrittivi, frasi sotto le 25 parole, un indice "In questa pagina" in alto.</li>
+      <li><strong>Lettura facile:</strong> riquadro con 5 frasi brevi accanto alla spiegazione completa.</li>
+      <li><strong>Pulsante Accessibilità:</strong> primo comando della pagina dopo "Salta al contenuto", a tutta larghezza, con nome esplicito.</li>
       <li><strong>Colori:</strong> testo e link almeno 4,5:1; il verde menta e il rosso sono usati solo come sfondo con testo scuro o per bordi.</li>
       <li><strong>Contenuti esterni:</strong> nessuna mappa, video o social incorporati; solo link segnalati come "sito esterno".</li>
     </ul>
@@ -64,7 +66,10 @@ th { font-weight: 700; }
         <tbody>
           <tr><td>Contrasto del testo, tema chiaro, scuro e alto contrasto</td><td>Nessun errore</td></tr>
           <tr><td>Struttura dei titoli</td><td>H1 unico, nessun livello saltato</td></tr>
-          <tr><td>Larghezza 320 px e testo al 125%</td><td>Nessuno scorrimento orizzontale</td></tr>
+          <tr><td>Larghezza 320 px (1.4.10)</td><td>Nessuno scorrimento orizzontale</td></tr>
+          <tr><td>Testo al 200% (1.4.4)</td><td>Nessuna perdita di contenuto; corretto un titolo che usciva dallo schermo</td></tr>
+          <tr><td>Spaziatura del testo (1.4.12: interlinea 1,5, lettere 0,12, parole 0,16, paragrafi 2)</td><td>Nessun testo tagliato o sovrapposto</td></tr>
+          <tr><td>ID duplicati e riferimenti ARIA (aria-controls, aria-labelledby)</td><td>Nessun errore</td></tr>
           <tr><td>Dimensione dei comandi (minimo 24×24 px)</td><td>Nessun errore</td></tr>
           <tr><td>Ordine di tabulazione e focus visibile</td><td>Ordine logico, focus sempre visibile</td></tr>
           <tr><td>Albero di accessibilità (lettura simulata)</td><td>Nomi e ruoli presenti; nessuna doppia lettura</td></tr>

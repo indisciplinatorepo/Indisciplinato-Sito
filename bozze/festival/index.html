@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Indisciplinato 2027 · Fiera di Asti</title>
 <script>try{["p-grande","p-contrasto","p-spazio","p-link","p-fermo"].forEach(function(c){if(localStorage.getItem(c)==="1")document.documentElement.classList.add(c)})}catch(e){}</script>
+<meta name="robots" content="noindex, nofollow">
 <meta name="description" content="Indisciplinato, fiera astigiana delle microproduzioni di prossimità: 15 e 16 maggio 2027 a Palazzo del Michelerio, Asti. Programma, produttori, biglietti e servizi di accessibilità.">
 <!-- Sul sito vero i font saranno ospitati sul nostro dominio. -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -77,6 +78,13 @@ ul, ol { margin: 0; }
   }
 }
 .tools { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+.a11y-btn {
+  flex-basis: 100%; order: -1; display: flex; align-items: center; justify-content: center; gap: 0.6rem; width: 100%;
+  min-height: 52px; padding: 0.5rem 1rem; font: inherit; font-size: 1rem; font-weight: 700; cursor: pointer;
+  background: var(--ink); color: var(--paper); border: 2px solid var(--ink); border-radius: 14px;
+}
+.a11y-btn svg { width: 24px; height: 24px; flex: none; }
+.a11y-btn[aria-expanded="true"] { background: var(--paper); color: var(--ink); }
 .btn {
   display: inline-flex; align-items: center; gap: 0.4rem; font: inherit; font-size: 1rem; font-weight: 700; min-height: 44px;
   padding: 0.4rem 1rem; cursor: pointer; background: transparent; color: var(--ink); border: 2px solid var(--ink); border-radius: 999px;
@@ -92,7 +100,7 @@ nav.main ul { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap:
 nav.main a { display: inline-block; padding: 0.5rem 0; font-weight: 700; color: var(--ink); }
 
 /* apertura */
-.hero { display: grid; grid-template-columns: 1fr; border-top: 2px solid var(--ink); }
+.hero { display: grid; grid-template-columns: minmax(0, 1fr); border-top: 2px solid var(--ink); }
 @media (min-width: 900px) { .hero { grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); } }
 .photo { margin: 0; background: var(--mint); position: relative; min-height: 14rem; }
 .photo video { display: block; width: 100%; height: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
@@ -100,7 +108,8 @@ nav.main a { display: inline-block; padding: 0.5rem 0; font-weight: 700; color: 
 .vbtn { position: absolute; left: 1rem; bottom: 1rem; display: inline-flex; align-items: center; gap: 0.5rem; min-height: 44px; padding: 0.45rem 1rem; font: inherit; font-size: 1rem; font-weight: 700; cursor: pointer; background: #1b2233; color: #fff; border: 2px solid #fff; border-radius: 999px; }
 .vbtn svg { width: 18px; height: 18px; }
 .intro { padding: clamp(1.5rem, 5vw, 3.5rem) clamp(1rem, 4vw, 3rem); display: grid; gap: 1.5rem; align-content: center; }
-.intro h1 { font-size: clamp(2.8rem, 9vw, 5.6rem); letter-spacing: -0.02em; }
+.intro h1 { font-size: clamp(2.6rem, 9vw, 5.6rem); letter-spacing: -0.02em; overflow-wrap: anywhere; hyphens: auto; }
+.intro > * { min-width: 0; }
 .claim { font-size: 1.25rem; max-width: 40ch; }
 .countdown { justify-self: start; background: var(--mint); color: #1b2233; border-radius: 999px; padding: 0.5rem 1.2rem; font-weight: 700; font-size: clamp(1.2rem, 3.4vw, 1.5rem); }
 .countdown .n { font-variant-numeric: tabular-nums; }
@@ -117,7 +126,8 @@ nav.main a { display: inline-block; padding: 0.5rem 0; font-weight: 700; color: 
 /* sezioni */
 section.block { padding: clamp(2.5rem, 6vw, 4.5rem) 0; border-top: 2px solid var(--ink); }
 section.alt { background: var(--paper-2); }
-.easy ol { padding-left: 1.4em; display: grid; gap: 0.6rem; font-size: 1.2em; max-width: 34ch; }
+.easy-box { border: 3px solid var(--ink); border-radius: 16px; padding: 1.25rem 1.4rem; background: var(--paper); align-self: start; }
+.easy-box ol { padding-left: 1.4em; display: grid; gap: 0.6rem; font-size: 1.2em; max-width: 34ch; }
 .badge { justify-self: start; font-size: 0.9rem; font-weight: 700; padding: 0.15rem 0.7rem; border-radius: 999px; background: var(--mint); color: #1b2233; }
 .cards { list-style: none; padding: 0; display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr)); }
 .cards > li { border: 2px solid var(--ink); border-radius: 14px; padding: 1.1rem 1.2rem; display: grid; gap: 0.5rem; align-content: start; background: var(--paper); }
@@ -176,15 +186,13 @@ html.p-fermo .stamp { animation: none !important; }
 </div>
 
 <header class="wrap top">
+  <button class="a11y-btn" type="button" id="prefs-btn" aria-expanded="false" aria-controls="prefs">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="4.5" r="2"/><path d="M5 8.5l7 1.5 7-1.5M12 10v5m0 0l-3 6m3-6l3 6"/></svg>
+    <span data-it="Accessibilità: adatta la pagina" data-en="Accessibility: adjust the page">Accessibilità: adatta la pagina</span>
+  </button>
   <svg class="brand" viewBox="0 0 900 118" role="img" aria-label="Indisciplinato" xmlns="http://www.w3.org/2000/svg"><title>Indisciplinato</title><defs><clipPath id="lg0"><rect x="0" y="0" width="32" height="118"/></clipPath><clipPath id="lg1"><rect x="32" y="0" width="77" height="118"/></clipPath><clipPath id="lg2"><rect x="109" y="0" width="73" height="118"/></clipPath><clipPath id="lg3"><rect x="182" y="0" width="41" height="118"/></clipPath><clipPath id="lg4"><rect x="223" y="0" width="57" height="118"/></clipPath><clipPath id="lg5"><rect x="280" y="0" width="62" height="118"/></clipPath><clipPath id="lg6"><rect x="342" y="0" width="34" height="118"/></clipPath><clipPath id="lg7"><rect x="376" y="0" width="78" height="118"/></clipPath><clipPath id="lg8"><rect x="454" y="0" width="68" height="118"/></clipPath><clipPath id="lg9"><rect x="522" y="0" width="36" height="118"/></clipPath><clipPath id="lg10"><rect x="558" y="0" width="92" height="118"/></clipPath><clipPath id="lg11"><rect x="650" y="0" width="153" height="118"/></clipPath><clipPath id="lg12"><rect x="803" y="0" width="97" height="118"/></clipPath></defs><g class="stamp" style="--i:0;--r:-9deg"><image href="logo.png" width="900" height="118" clip-path="url(#lg0)"/></g><g class="stamp" style="--i:1;--r:7deg"><image href="logo.png" width="900" height="118" clip-path="url(#lg1)"/></g><g class="stamp" style="--i:2;--r:-5deg"><image href="logo.png" width="900" height="118" clip-path="url(#lg2)"/></g><g class="stamp" style="--i:3;--r:10deg"><image href="logo.png" width="900" height="118" clip-path="url(#lg3)"/></g><g class="stamp" style="--i:4;--r:-7deg"><image href="logo.png" width="900" height="118" clip-path="url(#lg4)"/></g><g class="stamp" style="--i:5;--r:6deg"><image href="logo.png" width="900" height="118" clip-path="url(#lg5)"/></g><g class="stamp" style="--i:6;--r:-10deg"><image href="logo.png" width="900" height="118" clip-path="url(#lg6)"/></g><g class="stamp" style="--i:7;--r:8deg"><image href="logo.png" width="900" height="118" clip-path="url(#lg7)"/></g><g class="stamp" style="--i:8;--r:-6deg"><image href="logo.png" width="900" height="118" clip-path="url(#lg8)"/></g><g class="stamp" style="--i:9;--r:9deg"><image href="logo.png" width="900" height="118" clip-path="url(#lg9)"/></g><g class="stamp" style="--i:10;--r:-8deg"><image href="logo.png" width="900" height="118" clip-path="url(#lg10)"/></g><g class="stamp" style="--i:11;--r:5deg"><image href="logo.png" width="900" height="118" clip-path="url(#lg11)"/></g><g class="stamp" style="--i:12;--r:-7deg"><image href="logo.png" width="900" height="118" clip-path="url(#lg12)"/></g></svg>
-  <div class="tools">
-    <button class="btn" type="button" id="prefs-btn" aria-expanded="false" aria-controls="prefs">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="4.5" r="2"/><path d="M5 8.5l7 1.5 7-1.5M12 10v5m0 0l-3 6m3-6l3 6"/></svg>
-      <span data-it="Accessibilità" data-en="Accessibility">Accessibilità</span>
-    </button>
-    <button class="btn" type="button" id="lang" lang="en">English</button>
-  </div>
-  <fieldset class="prefs" id="prefs" hidden>
+  <div class="tools"><button class="btn" type="button" id="lang" lang="en">English</button></div>
+  <fieldset class="prefs" id="prefs" hidden style="order:-1">
     <legend data-it="Adatta la pagina" data-en="Adjust the page">Adatta la pagina</legend>
     <button type="button" class="pref" data-pref="p-grande" aria-pressed="false" data-it="Testo più grande" data-en="Larger text">Testo più grande</button>
     <button type="button" class="pref" data-pref="p-contrasto" aria-pressed="false" data-it="Alto contrasto" data-en="High contrast">Alto contrasto</button>
@@ -193,14 +201,15 @@ html.p-fermo .stamp { animation: none !important; }
     <button type="button" class="pref" data-pref="p-fermo" aria-pressed="false" data-it="Ferma animazioni e video" data-en="Stop animations and video">Ferma animazioni e video</button>
     <button type="button" class="reset" id="prefs-reset" data-it="Ripristina" data-en="Reset">Ripristina</button>
   </fieldset>
-  <nav class="main" aria-label="Principale" data-aria-it="Principale" data-aria-en="Main" style="flex-basis:100%">
+  <nav class="main" aria-label="In questa pagina" data-aria-it="In questa pagina" data-aria-en="On this page" style="flex-basis:100%">
     <ul>
+      <li><a href="#cose" data-it="Cos'è" data-en="What it is">Cos'è</a></li>
+      <li><a href="#biglietti" data-it="Biglietti" data-en="Tickets">Biglietti</a></li>
       <li><a href="#programma" data-it="Programma" data-en="Programme">Programma</a></li>
       <li><a href="#produttori" data-it="Produttori" data-en="Producers">Produttori</a></li>
       <li><a href="#accessibilita" data-it="Servizi di accessibilità" data-en="Accessibility services">Servizi di accessibilità</a></li>
       <li><a href="#info" data-it="Come arrivare" data-en="Getting there">Come arrivare</a></li>
-      <li><a href="#biglietti" data-it="Biglietti" data-en="Tickets">Biglietti</a></li>
-      <li><a href="#domande" data-it="Domande" data-en="FAQ">Domande</a></li>
+      <li><a href="#domande" data-it="Domande frequenti" data-en="FAQ">Domande frequenti</a></li>
     </ul>
   </nav>
 </header>
@@ -233,6 +242,11 @@ html.p-fermo .stamp { animation: none !important; }
             <small>Corso Vittorio Alfieri 381, Asti</small>
             <small><a href="#info" data-it="Come arrivare e accessi" data-en="Getting there and entrances">Come arrivare e accessi</a></small></dd>
         </div>
+        <div>
+          <dt data-it="Ingresso" data-en="Entry">Ingresso</dt>
+          <dd><span data-it="A pagamento, gratis per minori e accompagnatori" data-en="Paid entry, free for under 18s and companions">A pagamento, gratis per minori e accompagnatori</span>
+            <small><a href="#biglietti" data-it="Prezzi e riduzioni" data-en="Prices and discounts">Prezzi e riduzioni</a></small></dd>
+        </div>
       </dl>
       <div class="actions">
         <a class="primary" href="#biglietti">
@@ -247,21 +261,52 @@ html.p-fermo .stamp { animation: none !important; }
     </div>
   </div>
 
-  <section class="block alt easy" aria-labelledby="facile-t">
-    <div class="wrap stack">
-      <span class="badge" data-it="Lettura facile" data-en="Easy read">Lettura facile</span>
-      <h2 id="facile-t" data-it="Indisciplinato in breve" data-en="Indisciplinato in short">Indisciplinato in breve</h2>
-      <ol>
-        <li data-it="È una fiera di vino e di cibo." data-en="It is a wine and food fair.">È una fiera di vino e di cibo.</li>
-        <li data-it="È ad Asti, nel cortile di Palazzo del Michelerio." data-en="It is in Asti, in the courtyard of Palazzo del Michelerio.">È ad Asti, nel cortile di Palazzo del Michelerio.</li>
-        <li data-it="È sabato 15 e domenica 16 maggio 2027." data-en="It is on Saturday 15 and Sunday 16 May 2027.">È sabato 15 e domenica 16 maggio 2027.</li>
-        <li data-it="Puoi assaggiare e comprare da piccoli produttori." data-en="You can taste and buy from small producers.">Puoi assaggiare e comprare da piccoli produttori.</li>
-        <li data-it="Se hai bisogno di aiuto, scrivici prima di venire." data-en="If you need help, write to us before you come.">Se hai bisogno di aiuto, scrivici prima di venire.</li>
-      </ol>
+  <section class="block alt" id="cose" aria-labelledby="cose-t">
+    <div class="wrap two">
+      <div class="stack read">
+        <h2 id="cose-t" data-it="Cos'è Indisciplinato" data-en="What Indisciplinato is">Cos'è Indisciplinato</h2>
+        <p data-it="Indisciplinato è una fiera dove piccoli produttori di vino e cibo incontrano il pubblico. Nasce ad Asti nel 2023 da un gruppo di giovani dell'Associazione Vinaccia." data-en="Indisciplinato is a fair where small wine and food producers meet the public. It started in Asti in 2023, run by a group of young people from the Vinaccia association.">Indisciplinato è una fiera dove piccoli produttori di vino e cibo incontrano il pubblico. Nasce ad Asti nel 2023 da un gruppo di giovani dell'Associazione Vinaccia.</p>
+        <h3 data-it="Cosa puoi fare" data-en="What you can do">Cosa puoi fare</h3>
+        <ul>
+          <li data-it="Assaggiare vini e prodotti di circa 30 produttori." data-en="Taste wines and food from about 30 producers.">Assaggiare vini e prodotti di circa 30 produttori.</li>
+          <li data-it="Parlare con chi li produce e comprare direttamente da loro." data-en="Talk to the people who make them and buy directly from them.">Parlare con chi li produce e comprare direttamente da loro.</li>
+          <li data-it="Partecipare a incontri e degustazioni guidate, molte gratuite." data-en="Join talks and guided tastings, many of them free.">Partecipare a incontri e degustazioni guidate, molte gratuite.</li>
+        </ul>
+        <p data-it="Vogliamo una fiera aperta a tutte e tutti: per questo l'abbiamo progettata con associazioni di persone con disabilità." data-en="We want a fair that is open to everyone, so we designed it with disability organisations.">Vogliamo una fiera aperta a tutte e tutti: per questo l'abbiamo progettata con associazioni di persone con disabilità.</p>
+      </div>
+      <aside class="easy-box stack" aria-labelledby="facile-t">
+        <span class="badge" data-it="Lettura facile" data-en="Easy read">Lettura facile</span>
+        <h3 id="facile-t" data-it="Indisciplinato in breve" data-en="Indisciplinato in short">Indisciplinato in breve</h3>
+        <ol>
+          <li data-it="È una fiera di vino e di cibo." data-en="It is a wine and food fair.">È una fiera di vino e di cibo.</li>
+          <li data-it="È ad Asti, nel cortile di Palazzo del Michelerio." data-en="It is in Asti, in the courtyard of Palazzo del Michelerio.">È ad Asti, nel cortile di Palazzo del Michelerio.</li>
+          <li data-it="È sabato 15 e domenica 16 maggio 2027." data-en="It is on Saturday 15 and Sunday 16 May 2027.">È sabato 15 e domenica 16 maggio 2027.</li>
+          <li data-it="Puoi assaggiare e comprare da piccoli produttori." data-en="You can taste and buy from small producers.">Puoi assaggiare e comprare da piccoli produttori.</li>
+          <li data-it="Se hai bisogno di aiuto, scrivici prima di venire." data-en="If you need help, write to us before you come.">Se hai bisogno di aiuto, scrivici prima di venire.</li>
+        </ol>
+      </aside>
     </div>
   </section>
 
-  <section class="block" id="programma" aria-labelledby="prog-t">
+  <section class="block" id="biglietti" aria-labelledby="big-t">
+    <div class="wrap two">
+      <div class="stack">
+        <h2 id="big-t" data-it="Biglietti" data-en="Tickets">Biglietti</h2>
+        <dl class="prices">
+          <dt data-it="Ingresso con degustazione" data-en="Entry with tasting">Ingresso con degustazione</dt><dd><span class="tbd" data-it="da confermare" data-en="to be confirmed">da confermare</span></dd>
+          <dt data-it="Under 25" data-en="Under 25">Under 25</dt><dd data-it="ridotto" data-en="reduced">ridotto</dd>
+          <dt data-it="Minori" data-en="Under 18">Minori</dt><dd data-it="gratis" data-en="free">gratis</dd>
+          <dt data-it="Accompagnatori di persone con disabilità" data-en="Companions of disabled visitors">Accompagnatori di persone con disabilità</dt><dd data-it="gratis" data-en="free">gratis</dd>
+        </dl>
+      </div>
+      <div class="stack read">
+        <p data-it="La vendita online aprirà su questo sito in primavera. Alcune attività, come gli incontri e le degustazioni guidate, sono gratuite." data-en="Online sales will open on this site in spring. Some activities, such as talks and guided tastings, are free.">La vendita online aprirà su questo sito in primavera. Alcune attività, come gli incontri e le degustazioni guidate, sono gratuite.</p>
+        <p data-it="Se non riesci a comprare online, scrivici a info@indisciplinato.it: teniamo il biglietto per te e paghi all'ingresso." data-en="If you can't buy online, write to info@indisciplinato.it: we will hold a ticket for you and you pay at the entrance.">Se non riesci a comprare online, scrivici a info@indisciplinato.it: teniamo il biglietto per te e paghi all'ingresso.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="block alt" id="programma" aria-labelledby="prog-t">
     <div class="wrap stack">
       <h2 id="prog-t" data-it="Programma" data-en="Programme">Programma</h2>
       <p class="read"><span data-it="Gli orari sono provvisori." data-en="Times are provisional.">Gli orari sono provvisori.</span> <span class="tbd" data-it="da confermare" data-en="to be confirmed">da confermare</span></p>
@@ -294,7 +339,7 @@ html.p-fermo .stamp { animation: none !important; }
     </div>
   </section>
 
-  <section class="block alt" id="produttori" aria-labelledby="prod-t">
+  <section class="block" id="produttori" aria-labelledby="prod-t">
     <div class="wrap stack">
       <h2 id="prod-t" data-it="Produttori" data-en="Producers">Produttori</h2>
       <p class="read"><span data-it="Esempio con i produttori dell'edizione 2025: la lista 2027 è in arrivo." data-en="Example using the 2025 producers: the 2027 list is coming soon.">Esempio con i produttori dell'edizione 2025: la lista 2027 è in arrivo.</span> <span class="tbd" data-it="da confermare" data-en="to be confirmed">da confermare</span></p>
@@ -309,7 +354,7 @@ html.p-fermo .stamp { animation: none !important; }
     </div>
   </section>
 
-  <section class="block" id="accessibilita" aria-labelledby="acc-t">
+  <section class="block alt" id="accessibilita" aria-labelledby="acc-t">
     <div class="wrap stack">
       <h2 id="acc-t" data-it="Accessibilità alla fiera" data-en="Accessibility at the fair">Accessibilità alla fiera</h2>
       <p class="read" data-it="Abbiamo progettato la fiera insieme ad associazioni del territorio. Dicci in anticipo di cosa hai bisogno: ci organizziamo." data-en="We designed the fair together with local associations. Tell us in advance what you need and we will arrange it.">Abbiamo progettato la fiera insieme ad associazioni del territorio. Dicci in anticipo di cosa hai bisogno: ci organizziamo.</p>
@@ -340,7 +385,7 @@ html.p-fermo .stamp { animation: none !important; }
     </div>
   </section>
 
-  <section class="block alt" id="info" aria-labelledby="info-t">
+  <section class="block" id="info" aria-labelledby="info-t">
     <div class="wrap stack">
       <h2 id="info-t" data-it="Come arrivare" data-en="Getting there">Come arrivare</h2>
       <div class="two">
@@ -364,23 +409,7 @@ html.p-fermo .stamp { animation: none !important; }
     </div>
   </section>
 
-  <section class="block" id="biglietti" aria-labelledby="big-t">
-    <div class="wrap two">
-      <div class="stack">
-        <h2 id="big-t" data-it="Biglietti" data-en="Tickets">Biglietti</h2>
-        <dl class="prices">
-          <dt data-it="Ingresso con degustazione" data-en="Entry with tasting">Ingresso con degustazione</dt><dd><span class="tbd" data-it="da confermare" data-en="to be confirmed">da confermare</span></dd>
-          <dt data-it="Under 25" data-en="Under 25">Under 25</dt><dd data-it="ridotto" data-en="reduced">ridotto</dd>
-          <dt data-it="Minori" data-en="Under 18">Minori</dt><dd data-it="gratis" data-en="free">gratis</dd>
-          <dt data-it="Accompagnatori di persone con disabilità" data-en="Companions of disabled visitors">Accompagnatori di persone con disabilità</dt><dd data-it="gratis" data-en="free">gratis</dd>
-        </dl>
-      </div>
-      <div class="stack read">
-        <p data-it="La vendita online aprirà su questo sito in primavera. Alcune attività, come gli incontri e le degustazioni guidate, sono gratuite." data-en="Online sales will open on this site in spring. Some activities, such as talks and guided tastings, are free.">La vendita online aprirà su questo sito in primavera. Alcune attività, come gli incontri e le degustazioni guidate, sono gratuite.</p>
-        <p data-it="Se non riesci a comprare online, scrivici a info@indisciplinato.it: teniamo il biglietto per te e paghi all'ingresso." data-en="If you can't buy online, write to info@indisciplinato.it: we will hold a ticket for you and you pay at the entrance.">Se non riesci a comprare online, scrivici a info@indisciplinato.it: teniamo il biglietto per te e paghi all'ingresso.</p>
-      </div>
-    </div>
-  </section>
+
 
   <section class="block alt faq" id="domande" aria-labelledby="faq-t">
     <div class="wrap stack read">
@@ -400,11 +429,11 @@ html.p-fermo .stamp { animation: none !important; }
 
   <section class="block" aria-labelledby="partner-t">
     <div class="wrap stack">
-      <h2 id="partner-t" data-it="Con chi lo facciamo" data-en="Who we work with">Con chi lo facciamo</h2>
+      <h2 id="partner-t" data-it="Chi organizza e con chi" data-en="Who organises it, and with whom">Chi organizza e con chi</h2>
       <ul class="partners">
         <li>Ente Nazionale Sordi</li><li>Fondazione Giorgio Faletti</li><li>Casa degli Alfieri</li><li>AUSER</li><li>APRI Asti</li><li>Spazio Kor</li><li>Asti Slow Fashion</li><li>Scienza sotto i campanili</li><li>PIAM</li><li>Liceo Artistico</li><li>Rione Cattedrale</li><li>Cooperativa Valdocco</li>
       </ul>
-      <p class="read" data-it="Progetto candidato al bando Eventi for All di Fondazione CRT." data-en="Project submitted to Fondazione CRT's Eventi for All call.">Progetto candidato al bando Eventi for All di Fondazione CRT.</p>
+      <p class="read" data-it="Organizza l'Associazione Vinaccia ETS, insieme a queste realtà del territorio. Progetto candidato al bando Eventi for All di Fondazione CRT." data-en="Organised by the Vinaccia association, together with these local partners. Project submitted to Fondazione CRT's Eventi for All call.">Organizza l'Associazione Vinaccia ETS, insieme a queste realtà del territorio. Progetto candidato al bando Eventi for All di Fondazione CRT.</p>
     </div>
   </section>
 </main>
