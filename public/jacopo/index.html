@@ -44,10 +44,9 @@
   .bars i b{display:block;height:100%;width:0;background:#fff;transition:width .35s ease}
   .bars i.done b{width:100%}
   .next{position:absolute;right:20px;bottom:22px;z-index:6;width:76px;height:76px;border-radius:50%;
-    background:#fff;color:var(--blue);display:grid;place-items:center;box-shadow:0 6px 0 rgba(0,0,0,.2);
-    animation:nudge 1.6s ease-in-out infinite}
+    background:#fff;color:var(--blue);display:grid;place-items:center;box-shadow:0 6px 0 rgba(0,0,0,.2)}
   .pg.b .next{color:var(--red)}
-  .next svg{width:38px;height:38px;margin-left:4px}
+  .next svg{width:40px;height:40px}
   .next:active{transform:scale(.92)}
   @keyframes nudge{0%,100%{transform:translateX(0)}50%{transform:translateX(8px)}}
   .tapzone{position:absolute;top:0;bottom:0;width:28%;z-index:4}
@@ -150,7 +149,7 @@
   .detail.r{background:var(--red)} .detail.b{background:var(--blue)}
   .dhead{display:flex;align-items:center;gap:12px;padding:calc(16px + var(--st)) 18px 14px}
   .back{flex:0 0 64px;height:64px;border-radius:50%;background:#fff;color:var(--ink);display:grid;place-items:center;box-shadow:0 5px 0 rgba(0,0,0,.2)}
-  .back svg{width:34px;height:34px;margin-right:4px}
+  .back svg{width:34px;height:34px}
   .back:active{transform:scale(.92)}
   .dhead .k{font-weight:800;font-size:1rem;opacity:.9;margin-top:2px}
   .dhead h2{font-family:var(--disp);font-size:2rem;line-height:1.02;margin-top:2px}
@@ -234,14 +233,14 @@
       <img src="img/cover.webp" alt="Ritratto illustrato di Jacopo">
       <svg class="star" viewBox="0 0 100 100" aria-hidden="true"><g fill="#fff"><rect x="40" y="4" width="20" height="92" rx="8"/><rect x="40" y="4" width="20" height="92" rx="8" transform="rotate(60 50 50)"/><rect x="40" y="4" width="20" height="92" rx="8" transform="rotate(-60 50 50)"/></g></svg>
       <div class="nameplate a d2"><div class="s">Ciao sono</div><div class="n">Jacopo</div></div>
-      <button class="next" data-step="1" aria-label="Pagina successiva"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4l8 8-8 8" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      <button class="next" data-step="1" aria-label="Pagina successiva"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
     </article>
 
     <article class="pg pg2">
       <div class="age a"><small>ho</small>25 anni</div>
       <div class="photo a d1"><img src="img/foto.webp" alt="Foto di Jacopo"></div>
       <p class="big-t a d2">e questo è il mio modo di comunicare.</p>
-      <button class="next" data-step="1" aria-label="Pagina successiva"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4l8 8-8 8" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      <button class="next" data-step="1" aria-label="Pagina successiva"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
     </article>
 
     <article class="pg b">
@@ -250,7 +249,7 @@
         <p class="txt a d1">Quando muovo le braccia portandole alla bocca, o quando faccio dei versi, significa che desidero comunicare con te. Dimmi:</p>
         <p class="quote a">“Jacopo, vuoi dirmi che…”</p>
       </div>
-      <button class="next" data-step="1" aria-label="Pagina successiva"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4l8 8-8 8" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      <button class="next" data-step="1" aria-label="Pagina successiva"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
     </article>
 
     <article class="pg r">
@@ -260,7 +259,7 @@
         <div class="w"><span class="si">Sì</span><span class="o">o</span><span class="no">No</span></div>
       </div>
       <p class="txt a d2" style="font-size:1.45rem">Quando sto bene, per dire SÌ uso la voce oppure muovo la testa dall’alto al basso.</p>
-      <button class="next" data-step="1" aria-label="Pagina successiva"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4l8 8-8 8" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      <button class="next" data-step="1" aria-label="Pagina successiva"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
     </article>
 
     <article class="pg b">
@@ -269,12 +268,12 @@
         <div class="y a d1"><b>SÌ</b><p>uso la voce oppure muovo la testa dall’alto al basso.</p></div>
         <div class="n a d2"><b>NO</b><p>non faccio nulla, oppure, se sono molto in forma, dico “No” con la voce o faccio no con la testa.</p></div>
       </div>
-      <button class="next" data-step="1" aria-label="Pagina successiva"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4l8 8-8 8" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      <button class="next" data-step="1" aria-label="Pagina successiva"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
     </article>
 
     <article class="pg r">
       <p class="txt a" style="font-size:2rem;line-height:1.18">Durante la giornata può capitarmi di avere delle crisi epilettiche: a volte può succedere che sono come assente, come se dormissi ma con gli occhi aperti, altre volte invece ho delle scosse.</p>
-      <button class="next" data-step="1" aria-label="Pagina successiva"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4l8 8-8 8" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      <button class="next" data-step="1" aria-label="Pagina successiva"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
     </article>
 
     <article class="pg b">
@@ -317,7 +316,7 @@
 <section class="detail" id="detail" aria-hidden="true">
   <div class="scroll" id="dScroll">
     <div class="dhead">
-      <button class="back" id="dBack" aria-label="Indietro"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 4l-8 8 8 8" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      <button class="back" id="dBack" aria-label="Indietro"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12H5M11 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
       <div><div class="k">Jacopo, vuoi dirmi che…</div><h2 id="dTitle"></h2><div class="note" id="dNote"></div></div>
     </div>
     <div id="dBody"></div>
