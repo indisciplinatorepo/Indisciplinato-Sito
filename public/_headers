@@ -6,3 +6,7 @@
 /indisciplinato-2027.ics
   Content-Type: text/calendar; charset=utf-8
   Content-Disposition: attachment; filename="indisciplinato-2027.ics"
+
+/jacopo/*
+  X-Robots-Tag: noindex, nofollow
+  Cache-Control: no-cache
