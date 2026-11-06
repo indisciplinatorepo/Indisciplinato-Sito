@@ -15,3 +15,7 @@
   X-Robots-Tag: noindex, nofollow
   Cache-Control: no-cache
   Referrer-Policy: no-referrer
+
+/fornitori/*
+  X-Robots-Tag: noindex, nofollow
+  Cache-Control: no-cache
