@@ -23,7 +23,9 @@
   --blue:#9fb8e6; --on-blue:#141a26; --mint-soft:#11392f; --tomato-soft:#3e1d1b; --ok:#4fd6ae; color-scheme:dark;}}
 *{box-sizing:border-box}
 html,body{overflow-x:hidden}
-.r>*,.head>*,.ttl>div{min-width:0}
+.r>*,.ttl,.ttl>div{min-width:0}
+.ttl{flex:1 1 auto}
+.head .bud{flex:0 0 auto}
 h3{overflow-wrap:anywhere}
 html,body{margin:0}
 body{background:var(--paper);color:var(--ink);font:16px/1.45 var(--body)}
@@ -36,7 +38,7 @@ h1 span{color:var(--mint)}
 .top p{margin:6px 0 0;font-size:14px;opacity:.9}
 main{max-width:980px;margin:0 auto;padding:20px 16px 48px}
 h2{font:800 24px/1.1 var(--display);margin:0}
-h3{font:700 18px/1.2 var(--display);margin:0}
+h3{font:700 17px/1.2 var(--display);margin:0}
 .hint{color:var(--muted);font-size:14px;margin:4px 0 0}
 .intro{margin:4px 0 18px}
 .group{margin-top:22px}
@@ -47,7 +49,7 @@ h3{font:700 18px/1.2 var(--display);margin:0}
 .ttl{display:flex;gap:10px;align-items:flex-start}
 .ico{flex:0 0 40px;height:40px;border-radius:10px;background:var(--mint-soft);display:grid;place-items:center;font-size:22px;line-height:1}
 .bud{text-align:right;white-space:nowrap}
-.bud b{font:800 18px/1.1 var(--display);font-variant-numeric:tabular-nums;display:block}
+.bud b{font:800 16px/1.1 var(--display);font-variant-numeric:tabular-nums;display:block}
 .bud small{color:var(--muted);font-size:12px}
 .rows{display:flex;flex-direction:column;gap:8px;margin-top:12px}
 .r{display:grid;grid-template-columns:1.3fr .7fr 1.4fr auto;gap:8px;align-items:end}
