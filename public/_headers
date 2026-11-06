@@ -10,3 +10,8 @@
 /jacopo/*
   X-Robots-Tag: noindex, nofollow
   Cache-Control: no-cache
+
+/gestionale/*
+  X-Robots-Tag: noindex, nofollow
+  Cache-Control: no-cache
+  Referrer-Policy: no-referrer

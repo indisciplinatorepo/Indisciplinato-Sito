@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="referrer" content="no-referrer">
+<link rel="icon" href="/favicon-32.png" type="image/png">
+<title>Gestionale Indisciplinato 2027</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&display=swap" rel="stylesheet">
+<style>
+/* Palette Indisciplinato (Dusk Blue, Mint Leaf, Tomato) su carta chiara. Layout: barra in alto con 4 sezioni, sommario prima del dettaglio, schede a griglia. */
+:root{
+  --paper:#f6f5f1; --card:#ffffff; --ink:#1b2233; --muted:#5a6275; --line:#dcdad3;
+  --blue:#345995; --on-blue:#ffffff; --mint:#03cea4; --mint-soft:#d6f5ee; --tomato:#fb4d3d; --tomato-soft:#fde3e0;
+  --amber:#b7791f; --amber-soft:#fbefd9; --ok:#0f7a5f;
+  --display:"Bricolage Grotesque","Arial Black",system-ui,sans-serif;
+  --body:"Atkinson Hyperlegible",Verdana,system-ui,sans-serif;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --paper:#141a26; --card:#1c2433; --ink:#eef1f6; --muted:#aab2c3; --line:#2f3a4f;
+  --blue:#9fb8e6; --on-blue:#141a26; --mint-soft:#11392f; --tomato-soft:#3e1d1b; --amber:#e7b562; --amber-soft:#3a2d14; --ok:#4fd6ae; color-scheme:dark;}}
+:root[data-theme="dark"]{
+  --paper:#141a26; --card:#1c2433; --ink:#eef1f6; --muted:#aab2c3; --line:#2f3a4f;
+  --blue:#9fb8e6; --on-blue:#141a26; --mint-soft:#11392f; --tomato-soft:#3e1d1b; --amber:#e7b562; --amber-soft:#3a2d14; --ok:#4fd6ae; color-scheme:dark;}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--paper);color:var(--ink);font:16px/1.45 var(--body)}
+a{color:var(--blue)}
+:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+.top{background:var(--blue);color:var(--on-blue)}
+.top .in{max-width:1180px;margin:0 auto;padding:18px 16px 0}
+.brand{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:8px 20px}
+.brand h1{font:800 clamp(26px,5vw,38px)/1 var(--display);margin:0;letter-spacing:-.01em}
+.brand h1 span{color:var(--mint)}
+:root[data-theme="dark"] .brand h1 span{color:#0b6b57}
+.brand p{margin:0;font-size:14px;opacity:.9}
+nav{display:flex;gap:4px;margin-top:16px;overflow-x:auto}
+nav a{color:var(--on-blue);text-decoration:none;padding:10px 16px;border-radius:10px 10px 0 0;font-weight:700;white-space:nowrap;opacity:.85}
+nav a[aria-current="page"]{background:var(--paper);color:var(--ink);opacity:1}
+main{max-width:1180px;margin:0 auto;padding:20px 16px 60px}
+h2{font:800 26px/1.1 var(--display);margin:0;text-wrap:balance}
+h3{font:700 19px/1.2 var(--display);margin:0}
+.bar{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;margin:26px 0 12px}
+.bar:first-child{margin-top:4px}
+.hint{color:var(--muted);font-size:14px;margin:4px 0 0}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+.tile{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 16px}
+.tile .k{font-size:13px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.04em}
+.tile .v{font:800 28px/1.15 var(--display);font-variant-numeric:tabular-nums;margin-top:4px}
+.tile .s{font-size:13px;color:var(--muted);margin-top:2px}
+.tile.accent{border-left:6px solid var(--mint)}
+.tile.warn{border-left:6px solid var(--tomato)}
+.meter{height:8px;background:var(--line);border-radius:99px;overflow:hidden;margin-top:8px}
+.meter i{display:block;height:100%;background:var(--mint);border-radius:99px}
+.meter i.over{background:var(--tomato)}
+.tablewrap{overflow-x:auto;background:var(--card);border:1px solid var(--line);border-radius:14px}
+table{width:100%;border-collapse:collapse;font-size:15px}
+th,td{padding:10px 12px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:12px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);background:var(--card);position:sticky;top:0}
+td.n,th.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+tr.cat td{background:var(--paper);font-weight:700}
+tr.cat td .meter{max-width:220px}
+tr.tot td{font-weight:700;border-bottom:0}
+tbody tr.click{cursor:pointer}
+tbody tr.click:hover td{background:color-mix(in srgb,var(--mint) 8%,transparent)}
+.chip{display:inline-block;font-size:12px;font-weight:700;padding:2px 9px;border-radius:99px;white-space:nowrap;border:1px solid transparent}
+.chip.ok{background:var(--mint-soft);color:var(--ok)}
+.chip.warn{background:var(--amber-soft);color:var(--amber)}
+.chip.bad{background:var(--tomato-soft);color:var(--tomato)}
+.chip.neu{background:transparent;color:var(--muted);border-color:var(--line)}
+:root:not([data-theme="dark"]) .chip.bad{color:#b4261a}
+.btn{font:700 15px var(--body);border-radius:10px;padding:10px 16px;border:2px solid var(--blue);background:var(--blue);color:var(--on-blue);cursor:pointer}
+.btn.ghost{background:transparent;color:var(--blue)}
+.btn.danger{background:transparent;border-color:var(--tomato);color:var(--tomato)}
+.btn.small{padding:6px 11px;font-size:14px}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.seg{display:inline-flex;border:2px solid var(--line);border-radius:10px;overflow:hidden}
+.seg button{font:700 14px var(--body);background:var(--card);color:var(--ink);border:0;padding:8px 13px;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+input,select,textarea{font:15px var(--body);color:var(--ink);background:var(--card);border:2px solid var(--line);border-radius:10px;padding:9px 11px;width:100%}
+textarea{min-height:90px;resize:vertical}
+label{display:block;font-size:13px;font-weight:700;color:var(--muted);margin-bottom:4px}
+.search{max-width:320px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:12px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 16px;text-align:left;font:inherit;color:inherit;cursor:pointer;display:flex;flex-direction:column;gap:6px;border-top:5px solid var(--line)}
+.card:hover{border-color:var(--blue)}
+.card.wine{border-top-color:var(--tomato)}
+.card.food{border-top-color:var(--mint)}
+.card .z{font-size:14px;color:var(--muted)}
+.card .p{font-size:14px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.card .chips{display:flex;flex-wrap:wrap;gap:5px;margin-top:auto;padding-top:4px}
+.group{margin-top:22px}
+.group>h3{margin-bottom:10px;display:flex;gap:10px;align-items:baseline}
+.group>h3 small{font:400 14px var(--body);color:var(--muted)}
+.empty{background:var(--card);border:2px dashed var(--line);border-radius:14px;padding:22px;color:var(--muted);text-align:center}
+.status{margin:0 0 14px;padding:10px 14px;border-radius:10px;background:var(--amber-soft);color:var(--ink);font-size:14px;display:none}
+.status.show{display:block}
+.status.err{background:var(--tomato-soft)}
+.contact{font-size:14px;line-height:1.6}
+.contact b{font-weight:700}
+/* dialog */
+.ov{position:fixed;inset:0;background:rgba(10,14,22,.55);display:none;align-items:flex-end;justify-content:center;z-index:20}
+.ov.open{display:flex}
+@media (min-width:700px){.ov{align-items:center}}
+.dlg{background:var(--paper);width:100%;max-width:640px;max-height:92vh;overflow:auto;border-radius:18px 18px 0 0;padding:20px 20px 24px}
+@media (min-width:700px){.dlg{border-radius:18px}}
+.dlg header{display:flex;justify-content:space-between;gap:12px;align-items:flex-start;margin-bottom:14px}
+.form{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.form .full{grid-column:1/-1}
+@media (max-width:520px){.form{grid-template-columns:1fr}}
+.check{display:flex;gap:8px;align-items:center;font-size:15px;color:var(--ink);font-weight:400}
+.check input{width:auto}
+.acts{display:flex;flex-wrap:wrap;gap:8px;justify-content:space-between;margin-top:18px}
+.notes{display:flex;flex-direction:column;gap:8px;margin-top:6px}
+.note{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px 12px;font-size:14px}
+.note time{font-weight:700;color:var(--muted);font-size:12px;display:block}
+.x{background:none;border:0;font-size:26px;line-height:1;color:var(--ink);cursor:pointer;padding:2px 6px}
+.toast{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);background:var(--ink);color:var(--paper);padding:10px 16px;border-radius:10px;font-size:14px;z-index:30;display:none;max-width:90vw}
+.toast.show{display:block}
+@media (prefers-reduced-motion:no-preference){.card,.btn{transition:border-color .15s,background .15s}}
+</style>
+</head>
+<body>
+<div class="top"><div class="in">
+  <div class="brand">
+    <h1>Indisciplinato <span>2027</span> · gestionale</h1>
+    <p id="countdown">15–16 maggio 2027 · Palazzo del Michelerio, Asti</p>
+  </div>
+  <nav aria-label="Sezioni">
+    <a href="#produttori" data-v="produttori">Produttori</a>
+    <a href="#budget" data-v="budget">Budget</a>
+    <a href="#spese" data-v="spese">Spese e fatture</a>
+    <a href="#partner" data-v="partner">Partner</a>
+  </nav>
+</div></div>
+
+<main>
+  <div class="status" id="status" role="status"></div>
+  <section id="v-produttori" hidden></section>
+  <section id="v-budget" hidden></section>
+  <section id="v-spese" hidden></section>
+  <section id="v-partner" hidden></section>
+</main>
+
+<div class="ov" id="ov" role="dialog" aria-modal="true" aria-labelledby="dlgTitle"><div class="dlg" id="dlg"></div></div>
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+const DRIVE_FOLDER = "19jCHtiW-Hzzzv-sZbnREOrRkzNtCQiCM";
+const DRIVE_FOLDER_URL = "https://drive.google.com/drive/folders/" + DRIVE_FOLDER;
+const API_URL = "https://script.google.com/macros/s/AKfycbyOEjvUSuB8NdsXgdqqn5JiaRNV-UACJ8xNVpfYAOHM8nGp89-FOZ9HYANSMfxJyng8/exec";
+const EVENT = new Date("2027-05-15T11:00:00+02:00");
+
+const S = {voci:[], spese:[], fonti:[], produttori:[], partner:[]};
+const loaded = {};
+let ready = false, sheetUrl = "";
+let KEY = null;
+(function(){
+  const u = new URL(location.href); const k = u.searchParams.get("k");
+  if(k){ KEY = k; try{ localStorage.setItem("gestionale_k", k); }catch(e){} u.searchParams.delete("k"); history.replaceState(null, "", u.pathname + u.hash); }
+  else { try{ KEY = localStorage.getItem("gestionale_k"); }catch(e){} }
+})();
+async function apiGet(){
+  const r = await fetch(API_URL + "?k=" + encodeURIComponent(KEY||""), {cache:"no-store"});
+  const j = await r.json(); if(!j.ok) throw new Error(j.error||"errore"); return j;
+}
+async function apiPost(body){
+  const r = await fetch(API_URL, {method:"POST", body: JSON.stringify(Object.assign({}, body, {k:KEY}))});
+  const j = await r.json(); if(!j.ok) throw new Error(j.error||"errore"); return j;
+}
+let view = "produttori";
+const ui = {speseFonte:"", speseVoce:"", prodTipo:"tutti", prodArea:"tutte", prodQ:"", partQ:""};
+
+const $ = s => document.querySelector(s);
+const esc = v => String(v ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const eur = n => { const v=Number(n)||0; const [i,d]=Math.abs(v).toFixed(2).split("."); return (v<0?"−":"")+i.replace(/\B(?=(\d{3})+(?!\d))/g,".")+","+d+" €"; };
+const pl = (n, one, many) => n + " " + (n===1 ? one : many);
+const num = v => { const n = parseFloat(String(v).replace(/\./g,"").replace(",", ".")); return isFinite(n) ? n : 0; };
+const toNum = v => typeof v === "number" ? v : num(v);
+const sum = (a, f) => a.reduce((t, x) => t + (toNum(f(x)) || 0), 0);
+const byOrd = (a, b) => (a.ordine ?? 999) - (b.ordine ?? 999) || String(a.nome||a.desc||"").localeCompare(String(b.nome||b.desc||""));
+const today = () => new Date().toISOString().slice(0,10);
+const fmtDate = d => d ? new Date(d + "T12:00:00").toLocaleDateString("it-IT",{day:"numeric",month:"short",year:"numeric"}) : "";
+function toast(msg){ const t=$("#toast"); t.textContent=msg; t.classList.add("show"); clearTimeout(t._h); t._h=setTimeout(()=>t.classList.remove("show"),3800); }
+function status(msg, err){ const s=$("#status"); s.textContent=msg||""; s.classList.toggle("show",!!msg); s.classList.toggle("err",!!err); }
+
+/* countdown */
+(function(){ const d=Math.ceil((EVENT-new Date())/86400000); if(d>0) $("#countdown").textContent = `15–16 maggio 2027 · Palazzo del Michelerio, Asti · mancano ${d} giorni`; })();
+
+/* ---------- routing ---------- */
+function route(){
+  const h = location.hash.replace("#","");
+  view = ["budget","spese","produttori","partner"].includes(h) ? h : "produttori";
+  document.querySelectorAll("nav a").forEach(a => { if(a.dataset.v===view) a.setAttribute("aria-current","page"); else a.removeAttribute("aria-current"); });
+  ["budget","spese","produttori","partner"].forEach(v => $("#v-"+v).hidden = v!==view);
+  render();
+}
+window.addEventListener("hashchange", route);
+
+/* ---------- calcoli ---------- */
+const spentByVoce = id => sum(S.spese.filter(s=>s.voceId===id), s=>s.importo);
+const spentByFonte = id => sum(S.spese.filter(s=>s.fonteId===id), s=>s.importo);
+function fontePrevisto(f){
+  if(f.auto === "quote") return (toNum(f.quotaUnit)||50) * S.produttori.length;
+  return toNum(f.previsto);
+}
+function fonteIncassato(f){
+  if(f.auto === "quote") return sum(S.produttori.filter(p=>p.quotaPagata), p=>p.quota ?? 50);
+  return toNum(f.incassato);
+}
+
+/* ---------- BUDGET ---------- */
+function renderBudget(){
+  const el = $("#v-budget");
+  const prev = sum(S.voci, v=>v.prev);
+  const spent = sum(S.spese, s=>s.importo);
+  const finanz = S.fonti.filter(f=>f.tipo!=="entrata");
+  const entrate = S.fonti.filter(f=>f.tipo==="entrata");
+  const fondiCerti = sum(finanz.filter(f=>f.stato==="confermato"), fontePrevisto);
+  const fondiTot = sum(finanz, fontePrevisto);
+  const entrateTot = sum(entrate, fontePrevisto);
+  const rimanente = prev - spent;
+  const pct = prev ? Math.min(100, spent/prev*100) : 0;
+  const scopertoFin = prev - fondiTot;
+
+  const cats = [...new Set(S.voci.map(v=>v.cat))];
+  let rows = "";
+  cats.forEach(c => {
+    const vs = S.voci.filter(v=>v.cat===c).sort(byOrd);
+    const cp = sum(vs, v=>v.prev), cs = sum(vs, v=>spentByVoce(v.id));
+    const cpct = cp ? Math.min(100, cs/cp*100) : 0;
+    rows += `<tr class="cat"><td>${esc(c)}<div class="meter" aria-hidden="true"><i class="${cs>cp?"over":""}" style="width:${cpct}%"></i></div></td><td class="n">${eur(cp)}</td><td class="n">${eur(cs)}</td><td class="n">${eur(cp-cs)}</td><td></td></tr>`;
+    vs.forEach(v => {
+      const s = spentByVoce(v.id), d = toNum(v.prev) - s;
+      const amm = v.ammissibile === true ? '<span class="chip ok">ammissibile CRT</span>' : v.ammissibile === false ? '<span class="chip bad">non ammissibile CRT</span>' : '<span class="chip neu">da verificare</span>';
+      const over = s > toNum(v.prev) ? ' <span class="chip bad">sopra preventivo</span>' : "";
+      rows += `<tr class="click" data-voce="${esc(v.id)}" tabindex="0"><td>${esc(v.desc)}${v.qta?`<div class="hint">${esc(v.qta)}</div>`:""}</td><td class="n">${eur(v.prev)}</td><td class="n">${eur(s)}</td><td class="n">${eur(d)}</td><td>${amm}${over}</td></tr>`;
+    });
+  });
+
+  let frows = "";
+  const fRow = f => {
+    const p = fontePrevisto(f), imp = spentByFonte(f.id);
+    const st = f.stato==="confermato" ? '<span class="chip ok">confermato</span>' : f.stato==="atteso" ? '<span class="chip neu">atteso</span>' : '<span class="chip warn">da confermare</span>';
+    return `<tr class="click" data-fonte="${esc(f.id)}" tabindex="0"><td>${esc(f.nome)}${f.note?`<div class="hint">${esc(f.note)}</div>`:""}</td><td class="n">${eur(p)}</td><td>${st}</td><td class="n">${f.tipo==="entrata"?eur(fonteIncassato(f)):eur(imp)}</td><td class="n">${f.tipo==="entrata"?"":eur(p-imp)}</td></tr>`;
+  };
+  frows += `<tr class="cat"><td colspan="5">Finanziamenti e cofinanziamenti</td></tr>` + finanz.sort(byOrd).map(fRow).join("");
+  frows += `<tr class="tot"><td>Totale finanziamenti</td><td class="n">${eur(fondiTot)}</td><td></td><td class="n">${eur(sum(finanz,f=>spentByFonte(f.id)))}</td><td class="n">${eur(fondiTot-sum(finanz,f=>spentByFonte(f.id)))}</td></tr>`;
+  frows += `<tr class="cat"><td colspan="5">Entrate dell'evento</td></tr>` + entrate.sort(byOrd).map(fRow).join("");
+  frows += `<tr class="tot"><td>Totale entrate previste</td><td class="n">${eur(entrateTot)}</td><td></td><td class="n">${eur(sum(entrate,fonteIncassato))}</td><td></td></tr>`;
+
+  el.innerHTML = `
+  <div class="bar"><div><h2>A che punto siamo</h2><p class="hint">Costi dal budget presentato a Fondazione CRT (foglio "costi", aprile 2026). Lo speso arriva dalle spese registrate.${sheetUrl?` Tutti i dati sono anche nel <a href="${esc(sheetUrl)}" target="_blank" rel="noopener">foglio Google</a>.`:""}</p></div></div>
+  <div class="tiles">
+    <div class="tile"><div class="k">Costi previsti</div><div class="v">${eur(prev)}</div><div class="s">${S.voci.length} voci di spesa</div></div>
+    <div class="tile accent"><div class="k">Speso finora</div><div class="v">${eur(spent)}</div><div class="meter"><i style="width:${pct}%"></i></div><div class="s">${pct.toFixed(0)}% del previsto · ${pl(S.spese.length,"spesa","spese")}</div></div>
+    <div class="tile ${rimanente<0?"warn":""}"><div class="k">Ancora da spendere</div><div class="v">${eur(rimanente)}</div><div class="s">previsto meno speso</div></div>
+    <div class="tile ${scopertoFin>0?"warn":"accent"}"><div class="k">Finanziamenti</div><div class="v">${eur(fondiTot)}</div><div class="s">${eur(fondiCerti)} confermati · ${scopertoFin>0?`mancano ${eur(scopertoFin)} da coprire con le entrate`:"costi coperti"}</div></div>
+  </div>
+
+  <div class="bar"><div><h3>Chi paga</h3><p class="hint">Tocca una riga per aggiornare importo o stato. "Speso" è la somma delle spese assegnate a quel finanziatore.</p></div><button class="btn ghost small" id="addFonte">+ Fonte</button></div>
+  <div class="tablewrap"><table><thead><tr><th>Fonte</th><th class="n">Previsto</th><th>Stato</th><th class="n">Speso / incassato</th><th class="n">Residuo</th></tr></thead><tbody>${frows}</tbody></table></div>
+
+  <div class="bar"><div><h3>Voci di spesa</h3><p class="hint">Preventivo e speso reale per voce. Tocca una voce per modificarla.</p></div><button class="btn ghost small" id="addVoce">+ Voce</button></div>
+  <div class="tablewrap"><table><thead><tr><th>Voce</th><th class="n">Preventivo</th><th class="n">Speso</th><th class="n">Differenza</th><th>Note</th></tr></thead><tbody>${rows || `<tr><td colspan="5" class="hint">Nessuna voce ancora.</td></tr>`}
+  <tr class="tot"><td>Totale</td><td class="n">${eur(prev)}</td><td class="n">${eur(spent)}</td><td class="n">${eur(rimanente)}</td><td></td></tr></tbody></table></div>`;
+
+  el.querySelectorAll("[data-voce]").forEach(r => { r.onclick = () => editVoce(S.voci.find(v=>v.id===r.dataset.voce)); r.onkeydown = e => { if(e.key==="Enter") r.onclick(); }; });
+  el.querySelectorAll("[data-fonte]").forEach(r => { r.onclick = () => editFonte(S.fonti.find(v=>v.id===r.dataset.fonte)); r.onkeydown = e => { if(e.key==="Enter") r.onclick(); }; });
+  $("#addVoce").onclick = () => editVoce(null);
+  $("#addFonte").onclick = () => editFonte(null);
+}
+
+function catOptions(sel){ const cats=[...new Set(S.voci.map(v=>v.cat))]; return cats.map(c=>`<option ${c===sel?"selected":""}>${esc(c)}</option>`).join(""); }
+
+function editVoce(v){
+  const isNew = !v; v = v || {cat:S.voci[0]?.cat||"Altro", desc:"", prev:0, ammissibile:null};
+  openDlg(isNew?"Nuova voce di spesa":"Modifica voce", `
+   <div class="form">
+    <div class="full"><label for="f_desc">Descrizione</label><input id="f_desc" value="${esc(v.desc)}"></div>
+    <div><label for="f_cat">Categoria</label><input id="f_cat" list="catlist" value="${esc(v.cat)}"><datalist id="catlist">${catOptions()}</datalist></div>
+    <div><label for="f_prev">Preventivo (€)</label><input id="f_prev" inputmode="decimal" value="${esc(String(v.prev).replace(".",","))}"></div>
+    <div class="full"><label for="f_qta">Dettaglio quantità</label><input id="f_qta" value="${esc(v.qta||"")}" placeholder="es. 300 bicchieri × 2,68 €"></div>
+    <div class="full"><label for="f_amm">Ammissibile per il contributo CRT</label><select id="f_amm"><option value="">Da verificare</option><option value="si" ${v.ammissibile===true?"selected":""}>Sì</option><option value="no" ${v.ammissibile===false?"selected":""}>No</option></select></div>
+   </div>`, async () => {
+    const data = {...strip(v), desc:$("#f_desc").value.trim(), cat:$("#f_cat").value.trim()||"Altro", prev:num($("#f_prev").value), qta:$("#f_qta").value.trim(), ammissibile: $("#f_amm").value==="si"?true:$("#f_amm").value==="no"?false:null};
+    if(!data.desc) return "Scrivi una descrizione.";
+    await save("voci", v.id, data);
+  }, isNew ? null : async () => {
+    if(S.spese.some(s=>s.voceId===v.id)) return "Questa voce ha delle spese collegate: spostale prima su un'altra voce.";
+    await del("voci", v.id);
+  });
+}
+
+function editFonte(f){
+  const isNew = !f; f = f || {nome:"", tipo:"finanziamento", previsto:0, stato:"da confermare"};
+  const auto = f.auto==="quote";
+  openDlg(isNew?"Nuova fonte":"Modifica fonte", `
+   <div class="form">
+    <div class="full"><label for="f_nome">Nome</label><input id="f_nome" value="${esc(f.nome)}"></div>
+    <div><label for="f_tipo">Tipo</label><select id="f_tipo">${["finanziamento","cofinanziamento","entrata"].map(t=>`<option ${t===f.tipo?"selected":""}>${t}</option>`).join("")}</select></div>
+    <div><label for="f_stato">Stato</label><select id="f_stato">${["confermato","da confermare","atteso"].map(t=>`<option ${t===f.stato?"selected":""}>${t}</option>`).join("")}</select></div>
+    ${auto ? `<div><label for="f_qu">Quota per produttore (€)</label><input id="f_qu" inputmode="decimal" value="${esc(f.quotaUnit??50)}"></div><div class="full hint">Il previsto si calcola da solo: quota × numero di produttori nella sezione Produttori. L'incassato somma le quote segnate come pagate.</div>`
+    : `<div><label for="f_prevf">Previsto (€)</label><input id="f_prevf" inputmode="decimal" value="${esc(String(f.previsto).replace(".",","))}"></div>
+       ${f.tipo==="entrata"?`<div><label for="f_inc">Incassato (€)</label><input id="f_inc" inputmode="decimal" value="${esc(String(f.incassato||0).replace(".",","))}"></div>`:""}`}
+    <div class="full"><label for="f_note">Note</label><input id="f_note" value="${esc(f.note||"")}"></div>
+   </div>`, async () => {
+    const data = {...strip(f), nome:$("#f_nome").value.trim(), tipo:$("#f_tipo").value, stato:$("#f_stato").value, note:$("#f_note").value.trim()};
+    if(auto) data.quotaUnit = num($("#f_qu").value); else { data.previsto = num($("#f_prevf").value); if($("#f_inc")) data.incassato = num($("#f_inc").value); }
+    if(!data.nome) return "Scrivi il nome della fonte.";
+    await save("fonti", f.id, data);
+  }, isNew || auto ? null : async () => {
+    if(S.spese.some(s=>s.fonteId===f.id)) return "Ci sono spese assegnate a questa fonte: cambiale prima.";
+    await del("fonti", f.id);
+  });
+}
+
+/* ---------- SPESE ---------- */
+function renderSpese(){
+  const el = $("#v-spese");
+  let list = S.spese.slice().sort((a,b)=>String(b.data).localeCompare(String(a.data)));
+  if(ui.speseFonte) list = list.filter(s=>s.fonteId===ui.speseFonte);
+  if(ui.speseVoce) list = list.filter(s=>s.voceId===ui.speseVoce);
+  const tot = sum(list, s=>s.importo);
+  const senzaDoc = S.spese.filter(s=>!s.driveUrl).length;
+  const fonte = id => S.fonti.find(f=>f.id===id)?.nome || "—";
+  const voce = id => S.voci.find(v=>v.id===id)?.desc || "—";
+  const rows = list.map(s => `<tr class="click" data-sp="${esc(s.id)}" tabindex="0">
+     <td>${fmtDate(s.data)}</td><td><b>${esc(s.fornitore)}</b>${s.descrizione?`<div class="hint">${esc(s.descrizione)}</div>`:""}</td>
+     <td>${esc(voce(s.voceId))}</td><td>${esc(fonte(s.fonteId))}</td><td class="n">${eur(s.importo)}</td>
+     <td>${s.driveUrl?`<a href="${esc(s.driveUrl)}" target="_blank" rel="noopener">Apri</a>`:'<span class="chip bad">manca</span>'}</td></tr>`).join("");
+  el.innerHTML = `
+  <div class="bar"><div><h2>Spese e fatture</h2><p class="hint">Ogni fattura o scontrino caricato finisce nella cartella <a href="${DRIVE_FOLDER_URL}" target="_blank" rel="noopener">Fatture rendicontazione 2027</a> su Google Drive.</p></div>
+   <button class="btn" id="addSpesa">+ Aggiungi spesa</button></div>
+  <div class="tiles">
+   <div class="tile accent"><div class="k">Totale ${ui.speseFonte||ui.speseVoce?"filtrato":"speso"}</div><div class="v">${eur(tot)}</div><div class="s">${pl(list.length,"spesa","spese")}</div></div>
+   <div class="tile ${senzaDoc?"warn":""}"><div class="k">Senza documento</div><div class="v">${senzaDoc}</div><div class="s">${senzaDoc?"da completare per la rendicontazione":"tutto documentato"}</div></div>
+  </div>
+  <div class="bar"><div class="row">
+    <select id="fFonte" aria-label="Filtra per fonte" style="width:auto"><option value="">Tutte le fonti</option>${S.fonti.filter(f=>f.tipo!=="entrata").sort(byOrd).map(f=>`<option value="${esc(f.id)}" ${f.id===ui.speseFonte?"selected":""}>${esc(f.nome)}</option>`).join("")}</select>
+    <select id="fVoce" aria-label="Filtra per voce" style="width:auto;max-width:280px"><option value="">Tutte le voci</option>${S.voci.slice().sort(byOrd).map(v=>`<option value="${esc(v.id)}" ${v.id===ui.speseVoce?"selected":""}>${esc(v.desc)}</option>`).join("")}</select>
+   </div><button class="btn ghost small" id="copyCsv">Copia elenco per rendicontazione</button></div>
+  ${list.length ? `<div class="tablewrap"><table><thead><tr><th>Data</th><th>Fornitore</th><th>Voce</th><th>Fonte</th><th class="n">Importo</th><th>Documento</th></tr></thead><tbody>${rows}<tr class="tot"><td colspan="4">Totale</td><td class="n">${eur(tot)}</td><td></td></tr></tbody></table></div>`
+   : `<div class="empty">${S.spese.length?"Nessuna spesa con questi filtri.":"Ancora nessuna spesa registrata. Premi “Aggiungi spesa” e allega la fattura o la foto dello scontrino."}</div>`}`;
+  $("#addSpesa").onclick = () => editSpesa(null);
+  $("#fFonte").onchange = e => { ui.speseFonte = e.target.value; render(); };
+  $("#fVoce").onchange = e => { ui.speseVoce = e.target.value; render(); };
+  $("#copyCsv").onclick = async () => {
+    const lines = [["Data","Fornitore","Descrizione","Voce","Categoria","Fonte","Importo","Pagamento","Documento"].join("\t")];
+    list.forEach(s => { const v=S.voci.find(x=>x.id===s.voceId); lines.push([s.data,s.fornitore,s.descrizione||"",v?.desc||"",v?.cat||"",fonte(s.fonteId),String(toNum(s.importo)).replace(".",","),s.pagamento||"",s.driveUrl||""].join("\t")); });
+    try { await navigator.clipboard.writeText(lines.join("\n")); toast("Elenco copiato: incollalo in un foglio di calcolo."); } catch { toast("Non riesco a copiare: il browser ha bloccato l'accesso agli appunti."); }
+  };
+  el.querySelectorAll("[data-sp]").forEach(r => { r.onclick = () => editSpesa(S.spese.find(s=>s.id===r.dataset.sp)); r.onkeydown = e => { if(e.key==="Enter") r.onclick(); }; });
+}
+
+function slug(s){ return String(s||"").normalize("NFD").replace(/[̀-ͯ]/g,"").replace(/[^A-Za-z0-9]+/g,"-").replace(/^-|-$/g,"").slice(0,40) || "spesa"; }
+
+function editSpesa(s){
+  const isNew = !s; s = s || {data:today(), fornitore:"", descrizione:"", importo:"", voceId:"", fonteId:S.fonti.find(f=>/CRT/i.test(f.nome))?.id||"", pagamento:"Bonifico"};
+  const voci = S.voci.slice().sort(byOrd), cats=[...new Set(voci.map(v=>v.cat))];
+  const voceOpts = cats.map(c=>`<optgroup label="${esc(c)}">${voci.filter(v=>v.cat===c).map(v=>`<option value="${esc(v.id)}" ${v.id===s.voceId?"selected":""}>${esc(v.desc)}</option>`).join("")}</optgroup>`).join("");
+  const fonteOpts = S.fonti.filter(f=>f.tipo!=="entrata").sort(byOrd).map(f=>`<option value="${esc(f.id)}" ${f.id===s.fonteId?"selected":""}>${esc(f.nome)}</option>`).join("");
+  openDlg(isNew?"Aggiungi spesa":"Modifica spesa", `
+   <div class="form">
+    <div><label for="s_data">Data del documento</label><input id="s_data" type="date" value="${esc(s.data)}"></div>
+    <div><label for="s_imp">Importo totale (€)</label><input id="s_imp" inputmode="decimal" value="${esc(String(s.importo).replace(".",","))}" placeholder="es. 158,00"></div>
+    <div class="full"><label for="s_forn">Fornitore</label><input id="s_forn" value="${esc(s.fornitore)}" placeholder="es. Tipografia Stese"></div>
+    <div class="full"><label for="s_desc">Cosa è stato comprato</label><input id="s_desc" value="${esc(s.descrizione||"")}" placeholder="es. 150 locandine A3"></div>
+    <div class="full"><label for="s_voce">Voce del budget</label><select id="s_voce"><option value="">Scegli la voce…</option>${voceOpts}</select></div>
+    <div><label for="s_fonte">Pagata con</label><select id="s_fonte"><option value="">Scegli…</option>${fonteOpts}</select></div>
+    <div><label for="s_pag">Metodo di pagamento</label><select id="s_pag">${["Bonifico","Carta / bancomat","Contanti","Satispay","PayPal","Altro"].map(p=>`<option ${p===s.pagamento?"selected":""}>${p}</option>`).join("")}</select></div>
+    <div class="full"><label for="s_file">Fattura, ricevuta o foto (PDF, JPG, PNG)</label><input id="s_file" type="file" accept="application/pdf,image/*">
+      ${s.driveUrl?`<p class="hint">Documento attuale: <a href="${esc(s.driveUrl)}" target="_blank" rel="noopener">${esc(s.fileName||"apri")}</a>. Scegli un file solo per sostituirlo.</p>`:`<p class="hint">Il file viene salvato su Drive con un nome ordinato: data_fornitore_importo.</p>`}</div>
+    <div class="full"><label for="s_note">Note</label><input id="s_note" value="${esc(s.note||"")}"></div>
+   </div>`, async (setMsg) => {
+    const data = {...strip(s), data:$("#s_data").value, importo:num($("#s_imp").value), fornitore:$("#s_forn").value.trim(), descrizione:$("#s_desc").value.trim(), voceId:$("#s_voce").value, fonteId:$("#s_fonte").value, pagamento:$("#s_pag").value, note:$("#s_note").value.trim()};
+    if(!data.data || !data.fornitore || !data.importo) return "Servono almeno data, fornitore e importo.";
+    if(!data.voceId) return "Scegli la voce del budget a cui appartiene la spesa.";
+    if(!data.fonteId) return "Scegli con quale fondo è stata pagata.";
+    const file = $("#s_file").files[0];
+    if(file){
+      setMsg("Carico il documento su Google Drive…");
+      const up = await uploadToDrive(file, data);
+      if(up.error) return up.error;
+      Object.assign(data, up);
+    }
+    if(!isNew) data.aggiornato = new Date().toISOString(); else data.creato = new Date().toISOString();
+    await save("spese", s.id, data);
+    toast(file ? "Spesa salvata e documento caricato su Drive." : "Spesa salvata.");
+  }, isNew ? null : async () => { await del("spese", s.id); });
+}
+
+async function uploadToDrive(file, d){
+  if(file.size > 15*1024*1024) return {error:"Il file supera 15 MB: riducilo o fotografalo a risoluzione più bassa."};
+  const ext = (file.name.split(".").pop()||"pdf").toLowerCase();
+  const name = `${d.data}_${slug(d.fornitore)}_${toNum(d.importo).toFixed(2).replace(".",",")}EUR.${ext}`;
+  const type = file.type || (ext==="pdf"?"application/pdf":"image/jpeg");
+  try {
+    const buf = new Uint8Array(await file.arrayBuffer()); let bin=""; for(let i=0;i<buf.length;i+=0x8000) bin += String.fromCharCode.apply(null, buf.subarray(i,i+0x8000));
+    const j = await apiPost({action:"upload", file:{name, type, base64:btoa(bin)}});
+    return {driveId:j.driveId, driveUrl:j.driveUrl, fileName:j.fileName};
+  } catch(e){
+    return {error:"Caricamento su Drive non riuscito (" + (e && e.message || "errore di rete") + "). Controlla nella cartella se il file c'è già prima di riprovare."};
+  }
+}
+
+/* ---------- PRODUTTORI ---------- */
+const STATI = ["da invitare","invitato","confermato","rifiutato"];
+const statoChip = s => `<span class="chip ${s==="confermato"?"ok":s==="rifiutato"?"bad":s==="invitato"?"warn":"neu"}">${esc(s||"da invitare")}</span>`;
+function renderProduttori(){
+  const el = $("#v-produttori");
+  const q = ui.prodQ.toLowerCase();
+  let list = S.produttori.filter(p => (ui.prodTipo==="tutti"||p.tipo===ui.prodTipo) && (ui.prodArea==="tutte"||p.area===ui.prodArea) && (!q || JSON.stringify(p).toLowerCase().includes(q)));
+  const conf = S.produttori.filter(p=>p.stato==="confermato").length;
+  const pag = S.produttori.filter(p=>p.quotaPagata);
+  const card = p => `<button class="card ${p.tipo==="food"?"food":"wine"}" data-pr="${esc(p.id)}">
+     <h3>${esc(p.nome)}</h3><div class="z">${esc(p.zona||"zona da completare")}</div>
+     ${p.prodotti?`<div class="p">${esc(p.prodotti)}</div>`:""}
+     <div class="chips">${statoChip(p.stato)}${p.quotaPagata?'<span class="chip ok">quota pagata</span>':""}${p.daVerificare?'<span class="chip warn">info da verificare</span>':""}</div></button>`;
+  const groups = [["vino","piemonte","Vino · Piemonte"],["vino","fuori","Vino · fuori Piemonte"],["food","piemonte","Food · Piemonte"],["food","fuori","Food · fuori Piemonte"]];
+  let html = "";
+  groups.forEach(([t,a,label]) => { const g = list.filter(p=>p.tipo===t && p.area===a).sort((x,y)=>x.nome.localeCompare(y.nome)); if(g.length) html += `<div class="group"><h3>${label} <small>${g.length}</small></h3><div class="grid">${g.map(card).join("")}</div></div>`; });
+  el.innerHTML = `
+  <div class="bar"><div><h2>Produttori</h2><p class="hint">Obiettivo: circa 15 di vino e 15 di cibo. Le schede raccolgono quello che serve per inviti, social e mappa della fiera.</p></div><button class="btn" id="addProd">+ Aggiungi produttore</button></div>
+  <div class="tiles">
+   <div class="tile"><div class="k">Vino</div><div class="v">${S.produttori.filter(p=>p.tipo==="vino").length}<small style="font-size:16px"> / 15</small></div></div>
+   <div class="tile"><div class="k">Food</div><div class="v">${S.produttori.filter(p=>p.tipo==="food").length}<small style="font-size:16px"> / 15</small></div></div>
+   <div class="tile accent"><div class="k">Confermati</div><div class="v">${conf}</div><div class="s">su ${S.produttori.length} in lista</div></div>
+   <div class="tile"><div class="k">Quote incassate</div><div class="v">${eur(sum(pag,p=>p.quota??50))}</div><div class="s">${pag.length} su ${S.produttori.length} · quota 50 €</div></div>
+  </div>
+  <div class="bar"><div class="row">
+   <div class="seg" role="group" aria-label="Tipo">${["tutti","vino","food"].map(t=>`<button data-t="${t}" aria-pressed="${ui.prodTipo===t}">${t[0].toUpperCase()+t.slice(1)}</button>`).join("")}</div>
+   <div class="seg" role="group" aria-label="Zona">${[["tutte","Tutte"],["piemonte","Piemonte"],["fuori","Fuori Piemonte"]].map(([a,l])=>`<button data-a="${a}" aria-pressed="${ui.prodArea===a}">${l}</button>`).join("")}</div>
+  </div><input class="search" id="pq" type="search" placeholder="Cerca nome, zona, vino…" value="${esc(ui.prodQ)}" aria-label="Cerca produttori"></div>
+  ${html || `<div class="empty">Nessun produttore con questi filtri.</div>`}`;
+  $("#addProd").onclick = () => editProd(null);
+  el.querySelectorAll("[data-t]").forEach(b => b.onclick = () => { ui.prodTipo=b.dataset.t; render(); });
+  el.querySelectorAll("[data-a]").forEach(b => b.onclick = () => { ui.prodArea=b.dataset.a; render(); });
+  const pq=$("#pq"); pq.oninput = e => { ui.prodQ=e.target.value; render(); const n=$("#pq"); n.focus(); n.setSelectionRange(n.value.length,n.value.length); };
+  el.querySelectorAll("[data-pr]").forEach(b => b.onclick = () => editProd(S.produttori.find(p=>p.id===b.dataset.pr)));
+}
+
+function editProd(p){
+  const isNew = !p; p = p || {nome:"", tipo:ui.prodTipo==="food"?"food":"vino", area:ui.prodArea==="fuori"?"fuori":"piemonte", stato:"da invitare", quota:50};
+  const f = (id,label,val,ph="",full=false) => `<div class="${full?"full":""}"><label for="${id}">${label}</label><input id="${id}" value="${esc(val||"")}" placeholder="${esc(ph)}"></div>`;
+  openDlg(isNew?"Nuovo produttore":esc(p.nome), `
+   <div class="form">
+    ${f("p_nome","Nome dell'azienda",p.nome,"",true)}
+    <div><label for="p_tipo">Tipo</label><select id="p_tipo"><option value="vino" ${p.tipo==="vino"?"selected":""}>Vino</option><option value="food" ${p.tipo==="food"?"selected":""}>Food</option></select></div>
+    <div><label for="p_area">Provenienza</label><select id="p_area"><option value="piemonte" ${p.area==="piemonte"?"selected":""}>Piemonte</option><option value="fuori" ${p.area==="fuori"?"selected":""}>Fuori Piemonte</option></select></div>
+    ${f("p_zona","Paese e zona",p.zona,"es. Nizza Monferrato (AT)")}
+    ${f("p_ref","Referente",p.referente)}
+    ${f("p_tel","Telefono",p.telefono)}
+    ${f("p_mail","Email",p.email)}
+    ${f("p_ig","Instagram",p.instagram,"@")}
+    ${f("p_web","Sito",p.sito)}
+    <div class="full"><label for="p_prod">Vini / prodotti (con prezzi se li hai)</label><textarea id="p_prod">${esc(p.prodotti||"")}</textarea></div>
+    <div class="full"><label for="p_desc">Storia e descrizione per i social</label><textarea id="p_desc" style="min-height:120px">${esc(p.descrizione||"")}</textarea></div>
+    <div><label for="p_stato">Stato invito</label><select id="p_stato">${STATI.map(s=>`<option ${s===p.stato?"selected":""}>${s}</option>`).join("")}</select></div>
+    <div><label for="p_quota">Quota (€)</label><input id="p_quota" inputmode="decimal" value="${esc(p.quota??50)}"></div>
+    <div class="full row" style="gap:18px">
+      <label class="check"><input type="checkbox" id="p_pag" ${p.quotaPagata?"checked":""}> Quota pagata</label>
+      <label class="check"><input type="checkbox" id="p_veg" ${p.vegano?"checked":""}> Ha prodotti vegani</label>
+      <label class="check"><input type="checkbox" id="p_cag" ${p.caglio?"checked":""}> Formaggi con caglio animale</label>
+      <label class="check"><input type="checkbox" id="p_ver" ${p.daVerificare?"checked":""}> Info da verificare</label>
+    </div>
+    ${f("p_stand","Esigenze stand",p.stand,"corrente, tavolo, frigo, posizione…",true)}
+    <div class="full"><label for="p_note">Note interne</label><textarea id="p_note">${esc(p.note||"")}</textarea></div>
+    ${p.fonte?`<p class="full hint">Fonte delle informazioni: ${esc(p.fonte)}</p>`:""}
+   </div>`, async () => {
+    const data = {...strip(p), nome:$("#p_nome").value.trim(), tipo:$("#p_tipo").value, area:$("#p_area").value, zona:$("#p_zona").value.trim(), referente:$("#p_ref").value.trim(), telefono:$("#p_tel").value.trim(), email:$("#p_mail").value.trim(), instagram:$("#p_ig").value.trim(), sito:$("#p_web").value.trim(), prodotti:$("#p_prod").value.trim(), descrizione:$("#p_desc").value.trim(), stato:$("#p_stato").value, quota:num($("#p_quota").value), quotaPagata:$("#p_pag").checked, vegano:$("#p_veg").checked, caglio:$("#p_cag").checked, daVerificare:$("#p_ver").checked, stand:$("#p_stand").value.trim(), note:$("#p_note").value.trim()};
+    if(!data.nome) return "Scrivi il nome dell'azienda.";
+    await save("produttori", p.id, data);
+  }, isNew ? null : async () => { await del("produttori", p.id); });
+}
+
+/* ---------- PARTNER ---------- */
+const PCAT = ["Partner di progetto","Cofinanziatori","Istituzioni e sede","Fornitori","Altri contatti"];
+function renderPartner(){
+  const el = $("#v-partner");
+  const q = ui.partQ.toLowerCase();
+  const list = S.partner.filter(p => !q || JSON.stringify(p).toLowerCase().includes(q));
+  const card = p => {
+    const last = (p.diario||[]).slice().sort((a,b)=>String(b.data).localeCompare(String(a.data)))[0];
+    return `<button class="card" data-pa="${esc(p.id)}">
+      <h3>${esc(p.nome)}</h3><div class="z">${esc(p.ruolo||"")}</div>
+      <div class="contact">${p.referente?`<div><b>${esc(p.referente)}</b></div>`:""}${p.telefono?`<div>${esc(p.telefono)}</div>`:""}${p.email?`<div>${esc(p.email)}</div>`:""}</div>
+      <div class="chips">${p.protocollo?'<span class="chip ok">protocollo firmato</span>':""}${(p.diario||[]).length?`<span class="chip neu">${p.diario.length} note · ultima ${fmtDate(last.data)}</span>`:""}${!p.telefono&&!p.email?'<span class="chip warn">contatti da completare</span>':""}</div></button>`;
+  };
+  let html="";
+  PCAT.forEach(c => { const g=list.filter(p=>(p.categoria||"Altri contatti")===c).sort(byOrd); if(g.length) html += `<div class="group"><h3>${c} <small>${g.length}</small></h3><div class="grid">${g.map(card).join("")}</div></div>`; });
+  el.innerHTML = `
+  <div class="bar"><div><h2>Partner e contatti</h2><p class="hint">Rubrica delle realtà coinvolte: ruolo, referente, protocollo e diario degli incontri.</p></div><button class="btn" id="addPart">+ Aggiungi contatto</button></div>
+  <div class="bar" style="margin-top:0"><input class="search" id="paq" type="search" placeholder="Cerca nome, ruolo, referente…" value="${esc(ui.partQ)}" aria-label="Cerca partner"></div>
+  ${html || `<div class="empty">Nessun contatto trovato.</div>`}`;
+  $("#addPart").onclick = () => editPart(null);
+  const paq=$("#paq"); paq.oninput = e => { ui.partQ=e.target.value; render(); const n=$("#paq"); n.focus(); n.setSelectionRange(n.value.length,n.value.length); };
+  el.querySelectorAll("[data-pa]").forEach(b => b.onclick = () => editPart(S.partner.find(p=>p.id===b.dataset.pa)));
+}
+
+function editPart(p){
+  const isNew = !p; p = p || {nome:"", categoria:"Partner di progetto", diario:[]};
+  const f = (id,label,val,ph="",full=false) => `<div class="${full?"full":""}"><label for="${id}">${label}</label><input id="${id}" value="${esc(val||"")}" placeholder="${esc(ph)}"></div>`;
+  const notes = (p.diario||[]).slice().sort((a,b)=>String(b.data).localeCompare(String(a.data)));
+  openDlg(isNew?"Nuovo contatto":esc(p.nome), `
+   <div class="form">
+    ${f("a_nome","Nome",p.nome,"",true)}
+    <div><label for="a_cat">Categoria</label><select id="a_cat">${PCAT.map(c=>`<option ${c===p.categoria?"selected":""}>${c}</option>`).join("")}</select></div>
+    ${f("a_ref","Referente",p.referente)}
+    ${f("a_ruolo","Ruolo nel progetto",p.ruolo,"es. formazione volontari",true)}
+    ${f("a_tel","Telefono",p.telefono)}
+    ${f("a_mail","Email",p.email)}
+    ${f("a_prot","Link al protocollo / preventivo",p.protocollo,"https://drive.google.com/…",true)}
+    ${p.protocollo?`<p class="full hint"><a href="${esc(p.protocollo)}" target="_blank" rel="noopener">Apri il documento</a></p>`:""}
+    <div class="full"><label for="a_info">Informazioni utili</label><textarea id="a_info">${esc(p.info||"")}</textarea></div>
+    <div class="full"><label for="a_nn">Diario incontri: aggiungi una nota</label>
+      <div class="row" style="flex-wrap:nowrap"><input id="a_nd" type="date" value="${today()}" style="max-width:170px" aria-label="Data della nota"><input id="a_nn" placeholder="es. Incontro in sede: confermano 2 volontari"></div>
+      <div class="notes">${notes.map(n=>`<div class="note"><time>${fmtDate(n.data)}</time>${esc(n.testo)}</div>`).join("") || '<p class="hint">Nessuna nota ancora.</p>'}</div></div>
+   </div>`, async () => {
+    const diario = (p.diario||[]).slice(); const nn=$("#a_nn").value.trim(); if(nn) diario.push({data:$("#a_nd").value||today(), testo:nn});
+    const data = {...strip(p), nome:$("#a_nome").value.trim(), categoria:$("#a_cat").value, referente:$("#a_ref").value.trim(), ruolo:$("#a_ruolo").value.trim(), telefono:$("#a_tel").value.trim(), email:$("#a_mail").value.trim(), protocollo:$("#a_prot").value.trim(), info:$("#a_info").value.trim(), diario};
+    if(!data.nome) return "Scrivi il nome.";
+    await save("partner", p.id, data);
+  }, isNew ? null : async () => { await del("partner", p.id); });
+}
+
+/* ---------- dialog + salvataggio ---------- */
+function strip(o){ const c={...o}; delete c.id; return c; }
+async function save(col, id, data){
+  const j = await apiPost({action:"set", col, id, data});
+  const nid = id || j.id; const i = S[col].findIndex(x=>x.id===nid);
+  if(i>=0) S[col][i] = {id:nid, ...data}; else S[col].push({id:nid, ...data});
+  render(); refresh();
+}
+async function del(col, id){
+  await apiPost({action:"delete", col, id});
+  S[col] = S[col].filter(x=>x.id!==id); render(); refresh();
+}
+
+function openDlg(title, body, onSave, onDelete){
+  const d=$("#dlg");
+  d.innerHTML = `<header><h2 id="dlgTitle">${title}</h2><button class="x" aria-label="Chiudi">×</button></header>${body}
+   <p class="hint" id="dlgMsg" role="alert"></p>
+   <div class="acts"><div>${onDelete?'<button class="btn danger" id="dlgDel">Elimina</button>':""}</div><div class="row"><button class="btn ghost" id="dlgCancel">Annulla</button><button class="btn" id="dlgSave" ${ready?"":"disabled"}>Salva</button></div></div>`;
+  $("#ov").classList.add("open");
+  const close = () => $("#ov").classList.remove("open");
+  d.querySelector(".x").onclick = close; $("#dlgCancel").onclick = close;
+  const msg = m => $("#dlgMsg").textContent = m || "";
+  if(!ready) msg("I dati non sono ancora caricati: aspetta qualche secondo o ricarica la pagina.");
+  $("#dlgSave").onclick = async () => {
+    const b=$("#dlgSave"); b.disabled=true; msg("");
+    try { const err = await onSave(msg); if(err){ msg(err); b.disabled=false; return; } close(); }
+    catch(e){ b.disabled=false; msg("Salvataggio non riuscito: " + (e && e.message === "chiave" ? "il link che hai usato non è valido, chiedi a Matteo quello giusto." : (e && e.message || "controlla la connessione e riprova."))); }
+  };
+  if(onDelete){ let armed=false; $("#dlgDel").onclick = async () => {
+    if(!armed){ armed=true; $("#dlgDel").textContent="Conferma eliminazione"; return; }
+    try { const err = await onDelete(); if(err){ msg(err); return; } close(); toast("Eliminato."); } catch(e){ msg("Eliminazione non riuscita: " + (e && e.message || "")); }
+  }; }
+  setTimeout(()=>{ const f=d.querySelector("input,select,textarea"); if(f) f.focus(); }, 30);
+}
+$("#ov").addEventListener("click", e => { if(e.target.id==="ov") $("#ov").classList.remove("open"); });
+document.addEventListener("keydown", e => { if(e.key==="Escape") $("#ov").classList.remove("open"); });
+
+/* ---------- render + dati ---------- */
+let rq=0;
+function render(){ cancelAnimationFrame(rq); rq=requestAnimationFrame(()=>{ ({budget:renderBudget, spese:renderSpese, produttori:renderProduttori, partner:renderPartner})[view](); }); }
+
+async function refresh(){
+  try {
+    const j = await apiGet();
+    Object.keys(S).forEach(c => S[c] = (j.data && j.data[c]) || []);
+    sheetUrl = j.sheetUrl || ""; ready = true; status(""); render();
+  } catch(e){
+    if(e && e.message==="chiave") status("Per entrare serve il link completo del gestionale (quello con la chiave). Chiedilo a Matteo.", true);
+    else if(!ready) status("Non riesco a caricare i dati: controlla la connessione e ricarica la pagina.", true);
+  }
+}
+route();
+if(!KEY) status("Per entrare serve il link completo del gestionale (quello con la chiave). Chiedilo a Matteo.", true);
+else if(API_URL.startsWith("__")) status("Il gestionale non è ancora collegato al foglio dati.", true);
+else { status("Carico i dati…"); refresh(); setInterval(()=>{ if(!document.hidden && !$("#ov").classList.contains("open")) refresh(); }, 60000); document.addEventListener("visibilitychange", ()=>{ if(!document.hidden) refresh(); }); }
+</script>
+</body>
+</html>
