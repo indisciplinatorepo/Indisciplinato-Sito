@@ -22,6 +22,9 @@
   --paper:#141a26; --card:#1c2433; --ink:#eef1f6; --muted:#aab2c3; --line:#2f3a4f;
   --blue:#9fb8e6; --on-blue:#141a26; --mint-soft:#11392f; --tomato-soft:#3e1d1b; --ok:#4fd6ae; color-scheme:dark;}}
 *{box-sizing:border-box}
+html,body{overflow-x:hidden}
+.r>*,.head>*,.ttl>div{min-width:0}
+h3{overflow-wrap:anywhere}
 html,body{margin:0}
 body{background:var(--paper);color:var(--ink);font:16px/1.45 var(--body)}
 a{color:var(--blue)}
@@ -31,7 +34,7 @@ a{color:var(--blue)}
 h1{font:800 clamp(26px,5vw,38px)/1.05 var(--display);margin:0;letter-spacing:-.01em}
 h1 span{color:var(--mint)}
 .top p{margin:6px 0 0;font-size:14px;opacity:.9}
-main{max-width:980px;margin:0 auto;padding:20px 16px 110px}
+main{max-width:980px;margin:0 auto;padding:20px 16px 48px}
 h2{font:800 24px/1.1 var(--display);margin:0}
 h3{font:700 18px/1.2 var(--display);margin:0}
 .hint{color:var(--muted);font-size:14px;margin:4px 0 0}
@@ -60,11 +63,10 @@ input{font:15px var(--body);color:var(--ink);background:var(--paper);border:2px 
 .chip.ok{background:var(--mint-soft);color:var(--ok)}
 .chip.bad{background:var(--tomato-soft);color:#b4261a}
 .chip.neu{color:var(--muted);border:1px solid var(--line)}
-.dock{position:fixed;left:0;right:0;bottom:0;background:var(--card);border-top:1px solid var(--line);padding:10px 16px calc(10px + env(safe-area-inset-bottom));z-index:5}
-.dock .in{max-width:980px;margin:0 auto;display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between}
-.dock .who{flex:1 1 180px;max-width:260px}
 .toast{position:fixed;left:50%;bottom:86px;transform:translateX(-50%);background:var(--ink);color:var(--paper);padding:10px 16px;border-radius:10px;font-size:14px;z-index:30;display:none;max-width:90vw}
 .toast.show{display:block}
+.fede{border-top-color:var(--mint);margin-top:22px}
+.fede .bud b{font-size:28px}
 .add{margin-top:18px;display:flex;gap:8px;flex-wrap:wrap}
 .add input{flex:1 1 220px}
 .add .n{flex:0 1 120px}
@@ -77,21 +79,19 @@ input{font:15px var(--body);color:var(--ink);background:var(--paper);border:2px 
 </div></div>
 
 <main>
-  <p class="hint intro">Per ogni voce scrivete i fornitori possibili: nome, costo totale e, se c'è, il link. Si salva da solo su questo telefono o computer: potete chiudere e tornare quando volete. Quando avete finito toccate <b>Scarica Excel</b>.</p>
+  <p class="hint intro">Per ogni voce scrivete i fornitori possibili: nome, costo totale e, se c'è, il link. Si salva da solo su questo telefono o computer: potete chiudere e tornare quando volete.</p>
   <div id="list"></div>
   <div class="add">
     <input id="newT" placeholder="Manca qualcosa? Scrivi cosa serve">
     <input id="newB" class="n" inputmode="decimal" placeholder="Budget €">
     <button class="btn ghost" id="newGo">+ Aggiungi voce</button>
   </div>
+  <div class="card fede" aria-label="Federica">
+    <div class="head"><div class="ttl"><span class="ico" aria-hidden="true">👼</span><div><h3>Federica ❤️</h3></div></div>
+      <div class="bud"><b aria-label="infinito">∞</b></div></div>
+  </div>
 </main>
 
-<div class="dock"><div class="in">
-  <input class="who" id="who" placeholder="Chi compila (nome)" aria-label="Chi compila">
-  <div style="display:flex;gap:8px;flex-wrap:wrap">
-    <button class="btn small" id="csv">Scarica Excel</button>
-  </div>
-</div></div>
 <div class="toast" id="toast" role="status"></div>
 
 <script>
@@ -185,8 +185,6 @@ $("#newGo").onclick = () => {
   D.extra.push({id:"x"+uid(), desc:t, prev:isFinite(b)?b:0});
   $("#newT").value = ""; $("#newB").value = ""; render(); toast("Voce aggiunta in fondo.");
 };
-$("#who").value = D.who || "";
-$("#who").oninput = e => { D.who = e.target.value; store(); };
 
 /* ---------- esportazione ---------- */
 function righe(){
@@ -196,18 +194,10 @@ function righe(){
     if(!rs.length) out.push([v.cat, v.desc, v.prev, "", "", ""]);
     rs.forEach(r => out.push([v.cat, v.desc, v.prev, r.nome, num(r.costo), r.link]));
   });
+  out.push(["", "Federica ❤️", 0, "", 0, ""]); // ∞, vale 0
   return out;
 }
 const csvCell = x => { if(typeof x==="number") return isFinite(x) ? String(x.toFixed(2)).replace(".", ",") : ""; const s=String(x??""); return /[;"\n]/.test(s) ? '"' + s.replace(/"/g,'""') + '"' : s; };
-$("#csv").onclick = () => {
-  const head = ["Categoria","Voce","Budget €","Fornitore","Costo €","Link"];
-  const txt = "﻿" + [head, ...righe()].map(r=>r.map(csvCell).join(";")).join("\r\n");
-  const a = document.createElement("a");
-  a.href = URL.createObjectURL(new Blob([txt], {type:"text/csv;charset=utf-8"}));
-  a.download = "fornitori-indisciplinato-" + new Date().toISOString().slice(0,10) + ".csv";
-  document.body.appendChild(a); a.click(); a.remove();
-  toast("File scaricato: si apre con Excel o Fogli Google.");
-};
 render();
 </script>
 </body>
