@@ -120,6 +120,14 @@ label{display:block;font-size:13px;font-weight:700;color:var(--muted);margin-bot
 .note{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px 12px;font-size:14px}
 .note time{font-weight:700;color:var(--muted);font-size:12px;display:block}
 .x{background:none;border:0;font-size:26px;line-height:1;color:var(--ink);cursor:pointer;padding:2px 6px}
+.evlist{display:flex;flex-direction:column;gap:8px}
+.ev{display:flex;gap:14px;align-items:center;text-align:left;font:inherit;color:inherit;background:var(--card);border:1px solid var(--line);border-left:6px solid #f2b43c;border-radius:12px;padding:10px 14px;cursor:pointer}
+.ev:hover{border-color:var(--blue)}
+.ev.past{opacity:.6}
+.ev.fiera{border-left-color:var(--tomato)}
+.evd{display:flex;flex-direction:column;align-items:center;min-width:42px;font-size:12px;text-transform:uppercase;color:var(--muted);font-weight:700}
+.evd b{font:800 24px/1 var(--display);color:var(--ink)}
+.evb{display:flex;flex-direction:column;gap:2px}
 .toast{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);background:var(--ink);color:var(--paper);padding:10px 16px;border-radius:10px;font-size:14px;z-index:30;display:none;max-width:90vw}
 .toast.show{display:block}
 @media (prefers-reduced-motion:no-preference){.card,.btn{transition:border-color .15s,background .15s}}
@@ -133,6 +141,7 @@ label{display:block;font-size:13px;font-weight:700;color:var(--muted);margin-bot
   </div>
   <nav aria-label="Sezioni">
     <a href="#produttori" data-v="produttori">Produttori</a>
+    <a href="#calendario" data-v="calendario">Calendario</a>
     <a href="#budget" data-v="budget">Budget</a>
     <a href="#spese" data-v="spese">Spese e fatture</a>
     <a href="#partner" data-v="partner">Partner</a>
@@ -142,6 +151,7 @@ label{display:block;font-size:13px;font-weight:700;color:var(--muted);margin-bot
 <main>
   <div class="status" id="status" role="status"></div>
   <section id="v-produttori" hidden></section>
+  <section id="v-calendario" hidden></section>
   <section id="v-budget" hidden></section>
   <section id="v-spese" hidden></section>
   <section id="v-partner" hidden></section>
@@ -165,8 +175,8 @@ let KEY = null;
   if(k){ KEY = k; try{ localStorage.setItem("gestionale_k", k); }catch(e){} u.searchParams.delete("k"); history.replaceState(null, "", u.pathname + u.hash); }
   else { try{ KEY = localStorage.getItem("gestionale_k"); }catch(e){} }
 })();
-async function apiGet(){
-  const r = await fetch(API_URL + "?k=" + encodeURIComponent(KEY||""), {cache:"no-store"});
+async function apiGet(extra){
+  const r = await fetch(API_URL + "?k=" + encodeURIComponent(KEY||"") + (extra||""), {cache:"no-store"});
   const j = await r.json(); if(!j.ok) throw new Error(j.error||"errore"); return j;
 }
 async function apiPost(body){
@@ -193,11 +203,13 @@ function status(msg, err){ const s=$("#status"); s.textContent=msg||""; s.classL
 (function(){ const d=Math.ceil((EVENT-new Date())/86400000); if(d>0) $("#countdown").textContent = `15–16 maggio 2027 · Palazzo del Michelerio, Asti · mancano ${d} giorni`; })();
 
 /* ---------- routing ---------- */
+const VIEWS = ["produttori","calendario","budget","spese","partner"];
 function route(){
   const h = location.hash.replace("#","");
-  view = ["budget","spese","produttori","partner"].includes(h) ? h : "produttori";
+  view = VIEWS.includes(h) ? h : "produttori";
   document.querySelectorAll("nav a").forEach(a => { if(a.dataset.v===view) a.setAttribute("aria-current","page"); else a.removeAttribute("aria-current"); });
-  ["budget","spese","produttori","partner"].forEach(v => $("#v-"+v).hidden = v!==view);
+  VIEWS.forEach(v => $("#v-"+v).hidden = v!==view);
+  if(view==="calendario" && !EV.loaded && ready) loadEventi();
   render();
 }
 window.addEventListener("hashchange", route);
@@ -529,6 +541,81 @@ function editPart(p){
   }, isNew ? null : async () => { await del("partner", p.id); });
 }
 
+/* ---------- CALENDARIO ---------- */
+const EV = {list:[], loaded:false, loading:false, err:"", passati:false};
+async function loadEventi(){
+  if(EV.loading) return; EV.loading = true; render();
+  try { const j = await apiGet("&action=eventi"); EV.list = j.eventi || []; EV.loaded = true; EV.err = ""; }
+  catch(e){ EV.err = e && e.message === "chiave" ? "Link non valido." : "Non riesco a leggere il calendario (" + (e && e.message || "errore di rete") + "). Se hai appena aggiornato lo script, controlla di aver creato la nuova versione della distribuzione."; }
+  EV.loading = false; render();
+}
+const GG = ["dom","lun","mar","mer","gio","ven","sab"];
+function evDay(ev){ return ev.inizio.slice(0,10); }
+function evTime(ev){
+  if(ev.tuttoIlGiorno) return ev.fine && ev.fine!==ev.inizio ? "fino al " + fmtDate(ev.fine) : "tutto il giorno";
+  const t = ev.inizio.slice(11,16), f = ev.fine ? ev.fine.slice(11,16) : "";
+  return f && f!==t ? `${t}–${f}` : t;
+}
+function renderCalendario(){
+  const el = $("#v-calendario");
+  const oggi = today();
+  const list = EV.list.filter(ev => EV.passati ? true : (ev.tuttoIlGiorno ? (ev.fine||ev.inizio) : ev.inizio.slice(0,10)) >= oggi).sort((a,b)=>a.inizio.localeCompare(b.inizio));
+  const prossimo = EV.list.filter(ev => evDay(ev) >= oggi).sort((a,b)=>a.inizio.localeCompare(b.inizio))[0];
+  const months = {};
+  list.forEach(ev => { const m = evDay(ev).slice(0,7); (months[m] = months[m] || []).push(ev); });
+  let html = "";
+  Object.keys(months).forEach(m => {
+    const d = new Date(m + "-01T12:00:00");
+    html += `<div class="group"><h3>${d.toLocaleDateString("it-IT",{month:"long",year:"numeric"}).replace(/^./,c=>c.toUpperCase())} <small>${pl(months[m].length,"evento","eventi")}</small></h3><div class="evlist">` +
+      months[m].map(ev => { const dd = new Date(evDay(ev)+"T12:00:00"); const past = evDay(ev) < oggi; const fiera = /indisciplinato/i.test(ev.titolo) && /fiera|evento|2027/i.test(ev.titolo);
+        return `<button class="ev ${past?"past":""} ${fiera?"fiera":""}" data-ev="${esc(ev.id)}"><span class="evd"><b>${dd.getDate()}</b>${GG[dd.getDay()]}</span><span class="evb"><b>${esc(ev.titolo)}</b><span class="hint">${esc(evTime(ev))}${ev.luogo?" · "+esc(ev.luogo):""}</span></span></button>`; }).join("") + `</div></div>`;
+  });
+  el.innerHTML = `
+  <div class="bar"><div><h2>Calendario</h2><p class="hint">Gli eventi aggiunti qui finiscono nel calendario Google <b>INDISCIPLINATO</b> e arrivano a tutti quelli che lo seguono.</p></div><button class="btn" id="addEv" ${ready?"":"disabled"}>+ Aggiungi evento</button></div>
+  <div class="tiles">
+    <div class="tile accent"><div class="k">Prossimo appuntamento</div><div class="v" style="font-size:22px">${prossimo?esc(prossimo.titolo):"—"}</div><div class="s">${prossimo?fmtDate(evDay(prossimo))+" · "+esc(evTime(prossimo)):"nessun evento in programma"}</div></div>
+    <div class="tile"><div class="k">Alla fiera</div><div class="v">${Math.max(0,Math.ceil((EVENT-new Date())/86400000))} giorni</div><div class="s">15–16 maggio 2027</div></div>
+  </div>
+  <div class="bar"><div class="seg" role="group" aria-label="Periodo"><button data-pp="0" aria-pressed="${!EV.passati}">Da oggi</button><button data-pp="1" aria-pressed="${EV.passati}">Anche ultimi 30 giorni</button></div><button class="btn ghost small" id="reloadEv">Aggiorna</button></div>
+  ${EV.err ? `<div class="empty" role="alert">${esc(EV.err)}</div>` : EV.loading && !EV.loaded ? `<div class="empty">Carico il calendario…</div>` : html || `<div class="empty">Nessun evento in calendario. Premi “Aggiungi evento” per inserire una riunione o una scadenza.</div>`}`;
+  $("#addEv").onclick = () => editEvento();
+  $("#reloadEv").onclick = () => loadEventi();
+  el.querySelectorAll("[data-pp]").forEach(b => b.onclick = () => { EV.passati = b.dataset.pp==="1"; render(); });
+  el.querySelectorAll("[data-ev]").forEach(b => b.onclick = () => showEvento(EV.list.find(e=>e.id===b.dataset.ev)));
+}
+function showEvento(ev){
+  openDlg(esc(ev.titolo), `<div class="contact"><p><b>${fmtDate(evDay(ev))}</b> · ${esc(evTime(ev))}</p>${ev.luogo?`<p>📍 ${esc(ev.luogo)}</p>`:""}${ev.note?`<p style="white-space:pre-wrap">${esc(ev.note)}</p>`:""}${ev.ricorrente?'<p class="hint">Evento ricorrente: si modifica solo da Google Calendar.</p>':""}</div>`,
+    async () => {}, ev.ricorrente ? null : async () => { await apiPost({action:"eliminaEvento", id:ev.id}); EV.list = EV.list.filter(x=>x.id!==ev.id); render(); });
+  $("#dlgSave").textContent = "Chiudi";
+}
+function editEvento(){
+  let autore = ""; try { autore = localStorage.getItem("gestionale_nome") || ""; } catch(e){}
+  openDlg("Nuovo evento", `
+   <div class="form">
+    <div class="full"><label for="e_tit">Titolo</label><input id="e_tit" placeholder="es. Riunione organizzativa"></div>
+    <div><label for="e_data">Data</label><input id="e_data" type="date" value="${today()}"></div>
+    <div><label class="check" style="margin-top:26px"><input type="checkbox" id="e_all"> Tutto il giorno</label></div>
+    <div class="ora"><label for="e_ora">Ora inizio</label><input id="e_ora" type="time" value="18:00"></div>
+    <div class="ora"><label for="e_oraf">Ora fine</label><input id="e_oraf" type="time" value="19:30"></div>
+    <div class="full alld" hidden><label for="e_df">Ultimo giorno (se dura più giorni)</label><input id="e_df" type="date"></div>
+    <div class="full"><label for="e_luogo">Luogo o link della call</label><input id="e_luogo" placeholder="es. Diavolo Rosso, Asti"></div>
+    <div class="full"><label for="e_note">Note</label><textarea id="e_note" placeholder="ordine del giorno, cosa portare…"></textarea></div>
+    <div class="full"><label for="e_aut">Il tuo nome</label><input id="e_aut" value="${esc(autore)}" placeholder="così il team sa chi l'ha inserito"></div>
+   </div>`, async (setMsg) => {
+    const all = $("#e_all").checked;
+    const e = {titolo:$("#e_tit").value.trim(), data:$("#e_data").value, tuttoIlGiorno:all, ora:$("#e_ora").value, oraFine:$("#e_oraf").value, dataFine: all ? $("#e_df").value : "", luogo:$("#e_luogo").value.trim(), note:$("#e_note").value.trim(), autore:$("#e_aut").value.trim()};
+    if(!e.titolo || !e.data) return "Servono almeno titolo e data.";
+    if(!all && e.oraFine && e.oraFine <= e.ora) return "L'ora di fine deve essere dopo l'inizio.";
+    try { localStorage.setItem("gestionale_nome", e.autore); } catch(x){}
+    setMsg("Inserisco nel calendario INDISCIPLINATO…");
+    await apiPost({action:"evento", evento:e});
+    toast("Evento aggiunto al calendario INDISCIPLINATO.");
+    loadEventi();
+  });
+  const sync = () => { const all=$("#e_all").checked; document.querySelectorAll(".ora").forEach(x=>x.hidden=all); $(".alld").hidden=!all; };
+  $("#e_all").onchange = sync;
+}
+
 /* ---------- dialog + salvataggio ---------- */
 function strip(o){ const c={...o}; delete c.id; return c; }
 async function save(col, id, data){
@@ -568,13 +655,14 @@ document.addEventListener("keydown", e => { if(e.key==="Escape") $("#ov").classL
 
 /* ---------- render + dati ---------- */
 let rq=0;
-function render(){ cancelAnimationFrame(rq); rq=requestAnimationFrame(()=>{ ({budget:renderBudget, spese:renderSpese, produttori:renderProduttori, partner:renderPartner})[view](); }); }
+function render(){ cancelAnimationFrame(rq); rq=requestAnimationFrame(()=>{ ({budget:renderBudget, spese:renderSpese, produttori:renderProduttori, partner:renderPartner, calendario:renderCalendario})[view](); }); }
 
 async function refresh(){
   try {
     const j = await apiGet();
     Object.keys(S).forEach(c => S[c] = (j.data && j.data[c]) || []);
     sheetUrl = j.sheetUrl || ""; ready = true; status(""); render();
+    if(view==="calendario" && !EV.loaded) loadEventi();
   } catch(e){
     if(e && e.message==="chiave") status("Per entrare serve il link completo del gestionale (quello con la chiave). Chiedilo a Matteo.", true);
     else if(!ready) status("Non riesco a caricare i dati: controlla la connessione e ricarica la pagina.", true);
