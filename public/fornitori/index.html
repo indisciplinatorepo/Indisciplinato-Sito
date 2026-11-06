@@ -70,6 +70,11 @@ input{font:15px var(--body);color:var(--ink);background:var(--paper);border:2px 
 .toast.show{display:block}
 .fede{border-top-color:var(--mint);margin-top:22px}
 .fede .pill{font-size:20px;padding:0 12px}
+.save{margin-top:22px;background:var(--card);border:2px solid var(--blue);border-radius:14px;padding:14px 16px;display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.save input{flex:1 1 180px}
+.save .btn{flex:1 1 200px;justify-content:center}
+.save .hint{flex:1 1 100%;margin:0}
+.save .hint.warn{color:#b4261a;font-weight:700}
 .add{margin-top:18px;display:flex;gap:8px;flex-wrap:wrap}
 .add input{flex:1 1 220px}
 .add .n{flex:0 1 120px}
@@ -82,7 +87,7 @@ input{font:15px var(--body);color:var(--ink);background:var(--paper);border:2px 
 </div></div>
 
 <main>
-  <p class="hint intro">Per ogni voce scrivete i fornitori possibili: nome, costo totale e, se c'è, il link. Si salva da solo su questo telefono o computer: potete chiudere e tornare quando volete.</p>
+  <p class="hint intro">Per ogni voce scrivete i fornitori possibili: nome, costo totale e, se c'è, il link. Quando avete finito toccate <b>Aggiorna foglio Google</b> in fondo alla pagina, così le informazioni arrivano anche al team di Indisciplinato.</p>
   <div id="list"></div>
   <div class="add">
     <input id="newT" placeholder="Manca qualcosa? Scrivi cosa serve">
@@ -91,6 +96,11 @@ input{font:15px var(--body);color:var(--ink);background:var(--paper);border:2px 
   </div>
   <div class="card fede" aria-label="Federica">
     <div class="head"><div class="ttl"><span class="ico" aria-hidden="true">👼</span><div><h3>Federica ❤️</h3><p class="meta"><span class="pill" aria-label="infinito">∞</span></p></div></div></div>
+  </div>
+  <div class="save">
+    <input id="who" placeholder="Il tuo nome (facoltativo)" aria-label="Il tuo nome">
+    <button class="btn" id="sync">Aggiorna foglio Google</button>
+    <p class="hint" id="syncInfo"></p>
   </div>
 </main>
 
@@ -163,19 +173,19 @@ $("#list").addEventListener("input", e => {
   const i = e.target; if(!i.dataset.k) return;
   const card = i.closest(".card"), rid = i.closest(".r").dataset.r;
   const r = rows(card.dataset.v).find(x=>x.id===rid); r[i.dataset.k] = i.value;
-  store(); refreshCard(card);
+  dirty(); refreshCard(card);
 });
 $("#list").addEventListener("click", e => {
   const card = e.target.closest(".card"); if(!card) return;
   const id = card.dataset.v;
   if(e.target.closest("[data-add]")){
     const r = {id:uid(), nome:"", costo:"", link:""}; rows(id).push(r);
-    card.querySelector(".rows").insertAdjacentHTML("beforeend", rowHtml(r)); refreshCard(card); store();
+    card.querySelector(".rows").insertAdjacentHTML("beforeend", rowHtml(r)); refreshCard(card); dirty();
     card.querySelector(`[data-r="${r.id}"] input`).focus();
   }
   if(e.target.closest("[data-rm]")){
     const rid = e.target.closest(".r").dataset.r;
-    D.f[id] = rows(id).filter(x=>x.id!==rid);
+    D.f[id] = rows(id).filter(x=>x.id!==rid); D.dirty = true;
     if(!D.f[id].length && D.extra.some(x=>x.id===id)){ D.extra = D.extra.filter(x=>x.id!==id); delete D.f[id]; render(); return; }
     render();
   }
@@ -184,22 +194,64 @@ $("#newGo").onclick = () => {
   const t = $("#newT").value.trim(); if(!t){ $("#newT").focus(); return; }
   const b = num($("#newB").value);
   D.extra.push({id:"x"+uid(), desc:t, prev:isFinite(b)?b:0});
-  $("#newT").value = ""; $("#newB").value = ""; render(); toast("Voce aggiunta in fondo.");
+  $("#newT").value = ""; $("#newB").value = ""; D.dirty = true; render(); toast("Voce aggiunta in fondo.");
 };
 
 /* ---------- esportazione ---------- */
+/* ---------- foglio Google ---------- */
+const SHEET_API = "__SCRIPT_URL__";
+const online = () => /^https:\/\/script\.google\.com\//.test(SHEET_API);
+function dirty(){ D.dirty = true; store(); info(); }
+function info(){
+  const el = $("#syncInfo"); if(!el) return;
+  el.classList.toggle("warn", !!D.dirty);
+  el.textContent = !online() ? "Il collegamento al foglio Google è in preparazione: intanto i dati restano salvati su questo dispositivo."
+    : D.dirty ? "Ci sono modifiche non ancora inviate al foglio."
+    : D.salvato ? "Foglio aggiornato il " + new Date(D.salvato).toLocaleString("it-IT",{day:"numeric",month:"short",hour:"2-digit",minute:"2-digit"}) + "."
+    : "";
+}
 function righe(){
   const out = [];
   voci().forEach(v => {
+    const base = {codice:v.id, categoria:v.cat, voce:v.desc, budget:v.prev};
     const rs = rows(v.id).filter(filled);
-    if(!rs.length) out.push([v.cat, v.desc, v.prev, "", "", ""]);
-    rs.forEach(r => out.push([v.cat, v.desc, v.prev, r.nome, num(r.costo), r.link]));
+    if(!rs.length) out.push({...base, fornitore:"", costo:"", link:""});
+    rs.forEach(r => { const c = num(r.costo); out.push({...base, fornitore:r.nome, costo:isFinite(c)?c:"", link:r.link}); });
   });
-  out.push(["", "Federica ❤️", 0, "", 0, ""]); // ∞, vale 0
+  out.push({codice:"federica", categoria:"", voce:"Federica ❤️", budget:0, fornitore:"∞", costo:0, link:""});
   return out;
 }
-const csvCell = x => { if(typeof x==="number") return isFinite(x) ? String(x.toFixed(2)).replace(".", ",") : ""; const s=String(x??""); return /[;"\n]/.test(s) ? '"' + s.replace(/"/g,'""') + '"' : s; };
-render();
+function daFoglio(rr){
+  const f = {}, extra = [];
+  rr.forEach(r => {
+    if(r.codice === "federica") return;
+    if(!VOCI.some(v=>v.id===r.codice) && !extra.some(x=>x.id===r.codice)) extra.push({id:r.codice, desc:String(r.voce||""), prev:Number(r.budget)||0});
+    f[r.codice] = f[r.codice] || [];
+    if(r.fornitore || r.costo !== "" || r.link) f[r.codice].push({id:uid(), nome:String(r.fornitore||""), costo:r.costo===""?"":String(r.costo).replace(".", ","), link:String(r.link||"")});
+  });
+  D.f = f; D.extra = extra;
+}
+async function caricaFoglio(){
+  if(!online() || D.dirty) return;
+  try {
+    const j = await (await fetch(SHEET_API, {cache:"no-store"})).json();
+    if(j.ok && j.righe && j.righe.length && !D.dirty){ daFoglio(j.righe); render(); }
+  } catch(e){}
+}
+$("#sync").onclick = async () => {
+  if(!online()){ toast("Il foglio Google non è ancora collegato."); return; }
+  const b = $("#sync"); b.disabled = true; b.textContent = "Aggiorno…";
+  try {
+    const r = await fetch(SHEET_API, {method:"POST", body: JSON.stringify({action:"salva", chi:$("#who").value.trim(), righe:righe()})});
+    const j = await r.json(); if(!j.ok) throw new Error(j.error||"errore");
+    D.dirty = false; D.salvato = new Date().toISOString(); store(); info(); toast("Foglio Google aggiornato.");
+  } catch(e){ toast("Non sono riuscito ad aggiornare il foglio: controlla la connessione e riprova."); }
+  b.disabled = false; b.textContent = "Aggiorna foglio Google";
+};
+$("#who").value = D.who || "";
+$("#who").oninput = e => { D.who = e.target.value; store(); };
+window.addEventListener("beforeunload", e => { if(D.dirty && online()){ e.preventDefault(); e.returnValue = ""; } });
+render(); info(); caricaFoglio();
 </script>
 </body>
 </html>
