@@ -120,6 +120,18 @@ label{display:block;font-size:13px;font-weight:700;color:var(--muted);margin-bot
 .note{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px 12px;font-size:14px}
 .note time{font-weight:700;color:var(--muted);font-size:12px;display:block}
 .x{background:none;border:0;font-size:26px;line-height:1;color:var(--ink);cursor:pointer;padding:2px 6px}
+.tl{position:relative;background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.slot{position:absolute;left:0;right:0;height:40px;border:0;border-top:1px solid var(--line);background:transparent;text-align:left;padding:0;cursor:pointer;color:var(--muted);font:700 12px var(--body)}
+.slot:first-child{border-top:0}
+.slot span{display:inline-block;width:48px;padding:3px 0 0 8px;font-variant-numeric:tabular-nums}
+.slot:hover{background:color-mix(in srgb,var(--blue) 6%,transparent)}
+.band{position:absolute;left:50px;width:32px;border:0;border-radius:8px;background:color-mix(in srgb,#03cea4 30%,var(--card));color:var(--ink);font:700 10px var(--body);display:flex;flex-direction:column;justify-content:space-between;align-items:center;padding:4px 0;cursor:pointer;writing-mode:vertical-rl}
+.pblock{position:absolute;border:0;border-left:4px solid var(--c);border-radius:8px;background:color-mix(in srgb,var(--c) 16%,var(--card));color:var(--ink);text-align:left;padding:3px 7px;font:13px/1.25 var(--body);overflow:hidden;cursor:pointer;display:flex;flex-direction:column;gap:1px}
+.pblock b{font-weight:700}
+.pblock span{color:var(--muted);font-size:12px}
+.pblock i{font-style:normal;font-size:11px;font-weight:700;color:var(--amber)}
+.legend{display:flex;flex-wrap:wrap;gap:4px 12px;font-size:12px;color:var(--muted)}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:4px;vertical-align:-1px}
 .evlist{display:flex;flex-direction:column;gap:8px}
 .ev{display:flex;gap:14px;align-items:center;text-align:left;font:inherit;color:inherit;background:var(--card);border:1px solid var(--line);border-left:6px solid #f2b43c;border-radius:12px;padding:10px 14px;cursor:pointer}
 .ev:hover{border-color:var(--blue)}
@@ -141,6 +153,7 @@ label{display:block;font-size:13px;font-weight:700;color:var(--muted);margin-bot
   </div>
   <nav aria-label="Sezioni">
     <a href="#produttori" data-v="produttori">Produttori</a>
+    <a href="#programma" data-v="programma">Programma</a>
     <a href="#calendario" data-v="calendario">Calendario</a>
     <a href="#budget" data-v="budget">Budget</a>
     <a href="#spese" data-v="spese">Spese e fatture</a>
@@ -151,6 +164,7 @@ label{display:block;font-size:13px;font-weight:700;color:var(--muted);margin-bot
 <main>
   <div class="status" id="status" role="status"></div>
   <section id="v-produttori" hidden></section>
+  <section id="v-programma" hidden></section>
   <section id="v-calendario" hidden></section>
   <section id="v-budget" hidden></section>
   <section id="v-spese" hidden></section>
@@ -166,7 +180,7 @@ const DRIVE_FOLDER_URL = "https://drive.google.com/drive/folders/" + DRIVE_FOLDE
 const API_URL = "https://script.google.com/macros/s/AKfycbyOEjvUSuB8NdsXgdqqn5JiaRNV-UACJ8xNVpfYAOHM8nGp89-FOZ9HYANSMfxJyng8/exec";
 const EVENT = new Date("2027-05-15T11:00:00+02:00");
 
-const S = {voci:[], spese:[], fonti:[], produttori:[], partner:[]};
+const S = {voci:[], spese:[], fonti:[], produttori:[], partner:[], programma:[]};
 const loaded = {};
 let ready = false, sheetUrl = "";
 let KEY = null;
@@ -203,7 +217,7 @@ function status(msg, err){ const s=$("#status"); s.textContent=msg||""; s.classL
 (function(){ const d=Math.ceil((EVENT-new Date())/86400000); if(d>0) $("#countdown").textContent = `15–16 maggio 2027 · Palazzo del Michelerio, Asti · mancano ${d} giorni`; })();
 
 /* ---------- routing ---------- */
-const VIEWS = ["produttori","calendario","budget","spese","partner"];
+const VIEWS = ["produttori","programma","calendario","budget","spese","partner"];
 function route(){
   const h = location.hash.replace("#","");
   view = VIEWS.includes(h) ? h : "produttori";
@@ -541,6 +555,81 @@ function editPart(p){
   }, isNew ? null : async () => { await del("partner", p.id); });
 }
 
+/* ---------- PROGRAMMA ---------- */
+const GIORNI = [{id:"sab", label:"Sabato 15 maggio", short:"Sab 15"}, {id:"dom", label:"Domenica 16 maggio", short:"Dom 16"}];
+const TIPI = {Apertura:"#03cea4", Degustazione:"#fb4d3d", Incontro:"#345995", Laboratorio:"#8a5cc2", Musica:"#f2b43c", Logistica:"#8a93a6", Altro:"#5a6275"};
+const H0 = 10, H1 = 22, PX = 40;
+const PROG_DEFAULT = [
+  {id:"p-sab-apertura", giorno:"sab", inizio:"11:00", fine:"21:00", titolo:"Apertura al pubblico", tipo:"Apertura", luogo:"Cortile del Michelerio"},
+  {id:"p-dom-apertura", giorno:"dom", inizio:"11:00", fine:"19:00", titolo:"Apertura al pubblico", tipo:"Apertura", luogo:"Cortile del Michelerio", note:"Orario di chiusura da decidere: forse anticipato.", daConfermare:true},
+  {id:"p-dom-onav-lis", giorno:"dom", inizio:"14:00", fine:"15:00", titolo:"Degustazione guidata ONAV con interprete LIS", tipo:"Degustazione", responsabile:"ONAV", note:"Dal programma del bando.", daConfermare:true},
+  {id:"p-dom-onav-cieca", giorno:"dom", inizio:"15:30", fine:"16:30", titolo:"Degustazione alla cieca ONAV", tipo:"Degustazione", responsabile:"ONAV", note:"Dal programma del bando.", daConfermare:true},
+  {id:"p-dom-clima", giorno:"dom", inizio:"16:30", fine:"17:30", titolo:"Incontro: cambiamento climatico e vino", tipo:"Incontro", responsabile:"Scienza sotto i Campanili", note:"Impatto del cambiamento climatico sugli ecosistemi collinari e sulla produzione vinicola. Dal programma del bando.", daConfermare:true}
+];
+let progSeedTried = false, progOld = false;
+async function seedProgramma(){
+  if(progSeedTried) return; progSeedTried = true;
+  try { for(const d of PROG_DEFAULT){ const {id, ...data} = d; await apiPost({action:"set", col:"programma", id, data}); S.programma.push(d); } render(); }
+  catch(e){ if(e && /sezione/.test(e.message)) { progOld = true; render(); } }
+}
+const min = t => { const [h,m] = String(t||"0:0").split(":").map(Number); return h*60 + (m||0); };
+function renderProgramma(){
+  const el = $("#v-programma");
+  const day = ui.progDay || "sab";
+  const items = S.programma.filter(x => x.giorno===day).sort((a,b)=>min(a.inizio)-min(b.inizio) || min(b.fine)-min(a.fine));
+  const bands = items.filter(x => x.tipo==="Apertura");
+  const evs = items.filter(x => x.tipo!=="Apertura");
+  // corsie per gli eventi sovrapposti
+  const lanes = []; evs.forEach(e => { let l = lanes.findIndex(end => end <= min(e.inizio)); if(l<0){ l = lanes.length; lanes.push(0); } lanes[l] = min(e.fine); e._lane = l; });
+  evs.forEach(e => { e._n = Math.max(1, ...evs.filter(o => min(o.inizio) < min(e.fine) && min(o.fine) > min(e.inizio)).map(o=>o._lane+1)); });
+  const top = t => (min(t) - H0*60) / 60 * PX;
+  let grid = "";
+  for(let h=H0; h<H1; h++) grid += `<button class="slot" data-h="${h}" style="top:${(h-H0)*PX}px" aria-label="Aggiungi alle ${h}:00"><span>${String(h).padStart(2,"0")}:00</span></button>`;
+  const band = bands.map(b => `<button class="band" data-pg="${esc(b.id)}" style="top:${top(b.inizio)}px;height:${top(b.fine)-top(b.inizio)}px" title="${esc(b.titolo)} ${esc(b.inizio)}–${esc(b.fine)}"><span>${esc(b.inizio)} apre</span><span>${esc(b.fine)} chiude${b.daConfermare?" ?":""}</span></button>`).join("");
+  const blocks = evs.map(e => { const h = Math.max(22, top(e.fine)-top(e.inizio)-2); const w = `calc((100% - 92px) / ${e._n})`;
+    return `<button class="pblock" data-pg="${esc(e.id)}" style="top:${top(e.inizio)+1}px;height:${h}px;left:calc(88px + ${e._lane} * ${w});width:calc(${w} - 4px);--c:${TIPI[e.tipo]||TIPI.Altro}"><b>${esc(e.inizio)}${h>34?` – ${esc(e.fine)}`:""} ${esc(e.titolo)}</b>${h>44&&e.luogo?`<span>${esc(e.luogo)}</span>`:""}${e.daConfermare?'<i>da confermare</i>':""}</button>`; }).join("");
+  const nowLine = "";
+  el.innerHTML = `
+  <div class="bar" style="margin-bottom:8px"><div><h2>Programma della fiera</h2><p class="hint">Tocca un'ora vuota per aggiungere qualcosa, o un blocco per modificarlo.</p></div><div class="row"><button class="btn ghost small" id="copyProg">Copia programma</button><button class="btn small" id="addProg" ${ready?"":"disabled"}>+ Aggiungi</button></div></div>
+  ${progOld?`<div class="empty" role="alert">Per salvare il programma serve la nuova versione dello script Google: incollala e crea una nuova versione della distribuzione.</div>`:""}
+  <div class="row" style="justify-content:space-between;margin-bottom:10px">
+    <div class="seg" role="group" aria-label="Giorno">${GIORNI.map(g=>`<button data-day="${g.id}" aria-pressed="${g.id===day}">${g.label}</button>`).join("")}</div>
+    <div class="legend">${Object.entries(TIPI).filter(([k])=>k!=="Apertura"&&k!=="Altro").map(([k,c])=>`<span><i style="background:${c}"></i>${k}</span>`).join("")}</div>
+  </div>
+  <div class="tl" style="height:${(H1-H0)*PX}px">${grid}${band}${blocks}${nowLine}</div>`;
+  el.querySelectorAll("[data-day]").forEach(b => b.onclick = () => { ui.progDay = b.dataset.day; render(); });
+  el.querySelectorAll(".slot").forEach(b => b.onclick = () => editProg(null, {giorno:day, inizio:String(b.dataset.h).padStart(2,"0")+":00", fine:String(+b.dataset.h+1).padStart(2,"0")+":00"}));
+  el.querySelectorAll("[data-pg]").forEach(b => b.onclick = (e) => { e.stopPropagation(); editProg(S.programma.find(x=>x.id===b.dataset.pg)); });
+  $("#addProg").onclick = () => editProg(null, {giorno:day});
+  $("#copyProg").onclick = async () => {
+    const txt = GIORNI.map(g => g.label.toUpperCase() + "\n" + S.programma.filter(x=>x.giorno===g.id).sort((a,b)=>min(a.inizio)-min(b.inizio)).map(x => `${x.inizio}–${x.fine} ${x.titolo}${x.luogo?" ("+x.luogo+")":""}`).join("\n")).join("\n\n");
+    try { await navigator.clipboard.writeText(txt); toast("Programma copiato."); } catch(e){ toast("Il browser non mi lascia copiare."); }
+  };
+}
+function editProg(p, preset){
+  const isNew = !p; p = p || {giorno:"sab", inizio:"12:00", fine:"13:00", titolo:"", tipo:"Degustazione", ...preset};
+  openDlg(isNew?"Aggiungi al programma":"Modifica", `
+   <div class="form">
+    <div class="full"><label for="g_tit">Cosa succede</label><input id="g_tit" value="${esc(p.titolo)}" placeholder="es. Degustazione guidata, musica dal vivo…"></div>
+    <div><label for="g_day">Giorno</label><select id="g_day">${GIORNI.map(g=>`<option value="${g.id}" ${g.id===p.giorno?"selected":""}>${g.label}</option>`).join("")}</select></div>
+    <div><label for="g_tipo">Tipo</label><select id="g_tipo">${Object.keys(TIPI).map(t=>`<option ${t===p.tipo?"selected":""}>${t}</option>`).join("")}</select></div>
+    <div><label for="g_ini">Inizio</label><input id="g_ini" type="time" step="900" value="${esc(p.inizio)}"></div>
+    <div><label for="g_fin">Fine</label><input id="g_fin" type="time" step="900" value="${esc(p.fine)}"></div>
+    <div><label for="g_luogo">Dove</label><input id="g_luogo" value="${esc(p.luogo||"")}" placeholder="es. Cortile, sala al piano terra"></div>
+    <div><label for="g_resp">Chi se ne occupa</label><input id="g_resp" value="${esc(p.responsabile||"")}"></div>
+    <div class="full"><label for="g_note">Note (accessibilità, materiali, prenotazione…)</label><textarea id="g_note">${esc(p.note||"")}</textarea></div>
+    <label class="check full"><input type="checkbox" id="g_conf" ${p.daConfermare?"checked":""}> Da confermare</label>
+   </div>
+   <p class="hint">"Apertura" disegna la fascia verde degli orari di apertura sulla sinistra.</p>`, async () => {
+    const data = {...strip(p), titolo:$("#g_tit").value.trim(), giorno:$("#g_day").value, tipo:$("#g_tipo").value, inizio:$("#g_ini").value, fine:$("#g_fin").value, luogo:$("#g_luogo").value.trim(), responsabile:$("#g_resp").value.trim(), note:$("#g_note").value.trim(), daConfermare:$("#g_conf").checked};
+    Object.keys(data).forEach(k => k.startsWith("_") && delete data[k]);
+    if(!data.titolo) return "Scrivi cosa succede.";
+    if(!data.inizio || !data.fine || min(data.fine) <= min(data.inizio)) return "L'ora di fine deve essere dopo l'inizio.";
+    if(min(data.inizio) < H0*60 || min(data.fine) > H1*60) return `Il programma va dalle ${H0}:00 alle ${H1}:00.`;
+    await save("programma", p.id, data);
+  }, isNew ? null : async () => { await del("programma", p.id); });
+}
+
 /* ---------- CALENDARIO ---------- */
 const EV = {list:[], loaded:false, loading:false, err:"", passati:false};
 async function loadEventi(){
@@ -655,7 +744,7 @@ document.addEventListener("keydown", e => { if(e.key==="Escape") $("#ov").classL
 
 /* ---------- render + dati ---------- */
 let rq=0;
-function render(){ cancelAnimationFrame(rq); rq=requestAnimationFrame(()=>{ ({budget:renderBudget, spese:renderSpese, produttori:renderProduttori, partner:renderPartner, calendario:renderCalendario})[view](); }); }
+function render(){ cancelAnimationFrame(rq); rq=requestAnimationFrame(()=>{ ({budget:renderBudget, spese:renderSpese, produttori:renderProduttori, partner:renderPartner, calendario:renderCalendario, programma:renderProgramma})[view](); }); }
 
 async function refresh(){
   try {
@@ -663,6 +752,7 @@ async function refresh(){
     Object.keys(S).forEach(c => S[c] = (j.data && j.data[c]) || []);
     sheetUrl = j.sheetUrl || ""; ready = true; status(""); render();
     if(view==="calendario" && !EV.loaded) loadEventi();
+    if(!S.programma.length) seedProgramma();
   } catch(e){
     if(e && e.message==="chiave") status("Per entrare serve il link completo del gestionale (quello con la chiave). Chiedilo a Matteo.", true);
     else if(!ready) status("Non riesco a caricare i dati: controlla la connessione e ricarica la pagina.", true);
