@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="/favicon-32.png" type="image/png">
+<title>Fornitori · Indisciplinato 2027 × Asti Slow Fashion</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&display=swap" rel="stylesheet">
+<style>
+/* Stesso stile del gestionale Indisciplinato: Dusk Blue, Mint Leaf, Tomato su carta chiara. */
+:root{
+  --paper:#f6f5f1; --card:#ffffff; --ink:#1b2233; --muted:#5a6275; --line:#dcdad3;
+  --blue:#345995; --on-blue:#ffffff; --mint:#03cea4; --mint-soft:#d6f5ee; --tomato:#fb4d3d; --tomato-soft:#fde3e0; --ok:#0f7a5f;
+  --display:"Bricolage Grotesque","Arial Black",system-ui,sans-serif;
+  --body:"Atkinson Hyperlegible",Verdana,system-ui,sans-serif;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){:root{
+  --paper:#141a26; --card:#1c2433; --ink:#eef1f6; --muted:#aab2c3; --line:#2f3a4f;
+  --blue:#9fb8e6; --on-blue:#141a26; --mint-soft:#11392f; --tomato-soft:#3e1d1b; --ok:#4fd6ae; color-scheme:dark;}}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--paper);color:var(--ink);font:16px/1.45 var(--body)}
+a{color:var(--blue)}
+:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+.top{background:var(--blue);color:var(--on-blue)}
+.top .in{max-width:980px;margin:0 auto;padding:18px 16px 20px}
+h1{font:800 clamp(26px,5vw,38px)/1.05 var(--display);margin:0;letter-spacing:-.01em}
+h1 span{color:var(--mint)}
+.top p{margin:6px 0 0;font-size:14px;opacity:.9}
+main{max-width:980px;margin:0 auto;padding:20px 16px 110px}
+h2{font:800 24px/1.1 var(--display);margin:0}
+h3{font:700 18px/1.2 var(--display);margin:0}
+.hint{color:var(--muted);font-size:14px;margin:4px 0 0}
+.intro{margin:4px 0 18px}
+.group{margin-top:22px}
+.group>h2{font-size:20px;margin-bottom:10px}
+.card{background:var(--card);border:1px solid var(--line);border-top:5px solid var(--tomato);border-radius:14px;padding:14px 16px;margin-bottom:12px}
+.card.done{border-top-color:var(--mint)}
+.head{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
+.ttl{display:flex;gap:10px;align-items:flex-start}
+.ico{flex:0 0 40px;height:40px;border-radius:10px;background:var(--mint-soft);display:grid;place-items:center;font-size:22px;line-height:1}
+.bud{text-align:right;white-space:nowrap}
+.bud b{font:800 18px/1.1 var(--display);font-variant-numeric:tabular-nums;display:block}
+.bud small{color:var(--muted);font-size:12px}
+.rows{display:flex;flex-direction:column;gap:8px;margin-top:12px}
+.r{display:grid;grid-template-columns:1.3fr .7fr 1.4fr auto;gap:8px;align-items:end}
+@media (max-width:640px){.r{grid-template-columns:1fr 110px;border-top:1px solid var(--line);padding-top:10px}.r .lk{grid-column:1/2}.r .rm{grid-column:2/3}}
+label{display:block;font-size:12px;font-weight:700;color:var(--muted);margin-bottom:3px}
+input{font:15px var(--body);color:var(--ink);background:var(--paper);border:2px solid var(--line);border-radius:10px;padding:8px 10px;width:100%}
+.btn{font:700 15px var(--body);border-radius:10px;padding:9px 15px;border:2px solid var(--blue);background:var(--blue);color:var(--on-blue);cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:6px}
+.btn.ghost{background:transparent;color:var(--blue)}
+.btn.small{padding:6px 11px;font-size:14px}
+.rm{background:none;border:2px solid var(--line);border-radius:10px;color:var(--muted);font:700 14px var(--body);padding:8px 10px;cursor:pointer;height:42px}
+.foot{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:8px;margin-top:12px}
+.chip{display:inline-block;font-size:12px;font-weight:700;padding:2px 9px;border-radius:99px}
+.chip.ok{background:var(--mint-soft);color:var(--ok)}
+.chip.bad{background:var(--tomato-soft);color:#b4261a}
+.chip.neu{color:var(--muted);border:1px solid var(--line)}
+.dock{position:fixed;left:0;right:0;bottom:0;background:var(--card);border-top:1px solid var(--line);padding:10px 16px calc(10px + env(safe-area-inset-bottom));z-index:5}
+.dock .in{max-width:980px;margin:0 auto;display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between}
+.dock .who{flex:1 1 180px;max-width:260px}
+.toast{position:fixed;left:50%;bottom:86px;transform:translateX(-50%);background:var(--ink);color:var(--paper);padding:10px 16px;border-radius:10px;font-size:14px;z-index:30;display:none;max-width:90vw}
+.toast.show{display:block}
+.add{margin-top:18px;display:flex;gap:8px;flex-wrap:wrap}
+.add input{flex:1 1 220px}
+.add .n{flex:0 1 120px}
+</style>
+</head>
+<body>
+<div class="top"><div class="in">
+  <h1>Indisciplinato <span>2027</span> · fornitori</h1>
+  <p>Con Asti Slow Fashion · 15–16 maggio 2027, Palazzo del Michelerio, Asti</p>
+</div></div>
+
+<main>
+  <p class="hint intro">Per ogni voce scrivete i fornitori possibili: nome, costo totale e, se c'è, il link. Si salva da solo su questo telefono o computer: potete chiudere e tornare quando volete. Quando avete finito toccate <b>Scarica Excel</b>.</p>
+  <div id="list"></div>
+  <div class="add">
+    <input id="newT" placeholder="Manca qualcosa? Scrivi cosa serve">
+    <input id="newB" class="n" inputmode="decimal" placeholder="Budget €">
+    <button class="btn ghost" id="newGo">+ Aggiungi voce</button>
+  </div>
+</main>
+
+<div class="dock"><div class="in">
+  <input class="who" id="who" placeholder="Chi compila (nome)" aria-label="Chi compila">
+  <div style="display:flex;gap:8px;flex-wrap:wrap">
+    <button class="btn small" id="csv">Scarica Excel</button>
+  </div>
+</div></div>
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+const VOCI = [
+  {id:"v01", ico:"♻️", cat:"Sostenibilità ambientale", desc:"Contenitori raccolta differenziata in cartone 95 l (set da 5)", prev:199.6, qta:"4 set"},
+  {id:"v02", ico:"🍽️", cat:"Sostenibilità ambientale", desc:"Piatti biodegradabili e compostabili (set da 500)", prev:46.48, qta:""},
+  {id:"v03", ico:"🥤", cat:"Sostenibilità ambientale", desc:"Bicchieri ecologici monouso 200 ml (set da 300)", prev:32.54, qta:"2 set"},
+  {id:"v04", ico:"🍴", cat:"Sostenibilità ambientale", desc:"Posate in legno (set da 50)", prev:44.8, qta:"20 set"},
+  {id:"v05", ico:"🍷", cat:"Sostenibilità ambientale", desc:"Bicchieri di vetro da degustazione serigrafati", prev:804, qta:"300 pezzi"},
+  {id:"v23", ico:"👕", cat:"Beni e attrezzature", desc:"Magliette staff in cotone bio (set da 50)", prev:222, qta:""},
+  {id:"v24", ico:"🧊", cat:"Beni e attrezzature", desc:"Glacette in acciaio 28 l", prev:266, qta:"20 pezzi"},
+  {id:"v25", ico:"🪣", cat:"Beni e attrezzature", desc:"Sputacchiere", prev:160, qta:"20 pezzi"}
+];
+const KEY = "indisciplinato_fornitori_v1";
+
+const $ = s => document.querySelector(s);
+const esc = v => String(v ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const eur = n => { const v=Number(n)||0; const [i,d]=Math.abs(v).toFixed(2).split("."); return (v<0?"−":"")+i.replace(/\B(?=(\d{3})+(?!\d))/g,".")+","+d+" €"; };
+const num = v => { const s=String(v??"").trim(); if(!s) return NaN; return parseFloat(s.replace(/[^\d,.\-]/g,"").replace(/\.(?=\d{3}(\D|$))/g,"").replace(",", ".")); };
+const uid = () => Math.random().toString(36).slice(2,9);
+function toast(m){ const t=$("#toast"); t.textContent=m; t.classList.add("show"); clearTimeout(t._h); t._h=setTimeout(()=>t.classList.remove("show"),3000); }
+
+/* stato: { who, extra:[{id,desc,prev}], f:{ voceId:[{id,nome,costo,link}] } } */
+let D = { who:"", extra:[], f:{} };
+try { D = Object.assign(D, JSON.parse(localStorage.getItem(KEY) || "{}")); } catch(e){}
+const store = () => { try { localStorage.setItem(KEY, JSON.stringify(D)); } catch(e){} };
+const voci = () => VOCI.concat(D.extra.map(x => ({...x, cat:"Altre voci", qta:""})));
+const rows = id => (D.f[id] = D.f[id] || []);
+const filled = r => r.nome || r.costo || r.link;
+
+function rowHtml(r){
+  return `<div class="r" data-r="${r.id}">
+    <div><label>Fornitore</label><input data-k="nome" value="${esc(r.nome)}" placeholder="Nome"></div>
+    <div><label>Costo €</label><input data-k="costo" inputmode="decimal" value="${esc(r.costo)}" placeholder="0,00"></div>
+    <div class="lk"><label>Link (facoltativo)</label><input data-k="link" type="url" inputmode="url" value="${esc(r.link)}" placeholder="https://"></div>
+    <button class="rm" data-rm aria-label="Togli fornitore">Togli</button>
+  </div>`;
+}
+function footHtml(v){
+  const rs = rows(v.id).filter(filled), costi = rs.map(r=>num(r.costo)).filter(n=>isFinite(n));
+  const min = costi.length ? Math.min(...costi) : null;
+  const info = !rs.length ? `<span class="chip neu">nessun fornitore</span>`
+    : `<span class="chip neu">${rs.length} ${rs.length===1?"fornitore":"fornitori"}</span>` + (min!==null ? ` <span class="chip ${min<=v.prev?"ok":"bad"}">più economico ${eur(min)}${min>v.prev?" · sopra budget":""}</span>` : "");
+  return `<div>${info}</div><button class="btn ghost small" data-add>+ Fornitore</button>`;
+}
+function cardHtml(v){
+  if(!rows(v.id).length) rows(v.id).push({id:uid(), nome:"", costo:"", link:""});
+  const done = rows(v.id).some(filled);
+  return `<div class="card ${done?"done":""}" data-v="${v.id}">
+    <div class="head"><div class="ttl"><span class="ico" aria-hidden="true">${v.ico||"📦"}</span><div><h3>${esc(v.desc)}</h3>${v.qta?`<p class="hint">${esc(v.qta)}</p>`:""}</div></div>
+      <div class="bud"><b>${eur(v.prev)}</b><small>budget</small></div></div>
+    <div class="rows">${rows(v.id).map(rowHtml).join("")}</div>
+    <div class="foot">${footHtml(v)}</div>
+  </div>`;
+}
+function render(){
+  const vs = voci(), cats = [...new Set(vs.map(v=>v.cat))];
+  $("#list").innerHTML = cats.map(c => `<div class="group"><h2>${esc(c)}</h2>${vs.filter(v=>v.cat===c).map(cardHtml).join("")}</div>`).join("");
+  store();
+}
+function refreshCard(card){
+  const v = voci().find(x=>x.id===card.dataset.v);
+  card.querySelector(".foot").innerHTML = footHtml(v);
+  card.classList.toggle("done", rows(v.id).some(filled));
+}
+
+$("#list").addEventListener("input", e => {
+  const i = e.target; if(!i.dataset.k) return;
+  const card = i.closest(".card"), rid = i.closest(".r").dataset.r;
+  const r = rows(card.dataset.v).find(x=>x.id===rid); r[i.dataset.k] = i.value;
+  store(); refreshCard(card);
+});
+$("#list").addEventListener("click", e => {
+  const card = e.target.closest(".card"); if(!card) return;
+  const id = card.dataset.v;
+  if(e.target.closest("[data-add]")){
+    const r = {id:uid(), nome:"", costo:"", link:""}; rows(id).push(r);
+    card.querySelector(".rows").insertAdjacentHTML("beforeend", rowHtml(r)); refreshCard(card); store();
+    card.querySelector(`[data-r="${r.id}"] input`).focus();
+  }
+  if(e.target.closest("[data-rm]")){
+    const rid = e.target.closest(".r").dataset.r;
+    D.f[id] = rows(id).filter(x=>x.id!==rid);
+    if(!D.f[id].length && D.extra.some(x=>x.id===id)){ D.extra = D.extra.filter(x=>x.id!==id); delete D.f[id]; render(); return; }
+    render();
+  }
+});
+$("#newGo").onclick = () => {
+  const t = $("#newT").value.trim(); if(!t){ $("#newT").focus(); return; }
+  const b = num($("#newB").value);
+  D.extra.push({id:"x"+uid(), desc:t, prev:isFinite(b)?b:0});
+  $("#newT").value = ""; $("#newB").value = ""; render(); toast("Voce aggiunta in fondo.");
+};
+$("#who").value = D.who || "";
+$("#who").oninput = e => { D.who = e.target.value; store(); };
+
+/* ---------- esportazione ---------- */
+function righe(){
+  const out = [];
+  voci().forEach(v => {
+    const rs = rows(v.id).filter(filled);
+    if(!rs.length) out.push([v.cat, v.desc, v.prev, "", "", ""]);
+    rs.forEach(r => out.push([v.cat, v.desc, v.prev, r.nome, num(r.costo), r.link]));
+  });
+  return out;
+}
+const csvCell = x => { if(typeof x==="number") return isFinite(x) ? String(x.toFixed(2)).replace(".", ",") : ""; const s=String(x??""); return /[;"\n]/.test(s) ? '"' + s.replace(/"/g,'""') + '"' : s; };
+$("#csv").onclick = () => {
+  const head = ["Categoria","Voce","Budget €","Fornitore","Costo €","Link"];
+  const txt = "﻿" + [head, ...righe()].map(r=>r.map(csvCell).join(";")).join("\r\n");
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(new Blob([txt], {type:"text/csv;charset=utf-8"}));
+  a.download = "fornitori-indisciplinato-" + new Date().toISOString().slice(0,10) + ".csv";
+  document.body.appendChild(a); a.click(); a.remove();
+  toast("File scaricato: si apre con Excel o Fogli Google.");
+};
+render();
+</script>
+</body>
+</html>
