@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mappa sensoriale del Michelerio · Indisciplinato × Liceo Artistico Alfieri</title>
+<script>try{["p-grande","p-contrasto","p-spazio","p-link","p-fermo"].forEach(function(c){if(localStorage.getItem(c)==="1")document.documentElement.classList.add(c)})}catch(e){}</script>
+<meta name="description" content="Mappa 3D interattiva del cortile di Palazzo del Michelerio per Indisciplinato 2027, base di lavoro per la mappa tattile del Liceo Artistico Benedetto Alfieri.">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#345995">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" href="/favicon-32.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper: #f6f5f1; --card: #ffffff; --ink: #1b2233; --muted: #4a5266; --line: #d9d6cc;
+  --blue: #345995; --on-blue: #ffffff; --mint: #03cea4; --tomato: #fb4d3d; --focus: #1b2233;
+  --display: "Bricolage Grotesque", "Arial Black", system-ui, sans-serif;
+  --body: "Atkinson Hyperlegible", Verdana, system-ui, sans-serif;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #141a26; --card: #1c2433; --ink: #eef1f6; --muted: #c3c9d6; --line: #34405a;
+    --blue: #9fb8e6; --on-blue: #141a26; --focus: #eef1f6; color-scheme: dark;
+  }
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body { background: var(--paper); color: var(--ink); font-family: var(--body); font-size: 1.0625rem; line-height: 1.55; }
+a { color: var(--blue); text-underline-offset: .2em; }
+:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; border-radius: 4px; }
+h1, h2, h3 { font-family: var(--display); font-weight: 800; line-height: 1.08; margin: 0; text-wrap: balance; }
+p { margin: 0; }
+.sr-only { position: absolute; width: 1px; height: 1px; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.skip { position: absolute; left: 1rem; top: -10rem; z-index: 9; background: var(--ink); color: var(--paper); padding: .7rem 1rem; font-weight: 700; }
+.skip:focus { top: 1rem; }
+
+.wrap { max-width: 1240px; margin: 0 auto; padding: 0 clamp(1rem, 3vw, 2rem); }
+header.top { padding: 1.4rem 0 1rem; display: flex; gap: 1rem; align-items: center; justify-content: space-between; flex-wrap: wrap; }
+header.top a.logo { display: flex; align-items: center; gap: .6rem; color: var(--ink); text-decoration: none; font-weight: 700; }
+header.top img { width: 44px; height: 44px; }
+.tag { font-size: .9rem; color: var(--muted); }
+
+.hero { padding: .5rem 0 1.2rem; }
+.hero h1 { font-size: clamp(2rem, 5vw, 3.4rem); }
+.hero p { margin-top: .6rem; max-width: 62ch; color: var(--muted); font-size: 1.125rem; }
+.braille-line { font-family: "DejaVu Sans", "Segoe UI Symbol", "Apple Braille", sans-serif; letter-spacing: .08em; color: var(--muted); }
+
+/* ---------- mappa ---------- */
+.mappa { position: relative; background: var(--card); border: 1px solid var(--line); border-radius: 18px; overflow: hidden; }
+.stage { position: relative; }
+canvas#c { display: block; width: 100%; height: clamp(400px, 110vw, 680px); max-height: 80vh; touch-action: none; cursor: grab; background: var(--card); }
+canvas#c.dragging { cursor: grabbing; }
+canvas#c.edit { cursor: crosshair; }
+.toolbar { display: flex; flex-wrap: wrap; gap: .5rem; padding: .8rem; border-top: 1px solid var(--line); align-items: center; }
+.btn { font: inherit; font-size: .95rem; font-weight: 700; padding: .5rem .95rem; min-height: 44px; border-radius: 999px; border: 2px solid var(--ink); background: transparent; color: var(--ink); cursor: pointer; }
+.btn[aria-pressed="true"], .btn.primary { background: var(--ink); color: var(--paper); }
+.btn.warn { border-color: var(--tomato); }
+.btn:disabled { opacity: .45; cursor: not-allowed; }
+.hint { margin-left: auto; font-size: .88rem; color: var(--muted); }
+.status { font-size: .88rem; color: var(--muted); min-height: 1.3em; }
+
+/* pannello modifica */
+.editor { display: none; border-top: 1px solid var(--line); padding: 1rem; gap: 1rem 1.4rem; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); }
+.editor.on { display: grid; }
+.editor fieldset { border: 1px solid var(--line); border-radius: 12px; padding: .8rem .9rem 1rem; margin: 0; min-width: 0; }
+.editor legend { font-weight: 700; padding: 0 .3rem; }
+.editor label { display: block; font-size: .9rem; margin-top: .55rem; }
+.editor input[type=text], .editor input[type=password], .editor select { width: 100%; font: inherit; font-size: .95rem; padding: .45rem .55rem; border: 1px solid var(--line); border-radius: 8px; background: var(--paper); color: var(--ink); min-height: 40px; }
+.editor input[type=range] { width: 100%; }
+.editor .row { display: flex; gap: .45rem; flex-wrap: wrap; margin-top: .7rem; }
+.editor .row .btn { font-size: .85rem; padding: .4rem .75rem; min-height: 40px; }
+.swatches { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .35rem; }
+.swatches button { width: 32px; height: 32px; border-radius: 8px; border: 2px solid transparent; cursor: pointer; }
+.swatches button[aria-pressed="true"] { border-color: var(--ink); box-shadow: 0 0 0 2px var(--card) inset; }
+
+/* legenda */
+.below { display: grid; gap: 1.5rem; grid-template-columns: 1fr; padding: 1.6rem 0 1rem; }
+@media (min-width: 900px) { .below { grid-template-columns: 1.1fr .9fr; } }
+.card { background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 1.2rem 1.3rem; }
+.card h2 { font-size: 1.45rem; margin-bottom: .7rem; }
+ul.legenda { list-style: none; padding: 0; margin: 0; display: grid; gap: .45rem; }
+ul.legenda li { display: grid; grid-template-columns: 28px 1fr; gap: .2rem .7rem; align-items: center; }
+ul.legenda .sw { width: 28px; height: 28px; border-radius: 7px; grid-row: span 2; }
+ul.legenda .n { font-weight: 700; }
+ul.legenda .d { font-size: .92rem; color: var(--muted); }
+#descrizione p + p { margin-top: .45rem; }
+
+/* sezioni racconto */
+.storia { display: grid; gap: 1.2rem; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); padding: .6rem 0 2.2rem; }
+.storia .card h2 { font-size: 1.3rem; }
+.storia .card p + p, .storia .card ul { margin-top: .55rem; }
+.storia ul { padding-left: 1.1rem; }
+.storia .num { display: inline-block; font-family: var(--display); font-weight: 800; color: var(--tomato); font-size: 1rem; margin-bottom: .3rem; }
+footer { border-top: 1px solid var(--line); padding: 1.2rem 0 2rem; font-size: .9rem; color: var(--muted); }
+@media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; } }
+</style>
+</head>
+<body>
+<a class="skip" href="#mappa">Vai alla mappa</a>
+
+<div class="wrap">
+  <header class="top">
+    <a class="logo" href="/"><img src="/logo.png" alt="" width="44" height="44"> Indisciplinato 2027</a>
+    <span class="tag">con il Liceo Artistico Benedetto Alfieri · Formazione Scuola Lavoro</span>
+  </header>
+
+  <section class="hero" aria-labelledby="titolo">
+    <h1 id="titolo">Mappa sensoriale del Michelerio</h1>
+    <p class="braille-line" aria-hidden="true" id="titolo-braille"></p>
+    <p>Il cortile di Palazzo del Michelerio come sarà il 15 e 16 maggio 2027. È la base da cui partire per progettare insieme la mappa tattile della fiera: girala, guardala dall'alto, sposta i blocchi.</p>
+  </section>
+
+  <section class="mappa" id="mappa" aria-labelledby="mappa-t">
+    <h2 id="mappa-t" class="sr-only">Mappa 3D interattiva</h2>
+    <div class="stage">
+      <canvas id="c" tabindex="0" role="img" aria-label="Mappa 3D del cortile di Palazzo del Michelerio. La descrizione testuale completa è sotto la mappa."></canvas>
+    </div>
+    <div class="toolbar" role="toolbar" aria-label="Comandi della mappa">
+      <button class="btn" id="b-ruota" aria-pressed="false">Ruota</button>
+      <button class="btn" id="b-alto" aria-pressed="false">Vista dall'alto</button>
+      <button class="btn" id="b-braille" aria-pressed="true">Braille</button>
+      <button class="btn" id="b-etichette" aria-pressed="true">Etichette</button>
+      <button class="btn" id="b-modifica" aria-pressed="false">Modifica</button>
+      <span class="hint" id="hint">Trascina per ruotare · rotella o due dita per lo zoom · frecce da tastiera</span>
+    </div>
+
+    <div class="editor" id="editor" aria-label="Pannello di modifica">
+      <fieldset>
+        <legend>Blocco selezionato</legend>
+        <label for="e-sel">Scegli un blocco (oppure toccalo sulla mappa)</label>
+        <select id="e-sel"></select>
+        <label for="e-nome">Nome</label>
+        <input type="text" id="e-nome" maxlength="40" autocomplete="off">
+        <label>Colore</label>
+        <div class="swatches" id="e-col" role="group" aria-label="Colore del blocco"></div>
+        <div class="row">
+          <button class="btn" id="e-rot">Ruota 90°</button>
+          <button class="btn" id="e-dup">Duplica</button>
+          <button class="btn warn" id="e-del">Elimina</button>
+        </div>
+      </fieldset>
+      <fieldset>
+        <legend>Misure</legend>
+        <label for="e-w">Lunghezza <output id="o-w"></output></label>
+        <input type="range" id="e-w" min="10" max="520" step="1">
+        <label for="e-d">Profondità <output id="o-d"></output></label>
+        <input type="range" id="e-d" min="10" max="300" step="1">
+        <label for="e-h">Altezza <output id="o-h"></output></label>
+        <input type="range" id="e-h" min="2" max="60" step="1">
+        <p class="status" style="margin-top:.6rem">Con il blocco selezionato: frecce per spostarlo (Maiusc = passo fine).</p>
+      </fieldset>
+      <fieldset>
+        <legend>Mappa</legend>
+        <div class="row" style="margin-top:.2rem">
+          <button class="btn primary" id="e-add">+ Aggiungi blocco</button>
+          <button class="btn" id="e-undo">Annulla</button>
+        </div>
+        <label style="display:flex;gap:.5rem;align-items:center;margin-top:.8rem"><input type="checkbox" id="e-grid" checked> Aggancia alla griglia</label>
+        <div class="row">
+          <button class="btn" id="e-export">Scarica file</button>
+          <button class="btn" id="e-import">Carica file</button>
+          <input type="file" id="e-file" accept="application/json,.json" hidden>
+          <button class="btn warn" id="e-reset">Ripristina originale</button>
+        </div>
+      </fieldset>
+      <fieldset id="online">
+        <legend>Salva online</legend>
+        <p class="status" id="online-info">Le modifiche restano salvate su questo dispositivo.</p>
+        <label for="e-pw">Password</label>
+        <input type="password" id="e-pw" autocomplete="current-password">
+        <div class="row"><button class="btn primary" id="e-save">Salva per tutti</button></div>
+        <p class="status" id="save-status" role="status" aria-live="polite"></p>
+      </fieldset>
+    </div>
+  </section>
+
+  <div class="below">
+    <section class="card" aria-labelledby="leg-t">
+      <h2 id="leg-t">Legenda</h2>
+      <ul class="legenda" id="legenda"></ul>
+    </section>
+    <section class="card" aria-labelledby="desc-t" id="descrizione">
+      <h2 id="desc-t">Descrizione testuale</h2>
+      <div id="desc"></div>
+    </section>
+  </div>
+
+  <div class="storia">
+    <section class="card" aria-labelledby="s1">
+      <span class="num">01</span>
+      <h2 id="s1">Chi siamo</h2>
+      <p>Vinaccia ETS è un'associazione astigiana nata nel 2022 per promuovere il vino naturale e le microproduzioni del territorio.</p>
+      <p>Indisciplinato è la nostra fiera dei vignaioli artigianali indipendenti: nel 2027 arriva alla terza edizione, il 15 e 16 maggio a Palazzo del Michelerio, a ingresso gratuito.</p>
+    </section>
+    <section class="card" aria-labelledby="s2">
+      <span class="num">02</span>
+      <h2 id="s2">Eventi for All</h2>
+      <p>È il bando della Fondazione CRT per eventi accessibili, sostenibili e legati al territorio.</p>
+      <p>Per noi non vuol dire aggiungere servizi, ma progettare una fiera leggibile da chiunque: interpretariato LIS, degustazioni al buio con ONAV e APRI, kit sensoriale, sala di decompressione, trasporto AUSER.</p>
+      <p><strong>Una fiera pensata meglio accoglie meglio tutti.</strong></p>
+    </section>
+    <section class="card" aria-labelledby="s3">
+      <span class="num">03</span>
+      <h2 id="s3">Il vostro ruolo</h2>
+      <ul>
+        <li>Progettare e realizzare una mappa tattile della fiera, con legenda, fruibile anche da persone cieche e ipovedenti.</li>
+        <li>Documentare il lavoro con foto e video.</li>
+        <li>Allestire la mappa al Michelerio durante l'evento.</li>
+      </ul>
+    </section>
+    <section class="card" aria-labelledby="s4">
+      <span class="num">04</span>
+      <h2 id="s4">Domande da cui partire</h2>
+      <ul>
+        <li>Plastico, rilievo su pannello o stampa 3D?</li>
+        <li>Quali texture al posto dei colori?</li>
+        <li>Braille breve sulla mappa e completo in legenda?</li>
+        <li>Dove metterla, a che altezza, con quale “tu sei qui”?</li>
+        <li>La proviamo con APRI prima della fiera?</li>
+      </ul>
+    </section>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap">Associazione Vinaccia ETS · Indisciplinato 2027 · Palazzo del Michelerio, Corso Alfieri 381, Asti · Pagina di lavoro, non indicizzata.</div>
+</footer>
+
+<script>
+"use strict";
+/* ======================================================================
+   Mappa 3D del Michelerio – motore canvas senza dipendenze.
+   Coordinate in pianta: x verso est, y verso sud (come il disegno CAD), z in alto.
+   ====================================================================== */
+
+// Indirizzo dell'Apps Script per il salvataggio online (vedi strumenti/mappa-apps-script.gs).
+// Lasciarlo vuoto = le modifiche restano sul dispositivo.
+const SHEET_API = "";
+
+const STORE = "mappa-michelerio-v1";
+const CENTRO = { x: 470, y: 490 };
+
+const PALETTE = [
+  { nome: "Vignaioli", c: "#80b252" },
+  { nome: "Agricoltori", c: "#cdc840" },
+  { nome: "Food", c: "#4e5496" },
+  { nome: "Cestini riciclo", c: "#cea0d2" },
+  { nome: "Sala conferenze / degustazione", c: "#58baac" },
+  { nome: "Infopoint", c: "#ed6658" },
+  { nome: "Entrata / uscita", c: "#ecb45c" },
+  { nome: "Bagni", c: "#68b6e4" },
+  { nome: "Altro", c: "#9a8f80" },
+];
+
+const ORIGINALE = [
+  { nome: "Vignaioli", c: "#80b252", x: 402.5, y: 162.5, w: 485, d: 35, h: 16 },
+  { nome: "Vignaioli", c: "#80b252", x: 178, y: 320, w: 36, d: 280, h: 16 },
+  { nome: "Agricoltori", c: "#cdc840", x: 762.5, y: 338, w: 35, d: 272, h: 16 },
+  { nome: "Agricoltori", c: "#cdc840", x: 762.5, y: 733.5, w: 35, d: 193, h: 16 },
+  { nome: "Agricoltori", c: "#cdc840", x: 179.5, y: 720, w: 35, d: 140, h: 16 },
+  { nome: "Food", c: "#4e5496", x: 171.5, y: 574, w: 47, d: 124, h: 16 },
+  { nome: "Cestini riciclo", c: "#cea0d2", x: 439, y: 492, w: 94, d: 96, h: 10 },
+  { nome: "Sala conferenze / degustazione", c: "#58baac", x: 826, y: 575, w: 60, d: 122, h: 30 },
+  { nome: "Infopoint", c: "#ed6658", x: 439, y: 778, w: 36, d: 32, h: 16 },
+  { nome: "Entrata / uscita", c: "#ecb45c", x: 439, y: 853, w: 36, d: 94, h: 8 },
+  { nome: "Entrata / uscita", c: "#ecb45c", x: 811, y: 166, w: 98, d: 36, h: 8 },
+  { nome: "Bagni", c: "#68b6e4", x: 82, y: 460, w: 92, d: 20, h: 26 },
+];
+
+/* ---------- scena fissa (dalla planimetria) ---------- */
+const R = (x0, y0, x1, y1, z0, z1, c, extra) => Object.assign({ x0, y0, x1, y1, z0, z1, c, fisso: true }, extra || {});
+const PIANO = [ // elementi bassi, disegnati per primi nell'ordine dato
+  R(20, 90, 880, 900, -10, 0, "#e2ded5"),
+  R(145, 130, 792, 842, 0, 1.5, "#7a7a80"),
+  R(212, 200, 412, 462, 1.5, 4, "#c4ceb6"), R(462, 200, 722, 462, 1.5, 4, "#c4ceb6"),
+  R(212, 500, 412, 778, 1.5, 4, "#c4ceb6"), R(462, 500, 722, 778, 1.5, 4, "#c4ceb6"),
+  R(412, 200, 462, 778, 1.5, 2.5, "#d6d2c8"), R(212, 462, 722, 500, 1.5, 2.5, "#d6d2c8"),
+];
+const ALTI = [ // siepi e corpo dell'edificio (basso, "sezionato")
+  ...[[398,335,410,455],[464,335,476,455],[398,508,410,640],[464,508,476,640],
+      [318,450,398,460],[476,450,588,460],[318,506,398,516],[476,506,588,516]]
+    .map(r => R(r[0], r[1], r[2], r[3], 4, 12, "#58784e")),
+  R(100, 92, 860, 130, 0, 10, "#ebe8e1"), R(100, 842, 860, 892, 0, 10, "#ebe8e1"),
+  R(100, 130, 145, 842, 0, 10, "#ebe8e1"), R(792, 130, 860, 842, 0, 10, "#ebe8e1"),
+  R(30, 440, 100, 530, 0, 6, "#ebe8e1"),
+];
+const STRADE = [
+  { t: "Corso Alfieri", x: 470, y: 925 },
+  { t: "Via Carducci", x: 470, y: 72 },
+];
+
+/* ---------- braille ---------- */
+const BR = { a:"1", b:"12", c:"14", d:"145", e:"15", f:"124", g:"1245", h:"125", i:"24", j:"245", k:"13",
+  l:"123", m:"134", n:"1345", o:"135", p:"1234", q:"12345", r:"1235", s:"234", t:"2345", u:"136",
+  v:"1236", w:"2456", x:"1346", y:"13456", z:"1356" };
+const POS = { 1:[0,0], 2:[0,1], 3:[0,2], 4:[1,0], 5:[1,1], 6:[1,2] };
+const pulisci = s => s.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
+const brailleUni = s => [...pulisci(s)].map(ch => BR[ch] ? String.fromCharCode(0x2800 + [...BR[ch]].reduce((a, n) => a | (1 << (n - 1)), 0)) : (ch === " " ? "⠀" : "")).join("");
+const iniziale = s => { const m = pulisci(s).match(/[a-z]/); return m ? m[0] : "a"; };
+
+/* ---------- stato ---------- */
+let blocchi = carica() || clona(ORIGINALE);
+let undo = [];
+let sel = -1;
+const vista = { yaw: rad(28), pitch: rad(36), zoom: 1, panX: 0, panY: 0 };
+const VISTA3D = { yaw: rad(28), pitch: rad(36) };
+let opz = { braille: true, etichette: true, modifica: false, ruota: false, griglia: true };
+
+function rad(g) { return g * Math.PI / 180; }
+function clona(a) { return JSON.parse(JSON.stringify(a)); }
+function carica() { try { const j = JSON.parse(localStorage.getItem(STORE)); return Array.isArray(j) && j.length ? j : null; } catch (e) { return null; } }
+function salvaLocale() { try { localStorage.setItem(STORE, JSON.stringify(blocchi)); localStorage.setItem(STORE + "-t", String(Date.now())); } catch (e) {} aggiornaTesti(); }
+function memo() { undo.push(JSON.stringify(blocchi)); if (undo.length > 60) undo.shift(); }
+
+/* ---------- canvas & proiezione ---------- */
+const cv = document.getElementById("c");
+const ctx = cv.getContext("2d");
+let DPR = 1, CW = 0, CH = 0, SC = 1, OFFY = 0;
+
+function ridimensiona() {
+  DPR = Math.min(window.devicePixelRatio || 1, 2.5);
+  const r = cv.getBoundingClientRect();
+  CW = r.width; CH = r.height;
+  cv.width = Math.round(CW * DPR); cv.height = Math.round(CH * DPR);
+  // adatta la scena allo spazio, misurandola nella vista 3D iniziale
+  const v0 = { ...vista }; Object.assign(vista, VISTA3D, { zoom: 1, panX: 0, panY: 0 });
+  SC = 1; OFFY = 0;
+  let x0 = 1e9, x1 = -1e9, y0 = 1e9, y1 = -1e9;
+  for (const [x, y] of [[20, 60], [880, 60], [880, 940], [20, 940]]) for (const z of [-10, 30]) {
+    const [X, Y] = P(x, y, z); x0 = Math.min(x0, X); x1 = Math.max(x1, X); y0 = Math.min(y0, Y); y1 = Math.max(y1, Y);
+  }
+  const pad = CW < 600 ? 6 : 30, sopra = CH * (CW < 600 ? 0.12 : 0.08);
+  SC = Math.min((CW - 2 * pad) / (x1 - x0), (CH - sopra - pad) / (y1 - y0));
+  OFFY = sopra / 2 - ((y0 + y1) / 2 - CH / 2) * SC;
+  Object.assign(vista, v0);
+  disegna();
+}
+
+function P(x, y, z) {
+  const dx = x - CENTRO.x, dy = y - CENTRO.y;
+  const c = Math.cos(vista.yaw), s = Math.sin(vista.yaw);
+  const rx = dx * c - dy * s, ry = dx * s + dy * c;
+  const k = SC * vista.zoom;
+  return [CW / 2 + vista.panX + rx * k, CH / 2 + OFFY + vista.panY + (ry * Math.sin(vista.pitch) - z * Math.cos(vista.pitch)) * k];
+}
+function profondita(x, y, z) {
+  const dx = x - CENTRO.x, dy = y - CENTRO.y;
+  const ry = dx * Math.sin(vista.yaw) + dy * Math.cos(vista.yaw);
+  return ry * Math.cos(vista.pitch) + (z || 0) * Math.sin(vista.pitch);
+}
+function suPiano(X, Y, z) { // schermo -> pianta, alla quota z
+  const k = SC * vista.zoom;
+  const rx = (X - CW / 2 - vista.panX) / k;
+  const ry = ((Y - CH / 2 - OFFY - vista.panY) / k + z * Math.cos(vista.pitch)) / Math.max(Math.sin(vista.pitch), 0.05);
+  const c = Math.cos(vista.yaw), s = Math.sin(vista.yaw);
+  return { x: rx * c + ry * s + CENTRO.x, y: -rx * s + ry * c + CENTRO.y };
+}
+
+/* ---------- colori ---------- */
+function hex2rgb(h) { const n = parseInt(h.slice(1), 16); return [n >> 16 & 255, n >> 8 & 255, n & 255]; }
+function tono(h, f, a) { const [r, g, b] = hex2rgb(h); const q = v => Math.max(0, Math.min(255, Math.round(v * f))); return `rgba(${q(r)},${q(g)},${q(b)},${a == null ? 1 : a})`; }
+
+/* ---------- box ---------- */
+function boxDa(b, i) {
+  const w = b.w / 2, d = b.d / 2;
+  return { x0: b.x - w, y0: b.y - d, x1: b.x + w, y1: b.y + d, z0: 1.5, z1: 1.5 + b.h, c: b.c, idx: i };
+}
+function facce(b) {
+  const s = Math.sin(vista.yaw), c = Math.cos(vista.yaw);
+  const L = [-0.45, -0.75]; // luce da nord-ovest
+  const out = [];
+  const lati = [
+    [[b.x1, b.y0], [b.x1, b.y1], [1, 0]],
+    [[b.x0, b.y1], [b.x1, b.y1], [0, 1]],
+    [[b.x0, b.y0], [b.x0, b.y1], [-1, 0]],
+    [[b.x0, b.y0], [b.x1, b.y0], [0, -1]],
+  ];
+  if (vista.pitch < rad(89)) for (const [p, q, n] of lati) {
+    if (n[0] * s + n[1] * c > 0.001) {
+      const f = 0.62 + 0.18 * -(n[0] * L[0] + n[1] * L[1]);
+      out.push({ poly: [P(p[0], p[1], b.z0), P(q[0], q[1], b.z0), P(q[0], q[1], b.z1), P(p[0], p[1], b.z1)], f });
+    }
+  }
+  out.push({ poly: [P(b.x0, b.y0, b.z1), P(b.x1, b.y0, b.z1), P(b.x1, b.y1, b.z1), P(b.x0, b.y1, b.z1)], f: 1, top: true });
+  return out;
+}
+function poligono(pts, fill, stroke, lw) {
+  ctx.beginPath(); ctx.moveTo(pts[0][0], pts[0][1]);
+  for (let i = 1; i < pts.length; i++) ctx.lineTo(pts[i][0], pts[i][1]);
+  ctx.closePath();
+  if (fill) { ctx.fillStyle = fill; ctx.fill(); }
+  if (stroke) { ctx.strokeStyle = stroke; ctx.lineWidth = lw || 1; ctx.stroke(); }
+}
+function disegnaBox(b, evid) {
+  for (const f of facce(b)) poligono(f.poly, tono(b.c, f.f), tono(b.c, 0.62), 1);
+  if (evid) {
+    const t = facce(b).find(f => f.top);
+    poligono(t.poly, null, "#fb4d3d", 3);
+    for (const f of facce(b)) if (!f.top) poligono(f.poly, null, "rgba(251,77,61,.55)", 1.5);
+  }
+}
+function bboxSchermo(b) {
+  let x0 = 1e9, y0 = 1e9, x1 = -1e9, y1 = -1e9;
+  for (const x of [b.x0, b.x1]) for (const y of [b.y0, b.y1]) for (const z of [b.z0, b.z1]) {
+    const [X, Y] = P(x, y, z); x0 = Math.min(x0, X); x1 = Math.max(x1, X); y0 = Math.min(y0, Y); y1 = Math.max(y1, Y);
+  }
+  return [x0, y0, x1, y1];
+}
+// A va disegnato prima di B?
+function prima(A, B) {
+  const vx = Math.sin(vista.yaw), vy = Math.cos(vista.yaw), e = 0.01;
+  let best = null, peso = -1;
+  const prova = (sep, gap, v) => { const p = Math.abs(v) * gap; if (sep && p > peso) { peso = p; best = v; } };
+  if (A.x1 <= B.x0 + e) prova(true, B.x0 - A.x1 + 1, vx);        // B a est di A
+  if (B.x1 <= A.x0 + e) prova(true, A.x0 - B.x1 + 1, -vx);       // B a ovest di A
+  if (A.y1 <= B.y0 + e) prova(true, B.y0 - A.y1 + 1, vy);        // B a sud di A
+  if (B.y1 <= A.y0 + e) prova(true, A.y0 - B.y1 + 1, -vy);       // B a nord di A
+  if (best !== null && Math.abs(best) > 1e-4) return best > 0;
+  if (A.z1 <= B.z0 + e) return true;
+  if (B.z1 <= A.z0 + e) return false;
+  return profondita((A.x0 + A.x1) / 2, (A.y0 + A.y1) / 2, A.z0) < profondita((B.x0 + B.x1) / 2, (B.y0 + B.y1) / 2, B.z0);
+}
+function ordina(list) {
+  const n = list.length, bb = list.map(bboxSchermo);
+  const dep = list.map(b => profondita((b.x0 + b.x1) / 2, (b.y0 + b.y1) / 2, b.z0));
+  const succ = Array.from({ length: n }, () => []), indeg = new Array(n).fill(0);
+  for (let i = 0; i < n; i++) for (let j = i + 1; j < n; j++) {
+    const a = bb[i], b = bb[j];
+    if (a[2] < b[0] || b[2] < a[0] || a[3] < b[1] || b[3] < a[1]) continue;
+    if (prima(list[i], list[j])) { succ[i].push(j); indeg[j]++; } else { succ[j].push(i); indeg[i]++; }
+  }
+  const fatto = new Array(n).fill(false), out = [];
+  for (let k = 0; k < n; k++) {
+    let m = -1;
+    for (let i = 0; i < n; i++) if (!fatto[i] && indeg[i] === 0 && (m < 0 || dep[i] < dep[m])) m = i;
+    if (m < 0) for (let i = 0; i < n; i++) if (!fatto[i] && (m < 0 || dep[i] < dep[m])) m = i; // ciclo: rompi
+    fatto[m] = true; out.push(list[m]);
+    for (const j of succ[m]) indeg[j]--;
+  }
+  return out;
+}
+
+/* ---------- braille in rilievo sul blocco ---------- */
+function puntiBraille(b, lettera) {
+  const passo = Math.max(5, Math.min(9, Math.min(b.x1 - b.x0, b.y1 - b.y0) * 0.2));
+  const cx = (b.x0 + b.x1) / 2, cy = (b.y0 + b.y1) / 2;
+  const k = SC * vista.zoom;
+  const r = Math.max(1.6, passo * 0.3 * k);
+  const c = Math.cos(vista.yaw), s = Math.sin(vista.yaw);
+  for (const n of BR[lettera] || "") {
+    const [i, j] = POS[n];
+    // la cella è "dritta" rispetto a chi guarda: offset in coordinate schermo, riportati in pianta
+    const ox = (i - 0.5) * passo, oy = (j - 1) * passo;
+    const x = cx + ox * c + oy * s, y = cy - ox * s + oy * c;
+    const [X, Y] = P(x, y, b.z1 + 0.6);
+    const ry = r * Math.max(0.45, Math.sin(vista.pitch));
+    ctx.beginPath(); ctx.ellipse(X + 0.8, Y + 1.2, r, ry, 0, 0, Math.PI * 2); ctx.fillStyle = "rgba(0,0,0,.28)"; ctx.fill();
+    ctx.beginPath(); ctx.ellipse(X, Y, r, ry, 0, 0, Math.PI * 2); ctx.fillStyle = "#ffffff"; ctx.fill();
+    ctx.lineWidth = 1; ctx.strokeStyle = "rgba(20,20,20,.55)"; ctx.stroke();
+  }
+}
+
+/* ---------- etichette ---------- */
+function etichette(boxes) {
+  const gruppi = new Map();
+  for (const b of boxes) {
+    const bl = blocchi[b.idx], a = (b.x1 - b.x0) * (b.y1 - b.y0);
+    const g = gruppi.get(bl.nome);
+    if (!g || a > g.a) gruppi.set(bl.nome, { b, a, bl });
+  }
+  const tag = [];
+  for (const { b, bl } of gruppi.values()) {
+    const cx = (b.x0 + b.x1) / 2, cy = (b.y0 + b.y1) / 2;
+    let far = null;
+    for (const [x, y] of [[b.x0, b.y0], [b.x1, b.y0], [b.x1, b.y1], [b.x0, b.y1]]) { const q = P(x, y, b.z1); if (!far || q[1] < far.Y) far = { x, y, Y: q[1] }; }
+    const t = Math.min(b.x1 - b.x0, b.y1 - b.y0) < 50 && Math.max(b.x1 - b.x0, b.y1 - b.y0) < 60 ? 0.62 : 0.5;
+    const [X, Y] = P(cx + (far.x - cx) * t, cy + (far.y - cy) * t, b.z1);
+    tag.push({ X, Y, bl });
+  }
+  tag.sort((p, q) => p.Y - q.Y);
+  const fz = Math.max(11, Math.min(16, CW / 70));
+  const placed = [];
+  const compatto = CW < 600; // su telefono: etichette solo testo, il braille resta sui blocchi e in legenda
+  const conBr = opz.braille && !compatto;
+  for (const t of tag) {
+    ctx.font = `700 ${fz}px "Atkinson Hyperlegible", Verdana, sans-serif`;
+    const w1 = ctx.measureText(compatto && t.bl.nome.length > 18 ? t.bl.nome.split("/")[0].trim().toUpperCase() : t.bl.nome.toUpperCase()).width;
+    const br = brailleUni(t.bl.nome);
+    ctx.font = `${fz}px "DejaVu Sans","Segoe UI Symbol","Apple Braille",sans-serif`;
+    const w2 = conBr ? ctx.measureText(br).width : 0;
+    const w = Math.max(w1, w2) + 30, h = conBr ? fz * 2.9 : fz * 1.9;
+    let lx = t.X - w / 2, ly = t.Y - h - (CW < 600 ? 22 : 34);
+    // evita sovrapposizioni semplici
+    for (let tries = 0; tries < 12; tries++) {
+      const hit = placed.find(p => lx < p[2] && lx + w > p[0] && ly < p[3] && ly + h > p[1]);
+      if (!hit) break;
+      ly = hit[1] - h - 6;
+    }
+    lx = Math.max(6, Math.min(CW - w - 6, lx)); ly = Math.max(6, ly);
+    placed.push([lx, ly, lx + w, ly + h]);
+    ctx.strokeStyle = "rgba(27,34,51,.75)"; ctx.lineWidth = 1.5;
+    ctx.beginPath(); ctx.moveTo(t.X, t.Y); ctx.lineTo(Math.max(lx + 8, Math.min(lx + w - 8, t.X)), ly + h); ctx.stroke();
+    ctx.beginPath(); ctx.arc(t.X, t.Y, 3, 0, Math.PI * 2); ctx.fillStyle = "#1b2233"; ctx.fill();
+    ctx.fillStyle = "rgba(0,0,0,.12)"; rrect(lx + 2, ly + 3, w, h, 10); ctx.fill();
+    ctx.fillStyle = "#ffffff"; rrect(lx, ly, w, h, 10); ctx.fill();
+    ctx.fillStyle = t.bl.c; rrect(lx, ly, 9, h, 5); ctx.fill();
+    ctx.fillStyle = "#1b2233"; ctx.textBaseline = "top";
+    ctx.font = `700 ${fz}px "Atkinson Hyperlegible", Verdana, sans-serif`;
+    ctx.fillText(compatto && t.bl.nome.length > 18 ? t.bl.nome.split("/")[0].trim().toUpperCase() : t.bl.nome.toUpperCase(), lx + 18, ly + fz * 0.45);
+    if (conBr) {
+      ctx.fillStyle = "#4a5266"; ctx.font = `${fz}px "DejaVu Sans","Segoe UI Symbol","Apple Braille",sans-serif`;
+      ctx.fillText(br, lx + 18, ly + fz * 1.6);
+    }
+  }
+}
+function rrect(x, y, w, h, r) { ctx.beginPath(); ctx.roundRect ? ctx.roundRect(x, y, w, h, r) : ctx.rect(x, y, w, h); }
+
+/* ---------- disegno ---------- */
+let ultimiBox = [];
+function disegna() {
+  ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+  const bg = getComputedStyle(cv).backgroundColor;
+  ctx.fillStyle = bg; ctx.fillRect(0, 0, CW, CH);
+
+  for (const b of PIANO) disegnaBox(b);
+  if (opz.modifica && opz.griglia) griglia();
+
+  const mobili = blocchi.map(boxDa);
+  ultimiBox = mobili;
+  const tutti = ordina([...ALTI, ...mobili]);
+  for (const b of tutti) {
+    disegnaBox(b, !b.fisso && b.idx === sel && opz.modifica);
+    if (!b.fisso && opz.braille) puntiBraille(b, iniziale(blocchi[b.idx].nome));
+  }
+  // strade
+  ctx.fillStyle = getComputedStyle(document.body).color; ctx.globalAlpha = .6;
+  ctx.font = `italic 700 ${Math.max(12, 14 * vista.zoom)}px "Atkinson Hyperlegible", Verdana, sans-serif`;
+  ctx.textAlign = "center"; ctx.textBaseline = "middle";
+  for (const s of STRADE) { const [X, Y] = P(s.x, s.y, 0); ctx.fillText(s.t, X, Y); }
+  ctx.textAlign = "left"; ctx.globalAlpha = 1;
+  bussola();
+  if (opz.etichette) etichette(mobili);
+}
+function griglia() {
+  ctx.strokeStyle = "rgba(255,255,255,.18)"; ctx.lineWidth = 1;
+  for (let x = 150; x <= 790; x += 20) { const a = P(x, 130, 4.2), b = P(x, 842, 4.2); ctx.beginPath(); ctx.moveTo(...a); ctx.lineTo(...b); ctx.stroke(); }
+  for (let y = 130; y <= 842; y += 20) { const a = P(145, y, 4.2), b = P(792, y, 4.2); ctx.beginPath(); ctx.moveTo(...a); ctx.lineTo(...b); ctx.stroke(); }
+}
+function bussola() {
+  const cx = CW - 46, cy = 46, r = 22;
+  ctx.beginPath(); ctx.arc(cx, cy, r, 0, Math.PI * 2); ctx.fillStyle = "rgba(255,255,255,.9)"; ctx.fill();
+  ctx.strokeStyle = "#1b2233"; ctx.lineWidth = 1.5; ctx.stroke();
+  // nord = -y in pianta
+  const a = P(CENTRO.x, CENTRO.y - 100, 0), o = P(CENTRO.x, CENTRO.y, 0);
+  let dx = a[0] - o[0], dy = a[1] - o[1]; const L = Math.hypot(dx, dy) || 1; dx /= L; dy /= L;
+  ctx.beginPath(); ctx.moveTo(cx + dx * (r - 5), cy + dy * (r - 5)); ctx.lineTo(cx - dy * 6, cy + dx * 6); ctx.lineTo(cx + dy * 6, cy - dx * 6); ctx.closePath();
+  ctx.fillStyle = "#fb4d3d"; ctx.fill();
+  ctx.fillStyle = "#1b2233"; ctx.font = `700 12px Verdana, sans-serif`; ctx.textAlign = "center"; ctx.textBaseline = "middle";
+  ctx.fillText("N", cx - dx * 12, cy - dy * 12); ctx.textAlign = "left";
+}
+
+/* ---------- picking ---------- */
+function dentro(pt, poly) {
+  let ins = false;
+  for (let i = 0, j = poly.length - 1; i < poly.length; j = i++) {
+    const [xi, yi] = poly[i], [xj, yj] = poly[j];
+    if ((yi > pt[1]) !== (yj > pt[1]) && pt[0] < (xj - xi) * (pt[1] - yi) / (yj - yi) + xi) ins = !ins;
+  }
+  return ins;
+}
+function colpito(X, Y) {
+  const ord = ordina(blocchi.map(boxDa)).reverse();
+  for (const b of ord) for (const f of facce(b)) if (dentro([X, Y], f.poly)) return b.idx;
+  return -1;
+}
+
+/* ---------- interazione ---------- */
+const punt = new Map();
+let gesto = null, animId = 0;
+function pos(e) { const r = cv.getBoundingClientRect(); return [e.clientX - r.left, e.clientY - r.top]; }
+
+cv.addEventListener("pointerdown", e => {
+  cv.setPointerCapture(e.pointerId);
+  punt.set(e.pointerId, pos(e));
+  fermaRotazione();
+  if (punt.size === 2) {
+    const [a, b] = [...punt.values()];
+    gesto = { tipo: "pinch", d0: Math.hypot(a[0] - b[0], a[1] - b[1]), z0: vista.zoom };
+    return;
+  }
+  const [X, Y] = pos(e);
+  if (opz.modifica) {
+    const i = colpito(X, Y);
+    if (i >= 0) {
+      seleziona(i);
+      const bl = blocchi[i];
+      memo();
+      gesto = { tipo: "sposta", i, p0: suPiano(X, Y, 0), x0: bl.x, y0: bl.y, mosso: false };
+      cv.classList.add("dragging");
+      return;
+    }
+  }
+  gesto = { tipo: e.button === 2 || e.shiftKey ? "pan" : "orbita", X, Y, yaw: vista.yaw, pitch: vista.pitch, px: vista.panX, py: vista.panY, mosso: false };
+  cv.classList.add("dragging");
+});
+cv.addEventListener("pointermove", e => {
+  if (!punt.has(e.pointerId)) return;
+  punt.set(e.pointerId, pos(e));
+  if (!gesto) return;
+  if (gesto.tipo === "pinch" && punt.size >= 2) {
+    const [a, b] = [...punt.values()];
+    vista.zoom = clamp(gesto.z0 * Math.hypot(a[0] - b[0], a[1] - b[1]) / gesto.d0, 0.5, 4);
+    disegna(); return;
+  }
+  const [X, Y] = pos(e);
+  if (gesto.tipo === "orbita") {
+    vista.yaw = gesto.yaw + (X - gesto.X) * 0.008;
+    vista.pitch = clamp(gesto.pitch + (Y - gesto.Y) * 0.005, rad(18), rad(90));
+    gesto.mosso = true; aggiornaAlto(); disegna();
+  } else if (gesto.tipo === "pan") {
+    vista.panX = gesto.px + X - gesto.X; vista.panY = gesto.py + Y - gesto.Y; disegna();
+  } else if (gesto.tipo === "sposta") {
+    const p = suPiano(X, Y, 0), bl = blocchi[gesto.i];
+    let nx = gesto.x0 + p.x - gesto.p0.x, ny = gesto.y0 + p.y - gesto.p0.y;
+    if (opz.griglia) { nx = Math.round(nx / 5) * 5; ny = Math.round(ny / 5) * 5; }
+    bl.x = clamp(nx, 0, 900); bl.y = clamp(ny, 60, 920);
+    gesto.mosso = true; disegna();
+  }
+});
+function fine(e) {
+  punt.delete(e.pointerId);
+  if (gesto && gesto.tipo === "sposta") {
+    if (gesto.mosso) salvaLocale(); else undo.pop();
+  } else if (gesto && gesto.tipo === "orbita" && !gesto.mosso && opz.modifica) {
+    seleziona(-1);
+  }
+  if (punt.size === 0) { gesto = null; cv.classList.remove("dragging"); }
+}
+cv.addEventListener("pointerup", fine);
+cv.addEventListener("pointercancel", fine);
+cv.addEventListener("contextmenu", e => e.preventDefault());
+cv.addEventListener("wheel", e => { e.preventDefault(); vista.zoom = clamp(vista.zoom * Math.exp(-e.deltaY * 0.0015), 0.5, 4); disegna(); }, { passive: false });
+cv.addEventListener("keydown", e => {
+  const passo = e.shiftKey ? 1 : 5;
+  if (opz.modifica && sel >= 0 && e.key.startsWith("Arrow")) {
+    e.preventDefault(); memo();
+    // le frecce seguono lo schermo, non la pianta
+    const m = { ArrowLeft: [-1, 0], ArrowRight: [1, 0], ArrowUp: [0, -1], ArrowDown: [0, 1] }[e.key];
+    const c = Math.cos(vista.yaw), s = Math.sin(vista.yaw);
+    blocchi[sel].x += (m[0] * c + m[1] * s) * passo; blocchi[sel].y += (-m[0] * s + m[1] * c) * passo;
+    salvaLocale(); disegna(); return;
+  }
+  const az = {
+    ArrowLeft: () => vista.yaw -= rad(8), ArrowRight: () => vista.yaw += rad(8),
+    ArrowUp: () => vista.pitch = clamp(vista.pitch + rad(6), rad(18), rad(90)),
+    ArrowDown: () => vista.pitch = clamp(vista.pitch - rad(6), rad(18), rad(90)),
+    "+": () => vista.zoom = clamp(vista.zoom * 1.15, 0.5, 4), "=": () => vista.zoom = clamp(vista.zoom * 1.15, 0.5, 4),
+    "-": () => vista.zoom = clamp(vista.zoom / 1.15, 0.5, 4),
+    Delete: () => opz.modifica && sel >= 0 && elimina(), Backspace: () => opz.modifica && sel >= 0 && elimina(),
+    Escape: () => seleziona(-1),
+  }[e.key];
+  if (az) { e.preventDefault(); az(); aggiornaAlto(); disegna(); }
+});
+function clamp(v, a, b) { return Math.max(a, Math.min(b, v)); }
+
+/* ---------- animazioni vista ---------- */
+const ridotto = matchMedia("(prefers-reduced-motion: reduce)").matches;
+function animaA(yaw, pitch) {
+  cancelAnimationFrame(animId);
+  // percorso più breve sull'angolo
+  let dy = ((yaw - vista.yaw) % (2 * Math.PI) + 3 * Math.PI) % (2 * Math.PI) - Math.PI;
+  const y0 = vista.yaw, p0 = vista.pitch, t0 = performance.now(), D = ridotto ? 1 : 650;
+  const step = t => {
+    const k = Math.min(1, (t - t0) / D), e = 1 - Math.pow(1 - k, 3);
+    vista.yaw = y0 + dy * e; vista.pitch = p0 + (pitch - p0) * e;
+    disegna(); if (k < 1) animId = requestAnimationFrame(step); else aggiornaAlto();
+  };
+  animId = requestAnimationFrame(step);
+}
+function giro() {
+  if (!opz.ruota) return;
+  vista.yaw += 0.004; disegna(); animId = requestAnimationFrame(giro);
+}
+function fermaRotazione() { if (opz.ruota) { opz.ruota = false; cancelAnimationFrame(animId); premi("b-ruota", false); } }
+
+/* ---------- toolbar ---------- */
+const $ = id => document.getElementById(id);
+function premi(id, v) { $(id).setAttribute("aria-pressed", v ? "true" : "false"); }
+function aggiornaAlto() { premi("b-alto", vista.pitch > rad(85)); $("b-alto").textContent = vista.pitch > rad(85) ? "Vista 3D" : "Vista dall'alto"; }
+
+$("b-ruota").onclick = () => { opz.ruota = !opz.ruota; premi("b-ruota", opz.ruota); cancelAnimationFrame(animId); if (opz.ruota) giro(); };
+$("b-alto").onclick = () => { fermaRotazione(); if (vista.pitch > rad(85)) animaA(VISTA3D.yaw, VISTA3D.pitch); else animaA(0, rad(90)); };
+$("b-braille").onclick = () => { opz.braille = !opz.braille; premi("b-braille", opz.braille); disegna(); };
+$("b-etichette").onclick = () => { opz.etichette = !opz.etichette; premi("b-etichette", opz.etichette); disegna(); };
+$("b-modifica").onclick = () => {
+  opz.modifica = !opz.modifica; premi("b-modifica", opz.modifica);
+  $("editor").classList.toggle("on", opz.modifica);
+  cv.classList.toggle("edit", opz.modifica);
+  $("hint").textContent = opz.modifica ? "Tocca un blocco per selezionarlo e trascinalo · trascina il vuoto per ruotare" : "Trascina per ruotare · rotella o due dita per lo zoom · frecce da tastiera";
+  if (!opz.modifica) seleziona(-1); else { aggiornaEditor(); if (sel < 0 && blocchi.length) seleziona(0); }
+  disegna();
+};
+
+/* ---------- editor ---------- */
+function seleziona(i) { sel = i; aggiornaEditor(); disegna(); }
+function aggiornaEditor() {
+  const s = $("e-sel");
+  s.innerHTML = blocchi.map((b, i) => `<option value="${i}">${i + 1}. ${esc(b.nome)} – ${lato(b)}</option>`).join("");
+  if (sel >= 0) s.value = sel;
+  const b = blocchi[sel];
+  const off = !b;
+  for (const id of ["e-nome", "e-w", "e-d", "e-h", "e-rot", "e-dup", "e-del"]) $(id).disabled = off;
+  if (!b) return;
+  $("e-nome").value = b.nome;
+  $("e-w").value = b.w; $("o-w").textContent = Math.round(b.w);
+  $("e-d").value = b.d; $("o-d").textContent = Math.round(b.d);
+  $("e-h").value = b.h; $("o-h").textContent = Math.round(b.h);
+  $("e-col").innerHTML = PALETTE.map(p => `<button type="button" style="background:${p.c}" aria-label="${esc(p.nome)}" title="${esc(p.nome)}" aria-pressed="${p.c === b.c}" data-c="${p.c}" data-n="${esc(p.nome)}"></button>`).join("");
+}
+function esc(s) { return String(s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c])); }
+
+$("e-sel").onchange = e => seleziona(+e.target.value);
+$("e-nome").addEventListener("focus", memo);
+$("e-nome").oninput = e => { if (sel < 0) return; blocchi[sel].nome = e.target.value || "Senza nome"; salvaLocale(); disegna(); };
+$("e-nome").onchange = () => aggiornaEditor();
+for (const k of ["w", "d", "h"]) {
+  $("e-" + k).addEventListener("pointerdown", memo);
+  $("e-" + k).addEventListener("keydown", memo);
+  $("e-" + k).oninput = e => { if (sel < 0) return; blocchi[sel][k] = +e.target.value; $("o-" + k).textContent = e.target.value; salvaLocale(); disegna(); };
+}
+$("e-col").onclick = e => {
+  const t = e.target.closest("button"); if (!t || sel < 0) return;
+  memo();
+  const b = blocchi[sel];
+  const vecchioPred = PALETTE.find(p => p.c === b.c);
+  b.c = t.dataset.c;
+  // se il nome era quello predefinito del colore precedente, segue il nuovo colore
+  if (vecchioPred && b.nome === vecchioPred.nome && t.dataset.n !== "Altro") b.nome = t.dataset.n;
+  salvaLocale(); aggiornaEditor(); disegna();
+};
+$("e-rot").onclick = () => { if (sel < 0) return; memo(); const b = blocchi[sel]; [b.w, b.d] = [b.d, b.w]; salvaLocale(); aggiornaEditor(); disegna(); };
+$("e-dup").onclick = () => { if (sel < 0) return; memo(); const b = clona(blocchi[sel]); b.x += 25; b.y += 25; blocchi.push(b); salvaLocale(); seleziona(blocchi.length - 1); };
+$("e-del").onclick = () => elimina();
+function elimina() { if (sel < 0) return; memo(); blocchi.splice(sel, 1); salvaLocale(); seleziona(Math.min(sel, blocchi.length - 1)); }
+$("e-add").onclick = () => { memo(); blocchi.push({ nome: "Nuovo stand", c: "#9a8f80", x: 470, y: 330, w: 40, d: 40, h: 16 }); salvaLocale(); seleziona(blocchi.length - 1); };
+$("e-undo").onclick = () => { const u = undo.pop(); if (!u) return; blocchi = JSON.parse(u); sel = Math.min(sel, blocchi.length - 1); salvaLocale(); aggiornaEditor(); disegna(); };
+$("e-grid").onchange = e => { opz.griglia = e.target.checked; disegna(); };
+$("e-reset").onclick = () => { if (!confirm("Tornare alla disposizione originale? Le modifiche su questo dispositivo andranno perse.")) return; memo(); blocchi = clona(ORIGINALE); salvaLocale(); seleziona(-1); };
+$("e-export").onclick = () => {
+  const blob = new Blob([JSON.stringify({ versione: 1, salvato: new Date().toISOString(), blocchi }, null, 2)], { type: "application/json" });
+  const a = document.createElement("a"); a.href = URL.createObjectURL(blob);
+  a.download = "mappa-michelerio-" + new Date().toISOString().slice(0, 10) + ".json"; a.click();
+  setTimeout(() => URL.revokeObjectURL(a.href), 2000);
+};
+$("e-import").onclick = () => $("e-file").click();
+$("e-file").onchange = async e => {
+  const f = e.target.files[0]; if (!f) return;
+  try {
+    const j = JSON.parse(await f.text()); const arr = Array.isArray(j) ? j : j.blocchi;
+    if (!valida(arr)) throw new Error();
+    memo(); blocchi = arr; salvaLocale(); seleziona(-1);
+  } catch (err) { alert("Il file non sembra una mappa valida."); }
+  e.target.value = "";
+};
+function valida(a) { return Array.isArray(a) && a.every(b => b && typeof b.nome === "string" && /^#[0-9a-f]{6}$/i.test(b.c) && [b.x, b.y, b.w, b.d, b.h].every(Number.isFinite)); }
+
+/* ---------- salvataggio online (Apps Script) ---------- */
+if (!SHEET_API) {
+  $("online-info").textContent = "Salvataggio online non ancora collegato: per ora le modifiche restano su questo dispositivo. Usa “Scarica file” per condividerle.";
+  $("e-pw").disabled = true; $("e-save").disabled = true;
+} else {
+  $("online-info").textContent = "Inserisci la password per pubblicare questa disposizione: la vedranno tutti.";
+}
+$("e-save").onclick = async () => {
+  const st = $("save-status"); st.textContent = "Salvataggio…";
+  try {
+    const r = await fetch(SHEET_API, { method: "POST", body: JSON.stringify({ azione: "salvaMappa", password: $("e-pw").value, blocchi }) });
+    const j = await r.json();
+    st.textContent = j.ok ? "Salvato. Da adesso tutti vedono questa disposizione." : (j.errore || "Non salvato.");
+  } catch (e) { st.textContent = "Errore di rete: riprova."; }
+};
+async function caricaOnline() {
+  if (!SHEET_API) return;
+  try {
+    const j = await (await fetch(SHEET_API + "?azione=mappa", { cache: "no-store" })).json();
+    if (j && valida(j.blocchi) && j.blocchi.length) {
+      // l'ultima versione online vince, salvo modifiche locali più recenti
+      const loc = Number(localStorage.getItem(STORE + "-t") || 0);
+      if (!loc || (j.salvato && Date.parse(j.salvato) > loc)) { blocchi = j.blocchi; aggiornaTesti(); disegna(); }
+    }
+  } catch (e) {}
+}
+
+/* ---------- legenda e descrizione testuale ---------- */
+function lato(b) {
+  const dx = b.x - CENTRO.x, dy = b.y - CENTRO.y;
+  if (b.y > 845) return "verso Corso Alfieri";
+  if (Math.abs(dx) < 70 && Math.abs(dy) < 70) return "al centro del cortile";
+  const ns = dy < -150 ? "nord" : dy > 150 ? "sud" : "";
+  const eo = dx < -150 ? "ovest" : dx > 150 ? "est" : "";
+  if (b.x < 100 || b.x > 792) return "nell'edificio, lato " + (eo || ns);
+  return "lato " + (ns && eo ? ns + "-" + eo : ns || eo || "centrale");
+}
+function aggiornaTesti() {
+  const g = new Map();
+  for (const b of blocchi) { const k = b.nome; if (!g.has(k)) g.set(k, { c: b.c, n: 0, lati: [] }); const v = g.get(k); v.n++; v.lati.push(lato(b)); }
+  $("legenda").innerHTML = [...g].map(([nome, v]) => `<li><span class="sw" style="background:${v.c}" aria-hidden="true"></span><span class="n">${esc(nome)}</span><span class="d"><span class="braille-line" aria-hidden="true">${brailleUni(nome)}</span> · ${v.n === 1 ? "1 area" : v.n + " aree"}</span></li>`).join("");
+  const righe = [...g].map(([nome, v]) => `<p><strong>${esc(nome)}</strong>: ${[...new Set(v.lati)].join("; ")}.</p>`);
+  $("desc").innerHTML = `<p>Il cortile è un grande quadrato con un portico tutto intorno e un giardino al centro diviso in quattro aiuole da due vialetti a croce. L'ingresso principale è a sud, da Corso Alfieri; un secondo accesso è nell'angolo nord-est. Nord è in alto nella vista dall'alto.</p>` + righe.join("");
+}
+
+/* ---------- avvio ---------- */
+$("titolo-braille").textContent = brailleUni("mappa sensoriale del michelerio");
+aggiornaTesti();
+aggiornaEditor();
+new ResizeObserver(ridimensiona).observe(cv);
+if (document.fonts) document.fonts.ready.then(disegna);
+caricaOnline();
+</script>
+</body>
+</html>
