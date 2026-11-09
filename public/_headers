@@ -19,3 +19,7 @@
 /fornitori/*
   X-Robots-Tag: noindex, nofollow
   Cache-Control: no-cache
+
+/liceo-artistico/*
+  X-Robots-Tag: noindex, nofollow
+  Cache-Control: no-cache
