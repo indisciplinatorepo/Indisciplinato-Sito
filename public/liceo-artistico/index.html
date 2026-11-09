@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Mappa sensoriale del Michelerio · Indisciplinato × Liceo Artistico Alfieri</title>
+<title>Michelerio · Indisciplinato 2027</title>
 <script>try{["p-grande","p-contrasto","p-spazio","p-link","p-fermo"].forEach(function(c){if(localStorage.getItem(c)==="1")document.documentElement.classList.add(c)})}catch(e){}</script>
 <meta name="description" content="Mappa 3D interattiva del cortile di Palazzo del Michelerio per Indisciplinato 2027, base di lavoro per la mappa tattile del Liceo Artistico Benedetto Alfieri.">
 <meta name="robots" content="noindex, nofollow">
@@ -45,7 +45,7 @@ header.top a.logo { display: flex; align-items: center; gap: .6rem; color: var(-
 header.top img { width: 44px; height: 44px; }
 .tag { font-size: .9rem; color: var(--muted); }
 
-.hero { padding: .5rem 0 1.2rem; }
+.hero { padding: 1.6rem 0 1.2rem; }
 .hero h1 { font-size: clamp(2rem, 5vw, 3.4rem); }
 .hero p { margin-top: .6rem; max-width: 62ch; color: var(--muted); font-size: 1.125rem; }
 .braille-line { font-family: "DejaVu Sans", "Segoe UI Symbol", "Apple Braille", sans-serif; letter-spacing: .08em; color: var(--muted); }
@@ -104,13 +104,8 @@ footer { border-top: 1px solid var(--line); padding: 1.2rem 0 2rem; font-size: .
 <a class="skip" href="#mappa">Vai alla mappa</a>
 
 <div class="wrap">
-  <header class="top">
-    <a class="logo" href="/"><img src="/logo.png" alt="" width="44" height="44"> Indisciplinato 2027</a>
-    <span class="tag">con il Liceo Artistico Benedetto Alfieri · Formazione Scuola Lavoro</span>
-  </header>
-
   <section class="hero" aria-labelledby="titolo">
-    <h1 id="titolo">Mappa sensoriale del Michelerio</h1>
+    <h1 id="titolo">Michelerio</h1>
     <p class="braille-line" aria-hidden="true" id="titolo-braille"></p>
     <p>Il cortile di Palazzo del Michelerio come sarà il 15 e 16 maggio 2027. È la base da cui partire per progettare insieme la mappa tattile della fiera: girala, guardala dall'alto, sposta i blocchi.</p>
   </section>
@@ -770,7 +765,7 @@ function aggiornaTesti() {
 }
 
 /* ---------- avvio ---------- */
-$("titolo-braille").textContent = brailleUni("mappa sensoriale del michelerio");
+$("titolo-braille").textContent = brailleUni("michelerio");
 aggiornaTesti();
 aggiornaEditor();
 new ResizeObserver(ridimensiona).observe(cv);
