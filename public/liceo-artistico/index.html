@@ -118,7 +118,7 @@ footer { border-top: 1px solid var(--line); padding: 1.2rem 0 2rem; font-size: .
   <section class="mappa" id="mappa" aria-labelledby="mappa-t">
     <h2 id="mappa-t" class="sr-only">Mappa 3D interattiva</h2>
     <div class="stage">
-      <canvas id="c" tabindex="0" role="img" aria-label="Mappa 3D del cortile di Palazzo del Michelerio. La descrizione testuale completa è sotto la mappa."></canvas>
+      <canvas id="c" tabindex="0" role="img" aria-label="Mappa 3D del cortile di Palazzo del Michelerio con le aree della fiera: vignaioli, agricoltori, food, cestini riciclo, sala conferenze e degustazione, infopoint, entrate e bagni."></canvas>
     </div>
     <div class="toolbar" role="toolbar" aria-label="Comandi della mappa">
       <button class="btn" id="b-ruota" aria-pressed="false">Ruota</button>
@@ -179,52 +179,6 @@ footer { border-top: 1px solid var(--line); padding: 1.2rem 0 2rem; font-size: .
     </div>
   </section>
 
-  <div class="below">
-    <section class="card" aria-labelledby="leg-t">
-      <h2 id="leg-t">Legenda</h2>
-      <ul class="legenda" id="legenda"></ul>
-    </section>
-    <section class="card" aria-labelledby="desc-t" id="descrizione">
-      <h2 id="desc-t">Descrizione testuale</h2>
-      <div id="desc"></div>
-    </section>
-  </div>
-
-  <div class="storia">
-    <section class="card" aria-labelledby="s1">
-      <span class="num">01</span>
-      <h2 id="s1">Chi siamo</h2>
-      <p>Vinaccia ETS è un'associazione astigiana nata nel 2022 per promuovere il vino naturale e le microproduzioni del territorio.</p>
-      <p>Indisciplinato è la nostra fiera dei vignaioli artigianali indipendenti: nel 2027 arriva alla terza edizione, il 15 e 16 maggio a Palazzo del Michelerio, a ingresso gratuito.</p>
-    </section>
-    <section class="card" aria-labelledby="s2">
-      <span class="num">02</span>
-      <h2 id="s2">Eventi for All</h2>
-      <p>È il bando della Fondazione CRT per eventi accessibili, sostenibili e legati al territorio.</p>
-      <p>Per noi non vuol dire aggiungere servizi, ma progettare una fiera leggibile da chiunque: interpretariato LIS, degustazioni al buio con ONAV e APRI, kit sensoriale, sala di decompressione, trasporto AUSER.</p>
-      <p><strong>Una fiera pensata meglio accoglie meglio tutti.</strong></p>
-    </section>
-    <section class="card" aria-labelledby="s3">
-      <span class="num">03</span>
-      <h2 id="s3">Il vostro ruolo</h2>
-      <ul>
-        <li>Progettare e realizzare una mappa tattile della fiera, con legenda, fruibile anche da persone cieche e ipovedenti.</li>
-        <li>Documentare il lavoro con foto e video.</li>
-        <li>Allestire la mappa al Michelerio durante l'evento.</li>
-      </ul>
-    </section>
-    <section class="card" aria-labelledby="s4">
-      <span class="num">04</span>
-      <h2 id="s4">Domande da cui partire</h2>
-      <ul>
-        <li>Plastico, rilievo su pannello o stampa 3D?</li>
-        <li>Quali texture al posto dei colori?</li>
-        <li>Braille breve sulla mappa e completo in legenda?</li>
-        <li>Dove metterla, a che altezza, con quale “tu sei qui”?</li>
-        <li>La proviamo con APRI prima della fiera?</li>
-      </ul>
-    </section>
-  </div>
 </div>
 
 <footer>
@@ -809,6 +763,7 @@ function lato(b) {
 function aggiornaTesti() {
   const g = new Map();
   for (const b of blocchi) { const k = b.nome; if (!g.has(k)) g.set(k, { c: b.c, n: 0, lati: [] }); const v = g.get(k); v.n++; v.lati.push(lato(b)); }
+  if (!$("legenda")) return;
   $("legenda").innerHTML = [...g].map(([nome, v]) => `<li><span class="sw" style="background:${v.c}" aria-hidden="true"></span><span class="n">${esc(nome)}</span><span class="d"><span class="braille-line" aria-hidden="true">${brailleUni(nome)}</span> · ${v.n === 1 ? "1 area" : v.n + " aree"}</span></li>`).join("");
   const righe = [...g].map(([nome, v]) => `<p><strong>${esc(nome)}</strong>: ${[...new Set(v.lati)].join("; ")}.</p>`);
   $("desc").innerHTML = `<p>Il cortile è un grande quadrato con un portico tutto intorno e un giardino al centro diviso in quattro aiuole da due vialetti a croce. L'ingresso principale è a sud, da Corso Alfieri; un secondo accesso è nell'angolo nord-est. Nord è in alto nella vista dall'alto.</p>` + righe.join("");
