@@ -9,7 +9,8 @@ Ogni push su `main` viene pubblicato automaticamente da Cloudflare.
 
 Accessibilità: obiettivo WCAG 2.2 AA. Analisi e decisioni di progetto nel repo privato `indisciplinato` (cartella `sito/`).
 
-## Mappa sensoriale del Michelerio
+## Pagina Michelerio (Liceo Artistico)
 
-- `public/liceo-artistico/` – mappa 3D interattiva del cortile (Indisciplinato × Liceo Artistico Alfieri), modificabile dalla pagina con il pulsante *Modifica*. Nessuna libreria esterna.
-- `strumenti/mappa-apps-script.gs` – Apps Script per il salvataggio online con password (istruzioni nel file). Finché `SHEET_API` nella pagina è vuoto, le modifiche restano sul dispositivo e si condividono con *Scarica file* / *Carica file*.
+- `public/liceo-artistico/` – mappa 3D del cortile costruita sulla planimetria CAD (Tav. 2 pavimentazione, in metri), con vista "Pianta CAD" in scala, modalità *Modifica*, modulo "Suggerisci un'idea" con captcha, idee in card, link utili. Nessuna libreria esterna.
+- `public/liceo-artistico/michelerio-cad.webp` – planimetria resa in immagine (48 px/m, origine = filo interno muri ovest/nord del cortile).
+- `strumenti/mappa-apps-script.gs` – un solo Apps Script per salvataggio online della mappa (password) e raccolta idee (captcha firmato lato server). Istruzioni nel file; poi metti l'URL in `SHEET_API`.
