@@ -144,7 +144,7 @@ footer.piede { border-top: 1px solid var(--line); margin-top: 2rem; padding: 1.2
   <section class="hero" aria-labelledby="titolo">
     <h1 id="titolo">Michelerio</h1>
     <p class="braille-line" aria-hidden="true" id="titolo-braille"></p>
-    <p>Il cortile di Palazzo del Michelerio come sarà il 15 e 16 maggio 2027. È la base da cui partire per progettare insieme la mappa tattile della fiera: girala, guardala dall'alto, sposta i blocchi.</p>
+    <p>Il cortile di Palazzo del Michelerio come sarà il 15 e 16 maggio 2027. È la base da cui partire per progettare insieme la mappa tattile della fiera: girala e guardala dall'alto.</p>
   </section>
 
   <section class="mappa" id="mappa" aria-labelledby="mappa-t">
@@ -158,63 +158,19 @@ footer.piede { border-top: 1px solid var(--line); margin-top: 2rem; padding: 1.2
       <button class="btn" id="b-alto" aria-pressed="false">Vista dall'alto</button>
       <button class="btn" id="b-braille" aria-pressed="true">Braille</button>
       <button class="btn" id="b-etichette" aria-pressed="true">Etichette</button>
-      <button class="btn" id="b-modifica" aria-pressed="false">Modifica</button>
       <span class="hint" id="hint">Trascina per ruotare · rotella o due dita per lo zoom · frecce da tastiera</span>
     </div>
 
-    <div class="editor" id="editor" aria-label="Pannello di modifica">
-      <fieldset>
-        <legend>Blocco selezionato</legend>
-        <label for="e-sel">Scegli un blocco (oppure toccalo sulla mappa)</label>
-        <select id="e-sel"></select>
-        <label for="e-nome">Nome</label>
-        <input type="text" id="e-nome" maxlength="40" autocomplete="off">
-        <label>Colore</label>
-        <div class="swatches" id="e-col" role="group" aria-label="Colore del blocco"></div>
-        <div class="row">
-          <button class="btn" id="e-rot">Ruota 90°</button>
-          <button class="btn" id="e-dup">Duplica</button>
-          <button class="btn warn" id="e-del">Elimina</button>
-        </div>
-      </fieldset>
-      <fieldset>
-        <legend>Misure</legend>
-        <label for="e-w">Lunghezza <output id="o-w"></output></label>
-        <input type="range" id="e-w" min="0.3" max="30" step="0.05">
-        <label for="e-d">Profondità <output id="o-d"></output></label>
-        <input type="range" id="e-d" min="0.3" max="20" step="0.05">
-        <label for="e-h">Altezza <output id="o-h"></output></label>
-        <input type="range" id="e-h" min="0.1" max="3" step="0.05">
-        <p class="status" style="margin-top:.6rem">Misure reali in metri, dalla planimetria CAD. Con il blocco selezionato: frecce per spostarlo di 25 cm (Maiusc = 5 cm).</p>
-      </fieldset>
-      <fieldset>
-        <legend>Mappa</legend>
-        <div class="row" style="margin-top:.2rem">
-          <button class="btn primary" id="e-add">+ Aggiungi blocco</button>
-          <button class="btn" id="e-undo">Annulla</button>
-        </div>
-        <label style="display:flex;gap:.5rem;align-items:center;margin-top:.8rem"><input type="checkbox" id="e-grid" checked> Aggancia alla griglia</label>
-        <div class="row">
-          <button class="btn" id="e-export">Scarica file</button>
-          <button class="btn" id="e-import">Carica file</button>
-          <input type="file" id="e-file" accept="application/json,.json" hidden>
-          <button class="btn warn" id="e-reset">Ripristina originale</button>
-        </div>
-      </fieldset>
-      <fieldset id="online">
-        <legend>Salva online</legend>
-        <p class="status" id="online-info">Le modifiche restano salvate su questo dispositivo.</p>
-        <label for="e-pw">Password</label>
-        <input type="password" id="e-pw" autocomplete="current-password">
-        <div class="row"><button class="btn primary" id="e-save">Salva per tutti</button></div>
-        <p class="status" id="save-status" role="status" aria-live="polite"></p>
-      </fieldset>
-    </div>
+  </section>
+
+  <section class="blocco" id="idee" aria-labelledby="idee-t">
+    <h2 id="idee-t">Idee</h2>
+    <div class="idee" id="lista-idee" aria-live="polite"></div>
   </section>
 
   <section class="blocco" id="suggerisci" aria-labelledby="sug-t">
     <h2 id="sug-t">Suggerisci un'idea</h2>
-    <p class="intro">Come rendere la fiera e la mappa più accessibili? Scrivi la tua proposta: comparirà qui sotto, tra le idee.</p>
+    <p class="intro">Come rendere la fiera e la mappa più accessibili? Scrivi la tua proposta: comparirà qui sopra, tra le idee.</p>
     <form id="f-idea" class="card form" novalidate>
       <div class="campi">
         <div>
@@ -242,11 +198,6 @@ footer.piede { border-top: 1px solid var(--line); margin-top: 2rem; padding: 1.2
       <button type="submit" class="btn primary" id="i-invia">Invia l'idea</button>
       <p class="status" id="i-stato" role="status" aria-live="polite"></p>
     </form>
-  </section>
-
-  <section class="blocco" id="idee" aria-labelledby="idee-t">
-    <h2 id="idee-t">Idee</h2>
-    <div class="idee" id="lista-idee" aria-live="polite"></div>
   </section>
 
   <section class="blocco" id="link" aria-labelledby="link-t">
@@ -285,9 +236,7 @@ footer.piede { border-top: 1px solid var(--line); margin-top: 2rem; padding: 1.2
    Coordinate in pianta: x verso est, y verso sud (come il disegno CAD), z in alto.
    ====================================================================== */
 
-// Indirizzo dell'Apps Script per il salvataggio online (vedi strumenti/mappa-apps-script.gs).
-// Lasciarlo vuoto = le modifiche restano sul dispositivo.
-const SHEET_API = "";
+const API = "/api"; // servizio idee del sito (src/worker.js)
 
 const STORE = "mappa-michelerio-v2"; // v2: coordinate in metri sulla planimetria CAD
 const CENTRO = { x: 18.7, y: 20.6 };
@@ -334,17 +283,48 @@ const STRADE = [
   { t: "Via Carducci", x: 17, y: -4.4 },
 ];
 
-/* ---------- braille ---------- */
+/* ---------- braille italiano (6 punti, integrale) ----------
+   Lettere come nel braille internazionale; accentate come nel braille francese/italiano;
+   segno di maiuscola = punti 4-6 (prima della lettera). Fonte: Unitas, "Abc Braille italiano". */
 const BR = { a:"1", b:"12", c:"14", d:"145", e:"15", f:"124", g:"1245", h:"125", i:"24", j:"245", k:"13",
   l:"123", m:"134", n:"1345", o:"135", p:"1234", q:"12345", r:"1235", s:"234", t:"2345", u:"136",
-  v:"1236", w:"2456", x:"1346", y:"13456", z:"1356" };
+  v:"1236", w:"2456", x:"1346", y:"13456", z:"1356",
+  "à":"12356", "è":"2346", "é":"123456", "ì":"34", "ò":"346", "ó":"346", "ù":"23456" };
+const MAIUSC = "46";
 const POS = { 1:[0,0], 2:[0,1], 3:[0,2], 4:[1,0], 5:[1,1], 6:[1,2] };
-const pulisci = s => s.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
-const brailleUni = s => [...pulisci(s)].map(ch => BR[ch] ? String.fromCharCode(0x2800 + [...BR[ch]].reduce((a, n) => a | (1 << (n - 1)), 0)) : (ch === " " ? "⠀" : "")).join("");
-const iniziale = s => { const m = pulisci(s).match(/[a-z]/); return m ? m[0] : "a"; };
+// testo da scrivere in braille per ogni zona (senza la barra, che a tatto non serve)
+const testoBraille = nome => nome.replace(/\s*\/\s*/g, " e ");
+// elenco delle celle: stringa di punti, "" = spazio
+function celle(testo) {
+  const out = [];
+  for (const ch of testo) {
+    if (ch === " ") { if (out.length && out[out.length - 1] !== "") out.push(""); continue; }
+    const m = ch.toLowerCase();
+    if (!BR[m]) continue;
+    if (ch !== m) out.push(MAIUSC);
+    out.push(BR[m]);
+  }
+  while (out.length && out[out.length - 1] === "") out.pop();
+  return out;
+}
+// riga braille disegnata sullo schermo: x,y = angolo in alto a sinistra; p = distanza tra i punti
+function rigaBraille(cel, x, y, p, colore) {
+  const r = Math.max(1, p * 0.32);
+  ctx.fillStyle = colore;
+  cel.forEach((c, k) => {
+    for (const n of c) { const [i, j] = POS[n]; ctx.beginPath(); ctx.arc(x + k * p * 2.6 + i * p, y + j * p, r, 0, Math.PI * 2); ctx.fill(); }
+  });
+  return cel.length * p * 2.6;
+}
+function svgBraille(testo, p) {
+  const cel = celle(testo), r = p * 0.32, w = cel.length * p * 2.6, h = p * 2 + r * 2 + 2;
+  let pts = "";
+  cel.forEach((c, k) => { for (const n of c) { const [i, j] = POS[n]; pts += `<circle cx="${(k * p * 2.6 + i * p + r + 1).toFixed(1)}" cy="${(j * p + r + 1).toFixed(1)}" r="${r.toFixed(1)}"/>`; } });
+  return `<svg width="${(w + 2).toFixed(0)}" height="${h.toFixed(0)}" viewBox="0 0 ${(w + 2).toFixed(1)} ${h.toFixed(1)}" fill="currentColor" aria-hidden="true" focusable="false">${pts}</svg>`;
+}
 
 /* ---------- stato ---------- */
-let blocchi = carica() || clona(ORIGINALE);
+let blocchi = clona(ORIGINALE);
 let undo = [];
 let sel = -1;
 const vista = { yaw: rad(28), pitch: rad(36), zoom: 1, panX: 0, panY: 0 };
@@ -355,7 +335,7 @@ let opz = { braille: true, etichette: true, modifica: false, ruota: false, grigl
 function rad(g) { return g * Math.PI / 180; }
 function clona(a) { return JSON.parse(JSON.stringify(a)); }
 function carica() { try { const j = JSON.parse(localStorage.getItem(STORE)); return Array.isArray(j) && j.length ? j : null; } catch (e) { return null; } }
-function salvaLocale() { try { localStorage.setItem(STORE, JSON.stringify(blocchi)); localStorage.setItem(STORE + "-t", String(Date.now())); } catch (e) {} aggiornaTesti(); }
+function salvaLocale() {} // modifica disattivata
 function memo() { undo.push(JSON.stringify(blocchi)); if (undo.length > 60) undo.shift(); }
 
 /* ---------- canvas & proiezione ---------- */
@@ -486,24 +466,30 @@ function ordina(list) {
   return out;
 }
 
-/* ---------- braille in rilievo sul blocco ---------- */
-function puntiBraille(b, lettera) {
-  const passo = Math.max(0.28, Math.min(0.5, Math.min(b.x1 - b.x0, b.y1 - b.y0) * 0.2));
-  const cx = (b.x0 + b.x1) / 2, cy = (b.y0 + b.y1) / 2;
+/* ---------- braille in rilievo sul blocco: nome completo, lungo il lato lungo ---------- */
+function puntiBraille(b, nome) {
+  const cel = celle(testoBraille(nome));
+  if (!cel.length) return;
+  const L = Math.max(b.x1 - b.x0, b.y1 - b.y0), S = Math.min(b.x1 - b.x0, b.y1 - b.y0);
+  const orizz = (b.x1 - b.x0) >= (b.y1 - b.y0);
+  // passo tra i punti (m): la riga deve stare nel blocco, in lunghezza e in larghezza
+  const passo = Math.min(0.32, (L * 0.9) / (cel.length * 2.6), (S * 0.7) / 2.4);
   const k = SC * vista.zoom;
-  const r = Math.max(1.6, passo * 0.3 * k);
-  const c = Math.cos(vista.yaw), s = Math.sin(vista.yaw);
-  for (const n of BR[lettera] || "") {
-    const [i, j] = POS[n];
-    // la cella è "dritta" rispetto a chi guarda: offset in coordinate schermo, riportati in pianta
-    const ox = (i - 0.5) * passo, oy = (j - 1) * passo;
-    const x = cx + ox * c + oy * s, y = cy - ox * s + oy * c;
-    const [X, Y] = P(x, y, b.z1 + 0.03);
-    const ry = r * Math.max(0.45, Math.sin(vista.pitch));
-    ctx.beginPath(); ctx.ellipse(X + 0.8, Y + 1.2, r, ry, 0, 0, Math.PI * 2); ctx.fillStyle = "rgba(0,0,0,.28)"; ctx.fill();
-    ctx.beginPath(); ctx.ellipse(X, Y, r, ry, 0, 0, Math.PI * 2); ctx.fillStyle = "#ffffff"; ctx.fill();
-    ctx.lineWidth = 1; ctx.strokeStyle = "rgba(20,20,20,.55)"; ctx.stroke();
-  }
+  const r = passo * 0.34 * k;
+  if (r < 0.55) return; // troppo piccolo per essere visto: si legge ingrandendo
+  const cx = (b.x0 + b.x1) / 2, cy = (b.y0 + b.y1) / 2;
+  const tot = cel.length * passo * 2.6 - passo * 1.6;
+  const ry = r * Math.max(0.45, Math.sin(vista.pitch));
+  cel.forEach((c, n) => {
+    for (const d of c) {
+      const [i, j] = POS[d];
+      const u = -tot / 2 + n * passo * 2.6 + i * passo, v = (j - 1) * passo;
+      const x = orizz ? cx + u : cx - v, y = orizz ? cy + v : cy + u;
+      const [X, Y] = P(x, y, b.z1 + 0.02);
+      ctx.beginPath(); ctx.ellipse(X, Y, r, ry, 0, 0, Math.PI * 2); ctx.fillStyle = "#ffffff"; ctx.fill();
+      if (r > 1.2) { ctx.lineWidth = 0.8; ctx.strokeStyle = "rgba(20,20,20,.55)"; ctx.stroke(); }
+    }
+  });
 }
 
 /* ---------- etichette ---------- */
@@ -526,14 +512,13 @@ function etichette(boxes) {
   tag.sort((p, q) => p.Y - q.Y);
   const fz = Math.max(11, Math.min(16, CW / 70));
   const placed = [];
-  const compatto = CW < 600; // su telefono: etichette solo testo, il braille resta sui blocchi e in legenda
+  const compatto = CW < 600; // su telefono: etichette solo testo, il braille resta sui blocchi
   const conBr = opz.braille && !compatto;
   for (const t of tag) {
     ctx.font = `700 ${fz}px "Atkinson Hyperlegible", Verdana, sans-serif`;
     const w1 = ctx.measureText(compatto && t.bl.nome.length > 18 ? t.bl.nome.split("/")[0].trim().toUpperCase() : t.bl.nome.toUpperCase()).width;
-    const br = brailleUni(t.bl.nome);
-    ctx.font = `${fz}px "DejaVu Sans","Segoe UI Symbol","Apple Braille",sans-serif`;
-    const w2 = conBr ? ctx.measureText(br).width : 0;
+    const cel = celle(testoBraille(t.bl.nome)), pb = fz * 0.27;
+    const w2 = conBr ? cel.length * pb * 2.6 : 0;
     const w = Math.max(w1, w2) + 30, h = conBr ? fz * 2.9 : fz * 1.9;
     let lx = t.X - w / 2, ly = t.Y - h - (CW < 600 ? 22 : 34);
     // evita sovrapposizioni semplici
@@ -554,8 +539,7 @@ function etichette(boxes) {
     ctx.font = `700 ${fz}px "Atkinson Hyperlegible", Verdana, sans-serif`;
     ctx.fillText(compatto && t.bl.nome.length > 18 ? t.bl.nome.split("/")[0].trim().toUpperCase() : t.bl.nome.toUpperCase(), lx + 18, ly + fz * 0.45);
     if (conBr) {
-      ctx.fillStyle = "#4a5266"; ctx.font = `${fz}px "DejaVu Sans","Segoe UI Symbol","Apple Braille",sans-serif`;
-      ctx.fillText(br, lx + 18, ly + fz * 1.6);
+      rigaBraille(cel, lx + 18, ly + fz * 1.75, pb, "#4a5266");
     }
   }
 }
@@ -576,7 +560,7 @@ function disegna() {
   ultimiBox = mobili;
   for (const b of ordina(mobili)) {
     disegnaBox(b, b.idx === sel && opz.modifica);
-    if (opz.braille) puntiBraille(b, iniziale(blocchi[b.idx].nome));
+    if (opz.braille) puntiBraille(b, blocchi[b.idx].nome);
   }
   // strade
   ctx.fillStyle = getComputedStyle(document.body).color; ctx.globalAlpha = .65;
@@ -731,7 +715,6 @@ cv.addEventListener("keydown", e => {
     ArrowDown: () => opz.cad ? vista.panY -= 40 : vista.pitch = clamp(vista.pitch - rad(6), rad(18), rad(90)),
     "+": () => vista.zoom = clamp(vista.zoom * 1.15, 0.5, ZMAX()), "=": () => vista.zoom = clamp(vista.zoom * 1.15, 0.5, ZMAX()),
     "-": () => vista.zoom = clamp(vista.zoom / 1.15, 0.5, ZMAX()),
-    Delete: () => opz.modifica && sel >= 0 && elimina(), Backspace: () => opz.modifica && sel >= 0 && elimina(),
     Escape: () => seleziona(-1),
   }[e.key];
   if (az) { e.preventDefault(); az(); aggiornaAlto(); disegna(); }
@@ -767,8 +750,7 @@ $("b-cad").onclick = () => {
   fermaRotazione();
   opz.cad = !opz.cad; premi("b-cad", opz.cad);
   $("b-cad").textContent = opz.cad ? "Mappa 3D" : "Pianta CAD";
-  for (const id of ["b-ruota", "b-alto", "b-braille", "b-etichette", "b-modifica"]) $(id).disabled = opz.cad;
-  if (opz.cad && opz.modifica) $("b-modifica").click();
+  for (const id of ["b-ruota", "b-alto", "b-braille", "b-etichette"]) $(id).disabled = opz.cad;
   $("hint").textContent = opz.cad ? "Planimetria CAD in scala · trascina per spostarti · rotella o due dita per lo zoom" : "Trascina per ruotare · rotella o due dita per lo zoom · frecce da tastiera";
   if (opz.cad) { // pianta intera centrata nello schermo
     const cx = (BASE.x0 + BASE.x1) / 2, cy = (BASE.y0 + BASE.y1) / 2;
@@ -782,134 +764,17 @@ $("b-ruota").onclick = () => { opz.ruota = !opz.ruota; premi("b-ruota", opz.ruot
 $("b-alto").onclick = () => { fermaRotazione(); if (vista.pitch > rad(85)) animaA(VISTA3D.yaw, VISTA3D.pitch); else animaA(0, rad(90)); };
 $("b-braille").onclick = () => { opz.braille = !opz.braille; premi("b-braille", opz.braille); disegna(); };
 $("b-etichette").onclick = () => { opz.etichette = !opz.etichette; premi("b-etichette", opz.etichette); disegna(); };
-$("b-modifica").onclick = () => {
-  opz.modifica = !opz.modifica; premi("b-modifica", opz.modifica);
-  $("editor").classList.toggle("on", opz.modifica);
-  cv.classList.toggle("edit", opz.modifica);
-  $("hint").textContent = opz.modifica ? "Tocca un blocco per selezionarlo e trascinalo · trascina il vuoto per ruotare" : "Trascina per ruotare · rotella o due dita per lo zoom · frecce da tastiera";
-  if (!opz.modifica) seleziona(-1); else { aggiornaEditor(); if (sel < 0 && blocchi.length) seleziona(0); }
-  disegna();
-};
 
-/* ---------- editor ---------- */
-function seleziona(i) { sel = i; aggiornaEditor(); disegna(); }
-function aggiornaEditor() {
-  const s = $("e-sel");
-  s.innerHTML = blocchi.map((b, i) => `<option value="${i}">${i + 1}. ${esc(b.nome)} – ${lato(b)}</option>`).join("");
-  if (sel >= 0) s.value = sel;
-  const b = blocchi[sel];
-  const off = !b;
-  for (const id of ["e-nome", "e-w", "e-d", "e-h", "e-rot", "e-dup", "e-del"]) $(id).disabled = off;
-  if (!b) return;
-  $("e-nome").value = b.nome;
-  $("e-w").value = b.w; $("o-w").textContent = metri(b.w);
-  $("e-d").value = b.d; $("o-d").textContent = metri(b.d);
-  $("e-h").value = b.h; $("o-h").textContent = metri(b.h);
-  $("e-col").innerHTML = PALETTE.map(p => `<button type="button" style="background:${p.c}" aria-label="${esc(p.nome)}" title="${esc(p.nome)}" aria-pressed="${p.c === b.c}" data-c="${p.c}" data-n="${esc(p.nome)}"></button>`).join("");
-}
-function metri(v) { return v.toLocaleString("it-IT", { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + " m"; }
+/* ---------- (la modifica della mappa è stata tolta: disposizione fissa) ---------- */
+function seleziona(i) { sel = i; disegna(); }
 function esc(s) { return String(s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c])); }
 
-$("e-sel").onchange = e => seleziona(+e.target.value);
-$("e-nome").addEventListener("focus", memo);
-$("e-nome").oninput = e => { if (sel < 0) return; blocchi[sel].nome = e.target.value || "Senza nome"; salvaLocale(); disegna(); };
-$("e-nome").onchange = () => aggiornaEditor();
-for (const k of ["w", "d", "h"]) {
-  $("e-" + k).addEventListener("pointerdown", memo);
-  $("e-" + k).addEventListener("keydown", memo);
-  $("e-" + k).oninput = e => { if (sel < 0) return; blocchi[sel][k] = +e.target.value; $("o-" + k).textContent = metri(+e.target.value); salvaLocale(); disegna(); };
-}
-$("e-col").onclick = e => {
-  const t = e.target.closest("button"); if (!t || sel < 0) return;
-  memo();
-  const b = blocchi[sel];
-  const vecchioPred = PALETTE.find(p => p.c === b.c);
-  b.c = t.dataset.c;
-  // se il nome era quello predefinito del colore precedente, segue il nuovo colore
-  if (vecchioPred && b.nome === vecchioPred.nome && t.dataset.n !== "Altro") b.nome = t.dataset.n;
-  salvaLocale(); aggiornaEditor(); disegna();
-};
-$("e-rot").onclick = () => { if (sel < 0) return; memo(); const b = blocchi[sel]; [b.w, b.d] = [b.d, b.w]; salvaLocale(); aggiornaEditor(); disegna(); };
-$("e-dup").onclick = () => { if (sel < 0) return; memo(); const b = clona(blocchi[sel]); b.x += 1.5; b.y += 1.5; blocchi.push(b); salvaLocale(); seleziona(blocchi.length - 1); };
-$("e-del").onclick = () => elimina();
-function elimina() { if (sel < 0) return; memo(); blocchi.splice(sel, 1); salvaLocale(); seleziona(Math.min(sel, blocchi.length - 1)); }
-$("e-add").onclick = () => { memo(); blocchi.push({ nome: "Nuovo stand", c: "#9a8f80", x: 10, y: 10, w: 2.5, d: 2.5, h: 0.9 }); salvaLocale(); seleziona(blocchi.length - 1); };
-$("e-undo").onclick = () => { const u = undo.pop(); if (!u) return; blocchi = JSON.parse(u); sel = Math.min(sel, blocchi.length - 1); salvaLocale(); aggiornaEditor(); disegna(); };
-$("e-grid").onchange = e => { opz.griglia = e.target.checked; disegna(); };
-$("e-reset").onclick = () => { if (!confirm("Tornare alla disposizione originale? Le modifiche su questo dispositivo andranno perse.")) return; memo(); blocchi = clona(ORIGINALE); salvaLocale(); seleziona(-1); };
-$("e-export").onclick = () => {
-  const blob = new Blob([JSON.stringify({ versione: 1, salvato: new Date().toISOString(), blocchi }, null, 2)], { type: "application/json" });
-  const a = document.createElement("a"); a.href = URL.createObjectURL(blob);
-  a.download = "mappa-michelerio-" + new Date().toISOString().slice(0, 10) + ".json"; a.click();
-  setTimeout(() => URL.revokeObjectURL(a.href), 2000);
-};
-$("e-import").onclick = () => $("e-file").click();
-$("e-file").onchange = async e => {
-  const f = e.target.files[0]; if (!f) return;
-  try {
-    const j = JSON.parse(await f.text()); const arr = Array.isArray(j) ? j : j.blocchi;
-    if (!valida(arr)) throw new Error();
-    memo(); blocchi = arr; salvaLocale(); seleziona(-1);
-  } catch (err) { alert("Il file non sembra una mappa valida."); }
-  e.target.value = "";
-};
-function valida(a) { return Array.isArray(a) && a.every(b => b && typeof b.nome === "string" && /^#[0-9a-f]{6}$/i.test(b.c) && [b.x, b.y, b.w, b.d, b.h].every(Number.isFinite)); }
-
-/* ---------- salvataggio online (Apps Script) ---------- */
-if (!SHEET_API) {
-  $("online-info").textContent = "Salvataggio online non ancora collegato: per ora le modifiche restano su questo dispositivo. Usa “Scarica file” per condividerle.";
-  $("e-pw").disabled = true; $("e-save").disabled = true;
-} else {
-  $("online-info").textContent = "Inserisci la password per pubblicare questa disposizione: la vedranno tutti.";
-}
-$("e-save").onclick = async () => {
-  const st = $("save-status"); st.textContent = "Salvataggio…";
-  try {
-    const r = await fetch(SHEET_API, { method: "POST", body: JSON.stringify({ azione: "salvaMappa", password: $("e-pw").value, blocchi }) });
-    const j = await r.json();
-    st.textContent = j.ok ? "Salvato. Da adesso tutti vedono questa disposizione." : (j.errore || "Non salvato.");
-  } catch (e) { st.textContent = "Errore di rete: riprova."; }
-};
-async function caricaOnline() {
-  if (!SHEET_API) return;
-  try {
-    const j = await (await fetch(SHEET_API + "?azione=mappa", { cache: "no-store" })).json();
-    if (j && valida(j.blocchi) && j.blocchi.length) {
-      // l'ultima versione online vince, salvo modifiche locali più recenti
-      const loc = Number(localStorage.getItem(STORE + "-t") || 0);
-      if (!loc || (j.salvato && Date.parse(j.salvato) > loc)) { blocchi = j.blocchi; aggiornaTesti(); disegna(); }
-    }
-  } catch (e) {}
-}
-
-/* ---------- legenda e descrizione testuale ---------- */
-function lato(b) {
-  const dx = b.x - CENTRO.x, dy = b.y - CENTRO.y;
-  if (b.y > CORTILE.y1) return "verso Corso Alfieri";
-  if (Math.abs(dx) < 4 && Math.abs(dy) < 4) return "al centro del cortile";
-  const ns = dy < -8.5 ? "nord" : dy > 8.5 ? "sud" : "";
-  const eo = dx < -8.5 ? "ovest" : dx > 8.5 ? "est" : "";
-  if (b.x < CORTILE.x0 || b.x > CORTILE.x1) return "nell'edificio, lato " + (eo || ns);
-  return "lato " + (ns && eo ? ns + "-" + eo : ns || eo || "centrale");
-}
-function aggiornaTesti() {
-  const g = new Map();
-  for (const b of blocchi) { const k = b.nome; if (!g.has(k)) g.set(k, { c: b.c, n: 0, lati: [] }); const v = g.get(k); v.n++; v.lati.push(lato(b)); }
-  if (!$("legenda")) return;
-  $("legenda").innerHTML = [...g].map(([nome, v]) => `<li><span class="sw" style="background:${v.c}" aria-hidden="true"></span><span class="n">${esc(nome)}</span><span class="d"><span class="braille-line" aria-hidden="true">${brailleUni(nome)}</span> · ${v.n === 1 ? "1 area" : v.n + " aree"}</span></li>`).join("");
-  const righe = [...g].map(([nome, v]) => `<p><strong>${esc(nome)}</strong>: ${[...new Set(v.lati)].join("; ")}.</p>`);
-  $("desc").innerHTML = `<p>Il cortile è un grande quadrato con un portico tutto intorno e un giardino al centro diviso in quattro aiuole da due vialetti a croce. L'ingresso principale è a sud, da Corso Alfieri; un secondo accesso è nell'angolo nord-est. Nord è in alto nella vista dall'alto.</p>` + righe.join("");
-}
-
 /* ---------- avvio ---------- */
-$("titolo-braille").textContent = brailleUni("michelerio");
-aggiornaTesti();
-aggiornaEditor();
+$("titolo-braille").innerHTML = svgBraille("Michelerio", 6);
 new ResizeObserver(ridimensiona).observe(cv);
 if (document.fonts) document.fonts.ready.then(disegna);
-caricaOnline();
 
-/* ---------- idee (Apps Script) ---------- */
+/* ---------- idee (servizio /api del sito) ---------- */
 const listaIdee = $("lista-idee");
 let capToken = "";
 function data(d) { try { return new Date(d).toLocaleDateString("it-IT", { day: "numeric", month: "long", year: "numeric" }); } catch (e) { return ""; } }
@@ -918,15 +783,13 @@ function mostraIdee(arr) {
   listaIdee.innerHTML = arr.map(i => `<article class="idea"><p>${esc(i.idea)}</p><p class="chi">${esc(i.nome || "Anonimo")}${i.data ? " · " + data(i.data) : ""}</p></article>`).join("");
 }
 async function caricaIdee() {
-  if (!SHEET_API) { mostraIdee([]); return; }
-  try { const j = await (await fetch(SHEET_API + "?azione=idee", { cache: "no-store" })).json(); mostraIdee(j.idee); }
+  try { const j = await (await fetch(API + "/idee", { cache: "no-store" })).json(); mostraIdee(j.idee); }
   catch (e) { listaIdee.innerHTML = '<p class="vuoto">Non riesco a caricare le idee in questo momento.</p>'; }
 }
 async function nuovaDomanda() {
   $("i-cap").value = "";
-  if (!SHEET_API) { $("cap-domanda").textContent = "non disponibile"; return; }
   $("cap-domanda").textContent = "…";
-  try { const j = await (await fetch(SHEET_API + "?azione=captcha", { cache: "no-store" })).json(); $("cap-domanda").textContent = j.domanda + " = ?"; capToken = j.token; }
+  try { const j = await (await fetch(API + "/captcha", { cache: "no-store" })).json(); $("cap-domanda").textContent = j.domanda + " = ?"; capToken = j.token; }
   catch (e) { $("cap-domanda").textContent = "non disponibile, riprova"; }
 }
 $("cap-nuova").onclick = nuovaDomanda;
@@ -935,12 +798,11 @@ const aperta = Date.now();
 $("f-idea").onsubmit = async e => {
   e.preventDefault();
   const st = $("i-stato"), testo = $("i-testo").value.trim();
-  if (!SHEET_API) { st.textContent = "La raccolta delle idee non è ancora attiva."; return; }
   if (testo.length < 5) { st.textContent = "Scrivi la tua idea (almeno qualche parola)."; $("i-testo").focus(); return; }
   if (!$("i-cap").value.trim()) { st.textContent = "Rispondi alla domanda di verifica."; $("i-cap").focus(); return; }
   $("i-invia").disabled = true; st.textContent = "Invio in corso…";
   try {
-    const r = await fetch(SHEET_API, { method: "POST", body: JSON.stringify({
+    const r = await fetch(API + "/idee", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({
       azione: "idea", nome: $("i-nome").value.trim(), idea: testo, sito: $("i-sito").value,
       risposta: $("i-cap").value.trim(), token: capToken, tempo: Date.now() - aperta }) });
     const j = await r.json();
@@ -949,10 +811,6 @@ $("f-idea").onsubmit = async e => {
   } catch (err) { st.textContent = "Errore di rete: riprova."; }
   $("i-invia").disabled = false; nuovaDomanda();
 };
-if (!SHEET_API) {
-  $("i-invia").disabled = true; $("cap-nuova").disabled = true;
-  $("i-stato").textContent = "La raccolta delle idee si attiva appena colleghiamo il foglio Google.";
-}
 nuovaDomanda();
 caricaIdee();
 </script>

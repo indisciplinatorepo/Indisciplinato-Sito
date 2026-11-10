@@ -1,0 +1,11 @@
+{
+  "name": "indisciplinato-sito",
+  "private": true,
+  "description": "Sito di Indisciplinato: file statici in public/, Worker per /api in src/worker.js",
+  "scripts": {
+    "deploy": "wrangler deploy"
+  },
+  "devDependencies": {
+    "wrangler": "^4.40.0"
+  }
+}
