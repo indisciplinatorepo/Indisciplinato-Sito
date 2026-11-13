@@ -1,0 +1,28 @@
+{
+ "aggiornato": "2026-11-13T19:27+00:00",
+ "oggi": "2026-11-13",
+ "todo": {
+  "Matteo": [],
+  "Lorenza": []
+ },
+ "appuntamenti": [
+  {
+   "titolo": "APRI – incontro formativo volontari (?)",
+   "chi": "",
+   "inizio": "2026-11-23",
+   "fine": "2026-11-24",
+   "giorno_intero": true,
+   "luogo": "",
+   "link": "https://www.google.com/calendar/event?eid=Y2owYjA3MXM0aGNrMjBrc2EwbjY2Zzh0bjQgNTE1NGFjNjhmNDA1MDU4NjUyYzViMGVjOTVmOGE0YWE5Nzk4OTc2OWY0NWY0ZTNjMDcyOWYwZjRiMGY4N2I2OEBn&ctz=Europe/Rome"
+  },
+  {
+   "titolo": "Residenza Angela Bettoni",
+   "chi": "",
+   "inizio": "2026-11-28",
+   "fine": "2026-12-15",
+   "giorno_intero": true,
+   "luogo": "",
+   "link": "https://www.google.com/calendar/event?eid=YW1qMTkxNHV0M2FkZGQ2NTllMXJzODdmZG8gNTE1NGFjNjhmNDA1MDU4NjUyYzViMGVjOTVmOGE0YWE5Nzk4OTc2OWY0NWY0ZTNjMDcyOWYwZjRiMGY4N2I2OEBn&ctz=Europe/Rome"
+  }
+ ]
+}

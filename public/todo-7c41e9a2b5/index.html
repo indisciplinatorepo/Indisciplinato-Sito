@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="referrer" content="no-referrer">
+<link rel="icon" href="/favicon-32.png" type="image/png">
+<title>To do · Indisciplinato</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&display=swap" rel="stylesheet">
+<style>
+/* Stesso stile del gestionale Indisciplinato: Dusk Blue, Mint Leaf, Tomato su carta chiara. */
+:root{
+  --paper:#f6f5f1; --card:#ffffff; --ink:#1b2233; --muted:#5a6275; --line:#dcdad3;
+  --blue:#345995; --on-blue:#ffffff; --mint:#03cea4; --mint-soft:#d6f5ee; --tomato:#fb4d3d; --tomato-soft:#fde3e0; --ok:#0f7a5f;
+  --matteo:#345995; --lorenza:#7a4fb5;
+  --display:"Bricolage Grotesque","Arial Black",system-ui,sans-serif;
+  --body:"Atkinson Hyperlegible",Verdana,system-ui,sans-serif;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){:root{
+  --paper:#141a26; --card:#1c2433; --ink:#eef1f6; --muted:#aab2c3; --line:#2f3a4f;
+  --blue:#9fb8e6; --on-blue:#141a26; --mint-soft:#11392f; --tomato-soft:#3e1d1b; --ok:#4fd6ae;
+  --matteo:#9fb8e6; --lorenza:#c4a6ef; color-scheme:dark;}}
+*{box-sizing:border-box}
+html,body{margin:0;overflow-x:hidden}
+body{background:var(--paper);color:var(--ink);font:16px/1.45 var(--body)}
+a{color:var(--blue)}
+:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+.top{background:var(--blue);color:var(--on-blue)}
+.top .in{max-width:1180px;margin:0 auto;padding:18px 16px 20px;display:flex;justify-content:space-between;align-items:end;gap:12px;flex-wrap:wrap}
+h1{font:800 clamp(26px,5vw,38px)/1.05 var(--display);margin:0;letter-spacing:-.01em}
+h1 span{color:var(--mint)}
+.top p{margin:6px 0 0;font-size:14px;opacity:.9}
+.edit{font:700 14px var(--body);color:var(--on-blue);border:2px solid currentColor;border-radius:10px;padding:7px 12px;text-decoration:none;white-space:nowrap}
+main{max-width:1180px;margin:0 auto;padding:20px 16px 48px}
+.tabs{display:none;gap:6px;margin-bottom:14px}
+.tab{flex:1;font:700 15px var(--body);border:2px solid var(--line);background:var(--card);color:var(--ink);border-radius:10px;padding:9px 6px;cursor:pointer}
+.tab[aria-selected="true"]{background:var(--blue);border-color:var(--blue);color:var(--on-blue)}
+.cols{display:grid;grid-template-columns:1fr 1fr 1.15fr;gap:16px;align-items:start}
+.col{background:var(--card);border:1px solid var(--line);border-top:6px solid var(--c,var(--blue));border-radius:14px;padding:14px 16px 8px;min-width:0}
+.col h2{font:800 22px/1.1 var(--display);margin:0;display:flex;justify-content:space-between;align-items:baseline}
+.col h2 small{font:700 14px var(--body);color:var(--muted)}
+.col.app{background:transparent;border:2px dashed var(--line);border-top:6px solid var(--mint)}
+ul{list-style:none;margin:10px 0 0;padding:0}
+li{display:flex;gap:10px;padding:10px 0;border-top:1px solid var(--line)}
+li:first-child{border-top:0}
+.dot{flex:0 0 18px;height:18px;margin-top:3px;border:2px solid var(--c,var(--blue));border-radius:5px}
+.cal .dot{border-radius:50%}
+.txt{min-width:0;flex:1}
+.cosa{overflow-wrap:anywhere}
+.meta{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px;font-size:13px;color:var(--muted)}
+.pill{border:1px solid var(--line);background:var(--paper);border-radius:99px;padding:1px 9px;font-weight:700;color:var(--ink);white-space:nowrap;font-variant-numeric:tabular-nums}
+.pill.late{background:var(--tomato-soft);border-color:var(--tomato);color:var(--ink)}
+.pill.soon{background:#fff4d6;border-color:#c98a00}
+@media (prefers-color-scheme:dark){.pill.soon{background:#3a2f12}}
+.who{font-weight:700;border-radius:99px;padding:1px 9px;color:#fff;background:var(--c)}
+@media (prefers-color-scheme:dark){.who{color:#141a26}}
+.note{font-size:14px;color:var(--muted);margin-top:2px;overflow-wrap:anywhere}
+.vuoto{color:var(--muted);padding:12px 0 8px;margin:0}
+.giorno{font:700 13px var(--body);text-transform:uppercase;letter-spacing:.04em;color:var(--muted);margin:14px 0 0}
+.giorno:first-of-type{margin-top:8px}
+footer{color:var(--muted);font-size:13px;margin-top:26px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+@media (max-width:860px){
+  .tabs{display:flex}
+  .cols{grid-template-columns:1fr}
+  .col[hidden]{display:none}
+}
+</style>
+</head>
+<body>
+<header class="top"><div class="in">
+  <div><h1>To do <span>Indisciplinato</span></h1><p id="agg">Caricamento…</p></div>
+</div></header>
+<main>
+  <div class="tabs" role="tablist" aria-label="Sezioni">
+    <button class="tab" role="tab" id="t-m" aria-controls="c-m" aria-selected="true">Matteo</button>
+    <button class="tab" role="tab" id="t-l" aria-controls="c-l" aria-selected="false">Lorenza</button>
+    <button class="tab" role="tab" id="t-a" aria-controls="c-a" aria-selected="false">Appuntamenti</button>
+  </div>
+  <div class="cols">
+    <section class="col" id="c-m" role="tabpanel" aria-labelledby="t-m" style="--c:var(--matteo)"><h2>Matteo <small id="n-m"></small></h2><ul id="l-m"></ul></section>
+    <section class="col" id="c-l" role="tabpanel" aria-labelledby="t-l" style="--c:var(--lorenza)"><h2>Lorenza <small id="n-l"></small></h2><ul id="l-l"></ul></section>
+    <section class="col app" id="c-a" role="tabpanel" aria-labelledby="t-a"><h2>Appuntamenti <small id="n-a"></small></h2><div id="l-a"></div></section>
+  </div>
+  <footer>Pagina riservata, non indicizzata. Le cose da fare vengono dal foglio "To do Indisciplinato", gli appuntamenti dal calendario INDISCIPLINATO (prossimi 60 giorni). Nel calendario, scrivi [Matteo] o [Lorenza] all'inizio del titolo per assegnare un evento. Aggiornamento automatico ogni ora.</footer>
+</main>
+<script>
+const $ = id => document.getElementById(id);
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const oggi = new Date(); oggi.setHours(0,0,0,0);
+const COL = {Matteo:"--matteo", Lorenza:"--lorenza"};
+const d0 = iso => new Date(iso.slice(0,10) + "T00:00:00");
+const giorni = iso => /^\d{4}-\d{2}-\d{2}/.test(iso || "") ? Math.round((d0(iso) - oggi) / 864e5) : null;
+const fmtData = iso => d0(iso).toLocaleDateString("it-IT", {weekday:"short", day:"numeric", month:"short"});
+// La fine di un evento di tutto il giorno è esclusiva: l'ultimo giorno è quello prima (in ora locale).
+const ultimoGiorno = iso => { const d = d0(iso); d.setDate(d.getDate() - 1); return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`; };
+const fmtOra = iso => new Date(iso).toLocaleTimeString("it-IT", {hour:"2-digit", minute:"2-digit"});
+function scadenza(iso){
+  const g = giorni(iso); if(g === null) return "";
+  const cls = g < 0 ? " late" : g <= 3 ? " soon" : "";
+  const quando = g < 0 ? `scaduta ${fmtData(iso)}` : g === 0 ? "oggi" : g === 1 ? "domani" : `entro ${fmtData(iso)}`;
+  return `<span class="pill${cls}">${esc(quando)}</span>`;
+}
+function voce(t){
+  const cal = t.fonte === "calendario";
+  return `<li class="${cal ? "cal" : ""}"><span class="dot" aria-hidden="true"></span><div class="txt">
+    <div class="cosa">${cal && t.link ? `<a href="${esc(t.link)}" target="_blank" rel="noopener noreferrer">${esc(t.cosa)}</a>` : esc(t.cosa)}</div>
+    <div class="meta">${scadenza(t.entro)}${cal ? `<span>dal calendario</span>` : ""}</div>
+    ${t.note ? `<div class="note">${esc(t.note)}</div>` : ""}</div></li>`;
+}
+function lista(id, voci, nId){
+  $(nId).textContent = voci.length ? voci.length : "";
+  $(id).innerHTML = voci.length ? voci.map(voce).join("") : `<li class="vuoto">Niente da fare. 🎉</li>`;
+}
+function appuntamenti(app){
+  const futuri = app.filter(a => (giorni(a.fine || a.inizio) ?? 0) >= 0 || (giorni(a.inizio) ?? 0) >= 0);
+  $("n-a").textContent = futuri.length || "";
+  if(!futuri.length){ $("l-a").innerHTML = `<p class="vuoto">Nessun appuntamento in calendario.</p>`; return; }
+  let html = "", ultimo = "";
+  for(const a of futuri){
+    const g = a.inizio.slice(0,10);
+    if(g !== ultimo){ html += (ultimo ? "</ul>" : "") + `<h3 class="giorno">${esc(fmtData(g))}</h3><ul>`; ultimo = g; }
+    const quando = a.giorno_intero
+      ? (a.fine && giorni(a.fine) - giorni(a.inizio) > 1 ? `fino al ${fmtData(ultimoGiorno(a.fine))}` : "tutto il giorno")
+      : `${fmtOra(a.inizio)}–${fmtOra(a.fine)}`;
+    html += `<li class="cal" style="--c:var(${COL[a.chi] || "--mint"})"><span class="dot" aria-hidden="true"></span><div class="txt">
+      <div class="cosa">${a.link ? `<a href="${esc(a.link)}" target="_blank" rel="noopener noreferrer">${esc(a.titolo)}</a>` : esc(a.titolo)}</div>
+      <div class="meta"><span class="pill">${esc(quando)}</span>${a.chi ? `<span class="who">${esc(a.chi)}</span>` : ""}${a.luogo ? `<span>${esc(a.luogo)}</span>` : ""}</div></div></li>`;
+  }
+  $("l-a").innerHTML = html + "</ul>";
+}
+// Tab per il telefono
+const tabs = [["t-m","c-m"],["t-l","c-l"],["t-a","c-a"]];
+function mostra(i){
+  tabs.forEach(([t,c], j) => { $(t).setAttribute("aria-selected", i === j); $(c).hidden = matchMedia("(max-width:860px)").matches && i !== j; });
+}
+tabs.forEach(([t], i) => $(t).addEventListener("click", () => mostra(i)));
+matchMedia("(max-width:860px)").addEventListener("change", () => mostra(tabs.findIndex(([t]) => $(t).getAttribute("aria-selected") === "true")));
+mostra(0);
+fetch("todo.json", {cache: "no-store"}).then(r => r.json()).then(d => {
+  lista("l-m", d.todo?.Matteo || [], "n-m");
+  lista("l-l", d.todo?.Lorenza || [], "n-l");
+  appuntamenti(d.appuntamenti || []);
+  const a = d.aggiornato ? new Date(d.aggiornato) : null;
+  $("agg").textContent = a ? "Aggiornato il " + a.toLocaleDateString("it-IT", {day:"numeric", month:"long"}) + " alle " + a.toLocaleTimeString("it-IT", {hour:"2-digit", minute:"2-digit"}) : "";
+}).catch(() => { $("agg").textContent = "Impossibile caricare la lista."; });
+</script>
+</body>
+</html>

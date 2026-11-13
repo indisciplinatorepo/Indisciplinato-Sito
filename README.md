@@ -20,3 +20,9 @@ Accessibilità: obiettivo WCAG 2.2 AA. Analisi e decisioni di progetto nel repo 
 
 - `public/bandi-1868203d96/` – elenco dei bandi aperti a cui può partecipare un'associazione iscritta al RUNTS (Piemonte e fondazioni), divisi in quattro categorie. Non è linkata dal sito ed è `noindex`; chi ha il link la apre.
 - I dati vengono dal Google Sheet "Database - bandi" (foglio `Bandi`). Un'attività programmata li aggiorna ogni giorno, rigenera `bandi.json` con `bozze/bandi/build.py` e fa push su `main`.
+
+## Pagina to do (riservata)
+
+- `public/todo-7c41e9a2b5/` – to do list di Matteo e Lorenza più gli appuntamenti del calendario INDISCIPLINATO. Non linkata dal sito, `noindex`.
+- Le cose da fare vengono dal Google Sheet "To do Indisciplinato" (cartella Vinaccia › Indisciplinato), gli appuntamenti dal calendario INDISCIPLINATO. Nel calendario, `[Matteo]` o `[Lorenza]` all'inizio del titolo assegna l'evento a quella persona.
+- Un'attività programmata ogni ora (7-23) legge foglio e calendario, aggiunge al calendario le cose con data, rigenera `todo.json` con `bozze/todo/build.py` e fa push su `main`.

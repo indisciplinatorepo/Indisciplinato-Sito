@@ -25,6 +25,11 @@
   Cache-Control: no-cache
   Referrer-Policy: no-referrer
 
+/todo-7c41e9a2b5/*
+  X-Robots-Tag: noindex, nofollow
+  Cache-Control: no-cache
+  Referrer-Policy: no-referrer
+
 /liceo-artistico/*
   X-Robots-Tag: noindex, nofollow
   Cache-Control: no-cache
