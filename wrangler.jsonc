@@ -1,7 +1,6 @@
 {
   // Sito statico di Indisciplinato servito da Cloudflare (Workers Static Assets).
-  // Il Worker (src/worker.js) risponde a /api/* (idee della pagina Michelerio) e chiede la
-  // password per l'area riservata (pagina di accesso, bandi, to do);
+  // Il Worker (src/worker.js) risponde solo a /api/* (idee della pagina Michelerio);
   // tutto il resto sono i file di public/ serviti così come sono.
   "name": "indisciplinato-sito",
   "main": "src/worker.js",
@@ -10,7 +9,7 @@
     "directory": "./public",
     "binding": "ASSETS",
     "not_found_handling": "404-page",
-    "run_worker_first": ["/api/*", "/area-e8b40baf0f*", "/bandi-1868203d96*", "/todo-7c41e9a2b5*"]
+    "run_worker_first": ["/api/*"]
   },
   "durable_objects": {
     "bindings": [{ "name": "IDEE", "class_name": "Idee" }]

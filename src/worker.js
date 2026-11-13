@@ -1,7 +1,7 @@
 /**
  * Worker del sito Indisciplinato.
  * Le pagine statiche in public/ sono servite direttamente da Cloudflare (Workers Static Assets);
- * questo script risponde a /api/* e controlla la password dell'area riservata (vedi "run_worker_first" in wrangler.jsonc).
+ * questo script risponde solo a /api/* (vedi "run_worker_first" in wrangler.jsonc).
  *
  * /api/captcha            GET  -> { domanda, token }            domanda di verifica firmata
  * /api/idee               GET  -> { idee: [...] }               idee visibili, dalla più recente
@@ -10,56 +10,11 @@
  * /api/idee/mostra        POST { id, chiave }
  *
  * I dati stanno in un Durable Object con database SQLite: niente da configurare a mano.
- *
- * Area riservata: /area-e8b40baf0f/ (pagina di accesso), /bandi-1868203d96/ e /todo-7c41e9a2b5/
- * chiedono nome utente e password (HTTP Basic). Qui c'è solo l'impronta SHA-256 di
- * "utente:password", non la password. Le credenziali sono su Notion (Password clienti › Indisciplinato).
- * Per cambiarle senza toccare il codice: in Cloudflare aggiungi il secret AREA_HASH con l'impronta nuova.
  */
-
-const AREA_RISERVATA = ["/area-e8b40baf0f", "/bandi-1868203d96", "/todo-7c41e9a2b5"];
-const AREA_HASH = "b66f7b403211b1e791e1a50dd6151a30e8132d8a35ba41437860327b8668b8fe";
-
-async function sha256hex(testo) {
-  const buf = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(testo));
-  return [...new Uint8Array(buf)].map(b => b.toString(16).padStart(2, "0")).join("");
-}
-
-function confronta(a, b) {
-  if (a.length !== b.length) return false;
-  let diff = 0;
-  for (let i = 0; i < a.length; i++) diff |= a.charCodeAt(i) ^ b.charCodeAt(i);
-  return diff === 0;
-}
-
-async function autorizzato(request, env) {
-  const h = request.headers.get("authorization") || "";
-  if (!h.startsWith("Basic ")) return false;
-  let credenziali;
-  try { credenziali = atob(h.slice(6)); } catch { return false; }
-  return confronta(await sha256hex(credenziali), env.AREA_HASH || AREA_HASH);
-}
-
-const chiedi = () => new Response("Area riservata Indisciplinato: servono nome utente e password.", {
-  status: 401,
-  headers: {
-    "www-authenticate": 'Basic realm="Indisciplinato - area riservata", charset="UTF-8"',
-    "content-type": "text/plain; charset=utf-8", "cache-control": "no-store", "x-robots-tag": "noindex, nofollow",
-  },
-});
 
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
-    if (AREA_RISERVATA.some(p => url.pathname === p || url.pathname.startsWith(p + "/"))) {
-      if (!(await autorizzato(request, env))) return chiedi();
-      const risposta = await env.ASSETS.fetch(request);
-      const r = new Response(risposta.body, risposta);
-      r.headers.set("cache-control", "private, no-store");
-      r.headers.set("x-robots-tag", "noindex, nofollow");
-      r.headers.set("referrer-policy", "no-referrer");
-      return r;
-    }
     if (url.pathname.startsWith("/api/")) {
       const stub = env.IDEE.get(env.IDEE.idFromName("michelerio"));
       return stub.fetch(request);

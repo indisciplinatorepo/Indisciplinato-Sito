@@ -27,9 +27,6 @@ Accessibilità: obiettivo WCAG 2.2 AA. Analisi e decisioni di progetto nel repo 
 - Le cose da fare vengono dalla scheda "To do" del Google Sheet "Database - bandi", gli appuntamenti dal calendario INDISCIPLINATO. Nel calendario, `[Matteo]` o `[Lorenza]` all'inizio del titolo assegna l'evento a quella persona.
 - Un'attività programmata ogni ora (7-23) legge foglio e calendario, aggiunge al calendario le cose con data, rigenera `todo.json` con `bozze/todo/build.py` e fa push su `main`.
 
-## Area riservata (con password)
+## Area riservata
 
-- `public/area-e8b40baf0f/` – pagina di accesso con i pulsanti To do, Gestionale e Bandi.
-- La pagina di accesso, `/bandi-1868203d96/` e `/todo-7c41e9a2b5/` chiedono nome utente e password (HTTP Basic), controllati da `src/worker.js` (vedi `run_worker_first` in `wrangler.jsonc`). Nel codice c'è solo l'impronta SHA-256 di `utente:password`.
-- Le credenziali sono su Notion: Credenziali › Clienti › Indisciplinato.
-- Per cambiarle: calcola `sha256("utente:password")` e mettilo nel secret `AREA_HASH` del Worker su Cloudflare (Impostazioni › Variabili), oppure aggiorna la costante `AREA_HASH` in `src/worker.js`.
+- `public/area-e8b40baf0f/` – pagina di accesso con i pulsanti To do, Gestionale e Bandi. Come le altre pagine riservate: non linkata dal sito e `noindex`, senza password.
