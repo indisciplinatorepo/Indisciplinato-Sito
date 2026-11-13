@@ -1,8 +1,37 @@
 {
- "aggiornato": "2026-11-13T19:27+00:00",
+ "aggiornato": "2026-11-13T19:51+00:00",
  "oggi": "2026-11-13",
  "todo": {
-  "Matteo": [],
+  "Matteo": [
+   {
+    "cosa": "ONAV",
+    "entro": "",
+    "note": "",
+    "fonte": "lista",
+    "riga": 2
+   },
+   {
+    "cosa": "Michelerio",
+    "entro": "",
+    "note": "",
+    "fonte": "lista",
+    "riga": 3
+   },
+   {
+    "cosa": "Sicurezza",
+    "entro": "",
+    "note": "",
+    "fonte": "lista",
+    "riga": 4
+   },
+   {
+    "cosa": "Contattare Nicola",
+    "entro": "",
+    "note": "",
+    "fonte": "lista",
+    "riga": 5
+   }
+  ],
   "Lorenza": []
  },
  "appuntamenti": [
@@ -14,6 +43,15 @@
    "giorno_intero": true,
    "luogo": "",
    "link": "https://www.google.com/calendar/event?eid=Y2owYjA3MXM0aGNrMjBrc2EwbjY2Zzh0bjQgNTE1NGFjNjhmNDA1MDU4NjUyYzViMGVjOTVmOGE0YWE5Nzk4OTc2OWY0NWY0ZTNjMDcyOWYwZjRiMGY4N2I2OEBn&ctz=Europe/Rome"
+  },
+  {
+   "titolo": "ENS – incontro",
+   "chi": "",
+   "inizio": "2026-11-26T17:00:00+01:00",
+   "fine": "2026-11-26T18:00:00+01:00",
+   "giorno_intero": false,
+   "luogo": "",
+   "link": "https://www.google.com/calendar/event?eid=bHFma2k5cHQ3MnRiZTRhMW42Nmw4cTBiN3MgNTE1NGFjNjhmNDA1MDU4NjUyYzViMGVjOTVmOGE0YWE5Nzk4OTc2OWY0NWY0ZTNjMDcyOWYwZjRiMGY4N2I2OEBn"
   },
   {
    "titolo": "Residenza Angela Bettoni",
