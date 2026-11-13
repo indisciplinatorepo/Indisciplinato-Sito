@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="referrer" content="no-referrer">
+<link rel="icon" href="/favicon-32.png" type="image/png">
+<title>Bandi · Indisciplinato</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&display=swap" rel="stylesheet">
+<style>
+/* Stesso stile del gestionale Indisciplinato: Dusk Blue, Mint Leaf, Tomato su carta chiara. */
+:root{
+  --paper:#f6f5f1; --card:#ffffff; --ink:#1b2233; --muted:#5a6275; --line:#dcdad3;
+  --blue:#345995; --on-blue:#ffffff; --mint:#03cea4; --mint-soft:#d6f5ee; --tomato:#fb4d3d; --tomato-soft:#fde3e0; --ok:#0f7a5f;
+  --c1:#345995; --c2:#7a4fb5; --c3:#0f7a5f; --c4:#b5531c;
+  --display:"Bricolage Grotesque","Arial Black",system-ui,sans-serif;
+  --body:"Atkinson Hyperlegible",Verdana,system-ui,sans-serif;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){:root{
+  --paper:#141a26; --card:#1c2433; --ink:#eef1f6; --muted:#aab2c3; --line:#2f3a4f;
+  --blue:#9fb8e6; --on-blue:#141a26; --mint-soft:#11392f; --tomato-soft:#3e1d1b; --ok:#4fd6ae;
+  --c1:#9fb8e6; --c2:#c4a6ef; --c3:#4fd6ae; --c4:#f3a774; color-scheme:dark;}}
+*{box-sizing:border-box}
+html,body{margin:0;overflow-x:hidden}
+body{background:var(--paper);color:var(--ink);font:16px/1.45 var(--body)}
+a{color:var(--blue)}
+:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+.top{background:var(--blue);color:var(--on-blue)}
+.top .in{max-width:980px;margin:0 auto;padding:18px 16px 20px}
+h1{font:800 clamp(26px,5vw,38px)/1.05 var(--display);margin:0;letter-spacing:-.01em}
+h1 span{color:var(--mint)}
+.top p{margin:6px 0 0;font-size:14px;opacity:.9}
+main{max-width:980px;margin:0 auto;padding:20px 16px 48px}
+h2{font:800 20px/1.1 var(--display);margin:0 0 10px}
+h3{font:700 17px/1.25 var(--display);margin:0;overflow-wrap:anywhere}
+.tools{display:flex;flex-wrap:wrap;gap:10px;align-items:end;margin-bottom:8px}
+.tools .f{flex:1 1 220px}
+label{display:block;font-size:12px;font-weight:700;color:var(--muted);margin-bottom:3px}
+input,select{font:15px var(--body);color:var(--ink);background:var(--card);border:2px solid var(--line);border-radius:10px;padding:8px 10px;width:100%}
+.chk{display:flex;gap:6px;align-items:center;font-size:14px;color:var(--ink);font-weight:400;margin:0 0 10px}
+.chk input{width:auto}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 4px}
+.chip{font:700 14px var(--body);border-radius:99px;padding:6px 12px;border:2px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--blue);border-color:var(--blue);color:var(--on-blue)}
+.chip b{font-variant-numeric:tabular-nums}
+.hint{color:var(--muted);font-size:14px;margin:4px 0 0}
+.group{margin-top:22px}
+.card{background:var(--card);border:1px solid var(--line);border-left:6px solid var(--cat,var(--blue));border-radius:14px;padding:14px 16px;margin-bottom:12px}
+.card.scaduto{opacity:.6}
+.head{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}
+.ente{color:var(--muted);font-size:14px;margin:2px 0 0}
+.dl{flex:0 0 auto;text-align:right}
+.dl b{font:800 16px/1.1 var(--display);font-variant-numeric:tabular-nums;display:block}
+.dl small{color:var(--muted);font-size:12px}
+.dl.urg b{color:var(--tomato)}
+.meta{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 0}
+.pill{background:var(--paper);border:1px solid var(--line);font-size:13px;font-weight:700;border-radius:99px;padding:2px 10px}
+.pill.cat{color:var(--cat);border-color:var(--cat)}
+.card p{margin:8px 0 0;font-size:15px}
+.card dl{display:grid;grid-template-columns:max-content 1fr;gap:2px 10px;margin:8px 0 0;font-size:14px}
+.card dt{color:var(--muted);font-weight:700}
+.card dd{margin:0}
+.vuoto{color:var(--muted);padding:20px 0}
+footer{color:var(--muted);font-size:13px;margin-top:30px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+</style>
+</head>
+<body>
+<header class="top"><div class="in">
+  <h1>Bandi <span>terzo settore</span></h1>
+  <p id="agg">Caricamento…</p>
+</div></header>
+<main>
+  <div class="tools">
+    <div class="f"><label for="q">Cerca</label><input id="q" type="search" placeholder="Titolo, ente, destinatari…"></div>
+    <div class="f" style="flex:0 1 200px"><label for="fonte">Fonte</label>
+      <select id="fonte"><option value="">Tutte</option><option>Regionale</option><option>Fondazione</option></select></div>
+  </div>
+  <label class="chk"><input id="scaduti" type="checkbox"> Mostra anche i bandi scaduti</label>
+  <div class="chips" id="chips" role="group" aria-label="Categoria"></div>
+  <p class="hint" id="conta" aria-live="polite"></p>
+  <div id="lista"></div>
+  <footer>Pagina riservata, non indicizzata. Aggiornata ogni giorno dal foglio "Database - bandi". Verificate sempre requisiti e scadenze sul bando ufficiale.</footer>
+</main>
+<script>
+const CATEGORIE = [
+  ["Sociale", "--c1"],
+  ["Sociale tecnologico", "--c2"],
+  ["Innovazione tecnologica per il terzo settore", "--c3"],
+  ["Innovazione del terzo settore", "--c4"],
+];
+const colore = c => (CATEGORIE.find(x => x[0] === c) || [, "--blue"])[1];
+let bandi = [], cat = "";
+const $ = id => document.getElementById(id);
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const oggi = new Date(); oggi.setHours(0,0,0,0);
+function giorni(iso){
+  if(!/^\d{4}-\d{2}-\d{2}$/.test(iso)) return null;
+  const d = new Date(iso + "T00:00:00");
+  return Math.round((d - oggi) / 864e5);
+}
+const fmt = iso => /^\d{4}-\d{2}-\d{2}$/.test(iso) ? new Date(iso + "T00:00:00").toLocaleDateString("it-IT", {day:"numeric", month:"short", year:"numeric"}) : (iso || "n.d.");
+function visibili(conCat){
+  const q = $("q").value.trim().toLowerCase(), f = $("fonte").value, sc = $("scaduti").checked;
+  return bandi.filter(b => {
+    if(!sc && (b.stato === "Scaduto" || (giorni(b.scadenza) ?? 0) < 0)) return false;
+    if(f && b.fonte !== f) return false;
+    if(conCat && cat && b.categoria !== cat) return false;
+    if(q && ![b.titolo,b.ente,b.destinatari,b.sintesi,b.categoria].join(" ").toLowerCase().includes(q)) return false;
+    return true;
+  });
+}
+function chips(){
+  const base = visibili(false);
+  const tutte = [["", "Tutte", base.length]].concat(CATEGORIE.map(([c]) => [c, c, base.filter(b => b.categoria === c).length]));
+  $("chips").innerHTML = tutte.map(([v, t, n]) =>
+    `<button type="button" class="chip" data-v="${esc(v)}" aria-pressed="${v === cat}">${esc(t)} <b>${n}</b></button>`).join("");
+}
+function card(b){
+  const g = giorni(b.scadenza), scad = b.stato === "Scaduto" || (g !== null && g < 0);
+  const quando = g === null ? "" : scad ? "scaduto" : g === 0 ? "scade oggi" : g === 1 ? "domani" : `tra ${g} giorni`;
+  return `<article class="card${scad ? " scaduto" : ""}" style="--cat:var(${colore(b.categoria)})">
+    <div class="head"><div><h3>${b.link ? `<a href="${esc(b.link)}" target="_blank" rel="noopener noreferrer">${esc(b.titolo)}</a>` : esc(b.titolo)}</h3>
+      <p class="ente">${esc(b.ente)}</p></div>
+      <div class="dl${!scad && g !== null && g <= 7 ? " urg" : ""}"><b>${esc(fmt(b.scadenza))}</b><small>${esc(quando)}</small></div></div>
+    <div class="meta"><span class="pill cat">${esc(b.categoria || "Da classificare")}</span><span class="pill">${esc(b.fonte)}</span></div>
+    ${b.sintesi ? `<p>${esc(b.sintesi)}</p>` : ""}
+    <dl>${b.contributo ? `<dt>Contributo</dt><dd>${esc(b.contributo)}</dd>` : ""}${b.destinatari ? `<dt>Per chi</dt><dd>${esc(b.destinatari)}</dd>` : ""}</dl>
+  </article>`;
+}
+function render(){
+  chips();
+  const v = visibili(true).sort((a, b) => (a.scadenza || "9999").localeCompare(b.scadenza || "9999"));
+  $("conta").textContent = v.length === 1 ? "1 bando" : `${v.length} bandi`;
+  if(!v.length){ $("lista").innerHTML = `<p class="vuoto">Nessun bando con questi filtri.</p>`; return; }
+  const gruppi = cat ? [[cat, v]] : CATEGORIE.map(([c]) => [c, v.filter(b => b.categoria === c)])
+    .concat([["Da classificare", v.filter(b => !CATEGORIE.some(([c]) => c === b.categoria))]]);
+  $("lista").innerHTML = gruppi.filter(([, l]) => l.length).map(([c, l]) =>
+    `<section class="group"><h2>${esc(c)}</h2>${l.map(card).join("")}</section>`).join("");
+}
+$("chips").addEventListener("click", e => { const b = e.target.closest(".chip"); if(b){ cat = b.dataset.v; render(); } });
+["q","fonte","scaduti"].forEach(id => $(id).addEventListener("input", render));
+fetch("bandi.json", {cache: "no-store"}).then(r => r.json()).then(d => {
+  bandi = d.bandi || [];
+  const a = d.aggiornato ? new Date(d.aggiornato) : null;
+  $("agg").textContent = a ? "Aggiornato il " + a.toLocaleDateString("it-IT", {day:"numeric", month:"long", year:"numeric"}) + " alle " + a.toLocaleTimeString("it-IT", {hour:"2-digit", minute:"2-digit"}) : "";
+  render();
+}).catch(() => { $("agg").textContent = "Impossibile caricare i bandi."; });
+</script>
+</body>
+</html>
