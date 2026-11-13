@@ -1,5 +1,5 @@
 {
- "aggiornato": "2026-11-13T19:13+00:00",
+ "aggiornato": "2026-11-13T19:16+00:00",
  "bandi": [
   {
    "id": "B-0001",
@@ -9,9 +9,10 @@
    "fonte": "Fondazione",
    "categoria": "Innovazione tecnologica per il terzo settore",
    "scadenza": "2026-12-18",
-   "contributo": "Formazione, assessment e coaching sull'AI, poi supporto alle strategie (vedi bando)",
-   "destinatari": "Enti non profit sociali, culturali e ambientali con sede operativa in Piemonte, Liguria o Valle d'Aosta",
-   "sintesi": "Percorso in due fasi per adottare l'AI in modo etico e sicuro: dati, cybersecurity, governance. Manifestazione di interesse entro le 17:00. Piemonte Innova aiuta gratis a prepararla.",
+   "ammissibili": "Enti privati non profit (anche associazioni ETS) attivi in ambito sociale, culturale o ambientale, con sede operativa in Piemonte, Liguria o Valle d'Aosta. Costituiti prima del 1/1/2024, proventi 2025 di almeno 200.000 €, patrimonio netto positivo, almeno 2 figure professionali stabili. Niente partenariati.",
+   "destinatari": "L'ente stesso: il bando finanzia il percorso interno di adozione dell'AI. I benefici ricadono poi su utenti, lavoratori e comunità dell'ente.",
+   "budget": "Dotazione 1.000.000 €. Fase 1: fino a 20.000 €. Fase 2: fino a 120.000 €, massimo 75% del progetto (cofinanziamento minimo 25%, il volontariato non conta).",
+   "spese": "Fase 1: coach fino a 15.000 € IVA inclusa e personale dell'ente fino a 5.000 €. Fase 2: personale e collaborazioni, soluzioni tecnologiche e organizzative, servizi specialistici, licenze del primo anno, infrastrutture, formazione, investimenti, test. Escluse le spese di gestione ordinaria.",
    "link": "https://www.compagniadisanpaolo.it/it/contributi/bando-per-lo-sviluppo-di-strategie-e-percorsi-di-uso-responsabile-e-sicuro-dellintelligenza-artificiale-nelleconomia-sociale/",
    "stato": "Aperto"
   },
@@ -23,9 +24,10 @@
    "fonte": "Fondazione",
    "categoria": "Sociale",
    "scadenza": "2026-11-20",
-   "contributo": "Fino a 40.000 € per progetto",
-   "destinatari": "Enti del Terzo settore attivi a Torino nord (Aurora, Porta Palazzo, Barriera di Milano) e Settimo Torinese",
-   "sintesi": "Progetti di sviluppo di comunità: educazione, cittadinanza, lavoro, sicurezza alimentare, salute e welfare, clima. Possibile ingresso nel Lavazza Volunteer Program.",
+   "ammissibili": "Enti del Terzo settore attivi a Torino nord (Aurora, Porta Palazzo, Barriera di Milano) o a Settimo Torinese.",
+   "destinatari": "Le comunità di quei quartieri. Ambiti: educazione e cittadinanza, lavoro, sicurezza alimentare, salute e welfare, clima e resilienza ambientale.",
+   "budget": "Fino a 40.000 € per progetto. Dotazione complessiva non indicata.",
+   "spese": "Non indicate nella scheda del bando: vedi bando.",
    "link": "https://volontariatotorino.it/bandi/dora-in-avanti-bando-per-lo-sviluppo-delle-comunita-a-torino-nord/",
    "stato": "Aperto"
   },
@@ -37,9 +39,10 @@
    "fonte": "Fondazione",
    "categoria": "Innovazione del terzo settore",
    "scadenza": "2026-12-31",
-   "contributo": "Fino a 8.000 € al capofila, 4.000 € ai partner",
-   "destinatari": "Enti del Terzo settore ed enti pubblici della provincia di Cuneo",
-   "sintesi": "Copre redazione, trasferte per i partenariati e traduzioni di progetti da candidare su bandi regionali, nazionali ed europei.",
+   "ammissibili": "Enti ammissibili ai contributi della Fondazione CRC (ETS compresi) con sede legale o operativa in provincia di Cuneo, capofila o partner di un progetto da candidare a un bando regionale, nazionale o europeo.",
+   "destinatari": "L'ente richiedente, per pagare la progettazione. Lo scopo è portare risorse sul territorio della provincia di Cuneo.",
+   "budget": "80% dei costi di progettazione: fino a 8.000 € per il capofila, 4.000 € per il partner. Massimo 3 contributi all'anno per ente. Fino a esaurimento risorse.",
+   "spese": "Consulenze o personale a progetto per scrivere la candidatura, trasferte per costruire il partenariato, traduzione del dossier. Esclusi beni di consumo, attrezzature, personale interno, progettazione esecutiva.",
    "link": "https://fondazionecrc.it/wp-content/uploads/2026/01/Bando-Attrazione-Risorse-Misura-Progettazione-2026.pdf",
    "stato": "Aperto"
   },
@@ -51,10 +54,11 @@
    "fonte": "Regionale",
    "categoria": "Sociale",
    "scadenza": "2026-11-23",
-   "contributo": "Dotazione 150.000 €",
-   "destinatari": "Associazioni senza scopo di lucro iscritte al RUNTS con sede e attività in Piemonte, insieme a un ente locale piemontese",
-   "sintesi": "Progetti di educazione alla cittadinanza globale sul territorio. Domanda via PEC.",
-   "link": "https://www.regione.piemonte.it/web/node/23058",
+   "ammissibili": "Associazioni iscritte al RUNTS (o ETS in anagrafe ONLUS) con sede in Piemonte da almeno 3 anni, esperienza di ECG negli ultimi 3 anni e ricavi sotto i 10 milioni €. Obbligatorio almeno un ente locale piemontese co-proponente (Comune, Circoscrizione di Torino o Unione montana).",
+   "destinatari": "Studenti (percorsi didattici, anche di educazione civica), comunità locale e cittadinanza, su Agenda 2030 e sviluppo sostenibile.",
+   "budget": "Dotazione 150.000 €. Contributo regionale fino a 15.000 € per progetto, massimo 90% del costo.",
+   "spese": "Vedi Allegato 1 del bando e Modulo 1 (preventivo di spesa).",
+   "link": "https://bandi.regione.piemonte.it/contributi-finanziamenti/bando-educazione-alla-cittadinanza-globale-sostenibilita-solidarieta-internazionale-anno-2026",
    "stato": "Aperto"
   }
  ]

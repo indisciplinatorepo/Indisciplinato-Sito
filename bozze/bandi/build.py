@@ -2,7 +2,7 @@
 """Genera public/bandi-1868203d96/bandi.json dal Google Sheet "Database - bandi".
 
 Uso: python3 bozze/bandi/build.py valori.json
-dove valori.json e' la risposta di get_values sul range Bandi!A1:L
+dove valori.json e' la risposta di get_values sul range Bandi!A1:M
 (un oggetto con chiave "values", oppure direttamente la lista di righe).
 """
 import json
@@ -21,9 +21,10 @@ CAMPI = {
     "Fonte": "fonte",
     "Categoria": "categoria",
     "Scadenza": "scadenza",
-    "Contributo": "contributo",
+    "Soggetti ammissibili": "ammissibili",
     "Destinatari": "destinatari",
-    "Sintesi": "sintesi",
+    "Budget": "budget",
+    "Spese ammissibili": "spese",
     "Link": "link",
     "Stato": "stato",
 }

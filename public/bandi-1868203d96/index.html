@@ -61,9 +61,13 @@ input,select{font:15px var(--body);color:var(--ink);background:var(--card);borde
 .pill{background:var(--paper);border:1px solid var(--line);font-size:13px;font-weight:700;border-radius:99px;padding:2px 10px}
 .pill.cat{color:var(--cat);border-color:var(--cat)}
 .card p{margin:8px 0 0;font-size:15px}
-.card dl{display:grid;grid-template-columns:max-content 1fr;gap:2px 10px;margin:8px 0 0;font-size:14px}
-.card dt{color:var(--muted);font-weight:700}
-.card dd{margin:0}
+.card dl{margin:12px 0 0;font-size:15px}
+.card dt{color:var(--muted);font-weight:700;font-size:13px;text-transform:uppercase;letter-spacing:.03em;margin-top:10px}
+.card dt:first-child{margin-top:0}
+.card dd{margin:2px 0 0}
+.btn{display:inline-flex;align-items:center;gap:6px;margin-top:14px;font:700 15px var(--body);border-radius:10px;padding:9px 16px;border:2px solid var(--blue);background:var(--blue);color:var(--on-blue);text-decoration:none}
+.btn:hover{filter:brightness(1.1)}
+.btn::after{content:"→"}
 .vuoto{color:var(--muted);padding:20px 0}
 footer{color:var(--muted);font-size:13px;margin-top:30px}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
@@ -110,7 +114,7 @@ function visibili(conCat){
     if((giorni(b.scadenza) ?? 0) < 0) return false;
     if(f && b.fonte !== f) return false;
     if(conCat && cat && b.categoria !== cat) return false;
-    if(q && ![b.titolo,b.ente,b.destinatari,b.sintesi,b.categoria].join(" ").toLowerCase().includes(q)) return false;
+    if(q && ![b.titolo,b.ente,b.ammissibili,b.destinatari,b.categoria].join(" ").toLowerCase().includes(q)) return false;
     return true;
   });
 }
@@ -124,12 +128,13 @@ function card(b){
   const g = giorni(b.scadenza), scad = b.stato === "Scaduto" || (g !== null && g < 0);
   const quando = g === null ? "" : scad ? "scaduto" : g === 0 ? "scade oggi" : g === 1 ? "domani" : `tra ${g} giorni`;
   return `<article class="card${scad ? " scaduto" : ""}" style="--cat:var(${colore(b.categoria)})">
-    <div class="head"><div><h3>${b.link ? `<a href="${esc(b.link)}" target="_blank" rel="noopener noreferrer">${esc(b.titolo)}</a>` : esc(b.titolo)}</h3>
+    <div class="head"><div><h3>${esc(b.titolo)}</h3>
       <p class="ente">${esc(b.ente)}</p></div>
       <div class="dl${!scad && g !== null && g <= 7 ? " urg" : ""}"><b>${esc(fmt(b.scadenza))}</b><small>${esc(quando)}</small></div></div>
     <div class="meta"><span class="pill cat">${esc(b.categoria || "Da classificare")}</span><span class="pill">${esc(b.fonte)}</span></div>
-    ${b.sintesi ? `<p>${esc(b.sintesi)}</p>` : ""}
-    <dl>${b.contributo ? `<dt>Contributo</dt><dd>${esc(b.contributo)}</dd>` : ""}${b.destinatari ? `<dt>Per chi</dt><dd>${esc(b.destinatari)}</dd>` : ""}</dl>
+    <dl>${[["Soggetti ammissibili", b.ammissibili], ["Destinatari", b.destinatari], ["Budget", b.budget], ["Spese ammissibili", b.spese]]
+      .map(([t, v]) => `<dt>${t}</dt><dd>${esc(v || "Vedi bando")}</dd>`).join("")}</dl>
+    ${b.link ? `<a class="btn" href="${esc(b.link)}" target="_blank" rel="noopener noreferrer">Approfondisci<span class="sr"> su ${esc(b.titolo)} (si apre in una nuova scheda)</span></a>` : ""}
   </article>`;
 }
 function render(){
