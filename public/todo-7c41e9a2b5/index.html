@@ -104,6 +104,10 @@ ul.list>li{display:flex;gap:.75rem;padding:.85rem 0;border-bottom:1px solid var(
   .cols{grid-template-columns:1fr}
 }
 @media (max-width:420px){.form{grid-template-columns:1fr}}
+/* colore della sezione, come nella pagina di accesso */
+.hero{background:color-mix(in srgb,#345995 22%,var(--paper))}
+.hero h1 span{color:var(--blue)}
+@media (prefers-color-scheme:dark){.hero{background:color-mix(in srgb,#345995 30%,var(--paper))}.hero h1 span{color:#9fb8e6}}
 </style>
 </head>
 <body>

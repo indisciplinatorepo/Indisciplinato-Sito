@@ -70,15 +70,19 @@ section.alt{background:var(--paper-2)}
 footer{background:#1b2233;color:#f6f5f1;border-top:6px solid var(--tomato);padding:2rem 0;font-size:.95rem;margin-top:0}
 footer a{color:#f6f5f1}
 
-/* pagina di accesso */
-.porte{list-style:none;margin:0;padding:0;display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(17rem,1fr))}
-.porta{display:grid;grid-template-rows:auto auto 1fr auto;gap:.6rem;height:100%;padding:1.4rem 1.4rem 1.2rem;border:2px solid var(--ink);border-radius:18px;background:var(--paper);color:var(--ink);text-decoration:none;border-top:10px solid var(--c);transition:transform .15s ease,box-shadow .15s ease}
-.porta:hover{transform:translateY(-3px);box-shadow:6px 6px 0 var(--ink)}
+/* pagina di accesso: due colonne, ogni sezione col suo colore pieno */
+:root{--yellow:#ffd23f}
+.porte{list-style:none;margin:0;padding:0;display:grid;gap:1.25rem;grid-template-columns:repeat(2,minmax(0,1fr))}
+@media (max-width:640px){.porte{grid-template-columns:1fr}}
+.porta{display:grid;grid-template-rows:auto auto 1fr auto;gap:.7rem;height:100%;min-height:15rem;padding:1.6rem 1.6rem 1.4rem;border:2px solid #1b2233;border-radius:20px;background:var(--c);color:var(--t,#1b2233);text-decoration:none;transition:transform .15s ease,box-shadow .15s ease}
+.porta:hover{transform:translate(-3px,-3px);box-shadow:8px 8px 0 #1b2233}
+.porta:focus-visible{outline:4px solid var(--focus);outline-offset:4px}
 @media (prefers-reduced-motion:reduce){.porta{transition:none}.porta:hover{transform:none}}
-.porta svg{width:44px;height:44px;stroke:var(--c);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-.porta h2{font-size:clamp(1.9rem,4.5vw,2.6rem)}
-.porta p{color:var(--muted)}
-.porta .vai{justify-self:start;display:inline-flex;align-items:center;gap:.4rem;font-weight:700;border-radius:999px;padding:.45rem 1.1rem;background:var(--ink);color:var(--paper)}
+.porta svg{width:52px;height:52px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.porta h2{font-size:clamp(2.1rem,5vw,3rem)}
+.porta p{font-size:1.1rem;max-width:34ch}
+.porta .vai{justify-self:start;display:inline-flex;align-items:center;gap:.4rem;font-weight:700;border-radius:999px;padding:.5rem 1.2rem;background:#1b2233;color:#f6f5f1}
+.porta.scura .vai{background:#f6f5f1;color:#1b2233}
 .porta .vai::after{content:"→"}
 </style>
 </head>
@@ -95,17 +99,17 @@ footer a{color:#f6f5f1}
   <section class="block alt" aria-label="Strumenti">
     <div class="wrap">
       <ul class="porte">
-        <li><a class="porta" href="/todo-7c41e9a2b5/" style="--c:var(--blue)">
+        <li><a class="porta scura" href="/todo-7c41e9a2b5/" style="--c:#345995;--t:#fff">
           <svg viewBox="0 0 48 48" aria-hidden="true"><rect x="7" y="7" width="12" height="12" rx="3"/><path d="M10 13l2.5 2.5L17 10"/><path d="M25 13h16"/><rect x="7" y="27" width="12" height="12" rx="3"/><path d="M25 33h16"/></svg>
           <h2>To do</h2>
           <p>Le cose da fare di Matteo e Lorenza e gli appuntamenti del calendario.</p>
           <span class="vai">Apri</span></a></li>
-        <li><a class="porta" href="/gestionale/" style="--c:var(--tomato)">
+        <li><a class="porta" href="/gestionale/" style="--c:var(--yellow)">
           <svg viewBox="0 0 48 48" aria-hidden="true"><path d="M8 40V8"/><path d="M8 40h32"/><rect x="14" y="26" width="6" height="10"/><rect x="24" y="18" width="6" height="18"/><rect x="34" y="12" width="6" height="24"/></svg>
           <h2>Gestionale</h2>
           <p>Il gestionale di Indisciplinato 2027, con il bilancio.</p>
           <span class="vai">Apri</span></a></li>
-        <li><a class="porta" href="/bandi-1868203d96/" style="--c:var(--mint)">
+        <li><a class="porta" href="/bandi-1868203d96/" style="--c:#03cea4">
           <svg viewBox="0 0 48 48" aria-hidden="true"><path d="M12 6h17l9 9v27H12z"/><path d="M29 6v9h9"/><path d="M18 24h14M18 30h14M18 36h9"/></svg>
           <h2>Bandi</h2>
           <p>I bandi aperti a cui può partecipare Vinaccia ETS, aggiornati ogni giorno.</p>
