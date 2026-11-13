@@ -18,5 +18,5 @@ Accessibilità: obiettivo WCAG 2.2 AA. Analisi e decisioni di progetto nel repo 
 
 ## Pagina bandi (riservata)
 
-- `public/bandi-1868203d96/` – elenco dei bandi per il terzo settore (Piemonte e fondazioni), divisi in quattro categorie. Non è linkata dal sito ed è `noindex`; chi ha il link la apre.
+- `public/bandi-1868203d96/` – elenco dei bandi aperti a cui può partecipare un'associazione iscritta al RUNTS (Piemonte e fondazioni), divisi in quattro categorie. Non è linkata dal sito ed è `noindex`; chi ha il link la apre.
 - I dati vengono dal Google Sheet "Database - bandi" (foglio `Bandi`). Un'attività programmata li aggiorna ogni giorno, rigenera `bandi.json` con `bozze/bandi/build.py` e fa push su `main`.

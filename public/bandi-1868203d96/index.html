@@ -80,7 +80,7 @@ footer{color:var(--muted);font-size:13px;margin-top:30px}
     <div class="f" style="flex:0 1 200px"><label for="fonte">Fonte</label>
       <select id="fonte"><option value="">Tutte</option><option>Regionale</option><option>Fondazione</option></select></div>
   </div>
-  <label class="chk"><input id="scaduti" type="checkbox"> Mostra anche i bandi scaduti</label>
+  <p class="hint">Solo bandi aperti a cui può partecipare un'associazione del Terzo settore iscritta al RUNTS.</p>
   <div class="chips" id="chips" role="group" aria-label="Categoria"></div>
   <p class="hint" id="conta" aria-live="polite"></p>
   <div id="lista"></div>
@@ -105,9 +105,9 @@ function giorni(iso){
 }
 const fmt = iso => /^\d{4}-\d{2}-\d{2}$/.test(iso) ? new Date(iso + "T00:00:00").toLocaleDateString("it-IT", {day:"numeric", month:"short", year:"numeric"}) : (iso || "n.d.");
 function visibili(conCat){
-  const q = $("q").value.trim().toLowerCase(), f = $("fonte").value, sc = $("scaduti").checked;
+  const q = $("q").value.trim().toLowerCase(), f = $("fonte").value;
   return bandi.filter(b => {
-    if(!sc && (b.stato === "Scaduto" || (giorni(b.scadenza) ?? 0) < 0)) return false;
+    if((giorni(b.scadenza) ?? 0) < 0) return false;
     if(f && b.fonte !== f) return false;
     if(conCat && cat && b.categoria !== cat) return false;
     if(q && ![b.titolo,b.ente,b.destinatari,b.sintesi,b.categoria].join(" ").toLowerCase().includes(q)) return false;
@@ -143,7 +143,7 @@ function render(){
     `<section class="group"><h2>${esc(c)}</h2>${l.map(card).join("")}</section>`).join("");
 }
 $("chips").addEventListener("click", e => { const b = e.target.closest(".chip"); if(b){ cat = b.dataset.v; render(); } });
-["q","fonte","scaduti"].forEach(id => $(id).addEventListener("input", render));
+["q","fonte"].forEach(id => $(id).addEventListener("input", render));
 fetch("bandi.json", {cache: "no-store"}).then(r => r.json()).then(d => {
   bandi = d.bandi || [];
   const a = d.aggiornato ? new Date(d.aggiornato) : null;

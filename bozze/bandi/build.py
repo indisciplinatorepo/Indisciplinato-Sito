@@ -58,9 +58,11 @@ def main(percorso):
             continue
         rec["scadenza"] = data_iso(rec.get("scadenza"))
         rec["inserito"] = data_iso(rec.get("inserito"))
-        # Stato calcolato: un bando con scadenza passata e' scaduto anche se il foglio dice "Aperto".
+        # Sulla pagina vanno solo i bandi aperti: quelli con scadenza passata non si pubblicano.
         if rec["scadenza"][:4].isdigit() and rec["scadenza"] < oggi:
-            rec["stato"] = "Scaduto"
+            continue
+        if rec.get("stato") and rec["stato"] != "Aperto":
+            continue
         bandi.append(rec)
     uscita = {
         "aggiornato": datetime.now(timezone.utc).isoformat(timespec="minutes"),
