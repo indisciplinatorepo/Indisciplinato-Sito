@@ -1,36 +1,6 @@
 {
- "aggiornato": "2026-11-13T19:16+00:00",
+ "aggiornato": "2026-11-13T19:21+00:00",
  "bandi": [
-  {
-   "id": "B-0001",
-   "inserito": "2026-11-13",
-   "titolo": "Uso responsabile e sicuro dell'intelligenza artificiale nell'economia sociale",
-   "ente": "Fondazione Compagnia di San Paolo, con Fondo per la Repubblica Digitale",
-   "fonte": "Fondazione",
-   "categoria": "Innovazione tecnologica per il terzo settore",
-   "scadenza": "2026-12-18",
-   "ammissibili": "Enti privati non profit (anche associazioni ETS) attivi in ambito sociale, culturale o ambientale, con sede operativa in Piemonte, Liguria o Valle d'Aosta. Costituiti prima del 1/1/2024, proventi 2025 di almeno 200.000 €, patrimonio netto positivo, almeno 2 figure professionali stabili. Niente partenariati.",
-   "destinatari": "L'ente stesso: il bando finanzia il percorso interno di adozione dell'AI. I benefici ricadono poi su utenti, lavoratori e comunità dell'ente.",
-   "budget": "Dotazione 1.000.000 €. Fase 1: fino a 20.000 €. Fase 2: fino a 120.000 €, massimo 75% del progetto (cofinanziamento minimo 25%, il volontariato non conta).",
-   "spese": "Fase 1: coach fino a 15.000 € IVA inclusa e personale dell'ente fino a 5.000 €. Fase 2: personale e collaborazioni, soluzioni tecnologiche e organizzative, servizi specialistici, licenze del primo anno, infrastrutture, formazione, investimenti, test. Escluse le spese di gestione ordinaria.",
-   "link": "https://www.compagniadisanpaolo.it/it/contributi/bando-per-lo-sviluppo-di-strategie-e-percorsi-di-uso-responsabile-e-sicuro-dellintelligenza-artificiale-nelleconomia-sociale/",
-   "stato": "Aperto"
-  },
-  {
-   "id": "B-0002",
-   "inserito": "2026-11-13",
-   "titolo": "Dora in Avanti",
-   "ente": "Fondazione Giuseppe e Pericle Lavazza ETS",
-   "fonte": "Fondazione",
-   "categoria": "Sociale",
-   "scadenza": "2026-11-20",
-   "ammissibili": "Enti del Terzo settore attivi a Torino nord (Aurora, Porta Palazzo, Barriera di Milano) o a Settimo Torinese.",
-   "destinatari": "Le comunità di quei quartieri. Ambiti: educazione e cittadinanza, lavoro, sicurezza alimentare, salute e welfare, clima e resilienza ambientale.",
-   "budget": "Fino a 40.000 € per progetto. Dotazione complessiva non indicata.",
-   "spese": "Non indicate nella scheda del bando: vedi bando.",
-   "link": "https://volontariatotorino.it/bandi/dora-in-avanti-bando-per-lo-sviluppo-delle-comunita-a-torino-nord/",
-   "stato": "Aperto"
-  },
   {
    "id": "B-0003",
    "inserito": "2026-11-13",
@@ -39,6 +9,7 @@
    "fonte": "Fondazione",
    "categoria": "Innovazione del terzo settore",
    "scadenza": "2026-12-31",
+   "vinaccia": "Da verificare: serve sede legale o operativa in provincia di Cuneo. Lo statuto e l'iscrizione RUNTS indicano Rocchetta Belbo (CN), i documenti recenti Soglio (AT). Se al RUNTS risulta ancora Rocchetta Belbo, sì. Serve anche un progetto da candidare a un bando regionale, nazionale o europeo.",
    "ammissibili": "Enti ammissibili ai contributi della Fondazione CRC (ETS compresi) con sede legale o operativa in provincia di Cuneo, capofila o partner di un progetto da candidare a un bando regionale, nazionale o europeo.",
    "destinatari": "L'ente richiedente, per pagare la progettazione. Lo scopo è portare risorse sul territorio della provincia di Cuneo.",
    "budget": "80% dei costi di progettazione: fino a 8.000 € per il capofila, 4.000 € per il partner. Massimo 3 contributi all'anno per ente. Fino a esaurimento risorse.",
@@ -54,11 +25,28 @@
    "fonte": "Regionale",
    "categoria": "Sociale",
    "scadenza": "2026-11-23",
+   "vinaccia": "Da verificare: requisiti formali ok (RUNTS dal 2022, sede in Piemonte da più di 3 anni, ricavi sotto i 10 milioni). Mancano nei documenti: esperienza in educazione alla cittadinanza globale negli ultimi 3 anni e un Comune co-proponente.",
    "ammissibili": "Associazioni iscritte al RUNTS (o ETS in anagrafe ONLUS) con sede in Piemonte da almeno 3 anni, esperienza di ECG negli ultimi 3 anni e ricavi sotto i 10 milioni €. Obbligatorio almeno un ente locale piemontese co-proponente (Comune, Circoscrizione di Torino o Unione montana).",
    "destinatari": "Studenti (percorsi didattici, anche di educazione civica), comunità locale e cittadinanza, su Agenda 2030 e sviluppo sostenibile.",
    "budget": "Dotazione 150.000 €. Contributo regionale fino a 15.000 € per progetto, massimo 90% del costo.",
    "spese": "Vedi Allegato 1 del bando e Modulo 1 (preventivo di spesa).",
    "link": "https://bandi.regione.piemonte.it/contributi-finanziamenti/bando-educazione-alla-cittadinanza-globale-sostenibilita-solidarieta-internazionale-anno-2026",
+   "stato": "Aperto"
+  },
+  {
+   "id": "B-0005",
+   "inserito": "2026-11-13",
+   "titolo": "Comunicazione e promo-pubblicità di manifestazioni ed eventi in Piemonte, anno 2026 (l.r. 14/2016 art. 20)",
+   "ente": "Regione Piemonte",
+   "fonte": "Regionale",
+   "categoria": "Sociale",
+   "scadenza": "2026-11-24",
+   "vinaccia": "Sì, se nel 2026 avete organizzato o organizzate un evento con valenza turistica in Piemonte (Indisciplinato 2027 non rientra). Requisito di sede ok: associazione senza scopo di lucro con sede legale in Piemonte.",
+   "ammissibili": "Associazioni senza scopo di lucro con sede legale in Piemonte ed enti pubblici piemontesi. Un solo evento per richiedente.",
+   "destinatari": "Pubblico e turisti degli eventi: le iniziative devono valorizzare produzioni d'eccellenza, storia e tradizioni del Piemonte e portare flussi turistici. Eventi svolti tra 1/1/2026 e 31/12/2026 (o conclusi entro il 10/1/2027).",
+   "budget": "Dotazione 1.385.000 €, di cui 985.000 € per le associazioni. Contributo massimo e percentuale: vedi Allegato 1.",
+   "spese": "Spese di comunicazione e promo-pubblicità dell'evento. Dettaglio nell'Allegato 1 del bando.",
+   "link": "https://bandi.regione.piemonte.it/contributi-finanziamenti/lr-142016-art-20-contributi-iniziative-comunicazione-promo-pubblicita-nellambito-manifestazioni",
    "stato": "Aperto"
   }
  ]

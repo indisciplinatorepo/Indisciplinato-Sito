@@ -61,6 +61,9 @@ input,select{font:15px var(--body);color:var(--ink);background:var(--card);borde
 .pill{background:var(--paper);border:1px solid var(--line);font-size:13px;font-weight:700;border-radius:99px;padding:2px 10px}
 .pill.cat{color:var(--cat);border-color:var(--cat)}
 .card p{margin:8px 0 0;font-size:15px}
+.vin{margin:12px 0 0;padding:10px 12px;border-radius:10px;background:#fff4d6;border-left:4px solid #c98a00;font-size:15px}
+.vin.ok{background:var(--mint-soft);border-left-color:var(--ok)}
+@media (prefers-color-scheme:dark){.vin{background:#3a2f12}}
 .card dl{margin:12px 0 0;font-size:15px}
 .card dt{color:var(--muted);font-weight:700;font-size:13px;text-transform:uppercase;letter-spacing:.03em;margin-top:10px}
 .card dt:first-child{margin-top:0}
@@ -84,7 +87,7 @@ footer{color:var(--muted);font-size:13px;margin-top:30px}
     <div class="f" style="flex:0 1 200px"><label for="fonte">Fonte</label>
       <select id="fonte"><option value="">Tutte</option><option>Regionale</option><option>Fondazione</option></select></div>
   </div>
-  <p class="hint">Solo bandi aperti a cui può partecipare un'associazione del Terzo settore iscritta al RUNTS.</p>
+  <p class="hint">Solo bandi aperti, filtrati sul profilo di Vinaccia ETS (statuto, iscrizione RUNTS, sede, bilancio).</p>
   <div class="chips" id="chips" role="group" aria-label="Categoria"></div>
   <p class="hint" id="conta" aria-live="polite"></p>
   <div id="lista"></div>
@@ -132,6 +135,7 @@ function card(b){
       <p class="ente">${esc(b.ente)}</p></div>
       <div class="dl${!scad && g !== null && g <= 7 ? " urg" : ""}"><b>${esc(fmt(b.scadenza))}</b><small>${esc(quando)}</small></div></div>
     <div class="meta"><span class="pill cat">${esc(b.categoria || "Da classificare")}</span><span class="pill">${esc(b.fonte)}</span></div>
+    ${b.vinaccia ? `<p class="vin${/^s[iì]/i.test(b.vinaccia) ? " ok" : ""}"><b>Per Vinaccia:</b> ${esc(b.vinaccia)}</p>` : ""}
     <dl>${[["Soggetti ammissibili", b.ammissibili], ["Destinatari", b.destinatari], ["Budget", b.budget], ["Spese ammissibili", b.spese]]
       .map(([t, v]) => `<dt>${t}</dt><dd>${esc(v || "Vedi bando")}</dd>`).join("")}</dl>
     ${b.link ? `<a class="btn" href="${esc(b.link)}" target="_blank" rel="noopener noreferrer">Approfondisci<span class="sr"> su ${esc(b.titolo)} (si apre in una nuova scheda)</span></a>` : ""}
