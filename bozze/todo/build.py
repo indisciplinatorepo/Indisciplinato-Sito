@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Genera public/todo-7c41e9a2b5/todo.json dal foglio "To do Indisciplinato" e dal calendario INDISCIPLINATO.
+"""Genera public/todo-7c41e9a2b5/todo.json dalla scheda "To do" del foglio "Database - bandi" e dal calendario INDISCIPLINATO.
 
 Uso: python3 bozze/todo/build.py todo.json eventi.json
 - todo.json: risposta di get_values sul range 'To do'!A1:F

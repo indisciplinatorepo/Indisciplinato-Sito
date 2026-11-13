@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="referrer" content="no-referrer">
+<link rel="icon" href="/favicon-32.png" type="image/png">
+<title>Area riservata · Indisciplinato</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&display=swap" rel="stylesheet">
+<style>
+/* Stile del sito della fiera Indisciplinato: carta chiara, inchiostro, bordi netti,
+   Dusk Blue #345995, Mint Leaf #03CEA4, Tomato #FB4D3D. */
+:root{
+  --paper:#f6f5f1; --paper-2:#ecebe5; --ink:#1b2233; --muted:#4a5266;
+  --blue:#345995; --on-blue:#fff; --mint:#03cea4; --tomato:#fb4d3d; --violet:#6b3fa8; --focus:#1b2233;
+  --display:"Bricolage Grotesque","Arial Black",system-ui,sans-serif;
+  --body:"Atkinson Hyperlegible",Verdana,system-ui,sans-serif;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){:root{
+  --paper:#141a26; --paper-2:#1c2433; --ink:#eef1f6; --muted:#c3c9d6; --blue:#9fb8e6; --on-blue:#141a26; --violet:#c4a6ef; --focus:#eef1f6;
+  color-scheme:dark;}}
+*{box-sizing:border-box}
+html,body{margin:0;overflow-x:hidden}
+body{background:var(--paper);color:var(--ink);font:1.0625rem/1.55 var(--body)}
+a{color:var(--blue);text-underline-offset:.2em;text-decoration-thickness:.08em}
+a:hover{text-decoration-thickness:.18em}
+:focus-visible{outline:3px solid var(--focus);outline-offset:3px;border-radius:3px}
+h1,h2,h3{font-family:var(--display);font-weight:800;margin:0;line-height:1.08;text-wrap:balance}
+p{margin:0}
+.sr{position:absolute;width:1px;height:1px;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.wrap{width:min(100% - 2rem,74rem);margin-inline:auto}
+[hidden]{display:none!important}
+
+/* intestazione */
+.top{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:.75rem 1rem;padding:1rem 0}
+.brand{display:block;width:clamp(160px,34vw,250px);height:auto;overflow:visible}
+@media (prefers-color-scheme:dark){.brand{filter:invert(1)}}
+@media (prefers-reduced-motion:no-preference){
+  .stamp{transform-box:fill-box;transform-origin:50% 60%;animation:timbro 260ms cubic-bezier(.2,.9,.3,1.25) both;animation-delay:calc(var(--i)*55ms + 120ms)}
+  @keyframes timbro{0%{opacity:0;transform:translateY(-35%) scale(1.5) rotate(var(--r))}60%{opacity:1;transform:translateY(4%) scale(.94) rotate(calc(var(--r)*-.3))}100%{opacity:1;transform:none}}
+}
+.riservata{font-size:.9rem;font-weight:700;border:2px dashed var(--muted);color:var(--muted);border-radius:999px;padding:.15rem .75rem}
+.hero{border-top:2px solid var(--ink);padding:clamp(1.5rem,4vw,2.5rem) 0 1.5rem}
+.hero h1{font-size:clamp(2.4rem,8vw,4.6rem);letter-spacing:-.02em}
+.hero h1 span{color:var(--tomato)}
+.hero .claim{font-size:1.15rem;max-width:56ch;margin-top:.6rem}
+.stamp-line{display:inline-block;margin-top:1rem;background:var(--mint);color:#1b2233;border-radius:999px;padding:.35rem 1rem;font-weight:700;font-variant-numeric:tabular-nums}
+
+/* controlli */
+.btn,.chip{display:inline-flex;align-items:center;gap:.4rem;font:inherit;font-size:1rem;font-weight:700;min-height:44px;padding:.4rem 1rem;cursor:pointer;background:var(--paper);color:var(--ink);border:2px solid var(--ink);border-radius:999px;text-decoration:none}
+.btn.primary,.chip[aria-pressed="true"],.chip[aria-selected="true"]{background:var(--ink);color:var(--paper)}
+.btn.blue{background:var(--blue);border-color:var(--blue);color:var(--on-blue)}
+.btn svg{width:20px;height:20px;flex:none}
+label{display:block;font-size:.9rem;font-weight:700;margin-bottom:.25rem}
+input,select{font:inherit;color:var(--ink);background:var(--paper);border:2px solid var(--ink);border-radius:12px;padding:.5rem .75rem;width:100%;min-height:44px}
+
+/* sezioni e schede */
+section.block{border-top:2px solid var(--ink);padding:clamp(1.75rem,4vw,2.75rem) 0}
+section.alt{background:var(--paper-2)}
+.card{border:2px solid var(--ink);border-radius:14px;padding:1.1rem 1.25rem;background:var(--paper)}
+.badge{display:inline-block;font-size:.85rem;font-weight:700;padding:.1rem .65rem;border-radius:999px;background:var(--mint);color:#1b2233}
+.tag{display:inline-block;font-size:.85rem;font-weight:700;border:2px solid var(--blue);color:var(--blue);border-radius:999px;padding:0 .55rem;white-space:nowrap}
+.tag.late{border-color:var(--tomato);background:var(--tomato);color:#1b2233}
+.tag.soon{border-color:var(--tomato);color:var(--ink)}
+
+footer{background:#1b2233;color:#f6f5f1;border-top:6px solid var(--tomato);padding:2rem 0;font-size:.95rem;margin-top:0}
+footer a{color:#f6f5f1}
+
+/* pagina di accesso */
+.porte{list-style:none;margin:0;padding:0;display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(17rem,1fr))}
+.porta{display:grid;grid-template-rows:auto auto 1fr auto;gap:.6rem;height:100%;padding:1.4rem 1.4rem 1.2rem;border:2px solid var(--ink);border-radius:18px;background:var(--paper);color:var(--ink);text-decoration:none;border-top:10px solid var(--c);transition:transform .15s ease,box-shadow .15s ease}
+.porta:hover{transform:translateY(-3px);box-shadow:6px 6px 0 var(--ink)}
+@media (prefers-reduced-motion:reduce){.porta{transition:none}.porta:hover{transform:none}}
+.porta svg{width:44px;height:44px;stroke:var(--c);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.porta h2{font-size:clamp(1.9rem,4.5vw,2.6rem)}
+.porta p{color:var(--muted)}
+.porta .vai{justify-self:start;display:inline-flex;align-items:center;gap:.4rem;font-weight:700;border-radius:999px;padding:.45rem 1.1rem;background:var(--ink);color:var(--paper)}
+.porta .vai::after{content:"→"}
+</style>
+</head>
+<body>
+<header class="wrap top">
+  <a href="/" aria-label="Indisciplinato, vai al sito"><svg class="brand" viewBox="0 0 900 118" role="img" aria-label="Indisciplinato" xmlns="http://www.w3.org/2000/svg"><title>Indisciplinato</title><defs><clipPath id="lg0"><rect x="0" y="0" width="32" height="118"/></clipPath><clipPath id="lg1"><rect x="32" y="0" width="77" height="118"/></clipPath><clipPath id="lg2"><rect x="109" y="0" width="73" height="118"/></clipPath><clipPath id="lg3"><rect x="182" y="0" width="41" height="118"/></clipPath><clipPath id="lg4"><rect x="223" y="0" width="57" height="118"/></clipPath><clipPath id="lg5"><rect x="280" y="0" width="62" height="118"/></clipPath><clipPath id="lg6"><rect x="342" y="0" width="34" height="118"/></clipPath><clipPath id="lg7"><rect x="376" y="0" width="78" height="118"/></clipPath><clipPath id="lg8"><rect x="454" y="0" width="68" height="118"/></clipPath><clipPath id="lg9"><rect x="522" y="0" width="36" height="118"/></clipPath><clipPath id="lg10"><rect x="558" y="0" width="92" height="118"/></clipPath><clipPath id="lg11"><rect x="650" y="0" width="153" height="118"/></clipPath><clipPath id="lg12"><rect x="803" y="0" width="97" height="118"/></clipPath></defs><g class="stamp" style="--i:0;--r:-9deg"><image href="/logo.png" width="900" height="118" clip-path="url(#lg0)"/></g><g class="stamp" style="--i:1;--r:7deg"><image href="/logo.png" width="900" height="118" clip-path="url(#lg1)"/></g><g class="stamp" style="--i:2;--r:-5deg"><image href="/logo.png" width="900" height="118" clip-path="url(#lg2)"/></g><g class="stamp" style="--i:3;--r:10deg"><image href="/logo.png" width="900" height="118" clip-path="url(#lg3)"/></g><g class="stamp" style="--i:4;--r:-7deg"><image href="/logo.png" width="900" height="118" clip-path="url(#lg4)"/></g><g class="stamp" style="--i:5;--r:6deg"><image href="/logo.png" width="900" height="118" clip-path="url(#lg5)"/></g><g class="stamp" style="--i:6;--r:-10deg"><image href="/logo.png" width="900" height="118" clip-path="url(#lg6)"/></g><g class="stamp" style="--i:7;--r:8deg"><image href="/logo.png" width="900" height="118" clip-path="url(#lg7)"/></g><g class="stamp" style="--i:8;--r:-6deg"><image href="/logo.png" width="900" height="118" clip-path="url(#lg8)"/></g><g class="stamp" style="--i:9;--r:9deg"><image href="/logo.png" width="900" height="118" clip-path="url(#lg9)"/></g><g class="stamp" style="--i:10;--r:-8deg"><image href="/logo.png" width="900" height="118" clip-path="url(#lg10)"/></g><g class="stamp" style="--i:11;--r:5deg"><image href="/logo.png" width="900" height="118" clip-path="url(#lg11)"/></g><g class="stamp" style="--i:12;--r:-7deg"><image href="/logo.png" width="900" height="118" clip-path="url(#lg12)"/></g></svg></a>
+  <span class="riservata">Area riservata</span>
+</header>
+<main>
+  <div class="hero"><div class="wrap">
+    <h1>Area <span>riservata</span></h1>
+    <p class="claim">Gli strumenti di lavoro di Indisciplinato e dell'Associazione Vinaccia ETS.</p>
+  </div></div>
+  <section class="block alt" aria-label="Strumenti">
+    <div class="wrap">
+      <ul class="porte">
+        <li><a class="porta" href="/todo-7c41e9a2b5/" style="--c:var(--blue)">
+          <svg viewBox="0 0 48 48" aria-hidden="true"><rect x="7" y="7" width="12" height="12" rx="3"/><path d="M10 13l2.5 2.5L17 10"/><path d="M25 13h16"/><rect x="7" y="27" width="12" height="12" rx="3"/><path d="M25 33h16"/></svg>
+          <h2>To do</h2>
+          <p>Le cose da fare di Matteo e Lorenza e gli appuntamenti del calendario.</p>
+          <span class="vai">Apri</span></a></li>
+        <li><a class="porta" href="/gestionale/" style="--c:var(--tomato)">
+          <svg viewBox="0 0 48 48" aria-hidden="true"><path d="M8 40V8"/><path d="M8 40h32"/><rect x="14" y="26" width="6" height="10"/><rect x="24" y="18" width="6" height="18"/><rect x="34" y="12" width="6" height="24"/></svg>
+          <h2>Gestionale</h2>
+          <p>Il gestionale di Indisciplinato 2027, con il bilancio.</p>
+          <span class="vai">Apri</span></a></li>
+        <li><a class="porta" href="/bandi-1868203d96/" style="--c:var(--mint)">
+          <svg viewBox="0 0 48 48" aria-hidden="true"><path d="M12 6h17l9 9v27H12z"/><path d="M29 6v9h9"/><path d="M18 24h14M18 30h14M18 36h9"/></svg>
+          <h2>Bandi</h2>
+          <p>I bandi aperti a cui può partecipare Vinaccia ETS, aggiornati ogni giorno.</p>
+          <span class="vai">Apri</span></a></li>
+      </ul>
+    </div>
+  </section>
+</main>
+<footer><div class="wrap"><p>Area protetta da nome utente e password. Le credenziali sono su Notion, in Password clienti › Indisciplinato.</p></div></footer>
+</body>
+</html>
