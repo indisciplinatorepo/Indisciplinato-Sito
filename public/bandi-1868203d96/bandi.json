@@ -1,5 +1,5 @@
 {
- "aggiornato": "2026-11-13T19:21+00:00",
+ "aggiornato": "2026-11-14T06:33+00:00",
  "bandi": [
   {
    "id": "B-0003",
@@ -47,6 +47,38 @@
    "budget": "Dotazione 1.385.000 €, di cui 985.000 € per le associazioni. Contributo massimo e percentuale: vedi Allegato 1.",
    "spese": "Spese di comunicazione e promo-pubblicità dell'evento. Dettaglio nell'Allegato 1 del bando.",
    "link": "https://bandi.regione.piemonte.it/contributi-finanziamenti/lr-142016-art-20-contributi-iniziative-comunicazione-promo-pubblicita-nellambito-manifestazioni",
+   "stato": "Aperto"
+  },
+  {
+   "id": "B-0006",
+   "inserito": "2026-11-14",
+   "titolo": "Fabbrica – Spazi civici per la gioventù",
+   "ente": "Sport e Salute S.p.A. con Dipartimento Politiche Giovanili",
+   "fonte": "Fondazione",
+   "categoria": "Sociale",
+   "scadenza": "2026-12-18",
+   "vinaccia": "Da verificare: un ETS iscritto al RUNTS in forma di associazione può essere capofila, quindi il requisito formale c'è. Servono però un partenariato di almeno 3 soggetti con almeno una ASD/SSD, uno spazio fisico stabile (\"Spazio Civico\") e la capacità di gestire un progetto da 150.000-250.000 € per 18-24 mesi, molto sopra le entrate attuali.",
+   "ammissibili": "Capofila: ASD/SSD iscritte al RASD ed ETS iscritti al RUNTS costituiti come associazione o fondazione. Partenariato obbligatorio di almeno 3 soggetti, con almeno una ASD/SSD e un ETS.",
+   "destinatari": "Giovani 14-35 anni, con attività gratuite e continuative su tre linee: benessere e inclusione, partecipazione giovanile, formazione e competenze (26-35 anni).",
+   "budget": "Dotazione 27 milioni € (Fondo politiche giovanili). Contributo da 150.000 a 250.000 € per progetto. Cofinanziamento non richiesto.",
+   "spese": "Vedi bando (Avviso pubblico Fabbrica).",
+   "link": "https://www.sportesalute.eu/fabbrica.html",
+   "stato": "Aperto"
+  },
+  {
+   "id": "B-0007",
+   "inserito": "2026-11-14",
+   "titolo": "Fondo di beneficenza Intesa Sanpaolo – Linee guida 2025-2026 (liberalità territoriali)",
+   "ente": "Intesa Sanpaolo",
+   "fonte": "Fondazione",
+   "categoria": "Sociale",
+   "scadenza": "2026-12-31",
+   "vinaccia": "Da verificare: requisiti formali ok (ente non profit iscritto al RUNTS, attivo da più di 2 anni). Servono due rendiconti approvati. I progetti culturali sono ammessi solo se hanno risvolti sociali espliciti e coinvolgono direttamente persone fragili (es. accessibilità e inclusione di Indisciplinato). Domande tutto l'anno, ma si consiglia di presentarle entro inizio settembre.",
+   "ammissibili": "Enti senza scopo di lucro con sede in Italia, iscritti a un registro pubblico (es. RUNTS), costituiti e operativi da almeno 2 anni, con almeno 2 bilanci o rendiconti.",
+   "destinatari": "Persone fragili: povertà, disabilità, welfare sanitario, migranti, aree interne. Cultura solo con coinvolgimento diretto di beneficiari fragili.",
+   "budget": "Liberalità territoriali fino a 5.000 € (progetti a impatto locale, gestite dalle Direzioni regionali); liberalità centrali oltre 5.000 €. Dotazione annua del Fondo oltre 24 milioni €.",
+   "spese": "Vedi bando (Linee guida 2025-2026).",
+   "link": "https://group.intesasanpaolo.com/it/sociale/fondo-di-beneficenza/come-richiedere-un-contributo",
    "stato": "Aperto"
   }
  ]
