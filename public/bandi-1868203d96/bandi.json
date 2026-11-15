@@ -1,5 +1,5 @@
 {
- "aggiornato": "2026-11-14T06:33+00:00",
+ "aggiornato": "2026-11-15T06:33+00:00",
  "bandi": [
   {
    "id": "B-0003",
@@ -79,6 +79,22 @@
    "budget": "Liberalità territoriali fino a 5.000 € (progetti a impatto locale, gestite dalle Direzioni regionali); liberalità centrali oltre 5.000 €. Dotazione annua del Fondo oltre 24 milioni €.",
    "spese": "Vedi bando (Linee guida 2025-2026).",
    "link": "https://group.intesasanpaolo.com/it/sociale/fondo-di-beneficenza/come-richiedere-un-contributo",
+   "stato": "Aperto"
+  },
+  {
+   "id": "B-0008",
+   "inserito": "2026-11-15",
+   "titolo": "Linee guida per i Festival partecipativi 2027",
+   "ente": "Fondazione Compagnia di San Paolo",
+   "fonte": "Fondazione",
+   "categoria": "Sociale",
+   "scadenza": "2027-04-05",
+   "vinaccia": "Da verificare: due finestre, 03/12/2026 ore 15 (festival aprile-agosto 2027) e 05/04/2027 (festival settembre 2027-marzo 2028). Il festival deve essersi già svolto almeno una volta negli ultimi 2 anni e non sono ammesse fiere, sagre o eventi di un giorno: Indisciplinato va presentato come festival partecipativo di più giorni (massimo 2 mesi). Il contributo copre al massimo il 40% del costo, quindi serve il 60% da altre fonti. Le forme giuridiche ammesse sono nelle Linee applicative della Fondazione: verificare che un ETS RUNTS non APS sia incluso.",
+   "ammissibili": "Enti con i requisiti delle Linee applicative del Regolamento della Fondazione (enti non profit ed enti pubblici). Esclusi Case del quartiere di Torino e Genova, enti con convenzioni in essere o strumentali della Fondazione. Una richiesta per ente.",
+   "destinatari": "Abitanti e pubblico dei festival in Piemonte, Liguria e Valle d'Aosta, con attività almeno in parte gratuite e percorsi di partecipazione attiva; attenzione a under 35, over 65, persone con background migratorio e aree interne.",
+   "budget": "Contributo da 5.000 a 30.000 € per festival, al massimo 40% del costo totale. Dotazione complessiva: vedi bando.",
+   "spese": "Vedi bando (PDF Linee guida e FAQ). Il contributo deve rafforzare in modo riconoscibile gli elementi partecipativi del festival.",
+   "link": "https://www.compagniadisanpaolo.it/it/contributi/linee-guida-per-i-festival-partecipativi-2027/",
    "stato": "Aperto"
   }
  ]
