@@ -1,5 +1,5 @@
 {
- "aggiornato": "2026-11-15T06:33+00:00",
+ "aggiornato": "2026-11-16T06:25+00:00",
  "bandi": [
   {
    "id": "B-0003",
@@ -95,6 +95,22 @@
    "budget": "Contributo da 5.000 a 30.000 € per festival, al massimo 40% del costo totale. Dotazione complessiva: vedi bando.",
    "spese": "Vedi bando (PDF Linee guida e FAQ). Il contributo deve rafforzare in modo riconoscibile gli elementi partecipativi del festival.",
    "link": "https://www.compagniadisanpaolo.it/it/contributi/linee-guida-per-i-festival-partecipativi-2027/",
+   "stato": "Aperto"
+  },
+  {
+   "id": "B-0009",
+   "inserito": "2026-11-16",
+   "titolo": "Una mano a chi sostiene 2026/27",
+   "ente": "Fondazione Cattolica",
+   "fonte": "Fondazione",
+   "categoria": "Sociale",
+   "scadenza": "2027-02-16",
+   "vinaccia": "Sì: il bando accetta ETS iscritti a qualsiasi sezione del RUNTS, senza requisiti di fatturato, dipendenti o anni di attività. Attenzione: serve un cofinanziamento di almeno il 20% e il contributo arriva solo a fine progetto, quindi i costi vanno anticipati. Vanno caricati gli ultimi 3 rendiconti approvati (2023-2025).",
+   "ammissibili": "ETS iscritti in qualsiasi sezione del RUNTS (incluse imprese sociali e reti associative), enti privati non profit (esclusi cooperative, partiti, sindacati, associazioni di categoria) ed enti ecclesiastici. Un solo progetto per ente, con attività realizzate direttamente.",
+   "destinatari": "Persone e comunità locali: progetti di assistenza sociale, educazione/formazione o cultura che promuovano inclusione e coesione sociale con impatto misurabile.",
+   "budget": "Dotazione 500.000 €. Contributo massimo 20.000 € per progetto e non oltre l'80% dei costi (cofinanziamento minimo 20%). Investimenti in strutture e attrezzature massimo 20%. Erogazione a fine progetto.",
+   "spese": "Personale, materiali, comunicazione, servizi, altre spese coerenti col progetto; immobili/impianti/attrezzature fino al 20%. Dettaglio nel regolamento generale della Fondazione.",
+   "link": "https://www.unamanoachisostiene.it/wp-content/uploads/2026/10/Bando-Una-mano-a-chi-sostiene-2026-1.pdf",
    "stato": "Aperto"
   }
  ]
