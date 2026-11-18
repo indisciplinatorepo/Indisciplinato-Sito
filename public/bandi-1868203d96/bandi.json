@@ -1,5 +1,5 @@
 {
- "aggiornato": "2026-11-16T06:25+00:00",
+ "aggiornato": "2026-11-18T06:33+00:00",
  "bandi": [
   {
    "id": "B-0003",
@@ -111,6 +111,22 @@
    "budget": "Dotazione 500.000 €. Contributo massimo 20.000 € per progetto e non oltre l'80% dei costi (cofinanziamento minimo 20%). Investimenti in strutture e attrezzature massimo 20%. Erogazione a fine progetto.",
    "spese": "Personale, materiali, comunicazione, servizi, altre spese coerenti col progetto; immobili/impianti/attrezzature fino al 20%. Dettaglio nel regolamento generale della Fondazione.",
    "link": "https://www.unamanoachisostiene.it/wp-content/uploads/2026/10/Bando-Una-mano-a-chi-sostiene-2026-1.pdf",
+   "stato": "Aperto"
+  },
+  {
+   "id": "B-0010",
+   "inserito": "2026-11-18",
+   "titolo": "Attrazione Risorse: Misura Cofinanziamento 2026",
+   "ente": "Fondazione CRC",
+   "fonte": "Fondazione",
+   "categoria": "Innovazione del terzo settore",
+   "scadenza": "2026-12-31",
+   "vinaccia": "Da verificare: serve sede legale o operativa in provincia di Cuneo (al RUNTS risulta Rocchetta Belbo, CN; i documenti 2026 indicano Soglio, AT) e un progetto da candidare a un bando pubblico nazionale o europeo, come capofila o partner. Il cofinanziamento CRC non copre l'intera quota a carico dell'ente.",
+   "ammissibili": "Enti ammissibili ai contributi della Fondazione CRC (Regolamento e Programma Operativo 2026) con sede legale o operativa in provincia di Cuneo, capofila o partner di un progetto candidato a bandi pubblici nazionali o europei.",
+   "destinatari": "L'ente richiedente, per coprire parte del cofinanziamento richiesto dal bando nazionale o europeo; ricadute sul territorio della provincia di Cuneo.",
+   "budget": "Contributo da 10.000 a 50.000 € secondo le schede riepilogative; sportello aperto da fine gennaio 2026 fino al 31/12/2026 o a esaurimento risorse. Verificare importi nel bando.",
+   "spese": "Vedi bando.",
+   "link": "https://fondazionecrc.it/wp-content/uploads/2026/01/Strumenti-sostegno-progettazione-europea-Fondazione-CRC.pdf",
    "stato": "Aperto"
   }
  ]
