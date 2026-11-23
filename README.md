@@ -33,5 +33,8 @@ Accessibilità: obiettivo WCAG 2.2 AA. Analisi e decisioni di progetto nel repo 
 
 ## Pagina grafica e social (riservata)
 
-- `public/grafica-e-social/` – pagina per i collaboratori: task delle grafiche del sito (misure, formati, file di partenza, cartella Drive), template social per rubrica con le piastrelle 2025, timeline dei contenuti fino a giugno 2027. Non linkata dal sito, `noindex`; il pulsante è nell'area riservata.
-- I dati vengono dal Google Sheet "Indisciplinato 2027 – Scheda tecnica sito e piano social" (schede `Scheda tecnica sito` e `Timeline social`). Se il foglio è condiviso con chiunque abbia il link, la pagina lo legge in diretta; altrimenti mostra la copia del 23/11/2026 scritta nel file.
+- `public/grafica-e-social/` – pagina per i collaboratori, non linkata dal sito e `noindex` (pulsante nell'area riservata). Tre schede:
+  - **Home**: tempistiche gennaio-maggio 2027 di grafiche e social insieme; prima scadenza le bozze al Comune per il patrocinio entro il 31 gennaio.
+  - **Grafiche**: archivio delle grafiche 2024 e 2025 raggruppate per famiglia (locandina, piastrelle, manifesto social, produttori, materiali in fiera, partner, prima edizione); ogni famiglia si apre con tutte le declinazioni. Poi colori e caratteri.
+  - **Social**: com'è andata la comunicazione 2025 (ricostruita dalle date dei file su Drive), piano 2027 mese per mese e template per rubrica.
+- Immagini dell'archivio in `img/archivio/`, ricavate dai file di Drive "INDISCIPLINATO 2025 › Grafica". I dati sono scritti nel file `index.html`.

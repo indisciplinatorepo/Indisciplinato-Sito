@@ -5,16 +5,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
 <title>Grafica e social · Indisciplinato 2027</title>
+<link rel="icon" href="/favicon-32.png" type="image/png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Fredoka:wght@500;600;700&display=swap" rel="stylesheet">
 <style>
 /* VOICE   il tavolo di lavoro della squadra: chiaro, pratico, con la faccia della fiera
-   IDEA    una bacheca di piastrelle: ogni task e ogni grafica è una piastrella dipinta
-   PICTURE i template social disegnati con le piastrelle 2025, a grandezza reale in proporzione
+   IDEA    l'archivio della fiera aperto sul tavolo: cosa abbiamo fatto, cosa faremo, entro quando
+   PICTURE le grafiche vere del 2024 e 2025 e le piastrelle con le bottiglie
    COLOUR  palette Indisciplinato: giallo, rosa vino, blu, ottanio, verde acqua, arancio su carta
    TYPE    logo a pennello + Fredoka per titoli e numeri + Atkinson Hyperlegible per i testi
-   LAYOUT  testata con i numeri, poi tre sezioni: task delle grafiche, griglia dei template social, timeline */
+   LAYOUT  testata con i numeri e tre schede: Home (tempistiche), Grafiche (archivio), Social (template e timeline) */
 :root{
   --bg:#fffdf7;--paper:#fff;--ink:#141414;--dim:#555;--line:rgba(20,20,20,.14);
   --y:#e5c522;--pink:#c26e84;--blue:#1b4d9b;--teal:#1faab3;--aqua:#5cc4bf;--orange:#f9a423;--red:#f15a31;
@@ -25,94 +26,98 @@
 body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 var(--text);overflow-x:clip}
 a{color:var(--blue)}
 :focus-visible{outline:3px solid var(--ink);outline-offset:3px;border-radius:4px}
-h1,h2,h3{font-family:var(--display);font-weight:700;margin:0;line-height:1.05;text-wrap:balance}
+h1,h2,h3,h4{font-family:var(--display);font-weight:700;margin:0;line-height:1.08;text-wrap:balance}
 .wrap{width:min(100% - 32px,1240px);margin-inline:auto}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
 .skip{position:absolute;left:12px;top:-100px;background:var(--ink);color:#fff;padding:10px 14px;z-index:9}.skip:focus{top:12px}
+[hidden]{display:none!important}
 
 /* testata */
-header{position:relative;overflow:hidden;border-bottom:2px solid var(--ink);background:var(--bg)}
-.terr{position:absolute;inset:0;pointer-events:none}
-.top{position:relative;display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:32px;align-items:center;padding:28px 0 36px}
-.logo{display:block;width:min(100%,420px);height:auto}
-.kicker{font:700 13px/1.3 var(--text);letter-spacing:.16em;text-transform:uppercase;color:var(--dim);margin:14px 0 6px}
-header h1{font-size:clamp(34px,5vw,56px);text-transform:uppercase}
-.lead{max-width:56ch;margin:12px 0 0;font-size:17px}
+header{position:relative;overflow:hidden;background:var(--bg)}
+.terr{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.top{position:relative;display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:32px;align-items:center;padding:28px 0 30px}
+.logo{display:block;width:min(100%,400px);height:auto}
+.kicker{font:700 13px/1.3 var(--text);letter-spacing:.14em;text-transform:uppercase;color:var(--dim);margin:14px 0 6px}
+header h1{font-size:clamp(32px,4.6vw,52px);text-transform:uppercase}
+.lead{max-width:58ch;margin:12px 0 0;font-size:17px}
 .stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
 .stat{background:var(--paper);border:2px solid var(--ink);border-radius:18px;padding:14px 16px;box-shadow:5px 5px 0 var(--ink)}
-.stat b{display:block;font:700 44px/1 var(--display)}
+.stat b{display:block;font:700 42px/1 var(--display)}
 .stat span{display:block;font-size:14px;color:var(--dim);margin-top:4px}
-.stat:nth-child(1) b{color:var(--pink)}.stat:nth-child(2) b{color:var(--teal)}.stat:nth-child(3) b{color:var(--blue)}.stat:nth-child(4) b{color:var(--orange)}
-.src{position:relative;font-size:13.5px;color:var(--dim);padding-bottom:18px}
-nav.tabs{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:2px solid var(--ink)}
-nav.tabs ul{list-style:none;margin:0;padding:10px 0;display:flex;gap:8px;overflow-x:auto;scrollbar-width:none}
-nav.tabs a{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:8px 16px;border-radius:99px;border:2px solid var(--ink);text-decoration:none;color:var(--ink);font:600 16px/1 var(--display);white-space:nowrap;background:var(--paper)}
-nav.tabs a i{width:12px;height:12px;border-radius:3px;display:inline-block}
-html{scroll-padding-top:76px}
+.stat:nth-child(1){background:var(--y)}.stat:nth-child(1) span{color:var(--ink)}
+.stat:nth-child(2) b{color:var(--pink)}.stat:nth-child(3) b{color:var(--teal)}.stat:nth-child(4) b{color:var(--blue)}
 
-section{padding:44px 0 56px;border-bottom:2px solid var(--ink)}
+/* schede in alto */
+nav.tabs{position:sticky;top:0;z-index:5;background:var(--bg);border-block:2px solid var(--ink)}
+nav.tabs ul{list-style:none;margin:0;padding:10px 0;display:flex;gap:8px;overflow-x:auto;scrollbar-width:none}
+nav.tabs li{flex:none}
+nav.tabs a{display:inline-flex;align-items:center;gap:10px;min-height:48px;padding:8px 20px;border-radius:99px;border:2px solid var(--ink);text-decoration:none;color:var(--ink);font:600 18px/1 var(--display);white-space:nowrap;background:var(--paper)}
+nav.tabs a i{width:14px;height:14px;border-radius:4px;display:inline-block;border:1.5px solid var(--ink)}
+nav.tabs a[aria-current=page]{background:var(--ink);color:#fff}
+nav.tabs a[aria-current=page] i{border-color:#fff}
+
+section{padding:40px 0 52px;border-bottom:2px solid var(--ink)}
+section:last-child{border-bottom:0}
 .head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:end;gap:14px 24px;margin-bottom:20px}
-.head h2{font-size:clamp(30px,4vw,44px);text-transform:uppercase}
-.head p{margin:8px 0 0;max-width:62ch;color:var(--dim)}
+.head h2{font-size:clamp(28px,3.8vw,42px);text-transform:uppercase}
+.head p{margin:8px 0 0;max-width:66ch;color:var(--dim)}
 .chips{display:flex;flex-wrap:wrap;gap:6px}
 .chips button{font:600 14px/1 var(--display);min-height:40px;padding:8px 14px;border-radius:99px;border:2px solid var(--ink);background:var(--paper);color:var(--ink);cursor:pointer}
 .chips button[aria-pressed=true]{background:var(--ink);color:#fff}
-.search{font:16px var(--text);min-height:44px;padding:8px 14px;border:2px solid var(--ink);border-radius:99px;background:var(--paper);width:min(100%,260px)}
 
-/* bacheca task */
-.board{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;align-items:start}
-.col{background:var(--paper);border:2px solid var(--ink);border-radius:18px;overflow:hidden}
-.col h3{display:flex;justify-content:space-between;align-items:center;font-size:20px;padding:12px 14px;border-bottom:2px solid var(--ink);text-transform:uppercase}
-.col h3 span{font:700 14px/1 var(--text);color:var(--ink);background:#fff;border:2px solid var(--ink);border-radius:99px;padding:4px 9px}
-.col[data-s="Pronto"] h3{background:var(--aqua)}.col[data-s="Da adattare"] h3{background:var(--y)}.col[data-s="Da fare"] h3{background:var(--pink);color:#fff}.col[data-s="Da ricevere"] h3{background:var(--blue);color:#fff}
-.cards{display:grid;gap:10px;padding:12px}
-.card{border:1.5px solid var(--line);border-radius:12px;padding:10px 12px;background:var(--bg)}
-.card .id{font:700 12px/1 var(--display);color:var(--dim);letter-spacing:.06em}
-.card h4{font:600 16px/1.25 var(--display);margin:4px 0 4px}
-.card .meta{font-size:13px;color:var(--dim)}
-.card .spec{display:flex;flex-wrap:wrap;gap:4px;margin-top:8px}
-.card .spec span{font-size:12px;font-weight:700;border-radius:6px;padding:2px 6px;background:#fff;border:1px solid var(--line)}
-.card details{margin-top:6px;font-size:13.5px}
-.card summary{cursor:pointer;font-weight:700;color:var(--blue);min-height:28px;display:flex;align-items:center}
-.card .links{display:flex;flex-wrap:wrap;gap:10px;margin-top:6px;font-size:13.5px;font-weight:700}
-.empty{font-size:14px;color:var(--dim);padding:6px 2px}
+/* home: scadenza e gantt */
+.deadline{display:grid;grid-template-columns:auto minmax(0,1fr);gap:20px;align-items:center;background:var(--y);border:2px solid var(--ink);border-radius:22px;padding:20px 24px;box-shadow:6px 6px 0 var(--ink);margin-bottom:34px}
+.deadline .cal{background:#fff;border:2px solid var(--ink);border-radius:14px;text-align:center;padding:8px 16px;font-family:var(--display)}
+.deadline .cal b{display:block;font-size:46px;line-height:1}
+.deadline .cal span{display:block;font-weight:600;text-transform:uppercase;font-size:14px}
+.deadline h3{font-size:clamp(22px,2.6vw,30px);text-transform:uppercase}
+.deadline p{margin:6px 0 0}
+.deadline ul{margin:8px 0 0;padding-left:1.2em;display:grid;gap:2px}
+.gantt{border:2px solid var(--ink);border-radius:18px;background:var(--paper);overflow:hidden}
+.g-scroll{overflow-x:auto}
+.g-in{min-width:880px}
+.g-row{display:grid;grid-template-columns:150px minmax(0,1fr);border-bottom:1.5px solid var(--line)}
+.g-row:last-child{border-bottom:0}
+.g-lab{padding:12px 14px;font:700 17px/1.2 var(--display);text-transform:uppercase;border-right:2px solid var(--ink);display:flex;align-items:center;gap:8px}
+.g-lab i{width:14px;height:14px;border-radius:4px;border:1.5px solid var(--ink);flex:none}
+.g-track{position:relative;padding:10px 0;min-height:64px}
+.g-months{display:grid;grid-template-columns:repeat(5,1fr);background:var(--ink);color:#fff}
+.g-months div{padding:10px 12px;font:600 16px/1 var(--display);text-transform:uppercase;border-left:1px solid rgba(255,255,255,.25)}
+.g-grid{position:absolute;inset:0;display:grid;grid-template-columns:repeat(5,1fr);pointer-events:none}
+.g-grid div{border-left:1px dashed var(--line)}
+.bar{position:relative;display:block;margin:6px 0;height:auto;min-height:38px;border:2px solid var(--ink);border-radius:10px;padding:6px 10px;font:600 14px/1.2 var(--display);cursor:pointer;text-align:left;color:var(--ink);white-space:normal}
+.bar small{display:block;font:400 12px/1.3 var(--text);opacity:.85}
+.bar.key{box-shadow:3px 3px 0 var(--ink)}
+.g-ms{position:relative;height:56px}
+.ms{position:absolute;top:6px;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:2px;font:600 12px/1.15 var(--display);text-align:center;width:110px}
+.ms i{width:14px;height:14px;transform:rotate(45deg);background:var(--red);border:2px solid var(--ink)}
+.today{position:absolute;top:0;bottom:0;width:3px;background:var(--red);z-index:2}
+.list2{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,360px),1fr));gap:18px;margin-top:30px}
+.box{background:var(--paper);border:2px solid var(--ink);border-radius:18px;padding:16px 18px}
+.box h3{font-size:22px;text-transform:uppercase;display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.box h3 i{width:16px;height:16px;border-radius:4px;border:1.5px solid var(--ink)}
+.box ol{list-style:none;margin:0;padding:0;display:grid}
+.box li{display:grid;grid-template-columns:92px minmax(0,1fr);gap:12px;padding:10px 0;border-top:1px solid var(--line)}
+.box li b{font:600 15px/1.25 var(--display)}
+.box li .when{font:600 14px/1.3 var(--display);color:var(--dim)}
+.box li p{margin:2px 0 0;font-size:14px;color:var(--dim)}
 
-/* griglia template */
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,260px),1fr));gap:22px}
-.tpl{background:var(--paper);border:2px solid var(--ink);border-radius:18px;overflow:hidden;display:flex;flex-direction:column}
-.tpl .art{background:#ecebe5;padding:16px;display:grid;place-items:center;border-bottom:2px solid var(--ink)}
-.tpl .art svg{display:block;width:100%;height:auto;max-height:420px;box-shadow:0 10px 20px rgba(0,0,0,.18);border-radius:4px}
-.tpl .art.story svg{width:auto;height:420px;max-width:100%}
-.tpl .body{padding:14px 16px 16px;display:grid;gap:6px;flex:1}
-.tpl h3{font-size:21px;text-transform:uppercase;display:flex;gap:8px;align-items:center}
-.tpl h3 i{width:16px;height:16px;border-radius:4px;flex:none;border:1.5px solid var(--ink)}
-.tpl p{margin:0;font-size:14.5px}
-.tpl .spec{display:flex;flex-wrap:wrap;gap:4px}
-.tpl .spec span{font-size:12px;font-weight:700;border-radius:6px;padding:2px 7px;background:var(--bg);border:1px solid var(--line)}
-.tpl button{justify-self:start;margin-top:4px;font:600 14px/1 var(--display);min-height:40px;padding:8px 14px;border-radius:99px;border:2px solid var(--ink);background:var(--ink);color:#fff;cursor:pointer}
-.svt{font-family:var(--display);font-weight:700}
-
-/* timeline */
-.month{margin-top:26px}
-.month h3{font-size:24px;text-transform:uppercase;display:flex;align-items:center;gap:12px}
-.month h3::after{content:"";flex:1;height:2px;background:var(--ink)}
-.tl{list-style:none;margin:12px 0 0;padding:0;display:grid;gap:10px}
-.ev{display:grid;grid-template-columns:96px minmax(0,1fr) auto;gap:14px;align-items:start;background:var(--paper);border:2px solid var(--ink);border-left-width:12px;border-radius:14px;padding:12px 14px}
-.ev .d{font:700 15px/1.2 var(--display)}
-.ev .d small{display:block;font:400 13px var(--text);color:var(--dim)}
-.ev h4{font:600 17px/1.25 var(--display);margin:0}
-.ev .r{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--dim)}
-.ev p{margin:4px 0 0;font-size:14px}
-.ev .tags{display:flex;flex-wrap:wrap;gap:4px;margin-top:6px}
-.ev .tags span{font-size:12px;font-weight:700;border-radius:6px;padding:2px 6px;background:var(--bg);border:1px solid var(--line)}
-.ev .st{font:700 12px/1 var(--text);border-radius:99px;padding:6px 10px;border:2px solid var(--ink);white-space:nowrap;background:#fff}
-.ev .st.pub{background:var(--aqua)}.ev .st.prog{background:var(--y)}
-.ev.now{box-shadow:6px 6px 0 var(--y)}
-.ev.past{opacity:.62}
-.now-badge{display:inline-block;font:700 12px/1 var(--text);background:var(--y);border-radius:99px;padding:4px 8px;margin-left:6px;vertical-align:middle}
-.fair{background:var(--y)}
-
-/* identità */
+/* archivio grafiche */
+.gal{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,280px),1fr));gap:22px}
+.fam{all:unset;box-sizing:border-box;cursor:pointer;background:var(--paper);border:2px solid var(--ink);border-radius:18px;overflow:hidden;display:flex;flex-direction:column;transition:transform .2s}
+.fam:hover{transform:translateY(-3px)}
+.fam:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+.fam .cov{position:relative;aspect-ratio:1/1;background:#ecebe5;border-bottom:2px solid var(--ink);overflow:hidden}
+.fam .cov img{position:absolute;width:58%;height:auto;box-shadow:0 8px 18px rgba(0,0,0,.2);border-radius:3px;background:#fff}
+.fam .cov img:nth-child(1){left:8%;top:12%;transform:rotate(-5deg)}
+.fam .cov img:nth-child(2){left:34%;top:20%;transform:rotate(4deg)}
+.fam .cov img:nth-child(3){left:20%;top:34%;transform:rotate(-1deg)}
+.fam .cov img:only-child{left:21%;top:10%;width:58%;transform:rotate(-2deg)}
+.fam .bd{padding:14px 16px 16px;display:grid;gap:6px}
+.fam h3{font-size:22px;text-transform:uppercase}
+.fam p{margin:0;font-size:14.5px}
+.fam .n{font:700 12px/1 var(--text);letter-spacing:.08em;text-transform:uppercase;color:var(--dim)}
+.fam .go{justify-self:start;font:600 14px/1 var(--display);padding:9px 14px;border-radius:99px;background:var(--ink);color:#fff;margin-top:4px}
 .pal{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}
 .sw{border:2px solid var(--ink);border-radius:14px;overflow:hidden;background:var(--paper)}
 .sw i{display:block;height:70px;border-bottom:2px solid var(--ink)}
@@ -120,165 +125,176 @@ section{padding:44px 0 56px;border-bottom:2px solid var(--ink)}
 .sw b{display:block;font:600 16px var(--display)}
 .fonts{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:12px;margin-top:16px}
 .fonts div{border:2px solid var(--ink);border-radius:14px;padding:14px;background:var(--paper)}
+.note{font-size:14px;color:var(--dim);margin:14px 0 0;max-width:70ch}
 
-/* anteprima grande */
-dialog{border:0;padding:0;background:transparent;max-width:min(94vw,720px);width:100%}
-dialog::backdrop{background:rgba(20,20,20,.7)}
-dialog .in{background:var(--paper);border-radius:18px;border:2px solid var(--ink);padding:16px;display:grid;gap:12px}
-dialog svg{width:100%;height:auto;max-height:78vh;display:block;margin:auto}
-dialog .bar{display:flex;justify-content:space-between;gap:10px;align-items:center}
-dialog button{font:600 15px/1 var(--display);min-height:44px;padding:8px 16px;border-radius:99px;border:2px solid var(--ink);background:var(--paper);cursor:pointer}
+/* template social */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,250px),1fr));gap:20px}
+.tpl{background:var(--paper);border:2px solid var(--ink);border-radius:18px;overflow:hidden;display:flex;flex-direction:column}
+.tpl .art{background:#ecebe5;padding:14px;display:grid;place-items:center;border-bottom:2px solid var(--ink)}
+.tpl .art svg{display:block;width:100%;height:auto;max-height:380px;box-shadow:0 10px 20px rgba(0,0,0,.18);border-radius:4px}
+.tpl .art.story svg{width:auto;height:380px;max-width:100%}
+.tpl .body{padding:14px 16px 16px;display:grid;gap:6px;flex:1;align-content:start}
+.tpl h3{font-size:20px;text-transform:uppercase;display:flex;gap:8px;align-items:center}
+.tpl h3 i{width:16px;height:16px;border-radius:4px;flex:none;border:1.5px solid var(--ink)}
+.tpl p{margin:0;font-size:14.5px}
+.spec{display:flex;flex-wrap:wrap;gap:4px}
+.spec span{font-size:12px;font-weight:700;border-radius:6px;padding:2px 7px;background:var(--bg);border:1px solid var(--line)}
+.tpl button{justify-self:start;margin-top:4px;font:600 14px/1 var(--display);min-height:40px;padding:8px 14px;border-radius:99px;border:2px solid var(--ink);background:var(--ink);color:#fff;cursor:pointer}
+.svt{font-family:var(--display);font-weight:700}
+
+/* timeline 2025 */
+.past{list-style:none;margin:0;padding:0;position:relative}
+.past::before{content:"";position:absolute;left:111px;top:8px;bottom:8px;width:3px;background:var(--ink)}
+.past li{position:relative;display:grid;grid-template-columns:96px 30px minmax(0,1fr) 150px;gap:0 14px;align-items:start;padding:12px 0}
+.past .d{font:700 15px/1.2 var(--display);text-align:right;padding-top:4px}
+.past .dot{width:18px;height:18px;border-radius:50%;background:var(--y);border:3px solid var(--ink);margin:4px 0 0 4px;position:relative;z-index:1}
+.past h4{font:600 18px/1.25 var(--display)}
+.past p{margin:4px 0 0;font-size:14.5px}
+.past img{width:150px;height:110px;object-fit:cover;border:2px solid var(--ink);border-radius:10px;background:#ecebe5;cursor:zoom-in}
+.past li.fair .dot{background:var(--red)}
+.lesson{background:var(--aqua);border:2px solid var(--ink);border-radius:18px;padding:16px 20px;margin:24px 0 0}
+.lesson h3{font-size:22px;text-transform:uppercase}
+.lesson ul{margin:8px 0 0;padding-left:1.2em;display:grid;gap:4px}
+
+/* piano 2027 */
+.months{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:14px}
+.mon{background:var(--paper);border:2px solid var(--ink);border-radius:16px;overflow:hidden}
+.mon h3{font-size:19px;text-transform:uppercase;padding:10px 12px;background:var(--ink);color:#fff;display:flex;justify-content:space-between;align-items:center}
+.mon h3 span{font:700 13px/1 var(--text);background:#fff;color:var(--ink);border-radius:99px;padding:3px 8px}
+.mon ol{list-style:none;margin:0;padding:8px;display:grid;gap:8px}
+.post{border:1.5px solid var(--line);border-left:8px solid;border-radius:10px;padding:8px 10px;background:var(--bg)}
+.post .w{font:700 12px/1 var(--display);color:var(--dim);text-transform:uppercase;letter-spacing:.04em}
+.post b{display:block;font:600 14.5px/1.25 var(--display);margin-top:4px}
+.post span{display:block;font-size:12.5px;color:var(--dim);margin-top:3px}
+.post.hl{box-shadow:3px 3px 0 var(--y)}
+.stream{margin-top:14px;padding:12px 16px;border:2px dashed var(--ink);border-radius:14px;background:var(--paper);font-size:15px}
+
+/* visore */
+dialog{border:0;padding:0;background:transparent;width:min(96vw,1100px);max-height:94vh}
+dialog::backdrop{background:rgba(20,20,20,.78)}
+dialog .in{background:var(--paper);border-radius:18px;border:2px solid var(--ink);padding:16px;display:grid;gap:12px;max-height:92vh;overflow:auto}
+dialog .bar2{display:flex;justify-content:space-between;gap:10px;align-items:center;position:sticky;top:-16px;background:var(--paper);padding:4px 0;z-index:1}
+dialog h3{font-size:24px;text-transform:uppercase}
+dialog button.x{font:600 15px/1 var(--display);min-height:44px;padding:8px 16px;border-radius:99px;border:2px solid var(--ink);background:var(--paper);cursor:pointer}
+.var{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,230px),1fr));gap:16px;align-items:start}
+.var figure{margin:0;display:grid;gap:6px}
+.var figure button{all:unset;cursor:zoom-in;display:block;background:#ecebe5;border:2px solid var(--ink);border-radius:10px;padding:10px}
+.var figure button:focus-visible{outline:3px solid var(--ink)}
+.var img{display:block;width:100%;height:auto;max-height:340px;object-fit:contain;margin:auto}
+.var figcaption{font-size:13.5px}
+.var figcaption b{display:block;font:600 15px/1.2 var(--display)}
+.big{display:grid;gap:10px}
+.big img,.big svg{display:block;width:100%;height:auto;max-height:76vh;object-fit:contain;margin:auto}
+.big .nav{display:flex;justify-content:space-between;gap:10px;align-items:center}
+.big .nav button{font:600 15px/1 var(--display);min-height:44px;padding:8px 16px;border-radius:99px;border:2px solid var(--ink);background:var(--paper);cursor:pointer}
 footer{padding:28px 0 40px;font-size:14px;color:var(--dim)}
 
-@media (max-width:1000px){.board{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media (max-width:720px){.top{grid-template-columns:minmax(0,1fr)}.board{grid-template-columns:minmax(0,1fr)}.ev{grid-template-columns:minmax(0,1fr)}.ev .st{justify-self:start}}
+@media (max-width:1000px){.months{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:720px){.hm{display:none}nav.tabs a{font-size:16px;padding:8px 14px}.g-in{min-width:760px}.g-row{grid-template-columns:96px minmax(0,1fr)}.g-lab{font-size:14px;padding:10px 8px}.top{grid-template-columns:minmax(0,1fr)}.months{grid-template-columns:minmax(0,1fr)}.deadline{grid-template-columns:minmax(0,1fr)}.deadline .cal{justify-self:start}
+  .past::before{left:9px}.past li{grid-template-columns:30px minmax(0,1fr);gap:4px 10px}.past .d{grid-column:2;text-align:left;order:-1}.past .dot{grid-row:1/3;grid-column:1;margin-left:0}.past img{grid-column:2;width:100%;height:160px}
+  .box li{grid-template-columns:minmax(0,1fr)}}
 @media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
 </style>
 </head>
 <body>
-<a class="skip" href="#task">Salta ai task</a>
+<a class="skip" href="#main">Salta al contenuto</a>
 <header>
   <svg class="terr" id="terr" aria-hidden="true" preserveAspectRatio="xMidYMid slice"></svg>
   <div class="wrap top">
     <div>
       <img class="logo" src="img/logo.png" alt="Indisciplinato" width="900" height="118">
-      <p class="kicker">Grafica e social · per la squadra</p>
-      <h1>Cosa c'è da fare, e come deve essere</h1>
-      <p class="lead">I task delle grafiche del sito, i template dei post e la timeline dei contenuti fino alla fiera del 15 e 16 maggio 2027. Prendi un task, segui le misure e salva i file nella cartella indicata.</p>
+      <p class="kicker">Grafica e social 2027 · per la squadra</p>
+      <h1>Da gennaio a maggio, grafiche e social insieme</h1>
+      <p class="lead">Le tempistiche comuni, le grafiche delle edizioni passate da cui ripartire e il piano dei social, più stretto: cinque mesi fino alla fiera del 15 e 16 maggio 2027.</p>
     </div>
     <div class="stats" aria-label="Riepilogo">
+      <div class="stat"><b id="sPat">–</b><span>giorni alla consegna delle bozze al Comune (31 gennaio)</span></div>
       <div class="stat"><b id="sWeeks">–</b><span>settimane alla fiera</span></div>
-      <div class="stat"><b id="sTodo">–</b><span>grafiche del sito da fare o adattare</span></div>
-      <div class="stat"><b id="sPosts">–</b><span>contenuti social in programma</span></div>
-      <div class="stat"><b id="sTpl">–</b><span>template social</span></div>
+      <div class="stat"><b id="sArch">–</b><span>grafiche in archivio, 2024 e 2025</span></div>
+      <div class="stat"><b id="sPosts">–</b><span>contenuti social da gennaio a maggio</span></div>
     </div>
   </div>
-  <p class="wrap src" id="src">Dati dal foglio <a href="https://docs.google.com/spreadsheets/d/1U8h9WUG1a9h9eSlszRlMezxy-cOEyc_tYxYIvN_03-E/edit" target="_blank" rel="noopener">Scheda tecnica sito e piano social</a> · file nella cartella <a href="https://drive.google.com/drive/folders/1cK1lh00DC1zAVSc9DbclMsIlqqLSyLAs" target="_blank" rel="noopener">Grafiche sito e social</a></p>
 </header>
 
-<nav class="tabs" aria-label="Sezioni"><div class="wrap"><ul>
-  <li><a href="#task"><i style="background:var(--y)"></i>Task grafiche</a></li>
-  <li><a href="#template"><i style="background:var(--pink)"></i>Template social</a></li>
-  <li><a href="#timeline"><i style="background:var(--teal)"></i>Timeline</a></li>
-  <li><a href="#identita"><i style="background:var(--orange)"></i>Colori e caratteri</a></li>
+<nav class="tabs" aria-label="Schede"><div class="wrap"><ul>
+  <li><a href="#home" data-view="home"><i style="background:var(--y)"></i>Home<span class="hm"> · tempistiche</span></a></li>
+  <li><a href="#grafiche" data-view="grafiche"><i style="background:var(--pink)"></i>Grafiche</a></li>
+  <li><a href="#social" data-view="social"><i style="background:var(--teal)"></i>Social</a></li>
 </ul></div></nav>
 
-<main>
-<section id="task" aria-labelledby="task-t"><div class="wrap">
-  <div class="head">
-    <div><h2 id="task-t">Task grafiche del sito</h2><p>Ogni scheda è un'immagine del sito con misure, formato e file di partenza. Quando la finisci, cambia lo stato nel foglio.</p></div>
-    <input class="search" id="q" type="search" placeholder="Cerca un elemento" aria-label="Cerca tra i task">
+<main id="main" tabindex="-1">
+<!-- ================= HOME ================= -->
+<div data-pane="home">
+<section aria-labelledby="h-t"><div class="wrap">
+  <div class="deadline" role="region" aria-labelledby="dl-t">
+    <div class="cal" aria-hidden="true"><b>31</b><span>gennaio</span></div>
+    <div>
+      <h3 id="dl-t">Prima scadenza: le bozze al Comune per il patrocinio</h3>
+      <p>Entro fine gennaio il Comune di Asti deve vedere come comunicheremo la fiera. Si parte a gennaio con grafiche e social insieme.</p>
+      <ul><li>Bozza della locandina 2027 (verticale e quadrata)</li><li>Tre post tipo: manifesto, produttore, informazioni pratiche</li><li>Dove andrà il logo del Comune dopo il patrocinio</li></ul>
+    </div>
   </div>
-  <div class="chips" id="secChips" role="group" aria-label="Filtra per sezione" style="margin-bottom:18px"></div>
-  <p class="sr" id="boardStatus" role="status"></p>
-  <div class="board" id="board"></div>
-</div></section>
-
-<section id="template" aria-labelledby="tpl-t"><div class="wrap">
-  <div class="head">
-    <div><h2 id="tpl-t">Template social</h2><p>Un template per rubrica, con le piastrelle della fiera. Il colore della piastrella dice di che rubrica è il post: le informazioni pratiche sono sempre ottanio, i produttori sempre gialli. Tocca un template per vederlo grande e per filtrare la timeline.</p></div>
+  <div class="head"><div><h2 id="h-t">Tempistiche</h2><p>Una riga per le grafiche, una per i social, sugli stessi mesi. Tocca una barra per vedere cosa contiene.</p></div></div>
+  <div class="gantt"><div class="g-scroll"><div class="g-in" id="gantt"></div></div></div>
+  <div class="list2">
+    <div class="box"><h3><i style="background:var(--pink)"></i>Grafiche: le consegne</h3><ol id="dueG"></ol></div>
+    <div class="box"><h3><i style="background:var(--teal)"></i>Social: i passaggi</h3><ol id="dueS"></ol></div>
   </div>
-  <div class="grid" id="grid"></div>
 </div></section>
+</div>
 
-<section id="timeline" aria-labelledby="tl-t"><div class="wrap">
-  <div class="head">
-    <div><h2 id="tl-t">Timeline dei contenuti</h2><p>Settimana per settimana, da novembre a giugno. La settimana in corso è evidenziata.</p></div>
-  </div>
-  <div class="chips" id="rubChips" role="group" aria-label="Filtra per rubrica"></div>
-  <p class="sr" id="tlStatus" role="status"></p>
-  <div id="tl"></div>
+<!-- ================= GRAFICHE ================= -->
+<div data-pane="grafiche" hidden>
+<section aria-labelledby="g-t"><div class="wrap">
+  <div class="head"><div><h2 id="g-t">Grafiche delle edizioni passate</h2><p>Tutto quello che abbiamo fatto nel 2024 e nel 2025, raggruppato per famiglia. Apri una famiglia per vedere come la stessa grafica è stata declinata nei vari formati: per il 2027 ripartiamo da qui.</p></div></div>
+  <div class="gal" id="gal"></div>
+  <p class="note">File originali nella cartella Drive <a href="https://drive.google.com/drive/folders/1xHd5Mbc9iaC6YOvQFE130U8-e_SAtU82" target="_blank" rel="noopener">INDISCIPLINATO 2025 › Grafica</a>. Le grafiche nuove vanno in <a href="https://drive.google.com/drive/folders/1cK1lh00DC1zAVSc9DbclMsIlqqLSyLAs" target="_blank" rel="noopener">Grafiche sito e social 2027</a>.</p>
 </div></section>
-
-<section id="identita" aria-labelledby="id-t"><div class="wrap">
-  <div class="head"><div><h2 id="id-t">Colori e caratteri</h2><p>Dalla grafica 2025. Testo piccolo solo in nero o blu; giallo, rosa e arancio per fondi e numeri grandi.</p></div></div>
+<section aria-labelledby="c-t"><div class="wrap">
+  <div class="head"><div><h2 id="c-t">Colori e caratteri</h2><p>Dalla grafica 2025. Testo piccolo solo in nero o blu; giallo, rosa e arancio per fondi e numeri grandi.</p></div></div>
   <div class="pal" id="pal"></div>
   <div class="fonts">
-    <div><p class="kicker" style="margin-top:0">Titoli e numeri</p><p style="font:700 32px/1 var(--display);margin:0">FREDOKA 700</p><p style="margin:8px 0 0;font-size:14px">Maiuscolo per titoli, nomi dei produttori, date.</p></div>
+    <div><p class="kicker" style="margin-top:0">Titoli e numeri</p><p style="font:700 32px/1 var(--display);margin:0">FREDOKA 700</p><p style="margin:8px 0 0;font-size:14px">Maiuscolo per titoli, nomi dei produttori, date. È il più vicino ai titoli della locandina 2025.</p></div>
     <div><p class="kicker" style="margin-top:0">Testi</p><p style="font:700 22px/1.2 var(--text);margin:0">Atkinson Hyperlegible</p><p style="margin:8px 0 0;font-size:14px">Tutti i testi lunghi, anche nei caroselli: è fatto per chi vede poco.</p></div>
     <div><p class="kicker" style="margin-top:0">Logo</p><img src="img/logo.png" alt="Indisciplinato" style="width:100%;height:auto"><p style="margin:8px 0 0;font-size:14px">Sempre il file, mai riscritto con un font.</p></div>
   </div>
 </div></section>
+</div>
+
+<!-- ================= SOCIAL ================= -->
+<div data-pane="social" hidden>
+<section aria-labelledby="p-t"><div class="wrap">
+  <div class="head"><div><h2 id="p-t">Com'è andata nel 2025</h2><p>Cosa abbiamo comunicato e quando, per l'edizione del 1 giugno 2025 al Foyer delle Famiglie. Ricostruito dalle date dei file su Drive.</p></div></div>
+  <ol class="past" id="past"></ol>
+  <div class="lesson"><h3>Cosa cambia nel 2027</h3><ul>
+    <li>Nel 2025 la comunicazione pubblica è partita a fine marzo: circa due mesi. Nel 2027 partiamo a gennaio, con cinque mesi.</li>
+    <li>Cinque mesi non sono tanti per tutto quello che c'è da raccontare (produttori, partner, accessibilità, Spazio Kor): due post a settimana più le card dei produttori, niente di più.</li>
+    <li>Le card dei produttori del 2025 funzionavano: le rifacciamo, ma con una foto vera e una frase loro.</li>
+  </ul></div>
+</div></section>
+<section aria-labelledby="pl-t"><div class="wrap">
+  <div class="head"><div><h2 id="pl-t">Piano 2027 · gennaio-maggio</h2><p>Due contenuti a settimana, mese per mese. Il colore del bordo dice la rubrica, cioè il template da usare.</p></div></div>
+  <div class="chips" id="rubChips" role="group" aria-label="Filtra per rubrica" style="margin-bottom:14px"></div>
+  <p class="sr" id="plStatus" role="status"></p>
+  <div class="months" id="months"></div>
+  <p class="stream"><b>In parallelo da marzo:</b> le card dei produttori, due a settimana, ognuna in collaborazione con il produttore (template "Chi porta il vino").</p>
+</div></section>
+<section aria-labelledby="tpl-t"><div class="wrap">
+  <div class="head"><div><h2 id="tpl-t">Template social</h2><p>Un template per rubrica, con le piastrelle della fiera. Il colore della piastrella dice di che rubrica è il post: le informazioni pratiche sono sempre ottanio, i produttori sempre gialli.</p></div></div>
+  <div class="grid" id="grid"></div>
+</div></section>
+</div>
 </main>
 
-<footer><div class="wrap">Indisciplinato 2027 · Associazione Vinaccia ETS · pagina interna per collaboratori, non indicizzata. Per le modifiche scrivi nel foglio, la pagina lo legge quando è condiviso con chiunque abbia il link.</div></footer>
+<footer><div class="wrap">Indisciplinato 2027 · Associazione Vinaccia ETS · pagina interna per collaboratori, non indicizzata.</div></footer>
 
 <dialog id="dlg" aria-labelledby="dlgT"><div class="in">
-  <div class="bar"><h3 id="dlgT" style="font-size:22px;text-transform:uppercase"></h3><button type="button" id="dlgX">Chiudi</button></div>
-  <div id="dlgArt"></div>
-  <p id="dlgP" style="margin:0;font-size:14.5px"></p>
+  <div class="bar2"><h3 id="dlgT"></h3><button type="button" class="x" id="dlgX">Chiudi</button></div>
+  <div id="dlgBody"></div>
 </div></dialog>
 
 <script>
 {
-/* ============ DATI (copia del foglio al 23/11/2026; se il foglio è condiviso con il link, la pagina legge quello) ============ */
-const SHEET="1U8h9WUG1a9h9eSlszRlMezxy-cOEyc_tYxYIvN_03-E";
-const D="https://drive.google.com/file/d/",F="https://drive.google.com/drive/folders/";
-const FOLD={"01 Sito":F+"1c5lwHiYHw31P3e3QA-bA-GnFxwkIHtwr","02 Social – template":F+"1Rpe8ipYZpkf-shnLbrFpLEy3NGszLyiH","03 Social – produttori":F+"1lnSc9r4DjUuo5Qvfd_u3s9-0b59ddGmL","04 Loghi":F+"1SV8a5w_-S7NLiB9l6WZDA1g2H3zqOxL7","05 Foto e video":F+"1vqAJmKgPL0FP2DTytLHSe2YL3Tbmq6hd"};
-// id, sezione, elemento, dove, file, dimensioni, formato, peso, sorgente [nome, url], cartella, stato, alt, note
-let TASKS=[
- ["S01","Generale","Logo Indisciplinato (scritta a pennello)","Intestazione di ogni pagina","logo.png","1800 × 236","SVG o PNG","60 KB",["Logo.png",D+"12QNsEq_tBMpL20CkHVIRrOIIrPtq460N/view"],"01 Sito","Da adattare","Indisciplinato","Serve la versione vettoriale e una bianca per gli sfondi scuri."],
- ["S02","Generale","Favicon e icona su telefono","Scheda del browser, icona salvata sullo schermo","favicon.png, apple-touch-icon.png","512 × 512 e 180 × 180","PNG","30 KB",["Risorsa 10.svg",D+"1VNi_M99ZhF65RhBTQVIJ12hSocglJ2ST/view"],"01 Sito","Da fare","","Bottiglia bianca su quadrato giallo con il bordo irregolare."],
- ["S03","Generale","Anteprima dei link (Open Graph)","Link condivisi su WhatsApp e Facebook","og-indisciplinato-2027.jpg","1200 × 630","JPG","300 KB",["Risorsa 10@4x-8.png",D+"1IKKAyIhD_ZOEAABhF63CpzbXMoHprxOs/view"],"01 Sito","Da fare","Indisciplinato 2027, 15 e 16 maggio, Michelerio, Asti","Testo al centro: WhatsApp taglia i bordi."],
- ["S04","Sfondo","Sfondo terrazzo con bottiglie","Dietro allo scaffale","disegnato dal codice","a tutto schermo","SVG nel codice","",["Risorsa 10.svg",D+"1VNi_M99ZhF65RhBTQVIJ12hSocglJ2ST/view"],"","Pronto","decorativo",""],
- ["S05","Sfondo","Coriandoli","Pagina Quando","CSS","","CSS","",["",""],"","Pronto","decorativo","Si fermano con Ferma animazioni."],
- ["S06","Scaffale","Piastrella gialla con bottiglia e date","Scaffale 01 · Quando","img/tile-fiera.webp","1200 × 1170","WebP","150 KB",["Risorsa 10@4x-8.png",D+"1IKKAyIhD_ZOEAABhF63CpzbXMoHprxOs/view"],"01 Sito","Da adattare","testo dal codice","Oggi 1000 px. Esportare senza logo."],
- ["S07","Scaffale","Piastrella ottanio, bottiglie rosse e gialle","Scaffale 02 · Produttori","img/tile-produttori.webp","1200 × 1200","WebP","150 KB",["Risorsa 8@3x.png",D+"1XN8guHEbYKo1sEz2CZM9ROCxzna7Leqh/view"],"01 Sito","Da adattare","testo dal codice","Oggi 900 px."],
- ["S08","Scaffale","Piastrella arancio, bottiglie blu e rosse","Scaffale 03 · Partner","img/tile-partner.webp","1200 × 1200","WebP","150 KB",["Risorsa 6@3x.png",D+"1x5NYD_KkfzQp-aOFC24A-OFIrn7SJIAa/view"],"01 Sito","Da adattare","testo dal codice","Oggi 900 px."],
- ["S09","Scaffale","Piastrella verde acqua, bottiglie blu e arancio","Scaffale 04 · Accessibilità","img/tile-accesso.webp","1200 × 1200","WebP","150 KB",["Risorsa 7@3x.png",D+"1tJRpJMzGT7sbGr52GVzoPQWEc9FzhI8r/view"],"01 Sito","Da adattare","testo dal codice","Oggi 900 px."],
- ["S10","Scaffale","Piastrella gialla, bottiglie rosa","Scaffale 05 · Contattaci","img/tile-contatti.webp","1200 × 1200","WebP","150 KB",["Risorsa 2@3x.png",D+"11ArgLkyTFiu6loXZyEiCtl0Vl0hMER58/view"],"01 Sito","Da adattare","testo dal codice","Oggi 900 px."],
- ["S11","Icone","Bottiglia singola, 4 colori","Pagina Partner","img/b-*.webp","360 × 360","WebP","15 KB l'una",["Risorsa 1-4@4x-8.png","https://drive.google.com/drive/search?q=Risorsa%20%404x-8"],"01 Sito","Pronto","decorativo","Lasciano il posto ai loghi dei partner quando arrivano."],
- ["S12","Icone","Sagoma della bottiglia","Pagina Produttori, segno per tipo","SVG nel codice","14 × 42","SVG","",["Risorsa 10.svg",D+"1VNi_M99ZhF65RhBTQVIJ12hSocglJ2ST/view"],"","Pronto","decorativo",""],
- ["S13","Icone","Icone dei servizi di accessibilità","Pagina Accessibilità, 9 schede","SVG nel codice","32 × 32","SVG a linea","",["",""],"01 Sito","Da fare","decorativo","Usare gli stessi pittogrammi CAA dei cartelli in fiera."],
- ["S14","Scritte","INDIPENDENTI","Pagina Produttori","img/indipendenti.svg","alta 170","SVG","10 KB",["Risorsa 5.svg",D+"19BodvaCyMFy1j8uWwkvAc5wepoOKkz2S/view"],"01 Sito","Pronto","decorativo",""],
- ["S15","Scritte","COLLETTIVI","Pagina Partner","img/collettivi.svg","alta 170","SVG","10 KB",["Risorsa 7.svg",D+"1L2uACGRaI1LTkFqlGI1O6bXPkAHiDeVX/view"],"01 Sito","Pronto","decorativo",""],
- ["S16","Scritte","COMBATTIVI","Pagina Quando","img/combattivi.svg","alta 130","SVG","10 KB",["Risorsa 6.svg",D+"1eugU0btQ4zuoR-IkuKsRfb5WlBpN8jBW/view"],"01 Sito","Pronto","decorativo",""],
- ["S17","Video","Video dell'edizione 2025","Pagina Quando","fiera.mp4","1280 × 720, 20-30 s","MP4 H.264","2 MB",["VIDEO-2025-06-16.mp4",D+"1qQuMYjsPseHIha2Ngx8CucPhosnC8sWy/view"],"05 Foto e video","Da adattare","descrizione nel sito","Verificare l'originale e riesportarlo."],
- ["S18","Video","Copertina del video","Pagina Quando","poster.jpg","1280 × 720","JPG","120 KB",["fotogramma del video",""],"05 Foto e video","Da adattare","decorativo","Un fotogramma con banchi e bottiglie."],
- ["S19","Partner","Loghi sostenitori: CRT, Evento for All, CR Asti, Spazio Kor","Pagina Partner","loghi/*.png","altezza 120","SVG o PNG","40 KB",["sito precedente",""],"04 Loghi","Pronto","nome dell'ente","Verificare il logo CR Asti: contributo da confermare."],
- ["S20","Partner","Loghi partner di progetto (11 enti)","Pagina Partner, facoltativi","loghi/<nome>.png","240 × 240","SVG o PNG","30 KB",["piam.png, gli altri da chiedere",D+"1mFGDCVWcd_q0vTi3Do_7cLs36-zGPLRZ/view"],"04 Loghi","Da ricevere","nome dell'ente","ENS, APRI, AUSER, ONAV, Asti Slow Fashion, CRAFT, PIAM, Scienza sotto i Campanili, Casa degli Alfieri, Rione Cattedrale, Valdocco."],
- ["S21","Partner","Loghi di istituzioni e luoghi","Pagina Partner, facoltativi","loghi/<nome>.png","240 × 240","SVG o PNG","30 KB",["da chiedere",""],"04 Loghi","Da ricevere","nome dell'ente","Comune di Asti, Faletti, Liceo Artistico, Museo Paleontologico, Michelerio, Reale Mutua."],
- ["S22","Produttori","Foto o card di ogni produttore","Pagina Produttori e caroselli social","produttori/<id>.webp","800 × 1000 (4:5)","WebP","120 KB",["Produttori card 2025",F+"10mWCcnwaAWmIZJJy69MekVoqo2uKc0t1"],"03 Social – produttori","Da fare","nome e cosa mostra la foto","Chiederle ai produttori con il brand kit."],
- ["S23","Accessibilità","Mappa del Michelerio ad alta leggibilità","Pagine Accessibilità e Quando","mappa-michelerio.webp + PDF","1600 lato lungo","WebP + PDF","300 KB",["nuova",""],"01 Sito","Da fare","percorso descritto in testo","Ingresso, banchi, bagno accessibile, sala tranquilla, informazioni."],
- ["S24","Accessibilità","Foto del plastico tattile","Pagina Accessibilità","plastico.webp","1200 × 900","WebP","150 KB",["da scattare",""],"05 Foto e video","Da fare","mani che toccano il plastico",""],
- ["S25","Stampa","QR code verso il sito","Locandine e flyer","qr-indisciplinato.svg","1000 × 1000","SVG o PNG","",["QR 2025",D+"1OUg2zkpHaEMAejDj7zo5qEkIHT_BAm7H/view"],"02 Social – template","Da adattare","","Rifarlo per indisciplinato.it."]
-];
-// data, fase, rubrica, formato, contenuto, testo, grafica, collab, accessibilità, stato, note
-let POSTS=[
- ["2026-11-23","Lancio","Manifesto","Carosello 3 slide","Indisciplinato torna: 15 e 16 maggio 2027 a Palazzo del Michelerio","Collettivi. Combattivi. Indipendenti. Indisciplinato torna il 15 e 16 maggio 2027, al Michelerio di Asti.","Scritte S14-S16, piastrella S06","Associazione Vinaccia","Testo alternativo su ogni slide","Da fare",""],
- ["2026-11-23","Lancio","Verso la fiera con Spazio Kor","Storie","Inizia la residenza di Angela Bettoni a Spazio Kor","","Foto dei laboratori","Spazio Kor","Sottotitoli","Da fare","Data da verificare: 23 o 28 novembre"],
- ["2026-11-30","Lancio","Una fiera per tutti","Reel","Cos'è un Evento for All, in 30 secondi","Vogliamo una fiera aperta a tutte e tutti.","Piastrella S09","Fondazione CRT, ENS","LIS e sottotitoli","Da fare","Dopo l'incontro con ENS del 26/11"],
- ["2026-12-07","Lancio","Info pratiche","Post singolo","Save the date con il link al sito","","Anteprima link S03","","Date anche in didascalia","Da fare",""],
- ["2026-12-14","Lancio","Box domande e sondaggi","Storie","Cosa vorresti trovare a Indisciplinato?","","Sfondo carta con bottiglia","","Risposte anche in testo","Da fare",""],
- ["2026-12-21","Lancio","Manifesto","Post singolo","Auguri indisciplinati","","Piastrella rosa","","Testo alternativo","Da fare",""],
- ["2027-01-11","Racconto","Chi porta il vino","Carosello","Si aprono le candidature per i produttori","Fai vino, cibo o birra in piccolo e in modo indipendente? Scrivici.","Piastrella S07","VAN","Testo alternativo","Da fare",""],
- ["2027-01-18","Racconto","Una fiera per tutti","Carosello + storie","Il kit sensoriale con il Centro Diurno Valdocco (19/1)","","Foto dell'incontro","Centro Diurno Valdocco","Sottotitoli","Da fare","Chiedere il consenso per le foto"],
- ["2027-01-25","Racconto","Chi la fa con noi","Carosello","ENS e la lingua dei segni alle degustazioni","","Piastrella S08","ENS","Video in LIS","Da fare",""],
- ["2027-02-01","Racconto","Chi la fa con noi","Carosello","APRI e il plastico tattile del Liceo Artistico","","Foto plastico S24","APRI Asti, Liceo Artistico","Testo alternativo dettagliato","Da fare",""],
- ["2027-02-08","Racconto","Verso la fiera con Spazio Kor","Post + storie","Il Margine, sabato 13 febbraio ore 21","","Foto di scena","Spazio Kor, Fuori Margine","Avviso sul tema salute mentale","Da fare",""],
- ["2027-02-15","Racconto","Chi la fa con noi","Carosello","Asti Slow Fashion: bicchieri, stoviglie, raccolta differenziata","","Piastrella S08","Asti Slow Fashion","Testo alternativo","Da fare",""],
- ["2027-02-22","Racconto","Muro di nomi","Post singolo","I primi produttori confermati","","Muro di nomi","Produttori confermati","Elenco in didascalia","Da fare",""],
- ["2027-03-01","Produttori","Chi porta il vino","2 caroselli a settimana","Presentazione dei produttori, uno per post, fino a maggio","","Card produttore S22","Ogni produttore","Testo alternativo sulla foto","Da fare","Foto e brand kit entro fine febbraio"],
- ["2027-03-08","Produttori","Verso la fiera con Spazio Kor","Post + storie","Le case che siamo, domenica 14 marzo ore 17","","Foto di scena","Spazio Kor, Kairos","Sottotitoli","Da fare",""],
- ["2027-03-15","Produttori","La bottiglia storta in giro","Reel + storie","La bottiglia bianca compare in un luogo di Asti: indovina dove","","Sagoma stampata","","Luogo detto in testo dopo","Da fare",""],
- ["2027-03-22","Produttori","Chi la fa con noi","Carosello","Casa degli Alfieri e l'audioguida","","Piastrella S08","Casa degli Alfieri","Audio con sottotitoli","Da fare",""],
- ["2027-03-29","Produttori","Info pratiche","Carosello + storie in evidenza","Biglietti: apertura della vendita online","","Piastrella ottanio","","Prezzi in didascalia","Da fare","(da confermare) data e prezzo"],
- ["2027-04-05","Produttori","Una fiera per tutti","Carosello","Come prenotare un'assistenza: navetta, LIS, kit sensoriale","Scrivici prima di venire: ci organizziamo.","Piastrella S09","AUSER Asti, ENS","LIS, alto contrasto","Da fare",""],
- ["2027-04-12","Produttori","Indisciplinato in città","Post + storie","Serata in un locale di Asti con un produttore","","Piastrella rosa","Locale e produttore","Accessibilità del locale","Da fare","(da confermare) proposta"],
- ["2027-04-19","Produttori","Verso la fiera con Spazio Kor","Storie","Incontro con APRI e chiamata volontari","","Foto dell'incontro","APRI Asti, Spazio Kor","Sottotitoli","Da fare","(da confermare) 16 o 23 aprile"],
- ["2027-04-26","Contenuti caldi","Info pratiche","Carosello","Il programma completo dei due giorni","","Piastrella ottanio","ONAV, Scienza sotto i Campanili","Programma anche in testo","Da fare",""],
- ["2027-05-03","Contenuti caldi","Info pratiche","Carosello + storie","Come arrivare: stazione, parcheggi, navetta","","Mappa S23","AUSER Asti","Percorso senza gradini in testo","Da fare",""],
- ["2027-05-03","Contenuti caldi","Chi la fa con noi","Post singolo","Cosa si mangia: la cucina del Rione Cattedrale","","Piastrella S08","Rione Cattedrale","Allergeni in didascalia","Da fare",""],
- ["2027-05-10","Contenuti caldi","Conto alla rovescia","Storie ogni giorno","Mancano 5, 4, 3, 2, 1 giorni, un produttore al giorno","","Piastrella gialla con numero","Produttori","Numero nel testo alternativo","Da fare",""],
- ["2027-05-10","Contenuti caldi","Una fiera per tutti","Reel","La fiera in LIS: bagno, sala tranquilla, servizi","","Video con interprete","ENS, Museo Paleontologico","LIS e sottotitoli","Da fare",""],
- ["2027-05-15","Fiera","Dal vivo","Storie + reel","Sabato: apertura alle 11, banchi e degustazioni","","Foto e video","Produttori presenti","Sottotitoli","Da fare",""],
- ["2027-05-16","Fiera","Dal vivo","Storie + reel","Domenica: ONAV con LIS, alla cieca, incontro sul clima","","Foto e video","ONAV, Scienza sotto i Campanili","Momenti LIS ripresi","Da fare","Orari da confermare"],
- ["2027-05-17","Dopo la fiera","Dopo la fiera","Carosello","Grazie e prime foto","","Foto dell'evento","Produttori e partner","Testo alternativo","Da fare",""],
- ["2027-05-24","Dopo la fiera","Dopo la fiera","Reel","Il video racconto della fiera","","Video montato","","Sottotitoli","Da fare",""],
- ["2027-05-31","Dopo la fiera","Box domande e sondaggi","Storie + modulo","Questionario per chi è venuto","","Sfondo carta","PIAM ETS","Modulo accessibile","Da fare","Per la valutazione d'impatto"],
- ["2027-06-07","Dopo la fiera","Dopo la fiera","Carosello","I numeri dell'edizione e grazie a partner e sostenitori","","Piastrelle dei partner","Fondazione CRT, CR Asti","Numeri in didascalia","Da fare",""]
-];
-
 /* ============ TEMPLATE SOCIAL (SVG con le piastrelle 2025) ============ */
 const BOTTLE_FULL="M56.74,135c.1-5.9.14-11.81.34-17.71.1-2.86.04-5.73.24-8.59.23-3.25.45-6.49.63-9.74.26-4.63.23-9.26.16-13.89-.06-4.46-.46-8.9-1.12-13.33-.48-3.22-1.26-6.38-2.49-9.47-2-5.05-4.88-9.77-8.36-14.26-1.61-2.07-3.26-4.12-4.94-6.16-2.35-2.85-4.03-5.95-5.68-9.07-3.52-6.65-7.68-13.02-12.93-18.93-.8-.9-1.63-1.79-2.55-2.6-2.01-1.78-3.25-3.97-5-5.88-1.57-1.73-3.27-3.38-4.91-5.07-.3-.31-.66-.37-1.08-.21-.29.11-.58.24-.84.39C5.84,1.98,3.46,3.49,1.09,5c-.21.13-.41.29-.58.45-.65.64-.7.92,0,1.52,2.1,1.83,3.94,3.89,6.37,5.44,5.31,3.39,8.57,7.94,11.77,12.55,1.97,2.84,3.47,5.84,4.36,9.02.94,3.37.79,6.71-.49,10.02-1.21,3.14-3.1,6.07-4.69,9.09-2.03,3.85-3.82,7.75-4.95,11.83-.8,2.88-1.28,5.81-1.67,8.74-1.47,11.04-.84,22.12-.88,33.19-.04,11.96.05,23.92.02,35.88,0,1.94-.15,3.88-.07,5.81.23,5.46.9,10.87,2.78,16.15.43,1.2.93,2.39,1.52,3.55,1.13,2.23,3.2,3.68,5.96,4.6,2.42.8,4.95,1.15,7.54,1.29,4.59.26,9.18.18,13.72-.52,2.56-.4,4.98-1.08,7.05-2.4,1.64-1.04,2.63-2.45,3.41-3.96,1.62-3.11,2.44-6.38,3.09-9.69.78-3.99,1.08-8,1.15-12.03.06-3.51.2-7.02.31-10.53h-.04";
 const INK="#141414",C={y:"#e5c522",pink:"#c26e84",blue:"#1b4d9b",teal:"#1faab3",aqua:"#5cc4bf",orange:"#f9a423",red:"#f15a31",paper:"#fffdf7"};
@@ -302,99 +318,183 @@ const TPL=[
  {r:"Dopo la fiera",c:C.pink,fmt:"Carosello 4:5 e reel",freq:"2-3 settimane dopo la fiera",desc:"La bottiglia con la scritta a mano e il grazie. Poi foto, numeri e questionario.",vb:P,svg:`<rect width="1080" height="1350" fill="${C.y}"/>${img("tile-scritta.webp",0,0,1080,1077)}${band("GRAZIE!","Ci vediamo alla prossima edizione","#fff")}`}
 ];
 
+
+/* ============ DATI ============ */
+const A="img/archivio/";
+// famiglie di grafiche: [file, titolo, formato]
+const FAM=[
+ {t:"Locandina 2025",d:"La piastrella gialla con la bottiglia bianca, declinata in tutti i formati di stampa e per il web.",v:[
+   ["loc-70x100","Manifesto 70 × 100","Stampa, affissione"],["loc-a4","Poster A4","20 copie per negozi e locali"],["loc-a5","Flyer A5","Volantinaggio"],["loc-quadrata","Quadrata 1:1","WhatsApp e post Instagram"],["loc-orizzontale","Orizzontale 3:2","Pagina dell'evento su Raisin"],["loc-definitiva","Locandina definitiva","Versione con tutti i loghi dei partner"]]},
+ {t:"Piastrelle e identità",d:"Le piastrelle con le bottiglie in quattro combinazioni di colore, con e senza scritta, con cornice e come adesivo.",v:[
+   ["bozza-02","Arancio, blu e rosso","Piastrella"],["bozza-03","Verde acqua, blu e arancio","Piastrella"],["bozza-06","Ottanio, rosso e giallo","Piastrella"],["bozza-04","Versione retinata","Texture per la stampa"],["prima-2","Con cornice blu","Prima bozza"],["prima-6","Con cornice gialla","Prima bozza"],["bozza-07","Bottiglia con la scritta","Copertina social"],["bozza-08","Bottiglia e logo","Profilo e copertine"],["bozza-09","Bottiglia dritta e logo","Profilo e copertine"],["adesivo","Adesivo","Stampa a mezzo taglio"]]},
+ {t:"Manifesto social",d:"Progetti collettivi, combattivi, indipendenti: la prima serie di post del 2025, poi diventata scritta a pennello.",v:[
+   ["bozza-10","Progetti collettivi","Post 1:1"],["bozza-11","Progetti combattivi","Post 1:1"],["bozza-12","Progetti indipendenti","Post 1:1"],["../collettivi.svg","COLLETTIVI","Scritta a pennello"],["../combattivi.svg","COMBATTIVI","Scritta a pennello"],["../indipendenti.svg","INDIPENDENTI","Scritta a pennello"]]},
+ {t:"Produttori",d:"Come abbiamo presentato i produttori: card Instagram con la foto, storia in evidenza, schede della lista vini e muro di nomi.",v:[
+   ["card-omede","Card produttore: F.lli Omedè","Post 4:5 Instagram"],["card-lascesa","Card produttore: Cantina LaScesa","Post 4:5 Instagram"],["storia-produttori","Tutti i produttori","Copertina storie in evidenza"],["lista-01","Scheda lista vini: Agricola Bertolino","A6, numerata come il banco"],["lista-02","Scheda lista vini: Barroero","A6"],["lista-03","Scheda lista vini","A6"],["muro-1","Muro di nomi a colori","Annuncio della lista"],["muro-4","Muro di nomi in evidenza","Annuncio a blocchi"]]},
+ {t:"Materiali in fiera",d:"Tutto quello che serviva il giorno della fiera, con le stesse piastrelle e lo stesso carattere.",v:[
+   ["mappa","Mappa con tutti i produttori","A3, con QR"],["menu","Menù 2025","A3"],["badge-staff","Badge staff","Pass da collo"],["badge-prod","Badge produttore","Uno per banco"],["scheda-tecnica","Scheda tecnica per i produttori","Mail e WhatsApp"],["bicchiere-laser","Bicchiere inciso al laser","Sagoma della bottiglia e scritta"]]},
+ {t:"Partner",d:"I post di presentazione dei partner creativi, con la foto della persona e il nome.",v:[["partner-creativo","Partner creativo: Giacomo Langella","Post 4:5 Instagram"]]},
+ {t:"Prima edizione 2024",d:"La locandina della prima edizione al Diavolo Rosso: la bottiglia storta c'era già.",v:[["loc-2024","Locandina 2024","Sabato 1 giugno 2024, Diavolo Rosso"]]}
+];
+// tempistiche (2027): corsia, inizio, fine, titolo, dettaglio, scadenza chiave
+const PLAN=[
+ ["g","2027-01-07","2027-01-25","Identità 2027","Ripartire dalle piastrelle 2025: palette, logo, combinazioni di colore per le rubriche",0],
+ ["g","2027-01-12","2027-01-31","Bozze per il Comune","Locandina verticale e quadrata, tre post tipo, posizione del logo del Comune. Consegna entro il 31 gennaio",1],
+ ["g","2027-02-01","2027-02-28","Locandina definitiva","Con il logo del Comune dopo il patrocinio, poi le declinazioni: 70 × 100, A4, A5, quadrata, orizzontale",0],
+ ["g","2027-03-01","2027-03-31","Card produttori","Template e prime card, muro di nomi; foto e brand kit chiesti ai produttori a febbraio",0],
+ ["g","2027-04-01","2027-04-20","Stampa","Flyer A5, poster A4, 70 × 100, adesivi, bicchieri. In tipografia entro il 20 aprile",1],
+ ["g","2027-04-20","2027-05-10","Materiali in fiera","Mappa accessibile, menù, lista vini, badge staff e produttori, cartelli CAA",1],
+ ["s","2027-01-12","2027-01-31","Ripartenza","Manifesto, save the date, candidature dei produttori, primo reel in LIS",1],
+ ["s","2027-02-01","2027-02-28","Partner e accessibilità","Una fiera per tutti, Chi la fa con noi, Il Margine il 13 febbraio, primi nomi",0],
+ ["s","2027-03-01","2027-04-30","Produttori","Card produttori due a settimana, Le case che siamo il 14 marzo, biglietti online, bottiglia in giro per Asti",0],
+ ["s","2027-05-01","2027-05-14","Contenuti caldi","Programma, come arrivare, cibo, conto alla rovescia",0],
+ ["s","2027-05-15","2027-05-31","Fiera e dopo","Storie dal vivo il 15 e 16, poi grazie, video e questionario",0]
+];
+const MS=[["2027-01-31","Bozze al Comune"],["2027-02-13","Il Margine"],["2027-03-14","Le case che siamo"],["2027-03-30","Biglietti (da confermare)"],["2027-05-15","Fiera 15-16"]];
+// comunicazione 2025, ricostruita dai file su Drive
+const PAST=[
+ ["13-31 gen","Strategia e identità","Brainstorming con Lucia: bottiglia storta, corna, \"progetti collettivi, combattivi e indipendenti\". Prime bozze delle piastrelle.","prima-3"],
+ ["31 gen","Bozza dei social","Piastrelle a colori e la serie manifesto per il feed.","bozza-10"],
+ ["4-7 mar","Scritte a pennello","COLLETTIVI, COMBATTIVI, INDIPENDENTI pronte per Instagram.","../collettivi.svg"],
+ ["20 mar-7 apr","Bozze della locandina e flyer A5","Prima la locandina, poi il volantino per il centro.","loc-a5"],
+ ["9 apr","Uscita su Raisin","La versione orizzontale nella pagina dell'evento.","loc-orizzontale"],
+ ["18 apr","Card dei produttori","20 card Instagram con foto e nome, una per produttore.","card-omede"],
+ ["18-28 apr","Muro di nomi e bicchieri","L'annuncio della lista e la grafica per l'incisione laser.","muro-1"],
+ ["28 apr","Locandina definitiva","Con tutti i loghi dei partner.","loc-definitiva"],
+ ["8 mag","Locandina quadrata e storie in evidenza","Su WhatsApp e nel profilo Instagram, \"Tutti i produttori\".","storia-produttori"],
+ ["16 mag","Post dei partner creativi","Presentazione delle persone che hanno lavorato alla fiera.","partner-creativo"],
+ ["21-26 mag","Stampe per la fiera","Mappa, menù, lista vini, badge.","mappa"],
+ ["1 giu","La fiera","Foyer delle Famiglie, Asti, dalle 11 alle 19.","",1],
+ ["3-16 giu","Dopo la fiera","Foto e video dell'evento.",""]
+];
+// piano social 2027: data, rubrica, contenuto
+const POSTS=[
+ ["2027-01-12","Manifesto","Indisciplinato torna: collettivi, combattivi, indipendenti"],
+ ["2027-01-15","Info pratiche","Save the date: 15 e 16 maggio al Michelerio"],
+ ["2027-01-19","Una fiera per tutti","Il kit sensoriale con il Centro Diurno Valdocco"],
+ ["2027-01-22","Chi porta il vino","Aperte le candidature dei produttori"],
+ ["2027-01-26","Una fiera per tutti","Cos'è un Evento for All, reel in LIS"],
+ ["2027-01-29","Box domande e sondaggi","Cosa vorresti trovare a Indisciplinato?"],
+ ["2027-02-02","Chi la fa con noi","ENS e la lingua dei segni alle degustazioni"],
+ ["2027-02-09","Verso la fiera con Spazio Kor","Il Margine, sabato 13 febbraio ore 21"],
+ ["2027-02-16","Chi la fa con noi","APRI e il plastico tattile del Liceo Artistico"],
+ ["2027-02-23","Muro di nomi","I primi produttori confermati"],
+ ["2027-02-26","Chi la fa con noi","Asti Slow Fashion: bicchieri e stoviglie"],
+ ["2027-03-09","Verso la fiera con Spazio Kor","Le case che siamo, domenica 14 marzo"],
+ ["2027-03-16","La bottiglia storta in giro","La bottiglia in un luogo di Asti: indovina dove"],
+ ["2027-03-23","Chi la fa con noi","Casa degli Alfieri e l'audioguida"],
+ ["2027-03-30","Info pratiche","Biglietti online (data da confermare)"],
+ ["2027-04-06","Una fiera per tutti","Come prenotare navetta, LIS, kit sensoriale"],
+ ["2027-04-13","Indisciplinato in città","Una sera in un locale di Asti (proposta)"],
+ ["2027-04-20","Muro di nomi","La lista completa dei produttori"],
+ ["2027-04-23","Verso la fiera con Spazio Kor","Incontro APRI e chiamata volontari"],
+ ["2027-04-27","Info pratiche","Il programma dei due giorni"],
+ ["2027-05-04","Info pratiche","Come arrivare e cosa si mangia"],
+ ["2027-05-08","Una fiera per tutti","La fiera in LIS: bagno, sala tranquilla, servizi"],
+ ["2027-05-10","Conto alla rovescia","Mancano 5, 4, 3, 2, 1 giorni"],
+ ["2027-05-15","Dal vivo","Storie dalla fiera, sabato e domenica"],
+ ["2027-05-18","Dopo la fiera","Grazie e prime foto"],
+ ["2027-05-25","Dopo la fiera","Il video racconto"],
+ ["2027-05-29","Box domande e sondaggi","Questionario per chi è venuto"]
+];
+
 /* ============ UTILITÀ ============ */
 const $=s=>document.querySelector(s);
 const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const src=f=>f.startsWith("../")?"img/"+f.slice(3):A+f+".webp";
 const RUBCOL={"Manifesto":"#141414","Chi porta il vino":C.y,"Muro di nomi":"#bdbdbd","Chi la fa con noi":C.orange,"Una fiera per tutti":C.aqua,"Verso la fiera con Spazio Kor":C.blue,"Info pratiche":C.teal,"Indisciplinato in città":C.pink,"La bottiglia storta in giro":C.red,"Box domande e sondaggi":"#e8e1cf","Conto alla rovescia":C.y,"Dal vivo":C.aqua,"Dopo la fiera":C.pink};
-const STATI=["Da fare","Da adattare","Da ricevere","Pronto"];
 const MESI=["gennaio","febbraio","marzo","aprile","maggio","giugno","luglio","agosto","settembre","ottobre","novembre","dicembre"];
-const GG=["dom","lun","mar","mer","gio","ven","sab"];
 const todayISO=()=>new Intl.DateTimeFormat("en-CA",{timeZone:"Europe/Rome"}).format(new Date());
+const dd=s=>{const d=new Date(s+"T12:00:00");return `${d.getDate()} ${MESI[d.getMonth()].slice(0,3)}`};
+const days=(a,b)=>Math.round((Date.parse(b+"T00:00:00Z")-Date.parse(a+"T00:00:00Z"))/864e5);
 
-/* ============ TESTATA: terrazzo ============ */
-function terr(){const sv=$("#terr");sv.setAttribute("viewBox","0 0 1400 400");let s=3;const r=()=>(s=s*16807%2147483647)/2147483647;const cs=Object.values(C).slice(0,7);let g="";
+/* ============ TESTATA ============ */
+function terr(){const sv=$("#terr");sv.setAttribute("viewBox","0 0 1400 400");let s=3;const r=()=>(s=s*16807%2147483647)/2147483647;const cs=[C.y,C.pink,C.blue,C.teal,C.aqua,C.orange,C.red];let g="";
   for(let i=0;i<18;i++){const x=r()*1400,y=r()*400,sc=.4+r()*.5,a=(r()-.5)*120;g+=`<path d="${BOTTLE_FULL}" fill="${cs[i%7]}" opacity=".12" transform="translate(${x|0} ${y|0}) rotate(${a|0}) scale(${sc.toFixed(2)}) translate(-29 -87)"/>`}
   for(let i=0;i<90;i++){const x=r()*1400,y=r()*400,q=3+r()*7;g+=`<circle cx="${x|0}" cy="${y|0}" r="${q.toFixed(1)}" fill="${cs[i%7]}" opacity=".2"/>`}
   sv.innerHTML=g}
+function stats(){const t=todayISO();
+  $("#sPat").textContent=Math.max(0,days(t,"2027-01-31"));
+  $("#sWeeks").textContent=Math.max(0,Math.ceil(days(t,"2027-05-15")/7));
+  $("#sArch").textContent=FAM.reduce((a,f)=>a+f.v.length,0);
+  $("#sPosts").textContent=POSTS.length;}
 
-/* ============ BACHECA TASK ============ */
-let sec="Tutte",q="";
-function board(){
-  const secs=["Tutte",...new Set(TASKS.map(t=>t[1]))];
-  $("#secChips").innerHTML=secs.map(s=>`<button type="button" data-sec="${esc(s)}" aria-pressed="${s===sec}">${esc(s)}</button>`).join("");
-  const L=TASKS.filter(t=>(sec==="Tutte"||t[1]===sec)&&(!q||t.join(" ").toLowerCase().includes(q)));
-  $("#board").innerHTML=STATI.map(st=>{const c=L.filter(t=>t[10]===st);return `<div class="col" data-s="${st}"><h3>${st}<span>${c.length}</span></h3><div class="cards">${c.length?c.map(card).join(""):'<p class="empty">Niente qui.</p>'}</div></div>`}).join("");
-  $("#boardStatus").textContent=`${L.length} task mostrati`;
+/* ============ HOME: GANTT ============ */
+const G0="2027-01-01",G1="2027-06-01",SPAN=days(G0,G1);
+const pct=d=>Math.max(0,Math.min(100,days(G0,d)/SPAN*100));
+function gantt(){
+  const lane=k=>PLAN.map((p,i)=>[p,i]).filter(([p])=>p[0]===k);
+  const bars=k=>lane(k).map(([p,i])=>{const w=Math.max(17,pct(p[2])-pct(p[1])+.6),l=Math.min(pct(p[1]),100-w);const c=k==="g"?C.pink:C.teal;
+    return `<button type="button" class="bar ${p[5]?"key":""}" data-plan="${i}" style="margin-left:${l}%;width:${w}%;background:${c}22;border-color:${INK};border-left:8px solid ${c}" aria-label="${esc(p[3])}, dal ${dd(p[1])} al ${dd(p[2])}">${esc(p[3])}<small>${dd(p[1])} – ${dd(p[2])}</small></button>`}).join("");
+  const t=todayISO(),tp=t>=G0&&t<G1?`<div class="today" style="left:${pct(t)}%" title="Oggi"></div>`:"";
+  const grid='<div class="g-grid">'+"<div></div>".repeat(5)+"</div>";
+  $("#gantt").innerHTML=`<div class="g-row" style="border-bottom:0"><div class="g-lab" style="background:var(--ink);color:#fff;border-color:#fff">2027</div><div class="g-months">${["Gennaio","Febbraio","Marzo","Aprile","Maggio"].map(m=>`<div>${m}</div>`).join("")}</div></div>
+   <div class="g-row"><div class="g-lab"><i style="background:${C.pink}"></i>Grafiche</div><div class="g-track">${grid}${tp}${bars("g")}</div></div>
+   <div class="g-row"><div class="g-lab"><i style="background:${C.teal}"></i>Social</div><div class="g-track">${grid}${tp}${bars("s")}</div></div>
+   <div class="g-row"><div class="g-lab" style="font-size:14px">Date chiave</div><div class="g-track g-ms">${grid}${MS.map(([d,n])=>`<div class="ms" style="left:${pct(d)}%"><i></i>${dd(d)}<span>${esc(n)}</span></div>`).join("")}</div></div>`;
+  const li=k=>lane(k).map(([p])=>`<li><span class="when">${dd(p[1])}<br>– ${dd(p[2])}</span><div><b>${esc(p[3])}${p[5]?" ·  scadenza":""}</b><p>${esc(p[4])}</p></div></li>`).join("");
+  $("#dueG").innerHTML=li("g");$("#dueS").innerHTML=li("s");
 }
-function card(t){const [id,s,el,dove,file,dim,fmt,peso,src,cart,st,alt,note]=t;
-  const sp=[dim,fmt,peso].filter(Boolean).map(x=>`<span>${esc(x)}</span>`).join("");
-  const links=[src&&src[1]?`<a href="${esc(src[1])}" target="_blank" rel="noopener">File di partenza</a>`:"",cart&&FOLD[cart]?`<a href="${FOLD[cart]}" target="_blank" rel="noopener">Cartella ${esc(cart)}</a>`:""].filter(Boolean).join("");
-  return `<article class="card"><span class="id">${esc(id)} · ${esc(s)}</span><h4>${esc(el)}</h4><div class="meta">${esc(dove)}</div>${sp?`<div class="spec">${sp}</div>`:""}<details><summary>Dettagli</summary><p style="margin:4px 0"><b>Nome file:</b> ${esc(file)}</p>${src&&src[0]?`<p style="margin:4px 0"><b>Da:</b> ${esc(src[0])}</p>`:""}${alt?`<p style="margin:4px 0"><b>Testo alternativo:</b> ${esc(alt)}</p>`:""}${note?`<p style="margin:4px 0">${esc(note)}</p>`:""}</details>${links?`<div class="links">${links}</div>`:""}</article>`}
 
-/* ============ GRIGLIA TEMPLATE ============ */
+/* ============ GRAFICHE ============ */
+function gal(){
+  $("#gal").innerHTML=FAM.map((f,i)=>`<button type="button" class="fam" data-fam="${i}" aria-label="${esc(f.t)}: ${f.v.length} grafiche, apri"><div class="cov">${f.v.slice(0,3).map(v=>`<img src="${src(v[0])}" alt="" loading="lazy">`).join("")}</div><div class="bd"><span class="n">${f.v.length} ${f.v.length===1?"grafica":"grafiche"}</span><h3>${esc(f.t)}</h3><p>${esc(f.d)}</p><span class="go">Vedi le declinazioni</span></div></button>`).join("");
+  $("#pal").innerHTML=[["Giallo","#E5C522","Produttori, locandina, conto alla rovescia"],["Rosa vino","#C26E84","Bottiglie, città, dopo la fiera"],["Blu","#1B4D9B","Spazio Kor, link, testo"],["Ottanio","#1FAAB3","Info pratiche"],["Verde acqua","#5CC4BF","Accessibilità, dal vivo"],["Arancio","#F9A423","Partner"],["Rosso","#F15A31","Accenti"],["Inchiostro","#141414","Testi e logo"]].map(([n,h,u])=>`<div class="sw"><i style="background:${h}"></i><div><b>${n}</b>${h}<br>${u}</div></div>`).join("");
+}
+let cur=null;
+function openFam(i){const f=FAM[i];cur={list:f.v.map(v=>({src:src(v[0]),t:v[1],s:v[2]})),title:f.t};
+  $("#dlgT").textContent=f.t;
+  $("#dlgBody").innerHTML=`<p style="margin:0 0 10px">${esc(f.d)}</p><div class="var">${f.v.map((v,k)=>`<figure><button type="button" data-big="${k}" aria-label="Ingrandisci ${esc(v[1])}"><img src="${src(v[0])}" alt="${esc(v[1])}" loading="lazy"></button><figcaption><b>${esc(v[1])}</b>${esc(v[2])}</figcaption></figure>`).join("")}</div>`;
+  show();}
+function big(k){const L=cur.list,it=L[k];
+  $("#dlgT").textContent=cur.title;
+  $("#dlgBody").innerHTML=`<div class="big"><img src="${it.src}" alt="${esc(it.t)}"><p style="margin:0"><b>${esc(it.t)}</b> · ${esc(it.s)}</p><div class="nav"><button type="button" data-big="${(k-1+L.length)%L.length}">← Precedente</button>${cur.idx!=null?`<button type="button" data-back="1">Tutte le declinazioni</button>`:""}<button type="button" data-big="${(k+1)%L.length}">Successiva →</button></div></div>`;
+  show();}
+function show(){const d=$("#dlg");if(!d.open&&d.showModal)d.showModal();$("#dlgBody").scrollTop=0}
+
+/* ============ SOCIAL ============ */
+function past(){
+  $("#past").innerHTML=PAST.map(p=>`<li class="${p[4]?"fair":""}"><span class="d">${esc(p[0])}</span><span class="dot" aria-hidden="true"></span><div><h4>${esc(p[1])}</h4><p>${esc(p[2])}</p></div>${p[3]?`<img src="${src(p[3])}" alt="${esc(p[1])}" loading="lazy" data-zoom="${esc(src(p[3]))}">`:"<span></span>"}</li>`).join("");
+}
+let rub="Tutte";
+function plan(){
+  const rubs=["Tutte",...new Set(POSTS.map(p=>p[1]))];
+  $("#rubChips").innerHTML=rubs.map(r=>`<button type="button" data-rub="${esc(r)}" aria-pressed="${r===rub}">${esc(r)}</button>`).join("");
+  const L=POSTS.filter(p=>rub==="Tutte"||p[1]===rub);
+  $("#months").innerHTML=[0,1,2,3,4].map(m=>{const ps=L.filter(p=>+p[0].slice(5,7)===m+1);return `<div class="mon"><h3>${MESI[m]}<span>${ps.length}</span></h3><ol>${ps.map(p=>`<li class="post ${p[0]<="2027-01-31"?"hl":""}" style="border-left-color:${RUBCOL[p[1]]||INK}"><span class="w">${dd(p[0])} · ${esc(p[1])}</span><b>${esc(p[2])}</b></li>`).join("")||'<li class="post" style="border-left-color:#ccc"><span>Niente per questa rubrica.</span></li>'}</ol></div>`}).join("");
+  $("#plStatus").textContent=`${L.length} contenuti mostrati`;
+}
 const defs=`<defs><pattern id="ph" width="60" height="60" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="60" height="60" fill="#cfc8b8"/><rect width="30" height="60" fill="#d9d3c5"/></pattern></defs>`;
 const svgT=(t,label)=>`<svg viewBox="${t.vb}" role="img" aria-label="${esc(label)}" xmlns="http://www.w3.org/2000/svg">${defs}${t.svg}</svg>`;
 function grid(){
-  $("#grid").innerHTML=TPL.map((t,i)=>{const n=POSTS.filter(p=>p[2]===t.r).length;return `<article class="tpl"><div class="art ${t.vb===S?"story":""}">${svgT(t,"Esempio di template "+t.r)}</div><div class="body"><h3><i style="background:${t.c}"></i>${esc(t.r)}</h3><p>${esc(t.desc)}</p><div class="spec"><span>${esc(t.fmt)}</span><span>${esc(t.freq)}</span><span>${n} in timeline</span></div><button type="button" data-tpl="${i}">Vedi grande e filtra</button></div></article>`}).join("");
+  $("#grid").innerHTML=TPL.map((t,i)=>{const n=POSTS.filter(p=>p[1]===t.r).length;return `<article class="tpl"><div class="art ${t.vb===S?"story":""}">${svgT(t,"Esempio di template "+t.r)}</div><div class="body"><h3><i style="background:${t.c}"></i>${esc(t.r)}</h3><p>${esc(t.desc)}</p><div class="spec"><span>${esc(t.fmt)}</span><span>${esc(t.freq)}</span>${n?`<span>${n} nel piano</span>`:""}</div><button type="button" data-tpl="${i}">Vedi grande</button></div></article>`}).join("");
 }
 
-/* ============ TIMELINE ============ */
-let rub="Tutte";
-function timeline(){
-  const rubs=["Tutte",...new Set(POSTS.map(p=>p[2]))];
-  $("#rubChips").innerHTML=rubs.map(r=>`<button type="button" data-rub="${esc(r)}" aria-pressed="${r===rub}">${esc(r)}</button>`).join("");
-  const today=todayISO();
-  const L=POSTS.filter(p=>rub==="Tutte"||p[2]===rub).slice().sort((a,b)=>a[0].localeCompare(b[0]));
-  const byM={};L.forEach(p=>{const k=p[0].slice(0,7);(byM[k]=byM[k]||[]).push(p)});
-  $("#tl").innerHTML=Object.keys(byM).map(k=>{const [y,m]=k.split("-");return `<div class="month"><h3>${MESI[+m-1]} ${y}</h3><ol class="tl">${byM[k].map(p=>ev(p,today)).join("")}</ol></div>`}).join("")||'<p class="empty">Nessun contenuto per questa rubrica.</p>';
-  $("#tlStatus").textContent=`${L.length} contenuti mostrati`;
+/* ============ SCHEDE ============ */
+function view(v){if(!["home","grafiche","social"].includes(v))v="home";
+  document.querySelectorAll("[data-pane]").forEach(p=>p.hidden=p.dataset.pane!==v);
+  document.querySelectorAll("[data-view]").forEach(a=>{if(a.dataset.view===v)a.setAttribute("aria-current","page");else a.removeAttribute("aria-current")});
 }
-function ev(p,today){const [d,fase,r,fmt,cont,txt,gr,coll,acc,st,note]=p;
-  const dt=new Date(d+"T12:00:00"),end=new Date(dt);end.setDate(end.getDate()+6);const endISO=end.toISOString().slice(0,10);
-  const isNow=fase!=="Fiera"&&today>=d&&today<=endISO,past=endISO<today;
-  const stc=st==="Pubblicato"?"pub":st==="Programmato"?"prog":"";
-  const tags=[fmt,gr&&("Grafica: "+gr),coll&&("Tag: "+coll),acc].filter(Boolean).map(x=>`<span>${esc(x)}</span>`).join("");
-  return `<li class="ev ${isNow?"now":""} ${past?"past":""} ${fase==="Fiera"?"fair":""}" style="border-left-color:${RUBCOL[r]||INK}"><div class="d">${GG[dt.getDay()]} ${dt.getDate()} ${MESI[dt.getMonth()].slice(0,3)}<small>${esc(fase)}</small></div><div><span class="r">${esc(r)}</span>${isNow?'<span class="now-badge">questa settimana</span>':""}<h4>${esc(cont)}</h4>${txt?`<p>“${esc(txt)}”</p>`:""}${note?`<p><b>Nota:</b> ${esc(note)}</p>`:""}<div class="tags">${tags}</div></div><span class="st ${stc}">${esc(st||"Da fare")}</span></li>`}
-
-/* ============ IDENTITÀ ============ */
-function pal(){$("#pal").innerHTML=[["Giallo","#E5C522","Produttori, conto alla rovescia"],["Rosa vino","#C26E84","Città, dopo la fiera"],["Blu","#1B4D9B","Spazio Kor, link, testo"],["Ottanio","#1FAAB3","Info pratiche"],["Verde acqua","#5CC4BF","Accessibilità, dal vivo"],["Arancio","#F9A423","Partner"],["Rosso","#F15A31","Bottiglia in giro, accenti"],["Inchiostro","#141414","Testi e logo"]].map(([n,h,u])=>`<div class="sw"><i style="background:${h}"></i><div><b>${n}</b>${h}<br>${u}</div></div>`).join("")}
-
-/* ============ STATISTICHE ============ */
-function stats(){
-  const n=Math.max(0,Math.ceil((Date.UTC(2027,4,15)-Date.parse(todayISO()+"T00:00:00Z"))/(7*864e5)));
-  $("#sWeeks").textContent=n;$("#sTodo").textContent=TASKS.filter(t=>t[10]==="Da fare"||t[10]==="Da adattare").length;
-  $("#sPosts").textContent=POSTS.filter(p=>p[9]!=="Pubblicato").length;$("#sTpl").textContent=TPL.length;
-}
+addEventListener("hashchange",()=>{view(location.hash.slice(1));$("#main").focus({preventScroll:true});scrollTo({top:document.querySelector("nav.tabs").offsetTop,behavior:"auto"})});
 
 /* ============ EVENTI ============ */
 const dlg=$("#dlg");
-document.addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;const d=b.dataset;
-  if(d.sec){sec=d.sec;board()}
-  else if(d.rub){rub=d.rub;timeline()}
-  else if(d.tpl){const t=TPL[+d.tpl];$("#dlgT").textContent=t.r;$("#dlgArt").innerHTML=svgT(t,"Template "+t.r);$("#dlgP").textContent=t.fmt+" · "+t.freq+". La timeline sotto ora mostra solo questa rubrica.";rub=t.r;timeline();if(dlg.showModal)dlg.showModal();}
+document.addEventListener("click",e=>{
+  const z=e.target.closest("[data-zoom]");if(z){cur={list:[{src:z.dataset.zoom,t:z.alt,s:"Comunicazione 2025"}],title:"Com'è andata nel 2025"};big(0);return}
+  const b=e.target.closest("button");if(!b)return;const d=b.dataset;
+  if(d.fam){openFam(+d.fam);cur.idx=+d.fam}
+  else if(d.big!=null&&cur){big(+d.big)}
+  else if(d.back&&cur&&cur.idx!=null){openFam(cur.idx)}
+  else if(d.rub){rub=d.rub;plan()}
+  else if(d.plan){const p=PLAN[+d.plan];cur=null;$("#dlgT").textContent=p[3];$("#dlgBody").innerHTML=`<p style="margin:0;font-size:17px"><b>${p[0]==="g"?"Grafiche":"Social"} · dal ${dd(p[1])} al ${dd(p[2])}</b></p><p style="font-size:16px">${esc(p[4])}</p>`;show()}
+  else if(d.tpl){const t=TPL[+d.tpl];cur=null;$("#dlgT").textContent=t.r;$("#dlgBody").innerHTML=`<div class="big">${svgT(t,"Template "+t.r)}<p style="margin:0">${esc(t.fmt)} · ${esc(t.freq)}</p></div>`;show()}
   else if(b.id==="dlgX")dlg.close();
 });
 dlg.addEventListener("click",e=>{if(e.target===dlg)dlg.close()});
-dlg.addEventListener("close",()=>{if(rub!=="Tutte")document.getElementById("timeline").scrollIntoView()});
-$("#q").addEventListener("input",e=>{q=e.target.value.trim().toLowerCase();board()});
-
-/* ============ LETTURA DAL FOGLIO (se condiviso con chiunque abbia il link) ============ */
-function csv(t){const R=[];let row=[],f="",i=0,qd=false;for(;i<t.length;i++){const c=t[i];if(qd){if(c==='"'){if(t[i+1]==='"'){f+='"';i++}else qd=false}else f+=c}else if(c==='"')qd=true;else if(c===","){row.push(f);f=""}else if(c==="\n"){row.push(f);R.push(row);row=[];f=""}else if(c!=="\r")f+=c}if(f||row.length){row.push(f);R.push(row)}return R}
-async function live(){
-  const get=s=>fetch(`https://docs.google.com/spreadsheets/d/${SHEET}/gviz/tq?tqx=out:csv&sheet=${encodeURIComponent(s)}`).then(r=>{if(!r.ok)throw 0;return r.text()}).then(csv);
-  try{
-    const [a,b]=await Promise.all([get("Scheda tecnica sito"),get("Timeline social")]);
-    const ta=a.filter(r=>/^S\d+/.test(r[0]||""));
-    if(ta.length){const old=Object.fromEntries(TASKS.map(t=>[t[0],t]));TASKS=ta.map(r=>{const o=old[r[0]];const src=o?o[8]:[r[8]||"",""];return [r[0],r[1],r[2],r[3],r[4],r[5],r[6],r[7],[r[8]||src[0],src[1]],(r[9]||"").replace("04 Loghi partner e sostenitori","04 Loghi"),r[10],r[11],r[12]]})}
-    const tb=b.filter(r=>/^\d{1,2}\/\d{1,2}\/\d{4}$|^\d{4}-\d{2}-\d{2}/.test((r[0]||"").replace(/^\w{3} /,"")));
-    if(tb.length)POSTS=tb.map(r=>{let d=(r[0]||"").replace(/^\w{3} /,"");if(d.includes("/")){const [g,m,y]=d.split("/");d=`${y}-${m.padStart(2,"0")}-${g.padStart(2,"0")}`}return [d,...r.slice(1,11)]});
-    board();timeline();grid();stats();
-    $("#src").insertAdjacentHTML("beforeend"," · <b>aggiornato dal foglio</b>");
-  }catch(e){$("#src").insertAdjacentHTML("beforeend"," · copia del 23/11/2026");}
-}
+dlg.addEventListener("keydown",e=>{if(!cur||!$("#dlgBody .big"))return;const btns=[...document.querySelectorAll("#dlgBody .nav [data-big]")];if(e.key==="ArrowLeft"&&btns[0])btns[0].click();if(e.key==="ArrowRight"&&btns[btns.length-1])btns[btns.length-1].click()});
 
 /* ============ AVVIO ============ */
-terr();stats();board();grid();timeline();pal();live();
+terr();stats();gantt();gal();past();plan();grid();view(location.hash.slice(1));
 }
 </script>
 </body>
