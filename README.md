@@ -30,3 +30,8 @@ Accessibilità: obiettivo WCAG 2.2 AA. Analisi e decisioni di progetto nel repo 
 ## Area riservata
 
 - `public/area-e8b40baf0f/` – pagina di accesso con i pulsanti To do, Gestionale e Bandi. Come le altre pagine riservate: non linkata dal sito e `noindex`, senza password.
+
+## Pagina grafica e social (riservata)
+
+- `public/grafica-e-social/` – pagina per i collaboratori: task delle grafiche del sito (misure, formati, file di partenza, cartella Drive), template social per rubrica con le piastrelle 2025, timeline dei contenuti fino a giugno 2027. Non linkata dal sito, `noindex`; il pulsante è nell'area riservata.
+- I dati vengono dal Google Sheet "Indisciplinato 2027 – Scheda tecnica sito e piano social" (schede `Scheda tecnica sito` e `Timeline social`). Se il foglio è condiviso con chiunque abbia il link, la pagina lo legge in diretta; altrimenti mostra la copia del 23/11/2026 scritta nel file.

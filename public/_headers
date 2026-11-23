@@ -38,3 +38,7 @@
 /liceo-artistico/*
   X-Robots-Tag: noindex, nofollow
   Cache-Control: no-cache
+
+/grafica-e-social/*
+  X-Robots-Tag: noindex, nofollow
+  Cache-Control: no-cache
