@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
-<meta name="theme-color" content="#345995">
+<meta name="theme-color" content="#3d403f">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" href="/favicon-32.png" type="image/png" sizes="32x32">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
@@ -14,58 +14,60 @@
 <meta property="og:image" content="https://www.indisciplinato.it/og-image.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Bebas+Neue&display=swap" rel="stylesheet">
 <style>
-/* Stile del sito Indisciplinato: Dusk Blue #345995, Mint Leaf #03CEA4, Tomato #FB4D3D su carta chiara. */
+/* Grafica della prima edizione (2024, Diavolo Rosso): fondo crema, cinque bottiglie storte
+   (rosa vino #A46767, grigio chiaro #D8D2C9, antracite #3D403F, blu #52778F, sabbia #BFA87E),
+   scritte in stampatello condensato. Testo piccolo in tinte scurite per il contrasto AA. */
 :root{
-  --paper:#f6f5f1; --paper-2:#ecebe5; --ink:#1b2233; --muted:#4a5266;
-  --blue:#345995; --on-blue:#fff; --mint:#03cea4; --tomato:#fb4d3d; --focus:#1b2233;
-  --display:"Bricolage Grotesque","Arial Black",system-ui,sans-serif;
+  --paper:#fffceb; --paper-2:#f5efd8; --ink:#3d403f; --muted:#5f605a;
+  --rosa:#a46767; --rosa-t:#8f5656; --chiaro:#d8d2c9; --blu:#52778f; --blu-t:#46677c; --sabbia:#bfa87e;
+  --focus:#3d403f;
+  --display:"Bebas Neue","Oswald","Arial Narrow",Impact,sans-serif;
   --body:"Atkinson Hyperlegible",Verdana,system-ui,sans-serif;
   color-scheme:light;
 }
-@media (prefers-color-scheme:dark){:root{
-  --paper:#141a26; --paper-2:#1c2433; --ink:#eef1f6; --muted:#c3c9d6; --blue:#9fb8e6; --on-blue:#141a26; --focus:#eef1f6;
-  color-scheme:dark;}}
 *{box-sizing:border-box}
 html,body{margin:0}
 body{background:var(--paper);color:var(--ink);font:1.125rem/1.6 var(--body)}
-a{color:var(--blue);text-underline-offset:.2em;text-decoration-thickness:.08em}
+a{color:var(--blu-t);text-underline-offset:.2em;text-decoration-thickness:.08em}
 a:hover{text-decoration-thickness:.18em}
 :focus-visible{outline:3px solid var(--focus);outline-offset:3px;border-radius:3px}
-h1,h2{font-family:var(--display);font-weight:800;margin:0;line-height:1.05;text-wrap:balance}
+h1,h2{font-family:var(--display);font-weight:400;margin:0;line-height:.95;letter-spacing:.02em;text-transform:uppercase;text-wrap:balance}
 p{margin:0}
 [hidden]{display:none!important}
-.wrap{width:min(100% - 2rem,44rem);margin-inline:auto}
-.top{display:flex;justify-content:space-between;align-items:center;gap:1rem;padding:1.1rem 0}
-.brand{display:block;width:clamp(170px,42vw,280px);height:auto;overflow:visible}
-@media (prefers-color-scheme:dark){.brand{filter:invert(1)}}
+.wrap{width:min(100% - 2rem,46rem);margin-inline:auto}
+.top{display:flex;justify-content:center;align-items:center;gap:1rem;padding:1.4rem 0 .4rem}
+.brand{display:block;width:clamp(220px,70vw,520px);height:auto;overflow:visible}
 @media (prefers-reduced-motion:no-preference){
   .stamp{transform-box:fill-box;transform-origin:50% 60%;animation:timbro 260ms cubic-bezier(.2,.9,.3,1.25) both;animation-delay:calc(var(--i)*55ms + 120ms)}
   @keyframes timbro{0%{opacity:0;transform:translateY(-35%) scale(1.5) rotate(var(--r))}60%{opacity:1;transform:translateY(4%) scale(.94) rotate(calc(var(--r)*-.3))}100%{opacity:1;transform:none}}
 }
-.hero{border-top:2px solid var(--ink);padding:clamp(1.5rem,5vw,3rem) 0 2rem;display:grid;gap:1.4rem}
-.hero h1{font-size:clamp(3rem,11vw,5.6rem);letter-spacing:-.02em}
-.hero h1 span{color:var(--tomato)}
-.pill{justify-self:start;background:var(--mint);color:#1b2233;border-radius:999px;padding:.45rem 1.15rem;font-weight:700;font-size:clamp(1.1rem,3.2vw,1.35rem)}
-.lead{font-size:1.2rem;max-width:56ch}
-.facts{display:grid;gap:1rem;margin:0}
-.facts div{display:grid;gap:.1rem;border-left:5px solid var(--tomato);padding-left:.9rem}
-.facts dt{font-size:.95rem;color:var(--muted);font-weight:700}
-.facts dd{margin:0;font-size:1.25rem;font-weight:700}
-.facts dd small{display:block;font-size:1rem;font-weight:400;color:var(--muted)}
-.cal{display:flex;flex-wrap:wrap;gap:.75rem}
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;min-height:48px;padding:.6rem 1.25rem;border-radius:999px;font:inherit;font-size:1.05rem;font-weight:700;text-decoration:none;border:2px solid var(--ink);color:var(--ink);background:var(--paper);cursor:pointer}
-.btn.primary{background:var(--blue);color:var(--on-blue);border-color:var(--blue)}
+.hero{padding:.5rem 0 2.5rem;display:grid;gap:1.3rem;text-align:center;justify-items:center}
+.sotto{font:400 clamp(1.7rem,6.4vw,2.9rem)/1 var(--display);letter-spacing:.04em;color:var(--rosa);text-transform:uppercase}
+.righe{font:400 clamp(1.35rem,4.6vw,2rem)/1.15 var(--display);letter-spacing:.04em;text-transform:uppercase;display:grid;gap:.2rem}
+.righe .r{color:var(--rosa)}
+.bottiglie{width:min(70vw,300px);height:auto;margin:.4rem 0}
+.hero h1{font-size:clamp(3.6rem,15vw,6.5rem);color:var(--ink)}
+.hero h1 span{color:var(--rosa)}
+.lead{font-size:1.2rem;max-width:52ch}
+.motto{font:400 clamp(1.3rem,4.4vw,1.8rem)/1.1 var(--display);letter-spacing:.05em;text-transform:uppercase;color:var(--rosa)}
+.cal{display:flex;flex-wrap:wrap;gap:.75rem;justify-content:center}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;min-height:48px;padding:.6rem 1.3rem;border-radius:999px;font:inherit;font-size:1.05rem;font-weight:700;text-decoration:none;border:2px solid var(--ink);color:var(--ink);background:var(--paper);cursor:pointer}
+.btn.primary{background:var(--ink);color:var(--paper)}
 .btn.piccolo{min-height:44px;font-size:1rem;padding:.4rem 1rem}
 .btn:disabled{opacity:.55;cursor:wait}
 .btn svg{width:20px;height:20px;flex:none}
-section.modulo{background:var(--paper-2);border-top:2px solid var(--ink);padding:clamp(1.75rem,5vw,3rem) 0 3rem}
-section.modulo h2{font-size:clamp(2rem,6vw,2.8rem);margin-bottom:.5rem}
+/* striscia con i cinque colori delle bottiglie */
+.strisce{display:grid;grid-template-columns:repeat(5,1fr);height:10px}
+.strisce i:nth-child(1){background:var(--rosa)}.strisce i:nth-child(2){background:var(--chiaro)}.strisce i:nth-child(3){background:var(--ink)}.strisce i:nth-child(4){background:var(--blu)}.strisce i:nth-child(5){background:var(--sabbia)}
+section.modulo{background:var(--paper-2);padding:clamp(1.75rem,5vw,3rem) 0 3rem}
+section.modulo h2{font-size:clamp(2.6rem,9vw,3.8rem);margin-bottom:.4rem}
+section.modulo h2 span{color:var(--rosa)}
 form{display:grid;gap:1.4rem;margin-top:1.5rem}
 label,legend{display:block;font-weight:700;font-size:1rem;margin-bottom:.3rem}
 .facolt{font-weight:400;color:var(--muted)}
-input[type=text],input[type=email],input[type=tel],textarea{font:inherit;color:var(--ink);background:var(--paper);border:2px solid var(--ink);border-radius:12px;padding:.6rem .8rem;width:100%;min-height:48px}
+input[type=text],textarea{font:inherit;color:var(--ink);background:var(--paper);border:2px solid var(--ink);border-radius:12px;padding:.6rem .8rem;width:100%;min-height:48px}
 textarea{min-height:7.5rem;resize:vertical}
 .nota{font-size:.95rem;color:var(--muted);margin-top:.3rem}
 .due{display:grid;gap:1.4rem}
@@ -73,33 +75,34 @@ textarea{min-height:7.5rem;resize:vertical}
 fieldset{border:0;margin:0;padding:0;min-width:0}
 .giorni{display:grid;gap:.75rem;grid-template-columns:1fr}
 @media (min-width:520px){.giorni{grid-template-columns:1fr 1fr}}
-.giorno{position:relative;display:flex;gap:.8rem;align-items:flex-start;border:2px solid var(--ink);border-radius:16px;padding:1rem 1.1rem;background:var(--paper);cursor:pointer;font-weight:400;margin:0}
-.giorno input{width:26px;height:26px;margin:.15rem 0 0;accent-color:var(--blue);flex:none}
-.giorno b{display:block;font-family:var(--display);font-size:1.45rem;line-height:1.1}
+.giorno{display:flex;gap:.8rem;align-items:flex-start;border:2px solid var(--ink);border-radius:16px;padding:1rem 1.1rem;background:var(--paper);cursor:pointer;font-weight:400;margin:0}
+.giorno input{width:26px;height:26px;margin:.2rem 0 0;accent-color:var(--blu-t);flex:none}
+.giorno b{display:block;font:400 2rem/1 var(--display);letter-spacing:.04em;text-transform:uppercase}
 .giorno span span{color:var(--muted);font-size:.98rem}
-.giorno:has(input:checked){border-color:var(--blue);box-shadow:inset 0 0 0 2px var(--blue);background:color-mix(in srgb,var(--mint) 18%,var(--paper))}
+.giorno:has(input:checked){border-color:var(--blu-t);box-shadow:inset 0 0 0 2px var(--blu-t);background:color-mix(in srgb,var(--blu) 14%,var(--paper))}
 .giorno:has(input:focus-visible){outline:3px solid var(--focus);outline-offset:3px}
 .prezzi{display:grid;gap:.7rem}
 .prezzi-tit{font-weight:700;font-size:1rem}
 .prezzi ul{list-style:none;margin:0;padding:0;display:grid;gap:.75rem;grid-template-columns:1fr 1fr}
-.prezzi li{border:2px solid var(--ink);border-left:8px solid var(--tomato);border-radius:16px;padding:.8rem 1rem;background:var(--paper);display:grid;gap:.05rem}
+.prezzi li{border:2px solid var(--ink);border-radius:16px;padding:.8rem 1rem;background:var(--paper);display:grid;gap:.05rem}
+.prezzi li#pz1{border-top:10px solid var(--rosa)}
+.prezzi li#pz2{border-top:10px solid var(--sabbia)}
 .prezzi li span{font-weight:700}
-.prezzi li b{font:800 clamp(2rem,7vw,2.6rem)/1.05 var(--display);font-variant-numeric:tabular-nums}
+.prezzi li b{font:400 clamp(2.6rem,9vw,3.4rem)/1 var(--display);font-variant-numeric:tabular-nums}
 .prezzi li small{color:var(--muted);font-size:.92rem}
-.prezzi li.on{background:var(--mint);color:#1b2233;border-color:#1b2233;border-left-color:#1b2233}
-.prezzi li.on small{color:#1b2233}
-.quota{border-left:5px solid var(--mint);padding:.2rem 0 .2rem .9rem;font-size:1.02rem;font-weight:700}
+.prezzi li.on{background:var(--ink);color:var(--paper)}
+.prezzi li.on small{color:var(--chiaro)}
+.quota{border-left:5px solid var(--rosa);padding:.2rem 0 .2rem .9rem;font-size:1.02rem;font-weight:700}
 .trappola{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
 .cap-riga{display:flex;gap:.6rem;flex-wrap:wrap}
 .cap-riga input{max-width:8rem}
 .status{font-weight:700;min-height:1.6em}
-.status.err{color:#b4261a}
-@media (prefers-color-scheme:dark){.status.err{color:#ff9a90}}
-.grazie{border:2px solid var(--ink);border-radius:20px;padding:1.6rem;background:var(--mint);color:#1b2233;display:grid;gap:.8rem;margin-top:1.5rem}
-.grazie h2{font-size:clamp(2rem,6vw,2.6rem)}
-.grazie .btn{border-color:#1b2233;color:#1b2233;background:#f6f5f1;justify-self:start}
-footer{background:#1b2233;color:#f6f5f1;border-top:6px solid var(--tomato);padding:2rem 0;font-size:.98rem}
-footer a{color:#f6f5f1}
+.status.err{color:#9b3434}
+.grazie{border:2px solid var(--ink);border-radius:20px;padding:1.6rem;background:var(--paper);display:grid;gap:.8rem;margin-top:1.5rem;border-top:12px solid var(--rosa)}
+.grazie h2{font-size:clamp(2.6rem,8vw,3.4rem)}
+.grazie .btn{justify-self:start}
+footer{background:var(--ink);color:var(--paper);padding:2rem 0;font-size:.98rem}
+footer a{color:var(--paper)}
 footer p+p{margin-top:.5rem}
 </style>
 </head>
@@ -109,23 +112,26 @@ footer p+p{margin-top:.5rem}
 </header>
 <main>
   <div class="wrap hero">
+    <p class="sotto">Fiera di vini artigianali</p>
+    <div class="righe">
+      <p><span class="r">Asti</span> · sabato 15 e domenica 16 maggio</p>
+      <p>Palazzo del Michelerio · <span class="r">2027</span></p>
+    </div>
+    <img class="bottiglie" src="bottiglie-2024.webp" width="435" height="642" alt="">
     <h1>Ci <span>sei?</span></h1>
-    <p class="pill">15–16 maggio 2027 · Asti</p>
     <p class="lead">Indisciplinato torna! Siete tra i primi produttori a cui lo diciamo, perché vi vorremmo con noi. Ci serve solo sapere se ci sei sabato, domenica o (speriamo) tutti e due.</p>
-    <dl class="facts">
-      <div><dt>Quando</dt><dd>Sabato 15 e domenica 16 maggio 2027</dd></div>
-      <div><dt>Dove</dt><dd>Palazzo del Michelerio<small>Corso Vittorio Alfieri 381, Asti</small></dd></div>
-    </dl>
     <div class="cal">
       <a class="btn" href="/indisciplinato-2027.ics" download>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>
         Segna le date in calendario</a>
     </div>
+    <p class="motto">Progetti collettivi, combattivi e indipendenti.</p>
   </div>
+  <div class="strisce" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
 
   <section class="modulo" aria-labelledby="t-modulo">
     <div class="wrap">
-      <h2 id="t-modulo">La tua disponibilità</h2>
+      <h2 id="t-modulo">La tua <span>disponibilità</span></h2>
       <p>Un minuto e hai fatto. Se non sai ancora tutto, rispondi lo stesso: possiamo risentirci.</p>
 
       <form id="f" novalidate>
@@ -194,6 +200,7 @@ footer p+p{margin-top:.5rem}
     </div>
   </section>
 </main>
+<div class="strisce" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
 <footer>
   <div class="wrap">
     <p>Indisciplinato · Associazione Vinaccia ETS · <a href="/">indisciplinato.it</a></p>
