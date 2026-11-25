@@ -38,3 +38,9 @@ Accessibilità: obiettivo WCAG 2.2 AA. Analisi e decisioni di progetto nel repo 
   - **Grafiche**: archivio delle grafiche 2024 e 2025 raggruppate per famiglia (locandina, piastrelle, manifesto social, produttori, materiali in fiera, partner, prima edizione); ogni famiglia si apre con tutte le declinazioni. Poi colori e caratteri.
   - **Social**: com'è andata la comunicazione 2025 (ricostruita dalle date dei file su Drive), piano 2027 mese per mese e template per rubrica.
 - Immagini dell'archivio in `img/archivio/`, ricavate dai file di Drive "INDISCIPLINATO 2025 › Grafica". I dati sono scritti nel file `index.html`.
+
+## Disponibilità produttori 2027
+
+- `public/disponibilita/` – modulo per i produttori invitati: nome azienda, sabato 15 e/o domenica 16 maggio 2027, nota facoltativa "perché non potrai esserci", domanda di verifica. `noindex`; si può precompilare l'azienda con `?azienda=Nome`.
+- Le risposte vanno al Worker (`POST /api/disponibilita`, stesso Durable Object delle idee) e si leggono nella pagina riservata `public/disponibilita-95f986c475/` (pulsante nell'area riservata), con riepilogo e CSV.
+- Quote 2027: 70 € per una giornata, 120 € per entrambe (anche nel gestionale, sezione Produttori › Giornate).

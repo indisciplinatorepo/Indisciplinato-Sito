@@ -8,6 +8,8 @@
  * /api/idee               POST -> { ok } | { ok:false, errore } nuova idea (captcha + controlli)
  * /api/idee/nascondi      POST { id, chiave }                   moderazione (serve il secret ADMIN_KEY)
  * /api/idee/mostra        POST { id, chiave }
+ * /api/disponibilita      POST -> { ok } | { ok:false, errore } disponibilità dei produttori per sabato/domenica 2027
+ * /api/disponibilita/elenco?t=TOKEN  GET -> { risposte: [...] } per la pagina riservata /disponibilita-95f986c475/
  *
  * I dati stanno in un Durable Object con database SQLite: niente da configurare a mano.
  */
@@ -33,6 +35,8 @@ const json = (o, status = 200) => new Response(JSON.stringify(o), {
 });
 const errore = (msg, status = 200) => json({ ok: false, errore: msg }, status);
 const b64url = buf => btoa(String.fromCharCode(...new Uint8Array(buf))).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
+// token della pagina riservata con le risposte (stesso modello delle altre pagine riservate: chi ha il link vede)
+const TOKEN_DISPONIBILITA = "d8bcafbfae805b1ebd249ed9";
 const pulisci = (s, max) => String(s ?? "").replace(/[\u0000-\u0008\u000B\u000C\u000E-\u001F\u007F]/g, "").trim().slice(0, max);
 
 export class Idee {
@@ -45,6 +49,10 @@ export class Idee {
       id INTEGER PRIMARY KEY AUTOINCREMENT, data TEXT NOT NULL, nome TEXT NOT NULL DEFAULT '',
       idea TEXT NOT NULL, visibile INTEGER NOT NULL DEFAULT 1, ip TEXT NOT NULL DEFAULT '')`);
     this.sql.exec(`CREATE TABLE IF NOT EXISTS usati (firma TEXT PRIMARY KEY, ts INTEGER NOT NULL)`);
+    this.sql.exec(`CREATE TABLE IF NOT EXISTS disponibilita (
+      id INTEGER PRIMARY KEY AUTOINCREMENT, data TEXT NOT NULL, azienda TEXT NOT NULL, referente TEXT NOT NULL DEFAULT '',
+      contatto TEXT NOT NULL DEFAULT '', sabato INTEGER NOT NULL DEFAULT 0, domenica INTEGER NOT NULL DEFAULT 0,
+      motivo TEXT NOT NULL DEFAULT '', ip TEXT NOT NULL DEFAULT '')`);
     this.sql.exec(`CREATE TABLE IF NOT EXISTS conf (k TEXT PRIMARY KEY, v TEXT NOT NULL)`);
     if (!this.conf("semi-1")) {
       for (const i of IDEE_INIZIALI) this.sql.exec("INSERT INTO idee (data, nome, idea) VALUES (?, ?, ?)", i.data, i.nome, i.idea);
@@ -73,12 +81,14 @@ export class Idee {
     try {
       if (request.method === "GET" && p === "/api/captcha") return this.captcha();
       if (request.method === "GET" && p === "/api/idee") return this.elenco();
+      if (request.method === "GET" && p === "/api/disponibilita/elenco") return this.elencoDisponibilita(url);
       if (request.method === "POST") {
         const testo = await request.text();
         if (testo.length > 10000) return errore("Richiesta troppo grande.", 413);
         let dati;
         try { dati = JSON.parse(testo); } catch { return errore("Richiesta non valida.", 400); }
         if (p === "/api/idee") return this.nuova(dati, request);
+        if (p === "/api/disponibilita") return this.nuovaDisponibilita(dati, request);
         if (p === "/api/idee/nascondi") return this.visibilita(dati, 0);
         if (p === "/api/idee/mostra") return this.visibilita(dati, 1);
       }
@@ -102,18 +112,44 @@ export class Idee {
     return json({ ok: true, idee });
   }
 
-  async nuova(d, request) {
-    if (d.sito) return errore("Idea non inviata.");
-    if (!(Number(d.tempo) > 3000)) return errore("Troppo veloce: aspetta qualche secondo e riprova.");
+  // controlli anti-spam comuni: campo trappola, tempo minimo, domanda di verifica firmata e non riusata
+  async verifica(d) {
+    if (d.sito) return "Modulo non inviato.";
+    if (!(Number(d.tempo) > 3000)) return "Troppo veloce: aspetta qualche secondo e riprova.";
 
     const [tsTxt, firma] = String(d.token || "").split(".");
     const ts = Number(tsTxt);
-    if (!ts || !firma || Date.now() - ts > 30 * 60 * 1000 || ts > Date.now() + 60000) return errore("Domanda di verifica scaduta: rispondi a quella nuova.");
+    if (!ts || !firma || Date.now() - ts > 30 * 60 * 1000 || ts > Date.now() + 60000) return "Domanda di verifica scaduta: rispondi a quella nuova.";
     const risposta = String(d.risposta ?? "").replace(/\s/g, "");
-    if (!/^\d{1,3}$/.test(risposta) || (await this.hmac(`${Number(risposta)}|${ts}`)) !== firma) return errore("Risposta di verifica sbagliata: riprova con la nuova domanda.");
+    if (!/^\d{1,3}$/.test(risposta) || (await this.hmac(`${Number(risposta)}|${ts}`)) !== firma) return "Risposta di verifica sbagliata: riprova con la nuova domanda.";
     this.sql.exec("DELETE FROM usati WHERE ts < ?", Date.now() - 2 * 3600 * 1000);
-    if (this.sql.exec("SELECT 1 FROM usati WHERE firma = ?", firma).toArray().length) return errore("Domanda di verifica già usata: rispondi a quella nuova.");
+    if (this.sql.exec("SELECT 1 FROM usati WHERE firma = ?", firma).toArray().length) return "Domanda di verifica già usata: rispondi a quella nuova.";
     this.sql.exec("INSERT INTO usati (firma, ts) VALUES (?, ?)", firma, Date.now());
+    return null;
+  }
+
+  async nuovaDisponibilita(d, request) {
+    const no = await this.verifica(d);
+    if (no) return errore(no);
+    const azienda = pulisci(d.azienda, 120), referente = pulisci(d.referente, 80), contatto = pulisci(d.contatto, 120), motivo = pulisci(d.motivo, 1200);
+    if (azienda.length < 2) return errore("Scrivi il nome della tua azienda.");
+    const ip = await this.hmac("ip|" + (request.headers.get("CF-Connecting-IP") || ""));
+    const ora = new Date(Date.now() - 10 * 60 * 1000).toISOString();
+    if (this.sql.exec("SELECT COUNT(*) AS n FROM disponibilita WHERE ip = ? AND data > ?", ip, ora).toArray()[0].n >= 10) return errore("Troppi invii in poco tempo: riprova tra qualche minuto.");
+    this.sql.exec("INSERT INTO disponibilita (data, azienda, referente, contatto, sabato, domenica, motivo, ip) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
+      new Date().toISOString(), azienda, referente, contatto, d.sabato ? 1 : 0, d.domenica ? 1 : 0, motivo, ip);
+    return json({ ok: true });
+  }
+
+  elencoDisponibilita(url) {
+    if (url.searchParams.get("t") !== TOKEN_DISPONIBILITA) return errore("Non autorizzato.", 403);
+    const risposte = this.sql.exec("SELECT id, data, azienda, referente, contatto, sabato, domenica, motivo FROM disponibilita ORDER BY id DESC LIMIT 1000").toArray();
+    return json({ ok: true, risposte });
+  }
+
+  async nuova(d, request) {
+    const no = await this.verifica(d);
+    if (no) return errore(no);
 
     const idea = pulisci(d.idea, 800), nome = pulisci(d.nome, 60);
     if (idea.length < 5) return errore("L'idea è troppo corta.");

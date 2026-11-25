@@ -231,12 +231,18 @@ window.addEventListener("hashchange", route);
 /* ---------- calcoli ---------- */
 const spentByVoce = id => sum(S.spese.filter(s=>s.voceId===id), s=>s.importo);
 const spentByFonte = id => sum(S.spese.filter(s=>s.fonteId===id), s=>s.importo);
+/* quote produttori 2027: 70 € per una giornata, 120 € per entrambe (sabato e domenica) */
+const QUOTA_1G = 70, QUOTA_2G = 120;
+const GIORNATE = [["entrambe","Sabato e domenica"],["sab","Solo sabato 15"],["dom","Solo domenica 16"]];
+const quotaStd = p => (p.giornate==="sab" || p.giornate==="dom") ? QUOTA_1G : QUOTA_2G;
+// una quota scritta a mano vale se diversa dalla vecchia quota fissa di 50 €
+const quotaDi = p => { const q = toNum(p.quota); return (p.quota!=null && p.quota!=="" && q>0 && q!==50) ? q : quotaStd(p); };
 function fontePrevisto(f){
-  if(f.auto === "quote") return (toNum(f.quotaUnit)||50) * S.produttori.length;
+  if(f.auto === "quote") return sum(S.produttori, quotaDi);
   return toNum(f.previsto);
 }
 function fonteIncassato(f){
-  if(f.auto === "quote") return sum(S.produttori.filter(p=>p.quotaPagata), p=>p.quota ?? 50);
+  if(f.auto === "quote") return sum(S.produttori.filter(p=>p.quotaPagata), quotaDi);
   return toNum(f.incassato);
 }
 
@@ -331,13 +337,13 @@ function editFonte(f){
     <div class="full"><label for="f_nome">Nome</label><input id="f_nome" value="${esc(f.nome)}"></div>
     <div><label for="f_tipo">Tipo</label><select id="f_tipo">${["finanziamento","cofinanziamento","entrata"].map(t=>`<option ${t===f.tipo?"selected":""}>${t}</option>`).join("")}</select></div>
     <div><label for="f_stato">Stato</label><select id="f_stato">${["confermato","da confermare","atteso"].map(t=>`<option ${t===f.stato?"selected":""}>${t}</option>`).join("")}</select></div>
-    ${auto ? `<div><label for="f_qu">Quota per produttore (€)</label><input id="f_qu" inputmode="decimal" value="${esc(f.quotaUnit??50)}"></div><div class="full hint">Il previsto si calcola da solo: quota × numero di produttori nella sezione Produttori. L'incassato somma le quote segnate come pagate.</div>`
+    ${auto ? `<div class="full hint">Quote 2027: ${QUOTA_1G} € per una giornata, ${QUOTA_2G} € per entrambe. Il previsto si calcola da solo sommando la quota di ogni produttore nella sezione Produttori (in base alle giornate). L'incassato somma le quote segnate come pagate.</div>`
     : `<div><label for="f_prevf">Previsto (€)</label><input id="f_prevf" inputmode="decimal" value="${esc(String(f.previsto).replace(".",","))}"></div>
        ${f.tipo==="entrata"?`<div><label for="f_inc">Incassato (€)</label><input id="f_inc" inputmode="decimal" value="${esc(String(f.incassato||0).replace(".",","))}"></div>`:""}`}
     <div class="full"><label for="f_note">Note</label><input id="f_note" value="${esc(f.note||"")}"></div>
    </div>`, async () => {
     const data = {...strip(f), nome:$("#f_nome").value.trim(), tipo:$("#f_tipo").value, stato:$("#f_stato").value, note:$("#f_note").value.trim()};
-    if(auto) data.quotaUnit = num($("#f_qu").value); else { data.previsto = num($("#f_prevf").value); if($("#f_inc")) data.incassato = num($("#f_inc").value); }
+    if(!auto) { data.previsto = num($("#f_prevf").value); if($("#f_inc")) data.incassato = num($("#f_inc").value); }
     if(!data.nome) return "Scrivi il nome della fonte.";
     await save("fonti", f.id, data);
   }, isNew || auto ? null : async () => {
@@ -447,7 +453,7 @@ function renderProduttori(){
   const card = p => `<button class="card ${p.tipo==="food"?"food":"wine"}" data-pr="${esc(p.id)}">
      <h3>${esc(p.nome)}</h3><div class="z">${esc(p.zona||"zona da completare")}</div>
      ${p.prodotti?`<div class="p">${esc(p.prodotti)}</div>`:""}
-     <div class="chips">${statoChip(p.stato)}${p.quotaPagata?'<span class="chip ok">quota pagata</span>':""}${p.daVerificare?'<span class="chip warn">info da verificare</span>':""}</div></button>`;
+     <div class="chips">${statoChip(p.stato)}${p.giornate==="sab"?'<span class="chip neu">solo sabato</span>':p.giornate==="dom"?'<span class="chip neu">solo domenica</span>':""}${p.quotaPagata?'<span class="chip ok">quota pagata</span>':""}${p.daVerificare?'<span class="chip warn">info da verificare</span>':""}</div></button>`;
   const groups = [["vino","piemonte","Vino · Piemonte"],["vino","fuori","Vino · fuori Piemonte"],["food","piemonte","Food · Piemonte"],["food","fuori","Food · fuori Piemonte"]];
   let html = "";
   groups.forEach(([t,a,label]) => { const g = list.filter(p=>p.tipo===t && p.area===a).sort((x,y)=>x.nome.localeCompare(y.nome)); if(g.length) html += `<div class="group"><h3>${label} <small>${g.length}</small></h3><div class="grid">${g.map(card).join("")}</div></div>`; });
@@ -457,7 +463,7 @@ function renderProduttori(){
    <div class="tile"><div class="k">Vino</div><div class="v">${S.produttori.filter(p=>p.tipo==="vino").length}<small style="font-size:16px"> / 15</small></div></div>
    <div class="tile"><div class="k">Food</div><div class="v">${S.produttori.filter(p=>p.tipo==="food").length}<small style="font-size:16px"> / 15</small></div></div>
    <div class="tile accent"><div class="k">Confermati</div><div class="v">${conf}</div><div class="s">su ${S.produttori.length} in lista</div></div>
-   <div class="tile"><div class="k">Quote incassate</div><div class="v">${eur(sum(pag,p=>p.quota??50))}</div><div class="s">${pag.length} su ${S.produttori.length} · quota 50 €</div></div>
+   <div class="tile"><div class="k">Quote incassate</div><div class="v">${eur(sum(pag,quotaDi))}</div><div class="s">${pag.length} su ${S.produttori.length} · ${QUOTA_1G} € un giorno, ${QUOTA_2G} € due</div></div>
   </div>
   <div class="bar"><div class="row">
    <div class="seg" role="group" aria-label="Tipo">${["tutti","vino","food"].map(t=>`<button data-t="${t}" aria-pressed="${ui.prodTipo===t}">${t[0].toUpperCase()+t.slice(1)}</button>`).join("")}</div>
@@ -472,7 +478,7 @@ function renderProduttori(){
 }
 
 function editProd(p){
-  const isNew = !p; p = p || {nome:"", tipo:ui.prodTipo==="food"?"food":"vino", area:ui.prodArea==="fuori"?"fuori":"piemonte", stato:"da invitare", quota:50};
+  const isNew = !p; p = p || {nome:"", tipo:ui.prodTipo==="food"?"food":"vino", area:ui.prodArea==="fuori"?"fuori":"piemonte", stato:"da invitare", giornate:"entrambe"};
   const f = (id,label,val,ph="",full=false) => `<div class="${full?"full":""}"><label for="${id}">${label}</label><input id="${id}" value="${esc(val||"")}" placeholder="${esc(ph)}"></div>`;
   openDlg(isNew?"Nuovo produttore":esc(p.nome), `
    <div class="form">
@@ -488,7 +494,8 @@ function editProd(p){
     <div class="full"><label for="p_prod">Vini / prodotti (con prezzi se li hai)</label><textarea id="p_prod">${esc(p.prodotti||"")}</textarea></div>
     <div class="full"><label for="p_desc">Storia e descrizione per i social</label><textarea id="p_desc" style="min-height:120px">${esc(p.descrizione||"")}</textarea></div>
     <div><label for="p_stato">Stato invito</label><select id="p_stato">${STATI.map(s=>`<option ${s===p.stato?"selected":""}>${s}</option>`).join("")}</select></div>
-    <div><label for="p_quota">Quota (€)</label><input id="p_quota" inputmode="decimal" value="${esc(p.quota??50)}"></div>
+    <div><label for="p_gg">Giornate</label><select id="p_gg">${GIORNATE.map(([v,l])=>`<option value="${v}" ${(p.giornate||"entrambe")===v?"selected":""}>${l}</option>`).join("")}</select></div>
+    <div><label for="p_quota">Quota (€)</label><input id="p_quota" inputmode="decimal" value="${esc(quotaDi(p))}" aria-describedby="p_qh"><p class="hint" id="p_qh">${QUOTA_1G} € una giornata, ${QUOTA_2G} € due: cambia da sola con le giornate.</p></div>
     <div class="full row" style="gap:18px">
       <label class="check"><input type="checkbox" id="p_pag" ${p.quotaPagata?"checked":""}> Quota pagata</label>
       <label class="check"><input type="checkbox" id="p_veg" ${p.vegano?"checked":""}> Ha prodotti vegani</label>
@@ -499,10 +506,12 @@ function editProd(p){
     <div class="full"><label for="p_note">Note interne</label><textarea id="p_note">${esc(p.note||"")}</textarea></div>
     ${p.fonte?`<p class="full hint">Fonte delle informazioni: ${esc(p.fonte)}</p>`:""}
    </div>`, async () => {
-    const data = {...strip(p), nome:$("#p_nome").value.trim(), tipo:$("#p_tipo").value, area:$("#p_area").value, zona:$("#p_zona").value.trim(), referente:$("#p_ref").value.trim(), telefono:$("#p_tel").value.trim(), email:$("#p_mail").value.trim(), instagram:$("#p_ig").value.trim(), sito:$("#p_web").value.trim(), prodotti:$("#p_prod").value.trim(), descrizione:$("#p_desc").value.trim(), stato:$("#p_stato").value, quota:num($("#p_quota").value), quotaPagata:$("#p_pag").checked, vegano:$("#p_veg").checked, caglio:$("#p_cag").checked, daVerificare:$("#p_ver").checked, stand:$("#p_stand").value.trim(), note:$("#p_note").value.trim()};
+    const data = {...strip(p), nome:$("#p_nome").value.trim(), tipo:$("#p_tipo").value, area:$("#p_area").value, zona:$("#p_zona").value.trim(), referente:$("#p_ref").value.trim(), telefono:$("#p_tel").value.trim(), email:$("#p_mail").value.trim(), instagram:$("#p_ig").value.trim(), sito:$("#p_web").value.trim(), prodotti:$("#p_prod").value.trim(), descrizione:$("#p_desc").value.trim(), stato:$("#p_stato").value, giornate:$("#p_gg").value, quota:num($("#p_quota").value), quotaPagata:$("#p_pag").checked, vegano:$("#p_veg").checked, caglio:$("#p_cag").checked, daVerificare:$("#p_ver").checked, stand:$("#p_stand").value.trim(), note:$("#p_note").value.trim()};
     if(!data.nome) return "Scrivi il nome dell'azienda.";
+    if(!data.quota || data.quota===quotaStd(data)) data.quota = ""; // vuota = quota standard in base alle giornate
     await save("produttori", p.id, data);
   }, isNew ? null : async () => { await del("produttori", p.id); });
+  $("#p_gg").onchange = () => { const q=$("#p_quota"); const prima=quotaStd({giornate:q.dataset.gg||p.giornate}); if(num(q.value)===prima || !q.value) q.value = quotaStd({giornate:$("#p_gg").value}); q.dataset.gg=$("#p_gg").value; };
 }
 
 /* ---------- PARTNER ---------- */

@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#345995">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" href="/favicon-32.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<title>Ci sei? Disponibilità produttori · Indisciplinato 2027</title>
+<meta property="og:title" content="Indisciplinato 2027 · Ci sei?">
+<meta property="og:description" content="15–16 maggio 2027, Palazzo del Michelerio, Asti. Dicci se ci sei sabato, domenica o tutti e due.">
+<meta property="og:image" content="https://www.indisciplinato.it/og-image.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&display=swap" rel="stylesheet">
+<style>
+/* Stile del sito Indisciplinato: Dusk Blue #345995, Mint Leaf #03CEA4, Tomato #FB4D3D su carta chiara. */
+:root{
+  --paper:#f6f5f1; --paper-2:#ecebe5; --ink:#1b2233; --muted:#4a5266;
+  --blue:#345995; --on-blue:#fff; --mint:#03cea4; --tomato:#fb4d3d; --focus:#1b2233;
+  --display:"Bricolage Grotesque","Arial Black",system-ui,sans-serif;
+  --body:"Atkinson Hyperlegible",Verdana,system-ui,sans-serif;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){:root{
+  --paper:#141a26; --paper-2:#1c2433; --ink:#eef1f6; --muted:#c3c9d6; --blue:#9fb8e6; --on-blue:#141a26; --focus:#eef1f6;
+  color-scheme:dark;}}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--paper);color:var(--ink);font:1.125rem/1.6 var(--body)}
+a{color:var(--blue);text-underline-offset:.2em;text-decoration-thickness:.08em}
+a:hover{text-decoration-thickness:.18em}
+:focus-visible{outline:3px solid var(--focus);outline-offset:3px;border-radius:3px}
+h1,h2{font-family:var(--display);font-weight:800;margin:0;line-height:1.05;text-wrap:balance}
+p{margin:0}
+[hidden]{display:none!important}
+.wrap{width:min(100% - 2rem,44rem);margin-inline:auto}
+.top{display:flex;justify-content:space-between;align-items:center;gap:1rem;padding:1.1rem 0}
+.brand{display:block;width:clamp(170px,42vw,280px);height:auto;overflow:visible}
+@media (prefers-color-scheme:dark){.brand{filter:invert(1)}}
+@media (prefers-reduced-motion:no-preference){
+  .stamp{transform-box:fill-box;transform-origin:50% 60%;animation:timbro 260ms cubic-bezier(.2,.9,.3,1.25) both;animation-delay:calc(var(--i)*55ms + 120ms)}
+  @keyframes timbro{0%{opacity:0;transform:translateY(-35%) scale(1.5) rotate(var(--r))}60%{opacity:1;transform:translateY(4%) scale(.94) rotate(calc(var(--r)*-.3))}100%{opacity:1;transform:none}}
+}
+.hero{border-top:2px solid var(--ink);padding:clamp(1.5rem,5vw,3rem) 0 2rem;display:grid;gap:1.4rem}
+.hero h1{font-size:clamp(3rem,11vw,5.6rem);letter-spacing:-.02em}
+.hero h1 span{color:var(--tomato)}
+.pill{justify-self:start;background:var(--mint);color:#1b2233;border-radius:999px;padding:.45rem 1.15rem;font-weight:700;font-size:clamp(1.1rem,3.2vw,1.35rem)}
+.lead{font-size:1.2rem;max-width:56ch}
+.facts{display:grid;gap:1rem;margin:0}
+.facts div{display:grid;gap:.1rem;border-left:5px solid var(--tomato);padding-left:.9rem}
+.facts dt{font-size:.95rem;color:var(--muted);font-weight:700}
+.facts dd{margin:0;font-size:1.25rem;font-weight:700}
+.facts dd small{display:block;font-size:1rem;font-weight:400;color:var(--muted)}
+.cal{display:flex;flex-wrap:wrap;gap:.75rem}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;min-height:48px;padding:.6rem 1.25rem;border-radius:999px;font:inherit;font-size:1.05rem;font-weight:700;text-decoration:none;border:2px solid var(--ink);color:var(--ink);background:var(--paper);cursor:pointer}
+.btn.primary{background:var(--blue);color:var(--on-blue);border-color:var(--blue)}
+.btn.piccolo{min-height:44px;font-size:1rem;padding:.4rem 1rem}
+.btn:disabled{opacity:.55;cursor:wait}
+.btn svg{width:20px;height:20px;flex:none}
+section.modulo{background:var(--paper-2);border-top:2px solid var(--ink);padding:clamp(1.75rem,5vw,3rem) 0 3rem}
+section.modulo h2{font-size:clamp(2rem,6vw,2.8rem);margin-bottom:.5rem}
+form{display:grid;gap:1.4rem;margin-top:1.5rem}
+label,legend{display:block;font-weight:700;font-size:1rem;margin-bottom:.3rem}
+.facolt{font-weight:400;color:var(--muted)}
+input[type=text],input[type=email],input[type=tel],textarea{font:inherit;color:var(--ink);background:var(--paper);border:2px solid var(--ink);border-radius:12px;padding:.6rem .8rem;width:100%;min-height:48px}
+textarea{min-height:7.5rem;resize:vertical}
+.nota{font-size:.95rem;color:var(--muted);margin-top:.3rem}
+.due{display:grid;gap:1.4rem}
+@media (min-width:620px){.due{grid-template-columns:1fr 1fr}}
+fieldset{border:0;margin:0;padding:0;min-width:0}
+.giorni{display:grid;gap:.75rem;grid-template-columns:1fr}
+@media (min-width:520px){.giorni{grid-template-columns:1fr 1fr}}
+.giorno{position:relative;display:flex;gap:.8rem;align-items:flex-start;border:2px solid var(--ink);border-radius:16px;padding:1rem 1.1rem;background:var(--paper);cursor:pointer;font-weight:400;margin:0}
+.giorno input{width:26px;height:26px;margin:.15rem 0 0;accent-color:var(--blue);flex:none}
+.giorno b{display:block;font-family:var(--display);font-size:1.45rem;line-height:1.1}
+.giorno span span{color:var(--muted);font-size:.98rem}
+.giorno:has(input:checked){border-color:var(--blue);box-shadow:inset 0 0 0 2px var(--blue);background:color-mix(in srgb,var(--mint) 18%,var(--paper))}
+.giorno:has(input:focus-visible){outline:3px solid var(--focus);outline-offset:3px}
+.quota{border-left:5px solid var(--mint);padding:.2rem 0 .2rem .9rem;font-size:1.02rem}
+.trappola{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.cap-riga{display:flex;gap:.6rem;flex-wrap:wrap}
+.cap-riga input{max-width:8rem}
+.status{font-weight:700;min-height:1.6em}
+.status.err{color:#b4261a}
+@media (prefers-color-scheme:dark){.status.err{color:#ff9a90}}
+.grazie{border:2px solid var(--ink);border-radius:20px;padding:1.6rem;background:var(--mint);color:#1b2233;display:grid;gap:.8rem;margin-top:1.5rem}
+.grazie h2{font-size:clamp(2rem,6vw,2.6rem)}
+.grazie .btn{border-color:#1b2233;color:#1b2233;background:#f6f5f1;justify-self:start}
+footer{background:#1b2233;color:#f6f5f1;border-top:6px solid var(--tomato);padding:2rem 0;font-size:.98rem}
+footer a{color:#f6f5f1}
+footer p+p{margin-top:.5rem}
+</style>
+</head>
+<body>
+<header class="wrap top">
+  <a href="/" aria-label="Indisciplinato, vai al sito"><svg class="brand" viewBox="0 0 900 118" role="img" aria-label="Indisciplinato" xmlns="http://www.w3.org/2000/svg"><title>Indisciplinato</title><defs><clipPath id="lg0"><rect x="0" y="0" width="32" height="118"/></clipPath><clipPath id="lg1"><rect x="32" y="0" width="77" height="118"/></clipPath><clipPath id="lg2"><rect x="109" y="0" width="73" height="118"/></clipPath><clipPath id="lg3"><rect x="182" y="0" width="41" height="118"/></clipPath><clipPath id="lg4"><rect x="223" y="0" width="57" height="118"/></clipPath><clipPath id="lg5"><rect x="280" y="0" width="62" height="118"/></clipPath><clipPath id="lg6"><rect x="342" y="0" width="34" height="118"/></clipPath><clipPath id="lg7"><rect x="376" y="0" width="78" height="118"/></clipPath><clipPath id="lg8"><rect x="454" y="0" width="68" height="118"/></clipPath><clipPath id="lg9"><rect x="522" y="0" width="36" height="118"/></clipPath><clipPath id="lg10"><rect x="558" y="0" width="92" height="118"/></clipPath><clipPath id="lg11"><rect x="650" y="0" width="153" height="118"/></clipPath><clipPath id="lg12"><rect x="803" y="0" width="97" height="118"/></clipPath></defs><g class="stamp" style="--i:0;--r:-9deg"><image href="/logo.png" width="900" height="118" clip-path="url(#lg0)"/></g><g class="stamp" style="--i:1;--r:7deg"><image href="/logo.png" width="900" height="118" clip-path="url(#lg1)"/></g><g class="stamp" style="--i:2;--r:-5deg"><image href="/logo.png" width="900" height="118" clip-path="url(#lg2)"/></g><g class="stamp" style="--i:3;--r:10deg"><image href="/logo.png" width="900" height="118" clip-path="url(#lg3)"/></g><g class="stamp" style="--i:4;--r:-7deg"><image href="/logo.png" width="900" height="118" clip-path="url(#lg4)"/></g><g class="stamp" style="--i:5;--r:6deg"><image href="/logo.png" width="900" height="118" clip-path="url(#lg5)"/></g><g class="stamp" style="--i:6;--r:-10deg"><image href="/logo.png" width="900" height="118" clip-path="url(#lg6)"/></g><g class="stamp" style="--i:7;--r:8deg"><image href="/logo.png" width="900" height="118" clip-path="url(#lg7)"/></g><g class="stamp" style="--i:8;--r:-6deg"><image href="/logo.png" width="900" height="118" clip-path="url(#lg8)"/></g><g class="stamp" style="--i:9;--r:9deg"><image href="/logo.png" width="900" height="118" clip-path="url(#lg9)"/></g><g class="stamp" style="--i:10;--r:-8deg"><image href="/logo.png" width="900" height="118" clip-path="url(#lg10)"/></g><g class="stamp" style="--i:11;--r:5deg"><image href="/logo.png" width="900" height="118" clip-path="url(#lg11)"/></g><g class="stamp" style="--i:12;--r:-7deg"><image href="/logo.png" width="900" height="118" clip-path="url(#lg12)"/></g></svg></a>
+</header>
+<main>
+  <div class="wrap hero">
+    <h1>Ci <span>sei?</span></h1>
+    <p class="pill">15–16 maggio 2027 · Asti</p>
+    <p class="lead">Indisciplinato torna! Siete tra i primi produttori a cui lo diciamo, perché vi vorremmo con noi. Ci serve solo sapere se ci sei sabato, domenica o (speriamo) tutti e due.</p>
+    <dl class="facts">
+      <div><dt>Quando</dt><dd>Sabato 15 e domenica 16 maggio 2027</dd></div>
+      <div><dt>Dove</dt><dd>Palazzo del Michelerio<small>Corso Vittorio Alfieri 381, Asti</small></dd></div>
+    </dl>
+    <div class="cal">
+      <a class="btn" href="/indisciplinato-2027.ics" download>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>
+        Segna le date in calendario</a>
+    </div>
+  </div>
+
+  <section class="modulo" aria-labelledby="t-modulo">
+    <div class="wrap">
+      <h2 id="t-modulo">La tua disponibilità</h2>
+      <p>Un minuto e hai fatto. Se non sai ancora tutto, rispondi lo stesso: possiamo risentirci.</p>
+
+      <form id="f" novalidate>
+        <div>
+          <label for="azienda">Nome dell'azienda</label>
+          <input type="text" id="azienda" name="azienda" maxlength="120" autocomplete="organization" required>
+        </div>
+        <div class="due">
+          <div>
+            <label for="referente">Il tuo nome <span class="facolt">(facoltativo)</span></label>
+            <input type="text" id="referente" name="referente" maxlength="80" autocomplete="name">
+          </div>
+          <div>
+            <label for="contatto">Telefono o email <span class="facolt">(facoltativo)</span></label>
+            <input type="text" id="contatto" name="contatto" maxlength="120" autocomplete="email">
+          </div>
+        </div>
+
+        <fieldset aria-describedby="giorni-nota">
+          <legend>Quali giornate ci sei?</legend>
+          <p class="nota" id="giorni-nota" style="margin:0 0 .7rem">Seleziona le due giornate se puoi esserci per tutta la fiera.</p>
+          <div class="giorni">
+            <label class="giorno"><input type="checkbox" id="sab" name="sabato"><span><b>Sabato</b><span>15 maggio 2027</span></span></label>
+            <label class="giorno"><input type="checkbox" id="dom" name="domenica"><span><b>Domenica</b><span>16 maggio 2027</span></span></label>
+          </div>
+        </fieldset>
+        <p class="quota" id="quota" aria-live="polite">Quota di partecipazione: 120 € per entrambe le giornate, 70 € per una.</p>
+
+        <div>
+          <label for="motivo">Non riesci a esserci, o solo un giorno? Raccontaci perché <span class="facolt">(facoltativo)</span></label>
+          <textarea id="motivo" name="motivo" maxlength="1200" aria-describedby="motivo-nota"></textarea>
+          <p class="nota" id="motivo-nota">Ci aiuta a organizzarci meglio (e magari a trovare una soluzione insieme).</p>
+        </div>
+
+        <div class="trappola" aria-hidden="true">
+          <label for="sito">Lascia vuoto questo campo</label>
+          <input type="text" id="sito" name="sito" tabindex="-1" autocomplete="off">
+        </div>
+        <div>
+          <label for="cap">Verifica: <span id="cap-domanda">…</span></label>
+          <div class="cap-riga">
+            <input type="text" id="cap" inputmode="numeric" autocomplete="off" required aria-describedby="cap-aiuto">
+            <button type="button" class="btn piccolo" id="cap-nuova">Altra domanda</button>
+          </div>
+          <p class="nota" id="cap-aiuto">Scrivi il risultato in cifre: serve a bloccare i messaggi automatici.</p>
+        </div>
+
+        <div>
+          <button type="submit" class="btn primary" id="invia">Invia la disponibilità</button>
+          <p class="status" id="stato" role="status" aria-live="polite"></p>
+        </div>
+      </form>
+
+      <div class="grazie" id="grazie" hidden tabindex="-1">
+        <h2>Grazie, ricevuto!</h2>
+        <p id="grazie-testo">Ti scriviamo presto con tutti i dettagli.</p>
+        <a class="btn" href="/indisciplinato-2027.ics" download>Segna le date in calendario</a>
+      </div>
+    </div>
+  </section>
+</main>
+<footer>
+  <div class="wrap">
+    <p>Indisciplinato · Associazione Vinaccia ETS · <a href="/">indisciplinato.it</a></p>
+    <p>Usiamo i dati di questo modulo solo per organizzare la fiera. <a href="/note-legali.html">Note legali e privacy</a></p>
+  </div>
+</footer>
+<script>
+const $ = id => document.getElementById(id);
+const API = "/api";
+let capToken = "";
+const aperta = Date.now();
+async function nuovaDomanda(){
+  $("cap").value = ""; $("cap-domanda").textContent = "…";
+  try { const j = await (await fetch(API + "/captcha", {cache:"no-store"})).json(); $("cap-domanda").textContent = j.domanda + " = ?"; capToken = j.token; }
+  catch(e){ $("cap-domanda").textContent = "non disponibile, riprova"; }
+}
+function aggiornaQuota(){
+  const n = ($("sab").checked?1:0) + ($("dom").checked?1:0);
+  $("quota").textContent = n===2 ? "Entrambe le giornate: quota di partecipazione 120 €."
+    : n===1 ? "Una giornata: quota di partecipazione 70 € (per tutte e due sono 120 €)."
+    : "Quota di partecipazione: 120 € per entrambe le giornate, 70 € per una.";
+}
+$("sab").onchange = $("dom").onchange = aggiornaQuota;
+$("cap-nuova").onclick = nuovaDomanda;
+// precompila il nome se il link lo contiene: /disponibilita/?azienda=Nome
+try { const a = new URL(location.href).searchParams.get("azienda"); if(a) $("azienda").value = a.slice(0,120); } catch(e){}
+
+$("f").onsubmit = async e => {
+  e.preventDefault();
+  const st = $("stato"); st.classList.remove("err");
+  const fail = (m, el) => { st.textContent = m; st.classList.add("err"); if(el) el.focus(); };
+  const az = $("azienda").value.trim();
+  if(az.length < 2) return fail("Scrivi il nome della tua azienda.", $("azienda"));
+  if(!$("sab").checked && !$("dom").checked && !$("motivo").value.trim()) return fail("Seleziona almeno una giornata, oppure raccontaci perché non riesci a esserci.", $("sab"));
+  if(!$("cap").value.trim()) return fail("Rispondi alla domanda di verifica.", $("cap"));
+  $("invia").disabled = true; st.textContent = "Invio in corso…";
+  try {
+    const r = await fetch(API + "/disponibilita", {method:"POST", headers:{"content-type":"application/json"}, body: JSON.stringify({
+      azienda: az, referente: $("referente").value.trim(), contatto: $("contatto").value.trim(),
+      sabato: $("sab").checked, domenica: $("dom").checked, motivo: $("motivo").value.trim(),
+      sito: $("sito").value, risposta: $("cap").value.trim(), token: capToken, tempo: Date.now() - aperta })});
+    const j = await r.json();
+    if(j.ok){
+      const s=$("sab").checked, d=$("dom").checked;
+      $("grazie-testo").textContent = s&&d ? "Ci vediamo sabato e domenica! Ti scriviamo presto con tutti i dettagli."
+        : s ? "Ci vediamo sabato! Ti scriviamo presto con tutti i dettagli."
+        : d ? "Ci vediamo domenica! Ti scriviamo presto con tutti i dettagli."
+        : "Peccato! Grazie per avercelo detto: ti teniamo aggiornato.";
+      $("f").hidden = true; $("grazie").hidden = false; $("grazie").focus();
+      return;
+    }
+    fail(j.errore || "Non inviato, riprova.");
+  } catch(err){ fail("Errore di rete: riprova."); }
+  $("invia").disabled = false; nuovaDomanda();
+};
+nuovaDomanda();
+</script>
+</body>
+</html>
