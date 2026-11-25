@@ -41,6 +41,6 @@ Accessibilità: obiettivo WCAG 2.2 AA. Analisi e decisioni di progetto nel repo 
 
 ## Disponibilità produttori 2027
 
-- `public/disponibilita/` – modulo per i produttori invitati: nome azienda, sabato 15 e/o domenica 16 maggio 2027, nota facoltativa "perché non potrai esserci", domanda di verifica. `noindex`; si può precompilare l'azienda con `?azienda=Nome`.
+- `public/disponibilita/` – modulo per i produttori invitati: nome azienda, referente, email o telefono (obbligatori), sabato 15 e/o domenica 16 maggio 2027, nota facoltativa "perché non potrai esserci", domanda di verifica. `noindex`; si può precompilare l'azienda con `?azienda=Nome`.
 - Le risposte vanno al Worker (`POST /api/disponibilita`, stesso Durable Object delle idee) e si leggono nella pagina riservata `public/disponibilita-95f986c475/` (pulsante nell'area riservata), con riepilogo e CSV.
 - Quote 2027: 70 € per una giornata, 120 € per entrambe (anche nel gestionale, sezione Produttori › Giornate).

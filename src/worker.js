@@ -133,6 +133,8 @@ export class Idee {
     if (no) return errore(no);
     const azienda = pulisci(d.azienda, 120), referente = pulisci(d.referente, 80), contatto = pulisci(d.contatto, 120), motivo = pulisci(d.motivo, 1200);
     if (azienda.length < 2) return errore("Scrivi il nome della tua azienda.");
+    if (referente.length < 2) return errore("Scrivi il nome del referente.");
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(contatto) && contatto.replace(/\D/g, "").length < 6) return errore("Scrivi un'email o un numero di telefono valido.");
     const ip = await this.hmac("ip|" + (request.headers.get("CF-Connecting-IP") || ""));
     const ora = new Date(Date.now() - 10 * 60 * 1000).toISOString();
     if (this.sql.exec("SELECT COUNT(*) AS n FROM disponibilita WHERE ip = ? AND data > ?", ip, ora).toArray()[0].n >= 10) return errore("Troppi invii in poco tempo: riprova tra qualche minuto.");

@@ -123,12 +123,12 @@ footer p+p{margin-top:.5rem}
         </div>
         <div class="due">
           <div>
-            <label for="referente">Il tuo nome <span class="facolt">(facoltativo)</span></label>
-            <input type="text" id="referente" name="referente" maxlength="80" autocomplete="name">
+            <label for="referente">Referente</label>
+            <input type="text" id="referente" name="referente" maxlength="80" autocomplete="name" required>
           </div>
           <div>
-            <label for="contatto">Telefono o email <span class="facolt">(facoltativo)</span></label>
-            <input type="text" id="contatto" name="contatto" maxlength="120" autocomplete="email">
+            <label for="contatto">Email o numero di telefono</label>
+            <input type="text" id="contatto" name="contatto" maxlength="120" autocomplete="email" required>
           </div>
         </div>
 
@@ -216,6 +216,9 @@ $("f").onsubmit = async e => {
   const fail = (m, el) => { st.textContent = m; st.classList.add("err"); if(el) el.focus(); };
   const az = $("azienda").value.trim();
   if(az.length < 2) return fail("Scrivi il nome della tua azienda.", $("azienda"));
+  if($("referente").value.trim().length < 2) return fail("Scrivi il nome del referente.", $("referente"));
+  const ct = $("contatto").value.trim();
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(ct) && ct.replace(/\D/g,"").length < 6) return fail("Scrivi un'email o un numero di telefono valido.", $("contatto"));
   if(!$("sab").checked && !$("dom").checked && !$("motivo").value.trim()) return fail("Seleziona almeno una giornata, oppure raccontaci perché non riesci a esserci.", $("sab"));
   if(!$("cap").value.trim()) return fail("Rispondi alla domanda di verifica.", $("cap"));
   $("invia").disabled = true; st.textContent = "Invio in corso…";
