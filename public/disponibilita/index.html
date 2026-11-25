@@ -43,24 +43,19 @@ p{margin:0}
   .stamp{transform-box:fill-box;transform-origin:50% 60%;animation:timbro 260ms cubic-bezier(.2,.9,.3,1.25) both;animation-delay:calc(var(--i)*55ms + 120ms)}
   @keyframes timbro{0%{opacity:0;transform:translateY(-35%) scale(1.5) rotate(var(--r))}60%{opacity:1;transform:translateY(4%) scale(.94) rotate(calc(var(--r)*-.3))}100%{opacity:1;transform:none}}
 }
-.hero{padding:.5rem 0 2.5rem;display:grid;gap:1.3rem;text-align:center;justify-items:center}
+.hero{padding:1rem 0 2.5rem;display:grid;gap:1.3rem;text-align:center;justify-items:center}
 .sotto{font:400 clamp(1.7rem,6.4vw,2.9rem)/1 var(--display);letter-spacing:.04em;color:var(--rosa);text-transform:uppercase}
 .righe{font:400 clamp(1.35rem,4.6vw,2rem)/1.15 var(--display);letter-spacing:.04em;text-transform:uppercase;display:grid;gap:.2rem}
 .righe .r{color:var(--rosa)}
-.bottiglie{width:min(70vw,300px);height:auto;margin:.4rem 0}
 .hero h1{font-size:clamp(3.6rem,15vw,6.5rem);color:var(--ink)}
 .hero h1 span{color:var(--rosa)}
 .lead{font-size:1.2rem;max-width:52ch}
-.motto{font:400 clamp(1.3rem,4.4vw,1.8rem)/1.1 var(--display);letter-spacing:.05em;text-transform:uppercase;color:var(--rosa)}
 .cal{display:flex;flex-wrap:wrap;gap:.75rem;justify-content:center}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;min-height:48px;padding:.6rem 1.3rem;border-radius:999px;font:inherit;font-size:1.05rem;font-weight:700;text-decoration:none;border:2px solid var(--ink);color:var(--ink);background:var(--paper);cursor:pointer}
 .btn.primary{background:var(--ink);color:var(--paper)}
 .btn.piccolo{min-height:44px;font-size:1rem;padding:.4rem 1rem}
 .btn:disabled{opacity:.55;cursor:wait}
 .btn svg{width:20px;height:20px;flex:none}
-/* striscia con i cinque colori delle bottiglie */
-.strisce{display:grid;grid-template-columns:repeat(5,1fr);height:10px}
-.strisce i:nth-child(1){background:var(--rosa)}.strisce i:nth-child(2){background:var(--chiaro)}.strisce i:nth-child(3){background:var(--ink)}.strisce i:nth-child(4){background:var(--blu)}.strisce i:nth-child(5){background:var(--sabbia)}
 section.modulo{background:var(--paper-2);padding:clamp(1.75rem,5vw,3rem) 0 3rem}
 section.modulo h2{font-size:clamp(2.6rem,9vw,3.8rem);margin-bottom:.4rem}
 section.modulo h2 span{color:var(--rosa)}
@@ -112,22 +107,9 @@ footer p+p{margin-top:.5rem}
 </header>
 <main>
   <div class="wrap hero">
-    <p class="sotto">Fiera di vini artigianali</p>
-    <div class="righe">
-      <p><span class="r">Asti</span> · sabato 15 e domenica 16 maggio</p>
-      <p>Palazzo del Michelerio · <span class="r">2027</span></p>
-    </div>
-    <img class="bottiglie" src="bottiglie-2024.webp" width="435" height="642" alt="">
-    <h1>Ci <span>sei?</span></h1>
-    <p class="lead">Indisciplinato torna! Siete tra i primi produttori a cui lo diciamo, perché vi vorremmo con noi. Ci serve solo sapere se ci sei sabato, domenica o (speriamo) tutti e due.</p>
-    <div class="cal">
-      <a class="btn" href="/indisciplinato-2027.ics" download>
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>
-        Segna le date in calendario</a>
-    </div>
-    <p class="motto">Progetti collettivi, combattivi e indipendenti.</p>
+    <h1>Stiamo <span>tornando</span></h1>
+    <p class="righe">Sabato 15 e domenica 16 maggio 2027<br><span class="r">Palazzo del Michelerio, Asti</span></p>
   </div>
-  <div class="strisce" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
 
   <section class="modulo" aria-labelledby="t-modulo">
     <div class="wrap">
@@ -200,7 +182,6 @@ footer p+p{margin-top:.5rem}
     </div>
   </section>
 </main>
-<div class="strisce" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
 <footer>
   <div class="wrap">
     <p>Indisciplinato · Associazione Vinaccia ETS · <a href="/">indisciplinato.it</a></p>
