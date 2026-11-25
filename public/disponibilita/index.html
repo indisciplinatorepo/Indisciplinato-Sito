@@ -79,7 +79,16 @@ fieldset{border:0;margin:0;padding:0;min-width:0}
 .giorno span span{color:var(--muted);font-size:.98rem}
 .giorno:has(input:checked){border-color:var(--blue);box-shadow:inset 0 0 0 2px var(--blue);background:color-mix(in srgb,var(--mint) 18%,var(--paper))}
 .giorno:has(input:focus-visible){outline:3px solid var(--focus);outline-offset:3px}
-.quota{border-left:5px solid var(--mint);padding:.2rem 0 .2rem .9rem;font-size:1.02rem}
+.prezzi{display:grid;gap:.7rem}
+.prezzi-tit{font-weight:700;font-size:1rem}
+.prezzi ul{list-style:none;margin:0;padding:0;display:grid;gap:.75rem;grid-template-columns:1fr 1fr}
+.prezzi li{border:2px solid var(--ink);border-left:8px solid var(--tomato);border-radius:16px;padding:.8rem 1rem;background:var(--paper);display:grid;gap:.05rem}
+.prezzi li span{font-weight:700}
+.prezzi li b{font:800 clamp(2rem,7vw,2.6rem)/1.05 var(--display);font-variant-numeric:tabular-nums}
+.prezzi li small{color:var(--muted);font-size:.92rem}
+.prezzi li.on{background:var(--mint);color:#1b2233;border-color:#1b2233;border-left-color:#1b2233}
+.prezzi li.on small{color:#1b2233}
+.quota{border-left:5px solid var(--mint);padding:.2rem 0 .2rem .9rem;font-size:1.02rem;font-weight:700}
 .trappola{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
 .cap-riga{display:flex;gap:.6rem;flex-wrap:wrap}
 .cap-riga input{max-width:8rem}
@@ -143,7 +152,14 @@ footer p+p{margin-top:.5rem}
             <label class="giorno"><input type="checkbox" id="dom" name="domenica"><span><b>Domenica</b><span>16 maggio 2027</span></span></label>
           </div>
         </fieldset>
-        <p class="quota" id="quota" aria-live="polite">Quota di partecipazione: 120 € per entrambe le giornate, 70 € per una.</p>
+        <div class="prezzi" aria-labelledby="t-prezzi">
+          <p id="t-prezzi" class="prezzi-tit">Quota di partecipazione</p>
+          <ul>
+            <li id="pz1"><span>Una giornata</span><b>70 €</b><small>sabato oppure domenica</small></li>
+            <li id="pz2"><span>Due giornate</span><b>120 €</b><small>sabato e domenica</small></li>
+          </ul>
+          <p class="quota" id="quota" aria-live="polite">Scegli le giornate: qui vedi la tua quota.</p>
+        </div>
 
         <div>
           <label for="motivo">Non riesci a esserci, o solo un giorno? Raccontaci perché <span class="facolt">(facoltativo)</span></label>
@@ -196,9 +212,10 @@ async function nuovaDomanda(){
 }
 function aggiornaQuota(){
   const n = ($("sab").checked?1:0) + ($("dom").checked?1:0);
-  $("quota").textContent = n===2 ? "Entrambe le giornate: quota di partecipazione 120 €."
-    : n===1 ? "Una giornata: quota di partecipazione 70 € (per tutte e due sono 120 €)."
-    : "Quota di partecipazione: 120 € per entrambe le giornate, 70 € per una.";
+  $("quota").textContent = n===2 ? "La tua quota: 120 € per due giornate."
+    : n===1 ? "La tua quota: 70 € per una giornata (con tutte e due sono 120 €)."
+    : "Scegli le giornate: qui vedi la tua quota.";
+  $("pz1").classList.toggle("on", n===1); $("pz2").classList.toggle("on", n===2);
 }
 $("sab").onchange = $("dom").onchange = aggiornaQuota;
 $("cap-nuova").onclick = nuovaDomanda;
