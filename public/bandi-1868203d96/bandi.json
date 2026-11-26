@@ -1,5 +1,5 @@
 {
- "aggiornato": "2026-11-25T06:27+00:00",
+ "aggiornato": "2026-11-26T06:33+00:00",
  "bandi": [
   {
    "id": "B-0003",
@@ -191,6 +191,22 @@
    "budget": "Costo 1.800 € a partecipante: 900 € a carico della Fondazione, 900 € a carico dell'ente proponente (la Fondazione può coprire di più per progetti meritevoli). Dotazione: vedi bando.",
    "spese": "Vedi bando. Il progetto segue la metodologia Nave Italia (preparazione, imbarco, rielaborazione). Invio via email a progetti2027@naveitalia.org.",
    "link": "https://www.naveitalia.org/presenta-il-tuo-progetto/",
+   "stato": "Aperto"
+  },
+  {
+   "id": "B-0017",
+   "inserito": "2026-11-26",
+   "titolo": "Otto per mille dell'Unione Induista Italiana – anno 2026",
+   "ente": "Unione Induista Italiana",
+   "fonte": "Fondazione",
+   "categoria": "Sociale",
+   "scadenza": "2026-11-30",
+   "vinaccia": "Da verificare: il bando ammette in generale \"enti e associazioni che rispettino le leggi vigenti\", quindi Vinaccia sembra rientrare, ma i requisiti completi (iscrizioni, bilanci, cofinanziamento) vanno controllati sul sito dell'Unione. Scade tra 4 giorni e il progetto va realizzato nel 2027.",
+   "ammissibili": "Enti e associazioni che rispettino le leggi vigenti (dettagli sul sito 8xmille dell'Unione Induista).",
+   "destinatari": "Progetti di natura sociale, religiosa, culturale, umanitaria e assistenziale che valorizzino nonviolenza, integrazione e rispetto tra le fedi, da realizzare nel 2027.",
+   "budget": "Vedi bando (fondi della quota 8x1000 IRPEF 2022; contributo massimo e cofinanziamento non indicati).",
+   "spese": "Vedi bando. Domanda con modulo online sul sito 8xmille dell'Unione.",
+   "link": "https://8xmille.induismo.it/presenta-un-progetto/",
    "stato": "Aperto"
   }
  ]
