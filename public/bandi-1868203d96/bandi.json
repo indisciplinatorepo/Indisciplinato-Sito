@@ -1,5 +1,5 @@
 {
- "aggiornato": "2026-11-26T06:33+00:00",
+ "aggiornato": "2026-11-27T06:32+00:00",
  "bandi": [
   {
    "id": "B-0003",
@@ -207,6 +207,38 @@
    "budget": "Vedi bando (fondi della quota 8x1000 IRPEF 2022; contributo massimo e cofinanziamento non indicati).",
    "spese": "Vedi bando. Domanda con modulo online sul sito 8xmille dell'Unione.",
    "link": "https://8xmille.induismo.it/presenta-un-progetto/",
+   "stato": "Aperto"
+  },
+  {
+   "id": "B-0018",
+   "inserito": "2026-11-27",
+   "titolo": "Natura di prossimità – spazi verdi come porta di ingresso per chi non partecipa",
+   "ente": "Fondazione PuntoSud (progetto NOPLANETB, cofinanziato da Fondazione Cariplo)",
+   "fonte": "Fondazione",
+   "categoria": "Sociale",
+   "scadenza": "2026-12-23",
+   "vinaccia": "Sì: Vinaccia è un'organizzazione non profit registrata da più di un anno, con entrate molto sotto il limite di 150.000 € e progetto in Piemonte. Il tema è il verde di prossimità (orti, frutteti, impollinatori, cura di aree degradate) e deve coinvolgere persone poco sensibili ai temi ambientali. Controllare nelle linee guida che le associazioni non riconosciute siano incluse. Webinar informativo il 30/11/2026 alle 15.",
+   "ammissibili": "Organizzazioni della società civile senza scopo di lucro con sede e operatività in Italia, registrate da almeno un anno, con fatturato medio degli ultimi 3 anni sotto i 150.000 €. Progetto nella regione della sede legale o operativa.",
+   "destinatari": "Persone e gruppi poco coinvolti dai temi climatici ed ecologici (quartieri, giovani, commercianti, scuole, condomini), con un beneficio concreto per loro.",
+   "budget": "Dotazione 70.000 €. Contributo da 6.000 a 7.000 € per progetto, 100% dei costi ammissibili, nessun cofinanziamento. Progetti dal 01/02/2027, durata massima 6 mesi.",
+   "spese": "Vedi bando (Linee guida).",
+   "link": "https://noplanetb.puntosud.org/wp-content/uploads/Linee-guida_Bando-Natura-di-prossimita.pdf",
+   "stato": "Aperto"
+  },
+  {
+   "id": "B-0019",
+   "inserito": "2026-11-27",
+   "titolo": "Premio Edufin Index 2026/2027 – Donne che contano",
+   "ente": "Generali Italia e Fondazione Alleanza",
+   "fonte": "Fondazione",
+   "categoria": "Sociale",
+   "scadenza": "2026-12-20",
+   "vinaccia": "Da verificare: la forma giuridica va bene (sono ammesse associazioni con codice fiscale, anche non iscritte al RUNTS), ma serve un progetto con impatto diretto e misurabile sull'autonomia economica di donne in fragilità (ambito w, diritti e pari opportunità), che oggi non risulta tra le attività di Vinaccia. È un premio, non un contributo a spese. Vanno allegati statuto e ultimo bilancio approvato.",
+   "ammissibili": "Fondazioni non profit, ETS iscritti al RUNTS (anche cooperative sociali), cooperative sociali, associazioni regolarmente costituite con codice fiscale anche non iscritte al RUNTS, con sede legale in Italia. Una candidatura per ente.",
+   "destinatari": "Donne in fragilità economica: educazione finanziaria, reinserimento lavorativo, contrasto alla violenza economica, imprenditoria femminile, autonomia delle donne migranti, welfare di comunità.",
+   "budget": "Montepremi 15.000 €: primo premio 5.000 €, fino a 4 menzioni da 2.500 €. Nessun cofinanziamento.",
+   "spese": "Non applicabile (premio a progetti già avviati, in corso o in partenza).",
+   "link": "https://www.rameplatform.com/wp-content/uploads/2026/10/Bando-Premio-Edufin-Index-Donne-che-contano.pdf",
    "stato": "Aperto"
   }
  ]
